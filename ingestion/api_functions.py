@@ -64,10 +64,6 @@ def is_fully_evolved(pokemon_species: dict[str, str]) -> dict[str, dict]:
         for evolution in evolution_chain["evolves_to"]:
             evo_chain_result: tuple[bool, float] | None = __find_pokemon_in_chain(pokemon_name, evolution, weight)
 
-            if pokemon_name == 'silcoon':
-                print(f'Data from finding silcoon back in main method: {evo_chain_result[0]}, {evo_chain_result[1]}')
-                input('>')
-
             if evo_chain_result is not None:
                 result.update(
                     {
@@ -88,11 +84,6 @@ def __find_pokemon_in_chain(pokemon_name: str, chain: dict, weight: float) -> tu
     if chain["species"]["name"] == pokemon_name:
         # if the Pokemon can't evolve, it's fully evolved
         fully_evolved = len(chain["evolves_to"]) == 0
-
-        if pokemon_name == 'silcoon':
-            print(f'State of thinking of silcoon"s evo status: {fully_evolved}; Silcoon weight: {weight}')
-            input('>')
-
         return fully_evolved, 1.0 if fully_evolved else weight
 
     for evolution in chain["evolves_to"]:
@@ -110,4 +101,5 @@ if __name__ == '__main__':
     # print(pokemon)
 
     output = is_fully_evolved(pokemon)
+    print(output)
     print(f'\n\n{json.dumps(output, indent=4)}')
