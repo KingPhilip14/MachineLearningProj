@@ -40,9 +40,6 @@ def is_fully_evolved(pokemon_species: dict[str, str]) -> dict[str, dict]:
     result: dict[str, dict] = dict()
 
     for pokemon_name, species_url in pokemon_species.items():
-        print(f'Starting process for {pokemon_name}')
-        fully_evolved: bool = False
-
         # will be used to add weight to how desirable a Pokemon is; increases by 0.5 for criteria met
         weight: float = 0.0
 
@@ -50,44 +47,67 @@ def is_fully_evolved(pokemon_species: dict[str, str]) -> dict[str, dict]:
         chain_url: str = requests.get(species_url).json()['evolution_chain']['url']
         evolution_chain: dict | None = requests.get(chain_url).json()['chain']
 
-        chain_index: int = 0
+        if evolution_chain["species"]["name"] == pokemon_name:
+            fully_evolved = len(evolution_chain["evolves_to"]) == 0
 
-        while evolution_chain is not None:
-            print(json.dumps(evolution_chain, indent=4))
-            input('> ')
+            # If it has no further evolutions, it's fully evolved
+            result.update(
+                {
+                    pokemon_name: {
+                        'is_fully_evolved': fully_evolved,
+                        'weight': 1.0 if fully_evolved else weight,
+                    }
+                })
+            print(f'Added {pokemon_name} to result')
+            continue
 
-            # if the Pokemon doesn't evolve, consider it fully evolved and give it a weigh of 1
-            if len(evolution_chain['evolves_to']) == 0:
-                fully_evolved = True
-                weight = 1.0
-                break
+        for evolution in evolution_chain["evolves_to"]:
+            evo_chain_result: tuple[bool, float] | None = __find_pokemon_in_chain(pokemon_name, evolution, weight)
 
-            weight += 0.5
+            if pokemon_name == 'silcoon':
+                print(f'Data from finding silcoon back in main method: {evo_chain_result[0]}, {evo_chain_result[1]}')
+                input('>')
 
-            # if on the Pokemon to look for, break out the loop
-            if evolution_chain['species']['name'] == pokemon_name:
-                break
-
-            evolution_chain = evolution_chain.get(['evolves_to'][chain_index], None)
-
-            chain_index += 1
-
-        result.update(
-            {
-                pokemon_name: {
-                    'is_fully_evolved': fully_evolved,
-                    'weight': weight
-                }
-            })
+            if evo_chain_result is not None:
+                result.update(
+                    {
+                        pokemon_name: {
+                            'is_fully_evolved': evo_chain_result[0],
+                            'weight': evo_chain_result[1]
+                        }
+                    })
 
         print(f'Added {pokemon_name} to result')
 
     return result
 
 
+def __find_pokemon_in_chain(pokemon_name: str, chain: dict, weight: float) -> tuple[bool, float] | None:
+    weight += 0.5
+
+    if chain["species"]["name"] == pokemon_name:
+        # if the Pokemon can't evolve, it's fully evolved
+        fully_evolved = len(chain["evolves_to"]) == 0
+
+        if pokemon_name == 'silcoon':
+            print(f'State of thinking of silcoon"s evo status: {fully_evolved}; Silcoon weight: {weight}')
+            input('>')
+
+        return fully_evolved, 1.0 if fully_evolved else weight
+
+    for evolution in chain["evolves_to"]:
+        # recursively climb up the chain
+        result = __find_pokemon_in_chain(evolution['species']['name'], evolution, weight)
+        if result is not None:
+            return result
+
+    return None
+
+
 if __name__ == '__main__':
-    pokemon = get_generation_pokedex(pokedex_ids=[12, 13, 14, 15])
+    # pokemon = get_generation_pokedex(pokedex_ids=[12, 13, 14, 15])
+    pokemon = get_generation_pokedex(pokedex_ids=[15])
     # print(pokemon)
 
     output = is_fully_evolved(pokemon)
-    print(output)
+    print(f'\n\n{json.dumps(output, indent=4)}')
