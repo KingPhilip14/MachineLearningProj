@@ -97,7 +97,7 @@ def __find_pokemon_in_chain(pokemon_name: str, chain: dict, weight: float) -> tu
 
 if __name__ == '__main__':
     # pokemon = get_generation_pokedex(pokedex_ids=[12, 13, 14, 15])
-    pokemon = get_generation_pokedex(pokedex_ids=[15])
+    pokemon = get_generation_pokedex(pokedex_ids=[2])
     # print(pokemon)
 
     output = is_fully_evolved(pokemon)

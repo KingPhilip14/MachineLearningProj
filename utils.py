@@ -1,8 +1,8 @@
 def input_generation() -> list[int]:
     # this is a dict that maps a string representation of a generation to the int(s) used for the API for pokedex calls
     gen_to_pokedex_mapping: dict[str, list[int]] = {
-        'Everything': [0],
-        'Gen 1': [1],
+        'Everything': [1],
+        'Gen 1': [2],
         'Gen 2': [7],
         'Gen 3': [15],
         'Gen 4': [6],
