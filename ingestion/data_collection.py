@@ -1,5 +1,6 @@
 import json
 
+from tqdm import tqdm
 import requests
 import time
 import threading
@@ -10,7 +11,7 @@ base_url: str = 'https://pokeapi.co/api/v2/'
 def get_generation_pokedex(pokedex_ids: list[int]) -> dict[str, str]:
     """
     Using the Pokédex endpoint and the list of Pokédex IDs given, a new dictionary is created combining the info of
-    all Pokémon found.
+    all Pokémon found. The first step in collecting data.
     :param pokedex_ids:
     :return:
     """
@@ -19,12 +20,14 @@ def get_generation_pokedex(pokedex_ids: list[int]) -> dict[str, str]:
     pokedexes: list[dict] = list()
     collection: dict[str, str] = dict()
 
+    print('Collecting Pokédex info for the selected generation...')
+
     # collect the JSON for every Pokédex from the API
     for index, pokedex_id in enumerate(pokedex_ids):
         data: dict = requests.get(url + f'{pokedex_id}/').json()
         pokedexes.append(data)
 
-    for pokedex in pokedexes:
+    for pokedex in tqdm(pokedexes):
         # find each Pokémon's species name
         for entry in pokedex['pokemon_entries']:
             species_name: str = entry['pokemon_species']['name']
@@ -35,13 +38,23 @@ def get_generation_pokedex(pokedex_ids: list[int]) -> dict[str, str]:
                     species_name: entry['pokemon_species']['url']
                 })
 
+    print('Pokédex info collected.\n')
+
     return collection
 
 
 def is_fully_evolved(pokemon_species: dict[str, str]) -> dict[str, dict]:
+    """
+    Given the data of a Pokémon species, a boolean will be added to the information stating if the Pokémon
+    is fully evolved. The third step in the data collection.
+    :param pokemon_species:
+    :return:
+    """
+    print('\nAdding "is_fully_evolved" to all collected Pokémon...\n')
+
     result: dict[str, dict] = dict()
 
-    for pokemon_name, species_url in pokemon_species.items():
+    for pokemon_name, species_url in tqdm(pokemon_species.items()):
         # will be used to add weight to how desirable a Pokémon is; increases by 0.5 for criteria met
         weight: float = 0.0
 
@@ -61,7 +74,7 @@ def is_fully_evolved(pokemon_species: dict[str, str]) -> dict[str, dict]:
                     }
                 })
 
-            print(f'{pokemon_name} added to result')
+            # print(f'{pokemon_name} added to result')
             continue
 
         for evolution in evolution_chain["evolves_to"]:
@@ -75,7 +88,7 @@ def is_fully_evolved(pokemon_species: dict[str, str]) -> dict[str, dict]:
                             'weight': evo_chain_result[1]
                         }
                     })
-                print(f'{pokemon_name} added to result')
+                # print(f'{pokemon_name} added to result')
 
     return result
 
@@ -139,7 +152,7 @@ def __get_most_common_move_categories(moves: list[str]) -> list[str]:
     return [key for key, value in categories.items() if value == maximum]
 
 
-def get_additional_info(pokemon_name: str) -> dict[str, dict]:
+def __get_additional_info(pokemon_name: str) -> dict[str, dict]:
     output: dict[str, dict] = dict()
     wanted_data: dict = dict()
 
@@ -170,10 +183,39 @@ def get_additional_info(pokemon_name: str) -> dict[str, dict]:
     return output
 
 
+def add_extra_info_to_data(pokemon_data: dict[str, dict]) -> dict[str, dict]:
+    """
+    Adds the additional information for a Pokémon needed and returns a dict with the info. The second step
+    in data collection.
+    :param pokemon_data:
+    :return:
+    """
+    print('Getting extra info for all pokemon in Pokédex(s)')
+
+    more_info: dict[str, dict] = dict()
+
+    for pokemon_name in tqdm(pokemon_data.keys()):
+        time.sleep(0.1)
+        more_info.update(__get_additional_info(pokemon_name))
+
+    return more_info
+
+
+def combine_data(add_to: dict[str, dict], more_info: dict[str, dict]) -> None:
+    """
+    Adds the data from more_info to the given add_to dict. The final step in data collection,
+    :param add_to:
+    :param more_info:
+    :return:
+    """
+    print('Combining extra info to fully evolved data\n\n')
+    for pokemon_name in add_to.keys():
+        add_to[pokemon_name].update(more_info[pokemon_name])
+
+
 if __name__ == '__main__':
-    print('Collecting from pokedex(s)')
     # pokemon = get_generation_pokedex(pokedex_ids=[12, 13, 14, 15])
-    pokemon = get_generation_pokedex(pokedex_ids=[2])
+    pokemon: dict[str, str] = get_generation_pokedex(pokedex_ids=[2])
 
     time.sleep(5)
 
@@ -181,20 +223,20 @@ if __name__ == '__main__':
 
     time.sleep(5)
 
-    more_info: dict[str, dict] = dict()
+    extra_info: dict[str, dict] = add_extra_info_to_data(output)
 
-    print('Getting extra info for all pokemon in pokedex(s)')
-    for name in pokemon.keys():
-        print(f'Getting extra info for {[name]}')
-        time.sleep(0.1)
-        more_info.update(get_additional_info(name))
+    # for name in pokemon.keys():
+    #     print(f'Getting extra info for {[name]}')
+    #     time.sleep(0.1)
+    #     more_info.update(get_additional_info(name))
 
-    print(more_info)
+    # print(more_info)
 
-    input('Continue >')
+    # add_extra_info_to_data(output)
 
-    print('Combining extra info to fully evolved data\n\n')
-    for name in output.keys():
-        output[name].update(more_info[name])
+    combine_data(output, extra_info)
+    # print('Combining extra info to fully evolved data\n\n')
+    # for name in output.keys():
+    #     output[name].update(extra_info[name])
 
     print(f'{json.dumps(output, indent=4)}')
