@@ -105,15 +105,15 @@ def __find_pokemon_in_chain(pokemon_name: str, chain: dict, weight: float) -> tu
     return None
 
 
-def __get_move_coverage(moves: list[dict]) -> list:
-    coverage_collection: list = []
+def __get_move_coverage(moves: list[dict]) -> set:
+    coverage_collection: set = set()
 
     for move in moves:
         move_url: str = move['move']['url']
         move_data: dict = requests.get(move_url).json()
 
         result: str = move_data['type']['name'] + ' ' + move_data['damage_class']['name']
-        coverage_collection.append(result)
+        coverage_collection.add(result)
 
     return coverage_collection
 
@@ -157,7 +157,7 @@ def get_additional_info(pokemon_name: str) -> dict[str, dict]:
         'special-defense': all_data['stats'][4]['base_stat'],
         'speed': all_data['stats'][5]['base_stat'],
         'abilities': [ability_dict['ability']['name'] for ability_dict in all_data['abilities']],
-        'move_coverage': __get_move_coverage(all_data['moves']),
+        'move_coverage': list(__get_move_coverage(all_data['moves'])),
     })
 
     # call update again to get the data already collected from the 'move_coverage' key
