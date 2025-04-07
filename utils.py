@@ -1,17 +1,18 @@
+#%%
 import json
 import os
 
 
-def input_generation() -> list[int]:
-    # this is a dict that maps a string representation of a generation to the int(s) used for the API for pokedex calls
+def input_generation() -> tuple[str, list[int]]:
+    # this is a dict that maps a string representation of a generation to the int(s) used for the API for Pokédex calls
     gen_to_pokedex_mapping: dict[str, list[int]] = {
         'everything': [1],
         'gen 1': [2],
         'gen 2': [7],
         'gen 3': [15],
         'gen 4': [6],
-        'gen 5': [9],
-        'gen 6': [12, 13, 14, 15],  # includes Kalos and updated Hoenn
+        'gen 5': [9],  # the newest Pokédex data for gen 5
+        'gen 6': [12, 13, 14, 15],  # includes all 3 Kalos Pokédexes and updated Hoenn
         'gen 7': [21],
         'gen 8': [27, 28, 29],
         'gen 9': [31, 32, 33],
@@ -22,23 +23,29 @@ def input_generation() -> list[int]:
     user_input: str = input(f'What generation of Pokemon would you like to generate a competitive team for?\n'
                             f'{menu}').lower()
 
-    selected_gen: list[int] = gen_to_pokedex_mapping.get(user_input, None)
+    selected_gens: list[int] = gen_to_pokedex_mapping.get(user_input, None)
 
     # if the user's input is invalid, loop until it is valid
-    while selected_gen is None:
+    while selected_gens is None:
         user_input = input('\nPlease enter the generation you want as you see it appear in the list (e.g., "Gen 1" or '
                            '"Everything")\n> ')
 
-        selected_gen = gen_to_pokedex_mapping.get(user_input, None)
+        selected_gens = gen_to_pokedex_mapping.get(user_input, None)
 
-    print(f'You selected "{user_input}".')
+    print(f'\nYou selected "{user_input}".\n')
+
+    # create the filename based on the user's input; used later when creating files
+    file_name: str = user_input.replace(' ', '_') + '_data'
+    result: tuple[str, list[int]] = (file_name, selected_gens)
+
+    return result
 
 
 def make_menu(options: dict[str, list[int]]) -> str:
     output: str = ''
 
-    for index, key in enumerate(options, start=1):
-        output += f'{index}) {key[0].upper() + key[1:]}\n'
+    for key in options:
+        output += f'- {key[0].upper() + key[1:]}\n'
 
     output += '\n> '
 
@@ -54,28 +61,13 @@ def save_json_file(data: dict[str, dict], filename: str) -> None:
     data_path: str = os.path.join(os.getcwd(), 'data')
     file_path: str = os.path.join(data_path, filename + '.json')
 
-    if os.path.exists(file_path):
-        print(f'The file "{filename}" already exists. A new one will not be created.')
-        return
-
     with open(file_path, 'w') as file:
         json.dump(data, file, indent=4)
+        print(f'Saved new file "{filename}.json" to "{file_path}".')
 
 
-if __name__ == '__main__':
-    data_dict: dict = {
-        'First': 1,
-        'Second': 2,
-        'Third': 3,
-        'Fourth': 4,
-        'Fifth': 5,
-    }
+def file_exists(filename: str) -> bool:
+    data_path: str = os.path.join(os.getcwd(), 'data')
+    file_path: str = os.path.join(data_path, filename)
 
-    new_data: dict = {
-        'Sixth': 6,
-        'Seventh': 7,
-        'Eighth': 8,
-        'Ninth': 9,
-        'Tenth': 10,
-    }
-    save_json_file(data_dict, 'test')
+    return os.path.exists(file_path)

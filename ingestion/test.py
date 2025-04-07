@@ -1,3 +1,4 @@
+from utils import save_json_file
 import requests
 
 
@@ -27,7 +28,25 @@ def is_fully_evolved_with_weight(pokemon_name, evolution_chain_url):
 
 
 # Example Usage
-evolution_chain_url = "https://pokeapi.co/api/v2/evolution-chain/337/"
-print(is_fully_evolved_with_weight("chespin", evolution_chain_url))  # (False, 0.0)
-print(is_fully_evolved_with_weight("quilladin", evolution_chain_url))  # (False, 0.5)
-print(is_fully_evolved_with_weight("chesnaught", evolution_chain_url))  # (True, 1.0)
+# evolution_chain_url = "https://pokeapi.co/api/v2/evolution-chain/337/"
+# print(is_fully_evolved_with_weight("chespin", evolution_chain_url))  # (False, 0.0)
+# print(is_fully_evolved_with_weight("quilladin", evolution_chain_url))  # (False, 0.5)
+# print(is_fully_evolved_with_weight("chesnaught", evolution_chain_url))  # (True, 1.0)
+#
+# data_dict: dict = {
+#     'First': 1,
+#     'Second': 2,
+#     'Third': 3,
+#     'Fourth': 4,
+#     'Fifth': 5,
+# }
+#
+# new_data: dict = {
+#     'Sixth': 6,
+#     'Seventh': 7,
+#     'Eighth': 8,
+#     'Ninth': 9,
+#     'Tenth': 10,
+# }
+#
+# save_json_file(data_dict, 'test')
