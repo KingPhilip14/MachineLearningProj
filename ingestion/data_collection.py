@@ -45,10 +45,10 @@ def get_generation_pokedex(pokedex_ids: list[int]) -> dict[str, str]:
     return collection
 
 
-def is_fully_evolved(pokemon_species: dict[str, str]) -> dict[str, dict]:
+def get_species_data(pokemon_species: dict[str, str]) -> dict[str, dict]:
     """
-    Given the data of a Pokémon species, a boolean will be added to the information stating if the Pokémon
-    is fully evolved. The third step in the data collection.
+    Given the data of a Pokémon species, extra information is gathered, such as if the Pokémon is fully evolved
+    and if it's a legendary or mythical. The third step in the data collection.
     :param pokemon_species:
     :return:
     """
@@ -59,6 +59,10 @@ def is_fully_evolved(pokemon_species: dict[str, str]) -> dict[str, dict]:
     for pokemon_name, species_url in tqdm(pokemon_species.items()):
         # will be used to add weight to how desirable a Pokémon is; increases by 0.5 for criteria met
         evo_weight: float = 0.0
+
+        species_json: dict = requests.get(species_url).json()
+
+        is_legend_or_mythical: bool = species_json['is_legendary'] or species_json['is_mythical']
 
         # get the evolution chain from the URL
         chain_url: str = requests.get(species_url).json()['evolution_chain']['url']
@@ -73,6 +77,7 @@ def is_fully_evolved(pokemon_species: dict[str, str]) -> dict[str, dict]:
                     pokemon_name: {
                         'is_fully_evolved': fully_evolved,
                         'evo_weight': 1.0 if fully_evolved else evo_weight,
+                        'is_legend_or_mythical': is_legend_or_mythical
                     }
                 })
 
@@ -87,7 +92,8 @@ def is_fully_evolved(pokemon_species: dict[str, str]) -> dict[str, dict]:
                     {
                         pokemon_name: {
                             'is_fully_evolved': evo_chain_result[0],
-                            'evo_weight': evo_chain_result[1]
+                            'evo_weight': evo_chain_result[1],
+                            'is_legend_or_mythical': is_legend_or_mythical
                         }
                     })
                 # print(f'{pokemon_name} added to result')
@@ -159,7 +165,14 @@ def __get_additional_info(pokemon_name: str) -> dict[str, dict]:
     wanted_data: dict = dict()
 
     url: str = f'{base_url}/pokemon/{pokemon_name}/'
-    all_data: dict = requests.get(url).json()
+
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        print(f'\nCould not collect data for "{pokemon_name}". API response text: "{response.text}"\n')
+        return {pokemon_name: None}
+
+    all_data: dict = response.json()
 
     wanted_data.update({
         'type_1': all_data['types'][0]['type']['name'],
@@ -212,6 +225,9 @@ def combine_data(add_to: dict[str, dict], more_info: dict[str, dict]) -> None:
     """
     print('Combining extra info to fully evolved data\n\n')
     for pokemon_name in add_to.keys():
+        if more_info[pokemon_name] is None:
+            continue
+
         add_to[pokemon_name].update(more_info[pokemon_name])
 
 
@@ -235,7 +251,7 @@ def collect_data(filename: str, pokedex_ids: list[int]) -> None:
     print(f'\nPausing for {pause_time} seconds to not time out during data collection. Please wait...')
     time.sleep(pause_time)
 
-    output: dict[str, dict] = is_fully_evolved(pokemon)
+    output: dict[str, dict] = get_species_data(pokemon)
 
     print(f'\nPausing again for {pause_time} seconds to not time out during data collection. Please wait...')
     time.sleep(pause_time)

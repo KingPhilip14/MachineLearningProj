@@ -20,7 +20,7 @@ def input_generation() -> tuple[str, list[int]]:
 
     menu: str = make_menu(gen_to_pokedex_mapping)
 
-    user_input: str = input(f'What generation of Pokemon would you like to generate a competitive team for?\n'
+    user_input: str = input(f'What generation of Pokemon would you like to generate a team for?\n'
                             f'{menu}').lower()
 
     selected_gens: list[int] = gen_to_pokedex_mapping.get(user_input, None)
