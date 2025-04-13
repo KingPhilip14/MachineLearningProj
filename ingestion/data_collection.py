@@ -210,7 +210,6 @@ def add_extra_info_to_data(pokemon_data: dict[str, dict]) -> dict[str, dict]:
     more_info: dict[str, dict] = dict()
 
     for pokemon_name in tqdm(pokemon_data.keys()):
-        time.sleep(0.1)
         more_info.update(__get_additional_info(pokemon_name))
 
     return more_info

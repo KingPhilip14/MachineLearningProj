@@ -32,7 +32,7 @@ def input_generation() -> tuple[str, list[int]]:
 
         selected_gens = gen_to_pokedex_mapping.get(user_input, None)
 
-    print(f'\nYou selected "{user_input}".\n')
+    print(f'\nYou selected "{user_input}."\n')
 
     # create the filename based on the user's input; used later when creating files
     file_name: str = user_input.replace(' ', '_') + '_data'
