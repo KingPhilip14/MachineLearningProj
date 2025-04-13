@@ -1,6 +1,7 @@
 #%%
 import json
 import os
+from typing import Any
 
 
 def input_generation() -> tuple[str, list[int]]:

@@ -1,4 +1,6 @@
 #%%
+from typing import Any
+
 from tqdm import tqdm
 from utils import save_json_file, file_exists
 
@@ -260,6 +262,55 @@ def collect_data(filename: str, pokedex_ids: list[int]) -> None:
     combine_data(output, extra_info)
 
     save_json_file(output, filename)
+
+
+def classify_role_by_dynamic_stats(data: dict[str, Any]) -> str:
+    move_categories: list[str] = ['highest_move_categories']
+
+    hp = data['hp']
+    atk = data['attack']
+    defense = data['defense']
+    spa = data['special-attack']
+    spd_def = data['special-defense']
+    spd = data['speed']
+
+    # The base stat total of the Pokémon
+    bst = atk + spa + spd + hp + defense + spd_def
+
+    # Percentage thresholds based on total stats
+    high_stat_threshold = 0.20 * bst  # stat is considered high if ≥20% of total
+    balanced_offense_margin = 0.05 * bst  # if atk/spa are close within 5% of BST
+
+    # Wall / tank detection
+    if hp >= 0.20 * bst:
+        if defense >= 0.18 * bst and spd_def < 0.15 * bst:
+            return 'physical wall'
+        elif spd_def >= 0.18 * bst and defense < 0.15 * bst:
+            return 'special wall'
+        elif defense >= 0.16 * bst and spd_def >= 0.16 * bst:
+            return 'mixed tank'
+
+    # Utility/support detection
+    if 'status' in move_categories and atk < high_stat_threshold and spa < high_stat_threshold:
+        return 'utility/support'
+
+    # Sweeper detection (speed + high offense)
+    if spd >= 0.18 * bst:
+        if atk > spa and atk >= high_stat_threshold:
+            return 'physical sweeper'
+        elif spa > atk and spa >= high_stat_threshold:
+            return 'special sweeper'
+
+    # Attacker roles
+    if atk >= high_stat_threshold and atk > spa + balanced_offense_margin:
+        return 'physical attacker'
+    elif spa >= high_stat_threshold and spa > atk + balanced_offense_margin:
+        return 'special attacker'
+    elif abs(atk - spa) <= balanced_offense_margin:
+        return 'mixed attacker'
+
+    # Fallback
+    return 'versatile'
 
 
 # # if __name__ == '__main__':

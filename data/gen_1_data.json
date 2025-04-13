@@ -37,7 +37,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "special attacker"
     },
     "ivysaur": {
         "is_fully_evolved": false,
@@ -77,7 +78,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "versatile"
     },
     "venusaur": {
         "is_fully_evolved": true,
@@ -120,7 +122,8 @@
         "highest_move_categories": [
             "physical",
             "status"
-        ]
+        ],
+        "role": "versatile"
     },
     "charmander": {
         "is_fully_evolved": false,
@@ -168,7 +171,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "charmeleon": {
         "is_fully_evolved": false,
@@ -215,7 +219,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "versatile"
     },
     "charizard": {
         "is_fully_evolved": true,
@@ -267,7 +272,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "special sweeper"
     },
     "squirtle": {
         "is_fully_evolved": false,
@@ -314,7 +320,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "wartortle": {
         "is_fully_evolved": false,
@@ -360,7 +367,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "blastoise": {
         "is_fully_evolved": true,
@@ -410,7 +418,8 @@
         "highest_move_categories": [
             "physical",
             "special"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "caterpie": {
         "is_fully_evolved": false,
@@ -438,7 +447,8 @@
         "highest_move_categories": [
             "physical",
             "special"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "metapod": {
         "is_fully_evolved": false,
@@ -464,7 +474,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical wall"
     },
     "butterfree": {
         "is_fully_evolved": true,
@@ -511,7 +522,8 @@
         "highest_move_categories": [
             "special",
             "status"
-        ]
+        ],
+        "role": "special attacker"
     },
     "weedle": {
         "is_fully_evolved": false,
@@ -537,7 +549,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "versatile"
     },
     "kakuna": {
         "is_fully_evolved": false,
@@ -563,7 +576,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical wall"
     },
     "beedrill": {
         "is_fully_evolved": true,
@@ -607,7 +621,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "pidgey": {
         "is_fully_evolved": false,
@@ -650,7 +665,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "pidgeotto": {
         "is_fully_evolved": false,
@@ -693,7 +709,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "pidgeot": {
         "is_fully_evolved": true,
@@ -736,7 +753,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "rattata": {
         "is_fully_evolved": false,
@@ -786,7 +804,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "raticate": {
         "is_fully_evolved": true,
@@ -834,7 +853,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "versatile"
     },
     "spearow": {
         "is_fully_evolved": false,
@@ -877,7 +897,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "fearow": {
         "is_fully_evolved": true,
@@ -919,7 +940,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "ekans": {
         "is_fully_evolved": false,
@@ -968,7 +990,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "arbok": {
         "is_fully_evolved": true,
@@ -1019,7 +1042,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "pikachu": {
         "is_fully_evolved": false,
@@ -1067,7 +1091,8 @@
         "highest_move_categories": [
             "physical",
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "raichu": {
         "is_fully_evolved": true,
@@ -1116,7 +1141,8 @@
         "highest_move_categories": [
             "physical",
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "sandshrew": {
         "is_fully_evolved": false,
@@ -1159,7 +1185,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "sandslash": {
         "is_fully_evolved": true,
@@ -1203,7 +1230,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "nidoran-f": {
         "is_fully_evolved": false,
@@ -1249,7 +1277,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical wall"
     },
     "nidorina": {
         "is_fully_evolved": false,
@@ -1295,7 +1324,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "nidoqueen": {
         "is_fully_evolved": true,
@@ -1353,7 +1383,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "versatile"
     },
     "nidoran-m": {
         "is_fully_evolved": false,
@@ -1400,7 +1431,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "nidorino": {
         "is_fully_evolved": false,
@@ -1446,7 +1478,8 @@
         "highest_move_categories": [
             "physical",
             "status"
-        ]
+        ],
+        "role": "versatile"
     },
     "nidoking": {
         "is_fully_evolved": true,
@@ -1503,7 +1536,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "clefairy": {
         "is_fully_evolved": false,
@@ -1562,7 +1596,8 @@
         "highest_move_categories": [
             "physical",
             "special"
-        ]
+        ],
+        "role": "special wall"
     },
     "clefable": {
         "is_fully_evolved": true,
@@ -1621,7 +1656,8 @@
         ],
         "highest_move_categories": [
             "special"
-        ]
+        ],
+        "role": "versatile"
     },
     "vulpix": {
         "is_fully_evolved": false,
@@ -1662,7 +1698,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "ninetales": {
         "is_fully_evolved": true,
@@ -1705,7 +1742,8 @@
         "highest_move_categories": [
             "special",
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "jigglypuff": {
         "is_fully_evolved": false,
@@ -1763,7 +1801,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "wigglytuff": {
         "is_fully_evolved": true,
@@ -1822,7 +1861,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "versatile"
     },
     "zubat": {
         "is_fully_evolved": false,
@@ -1869,7 +1909,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "versatile"
     },
     "golbat": {
         "is_fully_evolved": false,
@@ -1916,7 +1957,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "versatile"
     },
     "oddish": {
         "is_fully_evolved": false,
@@ -1952,7 +1994,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "special attacker"
     },
     "gloom": {
         "is_fully_evolved": false,
@@ -1990,7 +2033,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "special attacker"
     },
     "vileplume": {
         "is_fully_evolved": true,
@@ -2028,7 +2072,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "special attacker"
     },
     "paras": {
         "is_fully_evolved": false,
@@ -2075,7 +2120,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "parasect": {
         "is_fully_evolved": true,
@@ -2119,7 +2165,8 @@
         "highest_move_categories": [
             "physical",
             "status"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "venonat": {
         "is_fully_evolved": false,
@@ -2160,7 +2207,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "versatile"
     },
     "venomoth": {
         "is_fully_evolved": true,
@@ -2206,7 +2254,8 @@
         "highest_move_categories": [
             "special",
             "status"
-        ]
+        ],
+        "role": "special sweeper"
     },
     "diglett": {
         "is_fully_evolved": false,
@@ -2250,7 +2299,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "dugtrio": {
         "is_fully_evolved": true,
@@ -2292,7 +2342,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "meowth": {
         "is_fully_evolved": false,
@@ -2345,7 +2396,8 @@
         "highest_move_categories": [
             "physical",
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "persian": {
         "is_fully_evolved": true,
@@ -2398,7 +2450,8 @@
         "highest_move_categories": [
             "physical",
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "psyduck": {
         "is_fully_evolved": false,
@@ -2448,7 +2501,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "special attacker"
     },
     "golduck": {
         "is_fully_evolved": true,
@@ -2500,7 +2554,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "versatile"
     },
     "mankey": {
         "is_fully_evolved": false,
@@ -2551,7 +2606,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "primeape": {
         "is_fully_evolved": false,
@@ -2603,7 +2659,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "growlithe": {
         "is_fully_evolved": false,
@@ -2648,7 +2705,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "arcanine": {
         "is_fully_evolved": true,
@@ -2694,7 +2752,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "poliwag": {
         "is_fully_evolved": false,
@@ -2735,7 +2794,8 @@
         "highest_move_categories": [
             "physical",
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "poliwhirl": {
         "is_fully_evolved": false,
@@ -2776,7 +2836,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "versatile"
     },
     "poliwrath": {
         "is_fully_evolved": true,
@@ -2822,7 +2883,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "versatile"
     },
     "abra": {
         "is_fully_evolved": false,
@@ -2869,7 +2931,8 @@
         "highest_move_categories": [
             "physical",
             "status"
-        ]
+        ],
+        "role": "special sweeper"
     },
     "kadabra": {
         "is_fully_evolved": false,
@@ -2916,7 +2979,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "special sweeper"
     },
     "alakazam": {
         "is_fully_evolved": true,
@@ -2964,7 +3028,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "special sweeper"
     },
     "machop": {
         "is_fully_evolved": false,
@@ -3009,7 +3074,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "machoke": {
         "is_fully_evolved": false,
@@ -3054,7 +3120,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "machamp": {
         "is_fully_evolved": true,
@@ -3100,7 +3167,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "bellsprout": {
         "is_fully_evolved": false,
@@ -3137,7 +3205,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "weepinbell": {
         "is_fully_evolved": false,
@@ -3174,7 +3243,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "victreebel": {
         "is_fully_evolved": true,
@@ -3211,7 +3281,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "tentacool": {
         "is_fully_evolved": false,
@@ -3255,7 +3326,8 @@
         ],
         "highest_move_categories": [
             "special"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "tentacruel": {
         "is_fully_evolved": true,
@@ -3299,7 +3371,8 @@
         ],
         "highest_move_categories": [
             "special"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "geodude": {
         "is_fully_evolved": false,
@@ -3343,7 +3416,8 @@
         "highest_move_categories": [
             "physical",
             "status"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "graveler": {
         "is_fully_evolved": false,
@@ -3388,7 +3462,8 @@
         "highest_move_categories": [
             "physical",
             "status"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "golem": {
         "is_fully_evolved": true,
@@ -3433,7 +3508,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "ponyta": {
         "is_fully_evolved": false,
@@ -3474,7 +3550,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "rapidash": {
         "is_fully_evolved": true,
@@ -3519,7 +3596,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "slowpoke": {
         "is_fully_evolved": false,
@@ -3569,7 +3647,8 @@
         ],
         "highest_move_categories": [
             "special"
-        ]
+        ],
+        "role": "physical wall"
     },
     "slowbro": {
         "is_fully_evolved": true,
@@ -3623,7 +3702,8 @@
         ],
         "highest_move_categories": [
             "special"
-        ]
+        ],
+        "role": "special attacker"
     },
     "magnemite": {
         "is_fully_evolved": false,
@@ -3663,7 +3743,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "special attacker"
     },
     "magneton": {
         "is_fully_evolved": false,
@@ -3703,7 +3784,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "special attacker"
     },
     "farfetchd": {
         "is_fully_evolved": false,
@@ -3750,7 +3832,8 @@
         "highest_move_categories": [
             "physical",
             "status"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "doduo": {
         "is_fully_evolved": false,
@@ -3790,7 +3873,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "dodrio": {
         "is_fully_evolved": true,
@@ -3833,7 +3917,8 @@
         "highest_move_categories": [
             "physical",
             "status"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "seel": {
         "is_fully_evolved": false,
@@ -3877,7 +3962,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "mixed tank"
     },
     "dewgong": {
         "is_fully_evolved": true,
@@ -3922,7 +4008,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "grimer": {
         "is_fully_evolved": false,
@@ -3973,7 +4060,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "muk": {
         "is_fully_evolved": true,
@@ -4028,7 +4116,8 @@
         "highest_move_categories": [
             "physical",
             "special"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "shellder": {
         "is_fully_evolved": false,
@@ -4069,7 +4158,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "cloyster": {
         "is_fully_evolved": true,
@@ -4116,7 +4206,8 @@
         "highest_move_categories": [
             "physical",
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "gastly": {
         "is_fully_evolved": false,
@@ -4163,7 +4254,8 @@
         ],
         "highest_move_categories": [
             "special"
-        ]
+        ],
+        "role": "special sweeper"
     },
     "haunter": {
         "is_fully_evolved": false,
@@ -4211,7 +4303,8 @@
         ],
         "highest_move_categories": [
             "special"
-        ]
+        ],
+        "role": "special sweeper"
     },
     "gengar": {
         "is_fully_evolved": true,
@@ -4261,7 +4354,8 @@
         ],
         "highest_move_categories": [
             "special"
-        ]
+        ],
+        "role": "special sweeper"
     },
     "onix": {
         "is_fully_evolved": false,
@@ -4305,7 +4399,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "versatile"
     },
     "drowzee": {
         "is_fully_evolved": false,
@@ -4353,7 +4448,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "hypno": {
         "is_fully_evolved": true,
@@ -4401,7 +4497,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "krabby": {
         "is_fully_evolved": false,
@@ -4446,7 +4543,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "kingler": {
         "is_fully_evolved": true,
@@ -4492,7 +4590,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "voltorb": {
         "is_fully_evolved": false,
@@ -4532,7 +4631,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "versatile"
     },
     "electrode": {
         "is_fully_evolved": true,
@@ -4572,7 +4672,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "versatile"
     },
     "exeggcute": {
         "is_fully_evolved": false,
@@ -4612,7 +4713,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "versatile"
     },
     "exeggutor": {
         "is_fully_evolved": true,
@@ -4653,7 +4755,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "special attacker"
     },
     "cubone": {
         "is_fully_evolved": false,
@@ -4700,7 +4803,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "marowak": {
         "is_fully_evolved": true,
@@ -4748,7 +4852,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "versatile"
     },
     "hitmonlee": {
         "is_fully_evolved": true,
@@ -4793,7 +4898,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "hitmonchan": {
         "is_fully_evolved": true,
@@ -4838,7 +4944,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "lickitung": {
         "is_fully_evolved": false,
@@ -4892,7 +4999,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "mixed tank"
     },
     "koffing": {
         "is_fully_evolved": false,
@@ -4937,7 +5045,8 @@
         "highest_move_categories": [
             "special",
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "weezing": {
         "is_fully_evolved": true,
@@ -4982,7 +5091,8 @@
         "highest_move_categories": [
             "special",
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "rhyhorn": {
         "is_fully_evolved": false,
@@ -5033,7 +5143,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical wall"
     },
     "rhydon": {
         "is_fully_evolved": false,
@@ -5088,7 +5199,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical wall"
     },
     "chansey": {
         "is_fully_evolved": false,
@@ -5145,7 +5257,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "special wall"
     },
     "tangela": {
         "is_fully_evolved": false,
@@ -5187,7 +5300,8 @@
         "highest_move_categories": [
             "special",
             "status"
-        ]
+        ],
+        "role": "special attacker"
     },
     "kangaskhan": {
         "is_fully_evolved": true,
@@ -5241,7 +5355,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "mixed tank"
     },
     "horsea": {
         "is_fully_evolved": false,
@@ -5283,7 +5398,8 @@
         "highest_move_categories": [
             "special",
             "status"
-        ]
+        ],
+        "role": "special sweeper"
     },
     "seadra": {
         "is_fully_evolved": false,
@@ -5325,7 +5441,8 @@
         "highest_move_categories": [
             "special",
             "status"
-        ]
+        ],
+        "role": "special sweeper"
     },
     "goldeen": {
         "is_fully_evolved": false,
@@ -5370,7 +5487,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "seaking": {
         "is_fully_evolved": true,
@@ -5414,7 +5532,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "staryu": {
         "is_fully_evolved": false,
@@ -5458,7 +5577,8 @@
         ],
         "highest_move_categories": [
             "special"
-        ]
+        ],
+        "role": "special sweeper"
     },
     "starmie": {
         "is_fully_evolved": true,
@@ -5505,7 +5625,8 @@
         ],
         "highest_move_categories": [
             "special"
-        ]
+        ],
+        "role": "versatile"
     },
     "mr-mime": {
         "is_fully_evolved": false,
@@ -5559,7 +5680,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "special sweeper"
     },
     "scyther": {
         "is_fully_evolved": false,
@@ -5604,7 +5726,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "jynx": {
         "is_fully_evolved": true,
@@ -5651,7 +5774,8 @@
         ],
         "highest_move_categories": [
             "special"
-        ]
+        ],
+        "role": "special sweeper"
     },
     "electabuzz": {
         "is_fully_evolved": false,
@@ -5698,7 +5822,8 @@
         "highest_move_categories": [
             "physical",
             "status"
-        ]
+        ],
+        "role": "versatile"
     },
     "magmar": {
         "is_fully_evolved": false,
@@ -5741,7 +5866,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "special sweeper"
     },
     "pinsir": {
         "is_fully_evolved": true,
@@ -5784,7 +5910,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "tauros": {
         "is_fully_evolved": true,
@@ -5832,7 +5959,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "magikarp": {
         "is_fully_evolved": false,
@@ -5858,7 +5986,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "gyarados": {
         "is_fully_evolved": true,
@@ -5911,7 +6040,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "lapras": {
         "is_fully_evolved": true,
@@ -5961,7 +6091,8 @@
         ],
         "highest_move_categories": [
             "special"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "ditto": {
         "is_fully_evolved": true,
@@ -5984,7 +6115,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "eevee": {
         "is_fully_evolved": false,
@@ -6028,7 +6160,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "vaporeon": {
         "is_fully_evolved": true,
@@ -6076,7 +6209,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "special wall"
     },
     "jolteon": {
         "is_fully_evolved": true,
@@ -6125,7 +6259,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "special sweeper"
     },
     "flareon": {
         "is_fully_evolved": true,
@@ -6172,7 +6307,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "porygon": {
         "is_fully_evolved": false,
@@ -6216,7 +6352,8 @@
         "highest_move_categories": [
             "special",
             "status"
-        ]
+        ],
+        "role": "special attacker"
     },
     "omanyte": {
         "is_fully_evolved": false,
@@ -6259,7 +6396,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "special attacker"
     },
     "omastar": {
         "is_fully_evolved": true,
@@ -6303,7 +6441,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "special attacker"
     },
     "kabuto": {
         "is_fully_evolved": false,
@@ -6350,7 +6489,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "kabutops": {
         "is_fully_evolved": true,
@@ -6400,7 +6540,8 @@
         "highest_move_categories": [
             "physical",
             "status"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "aerodactyl": {
         "is_fully_evolved": true,
@@ -6454,7 +6595,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "physical sweeper"
     },
     "snorlax": {
         "is_fully_evolved": true,
@@ -6511,7 +6653,8 @@
         ],
         "highest_move_categories": [
             "physical"
-        ]
+        ],
+        "role": "special wall"
     },
     "articuno": {
         "is_fully_evolved": true,
@@ -6560,7 +6703,8 @@
         "highest_move_categories": [
             "special",
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     },
     "zapdos": {
         "is_fully_evolved": true,
@@ -6609,7 +6753,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "special attacker"
     },
     "moltres": {
         "is_fully_evolved": true,
@@ -6654,7 +6799,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "special attacker"
     },
     "dratini": {
         "is_fully_evolved": false,
@@ -6697,7 +6843,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "dragonair": {
         "is_fully_evolved": false,
@@ -6740,7 +6887,8 @@
         ],
         "highest_move_categories": [
             "status"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "dragonite": {
         "is_fully_evolved": true,
@@ -6799,7 +6947,8 @@
         "highest_move_categories": [
             "physical",
             "status"
-        ]
+        ],
+        "role": "physical attacker"
     },
     "mewtwo": {
         "is_fully_evolved": true,
@@ -6861,7 +7010,8 @@
         "highest_move_categories": [
             "physical",
             "special"
-        ]
+        ],
+        "role": "special sweeper"
     },
     "mew": {
         "is_fully_evolved": true,
@@ -6938,6 +7088,7 @@
             "physical",
             "special",
             "status"
-        ]
+        ],
+        "role": "mixed attacker"
     }
 }
