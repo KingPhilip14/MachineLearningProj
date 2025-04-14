@@ -1,13 +1,12 @@
 #%%
+import os
 from typing import Any
-
-from tqdm import tqdm
-from utils import save_json_file, file_exists
-
 import json
 import requests
 import time
-import threading
+
+from tqdm import tqdm
+from utils import file_exists, save_json_file
 
 base_url: str = 'https://pokeapi.co/api/v2/'
 
@@ -109,7 +108,7 @@ def __find_pokemon_in_chain(pokemon_name: str, chain: dict, evo_weight: float) -
     (single-stage Pokémon count as fully evolved). If a Pokémon is partially evolved, its weight will be 0.5.
     :param pokemon_name: 
     :param chain: 
-    :param weight: 
+    :param evo_weight:
     :return: 
     """
     evo_weight += 0.5
@@ -227,6 +226,8 @@ def combine_data(add_to: dict[str, dict], more_info: dict[str, dict]) -> None:
     print('Combining extra info to fully evolved data\n\n')
     for pokemon_name in add_to.keys():
         if more_info[pokemon_name] is None:
+            add_to.pop(pokemon_name)
+            print(f'Removed {pokemon_name} from data since the additional gathered data cannot be accessed.')
             continue
 
         add_to[pokemon_name].update(more_info[pokemon_name])
@@ -261,37 +262,77 @@ def collect_data(filename: str, pokedex_ids: list[int]) -> None:
 
     combine_data(output, extra_info)
 
-    save_json_file(output, filename)
+    save_json_file(output, filename, False)
 
 
-def classify_role_by_dynamic_stats(data: dict[str, Any]) -> str:
+def clean_data(filename: str) -> None:
+    """
+    Looks at every Pokémon stored in a JSON file. If the entry is missing the 'hp' key, the data is identified as
+    malformed as is removed.
+    :return:
+    """
+    print('\n\n---------------------------------------------------------')
+    data_path: str = os.path.join(os.getcwd(), 'data')
+    file_path: str = os.path.join(data_path, filename)
+
+    with open(file_path, 'r') as f:
+        data = json.load(f)
+
+    to_remove: list[str] = []
+    modified: bool = False
+
+    for pokemon_name, pokemon_data in data.items():
+        if data[pokemon_name].get('hp', None) is None:
+            modified = True
+            to_remove.append(pokemon_name)
+
+    for name in to_remove:
+        data.pop(name)
+        print(f'Removed "{name}" because its data was incomplete.')
+
+    if modified:
+        save_json_file(data, filename, True)
+        return
+
+    print(f'No malformed/incomplete data was found in {filename}')
+
+
+def __classify_role_by_dynamic_stats(data: dict[str, Any]) -> str:
     move_categories: list[str] = ['highest_move_categories']
 
     hp = data['hp']
     atk = data['attack']
     defense = data['defense']
     spa = data['special-attack']
-    spd_def = data['special-defense']
+    sp_def = data['special-defense']
     spd = data['speed']
 
     # The base stat total of the Pokémon
-    bst = atk + spa + spd + hp + defense + spd_def
+    bst = atk + spa + spd + hp + defense + sp_def
 
     # Percentage thresholds based on total stats
-    high_stat_threshold = 0.20 * bst  # stat is considered high if ≥20% of total
+    high_stat_threshold = 0.19 * bst  # stat is considered high if ≥19% of total; 19 to help with better classifications
     balanced_offense_margin = 0.05 * bst  # if atk/spa are close within 5% of BST
+
+    # return versatile immediately if all stats are equal
+    if hp == atk == defense == spa == sp_def == spd:
+        return 'versatile'
 
     # Wall / tank detection
     if hp >= 0.20 * bst:
-        if defense >= 0.18 * bst and spd_def < 0.15 * bst:
+        if defense >= 0.18 * bst and sp_def < 0.15 * bst:
             return 'physical wall'
-        elif spd_def >= 0.18 * bst and defense < 0.15 * bst:
+        elif sp_def >= 0.18 * bst and defense < 0.15 * bst:
             return 'special wall'
-        elif defense >= 0.16 * bst and spd_def >= 0.16 * bst:
-            return 'mixed tank'
+        elif defense >= 0.16 * bst and sp_def >= 0.16 * bst:
+            return 'mixed wall'
+
+    # Classified as a tank only if both defenses are high
+    if defense >= high_stat_threshold and sp_def >= high_stat_threshold:
+        return 'tank'
 
     # Utility/support detection
-    if 'status' in move_categories and atk < high_stat_threshold and spa < high_stat_threshold:
+    if move_categories == ['status'] and atk < high_stat_threshold and spa < high_stat_threshold:
         return 'utility/support'
 
     # Sweeper detection (speed + high offense)
@@ -312,6 +353,78 @@ def classify_role_by_dynamic_stats(data: dict[str, Any]) -> str:
     # Fallback
     return 'versatile'
 
+
+def define_pokemon_role(filename: str) -> None:
+    """
+    By calling another method to define a Pokémon's role, it's then saved in the JSON file for each Pokémon stored.
+    """
+    data_path: str = os.path.join(os.getcwd(), 'data')
+    file_path: str = os.path.join(data_path, filename)
+
+    data: dict[str, dict]
+
+    print('Classifying roles...')
+
+    with open(file_path, 'r') as f:
+        data = json.load(f)
+
+        for pokemon_name, pokemon_data in data.items():
+            poke_data: dict[str, Any] = data[pokemon_name]
+            role: str = __classify_role_by_dynamic_stats(poke_data)
+
+            data[pokemon_name].update({'role': role})
+
+    save_json_file(data, filename, True)
+
+    print(f'Pokemon roles have been saved to {filename}')
+
+
+def add_bst(filename: str) -> None:
+    """
+    Calculates a Pokemon's base stat total (BST) by finding the sum of all stats (HP, attack, defense, etc.).
+    """
+    data_path: str = os.path.join(os.getcwd(), 'data')
+    file_path: str = os.path.join(data_path, filename)
+
+    data: dict[str, dict]
+
+    print('Calculating BSTs...')
+
+    with open(file_path, 'r') as f:
+        data = json.load(f)
+
+        for pokemon_name, pokemon_data in data.items():
+            poke_data: dict[str, Any] = data[pokemon_name]
+
+            hp = poke_data['hp']
+            atk = poke_data['attack']
+            defense = poke_data['defense']
+            spa = poke_data['special-attack']
+            spd_def = poke_data['special-defense']
+            spd = poke_data['speed']
+
+            # The base stat total of the Pokémon
+            bst: int = atk + spa + spd + hp + defense + spd_def
+
+            data[pokemon_name].update({'bst': bst})
+
+    save_json_file(data, filename, True)
+
+    print(f'Base stat totals have been saved to {filename}')
+
+
+def clean_and_update_data_files() -> None:
+    """
+    Iterates through every file in the /data folder to clean and update the stored data.
+    :return:
+    """
+    data_path: str = os.path.join(os.getcwd(), 'data')
+
+    for filename in os.listdir(data_path):
+        # clean data
+        clean_data(filename)
+        define_pokemon_role(filename)
+        add_bst(filename)
 
 # # if __name__ == '__main__':
 #     # pokemon = get_generation_pokedex(pokedex_ids=[12, 13, 14, 15])

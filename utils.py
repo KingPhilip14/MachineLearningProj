@@ -1,7 +1,6 @@
 #%%
 import json
 import os
-from typing import Any
 
 
 def input_generation() -> tuple[str, list[int]]:
@@ -53,22 +52,27 @@ def make_menu(options: dict[str, list[int]]) -> str:
     return output
 
 
-def save_json_file(data: dict[str, dict], filename: str) -> None:
+def save_json_file(data: dict[str, dict], filename: str, exists: bool) -> None:
     """
     Uses the given dictionary to save the data in a JSON file.
     :param data:
     :param filename:
     """
     data_path: str = os.path.join(os.getcwd(), 'data')
-    file_path: str = os.path.join(data_path, filename + '.json')
+
+    filename = filename + '.json' if not exists else filename
+
+    file_path: str = os.path.join(data_path, filename)
 
     with open(file_path, 'w') as file:
         json.dump(data, file, indent=4)
-        print(f'Saved new file "{filename}.json" to "{file_path}".')
+
+        print(f'Saved new file "{filename}" to "{file_path}".') if exists else \
+            print(f'Replaced data in file {filename}')
 
 
 def file_exists(filename: str) -> bool:
     data_path: str = os.path.join(os.getcwd(), 'data')
-    file_path: str = os.path.join(data_path, filename)
+    file_path: str = os.path.join(data_path, filename + '.json')
 
     return os.path.exists(file_path)
