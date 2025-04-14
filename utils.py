@@ -58,7 +58,7 @@ def save_json_file(data: dict[str, dict], filename: str, exists: bool) -> None:
     :param data:
     :param filename:
     """
-    data_path: str = os.path.join(os.getcwd(), 'data')
+    data_path: str = os.path.join(os.getcwd(), 'data', 'pokemon_data')
 
     filename = filename + '.json' if not exists else filename
 
@@ -72,7 +72,9 @@ def save_json_file(data: dict[str, dict], filename: str, exists: bool) -> None:
 
 
 def file_exists(filename: str) -> bool:
-    data_path: str = os.path.join(os.getcwd(), 'data')
+    data_path: str = os.path.join(os.getcwd(), 'data', 'pokemon_data')
     file_path: str = os.path.join(data_path, filename + '.json')
+
+    print(f'Filepath: "{file_path}"')
 
     return os.path.exists(file_path)

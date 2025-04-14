@@ -41,7 +41,20 @@
             "status"
         ],
         "role": "physical attacker",
-        "bst": 318
+        "bst": 318,
+        "weaknesses": {
+            "fire": 2.0,
+            "ice": 2.0,
+            "poison": 2.0,
+            "flying": 2.0,
+            "bug": 2.0
+        },
+        "resistances": {
+            "water": 0.5,
+            "electric": 0.5,
+            "grass": 0.5,
+            "ground": 0.5
+        }
     },
     "grotle": {
         "is_fully_evolved": false,
@@ -85,7 +98,20 @@
             "status"
         ],
         "role": "physical attacker",
-        "bst": 405
+        "bst": 405,
+        "weaknesses": {
+            "fire": 2.0,
+            "ice": 2.0,
+            "poison": 2.0,
+            "flying": 2.0,
+            "bug": 2.0
+        },
+        "resistances": {
+            "water": 0.5,
+            "electric": 0.5,
+            "grass": 0.5,
+            "ground": 0.5
+        }
     },
     "torterra": {
         "is_fully_evolved": true,
@@ -131,7 +157,18 @@
             "status"
         ],
         "role": "physical attacker",
-        "bst": 525
+        "bst": 525,
+        "weaknesses": {
+            "fire": 2.0,
+            "ice": 4.0,
+            "flying": 2.0,
+            "bug": 2.0
+        },
+        "resistances": {
+            "electric": 0.5,
+            "ground": 0.5,
+            "rock": 0.5
+        }
     },
     "chimchar": {
         "is_fully_evolved": false,
@@ -180,7 +217,20 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 309
+        "bst": 309,
+        "weaknesses": {
+            "water": 2.0,
+            "ground": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "grass": 0.5,
+            "ice": 0.5,
+            "bug": 0.5,
+            "steel": 0.5,
+            "fairy": 0.5
+        }
     },
     "monferno": {
         "is_fully_evolved": false,
@@ -230,7 +280,21 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 405
+        "bst": 405,
+        "weaknesses": {
+            "water": 2.0,
+            "ground": 2.0,
+            "flying": 2.0,
+            "psychic": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "grass": 0.5,
+            "ice": 0.5,
+            "bug": 0.25,
+            "dark": 0.5,
+            "steel": 0.5
+        }
     },
     "infernape": {
         "is_fully_evolved": true,
@@ -280,7 +344,21 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 534
+        "bst": 534,
+        "weaknesses": {
+            "water": 2.0,
+            "ground": 2.0,
+            "flying": 2.0,
+            "psychic": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "grass": 0.5,
+            "ice": 0.5,
+            "bug": 0.25,
+            "dark": 0.5,
+            "steel": 0.5
+        }
     },
     "piplup": {
         "is_fully_evolved": false,
@@ -329,7 +407,17 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 314
+        "bst": 314,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "steel": 0.5
+        }
     },
     "prinplup": {
         "is_fully_evolved": false,
@@ -379,7 +467,17 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 405
+        "bst": 405,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "steel": 0.5
+        }
     },
     "empoleon": {
         "is_fully_evolved": true,
@@ -434,7 +532,25 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 530
+        "bst": 530,
+        "weaknesses": {
+            "electric": 2.0,
+            "fighting": 2.0,
+            "ground": 2.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "water": 0.5,
+            "ice": 0.25,
+            "poison": 0.0,
+            "flying": 0.5,
+            "psychic": 0.5,
+            "bug": 0.5,
+            "rock": 0.5,
+            "dragon": 0.5,
+            "steel": 0.25,
+            "fairy": 0.5
+        }
     },
     "starly": {
         "is_fully_evolved": false,
@@ -480,7 +596,18 @@
             "status"
         ],
         "role": "physical sweeper",
-        "bst": 245
+        "bst": 245,
+        "weaknesses": {
+            "electric": 2.0,
+            "ice": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "ground": 0.0,
+            "bug": 0.5,
+            "ghost": 0.0
+        }
     },
     "staravia": {
         "is_fully_evolved": false,
@@ -522,7 +649,18 @@
             "special"
         ],
         "role": "physical sweeper",
-        "bst": 340
+        "bst": 340,
+        "weaknesses": {
+            "electric": 2.0,
+            "ice": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "ground": 0.0,
+            "bug": 0.5,
+            "ghost": 0.0
+        }
     },
     "staraptor": {
         "is_fully_evolved": true,
@@ -566,7 +704,18 @@
             "special"
         ],
         "role": "physical sweeper",
-        "bst": 485
+        "bst": 485,
+        "weaknesses": {
+            "electric": 2.0,
+            "ice": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "ground": 0.0,
+            "bug": 0.5,
+            "ghost": 0.0
+        }
     },
     "bidoof": {
         "is_fully_evolved": false,
@@ -616,7 +765,13 @@
             "status"
         ],
         "role": "mixed wall",
-        "bst": 250
+        "bst": 250,
+        "weaknesses": {
+            "fighting": 2.0
+        },
+        "resistances": {
+            "ghost": 0.0
+        }
     },
     "bibarel": {
         "is_fully_evolved": true,
@@ -667,7 +822,19 @@
             "status"
         ],
         "role": "physical attacker",
-        "bst": 410
+        "bst": 410,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0,
+            "fighting": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "ghost": 0.0,
+            "steel": 0.5
+        }
     },
     "kricketot": {
         "is_fully_evolved": false,
@@ -699,7 +866,17 @@
             "special"
         ],
         "role": "tank",
-        "bst": 194
+        "bst": 194,
+        "weaknesses": {
+            "fire": 2.0,
+            "flying": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "fighting": 0.5,
+            "ground": 0.5
+        }
     },
     "kricketune": {
         "is_fully_evolved": true,
@@ -740,7 +917,17 @@
             "status"
         ],
         "role": "physical attacker",
-        "bst": 384
+        "bst": 384,
+        "weaknesses": {
+            "fire": 2.0,
+            "flying": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "fighting": 0.5,
+            "ground": 0.5
+        }
     },
     "shinx": {
         "is_fully_evolved": false,
@@ -790,7 +977,15 @@
             "physical"
         ],
         "role": "physical attacker",
-        "bst": 263
+        "bst": 263,
+        "weaknesses": {
+            "ground": 2.0
+        },
+        "resistances": {
+            "electric": 0.5,
+            "flying": 0.5,
+            "steel": 0.5
+        }
     },
     "luxio": {
         "is_fully_evolved": false,
@@ -838,7 +1033,15 @@
             "physical"
         ],
         "role": "physical attacker",
-        "bst": 363
+        "bst": 363,
+        "weaknesses": {
+            "ground": 2.0
+        },
+        "resistances": {
+            "electric": 0.5,
+            "flying": 0.5,
+            "steel": 0.5
+        }
     },
     "luxray": {
         "is_fully_evolved": true,
@@ -887,7 +1090,15 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 523
+        "bst": 523,
+        "weaknesses": {
+            "ground": 2.0
+        },
+        "resistances": {
+            "electric": 0.5,
+            "flying": 0.5,
+            "steel": 0.5
+        }
     },
     "abra": {
         "is_fully_evolved": false,
@@ -936,7 +1147,16 @@
             "status"
         ],
         "role": "special sweeper",
-        "bst": 310
+        "bst": 310,
+        "weaknesses": {
+            "bug": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "psychic": 0.5
+        }
     },
     "kadabra": {
         "is_fully_evolved": false,
@@ -985,7 +1205,16 @@
             "physical"
         ],
         "role": "special sweeper",
-        "bst": 400
+        "bst": 400,
+        "weaknesses": {
+            "bug": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "psychic": 0.5
+        }
     },
     "alakazam": {
         "is_fully_evolved": true,
@@ -1035,7 +1264,16 @@
             "physical"
         ],
         "role": "special sweeper",
-        "bst": 500
+        "bst": 500,
+        "weaknesses": {
+            "bug": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "psychic": 0.5
+        }
     },
     "magikarp": {
         "is_fully_evolved": false,
@@ -1063,7 +1301,17 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 200
+        "bst": 200,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "steel": 0.5
+        }
     },
     "gyarados": {
         "is_fully_evolved": true,
@@ -1118,7 +1366,19 @@
             "physical"
         ],
         "role": "physical attacker",
-        "bst": 540
+        "bst": 540,
+        "weaknesses": {
+            "electric": 4.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "fighting": 0.5,
+            "ground": 0.0,
+            "bug": 0.5,
+            "steel": 0.5
+        }
     },
     "budew": {
         "is_fully_evolved": false,
@@ -1162,7 +1422,20 @@
             "status"
         ],
         "role": "versatile",
-        "bst": 280
+        "bst": 280,
+        "weaknesses": {
+            "fire": 2.0,
+            "ice": 2.0,
+            "flying": 2.0,
+            "psychic": 2.0
+        },
+        "resistances": {
+            "water": 0.5,
+            "electric": 0.5,
+            "grass": 0.25,
+            "fighting": 0.5,
+            "fairy": 0.5
+        }
     },
     "roselia": {
         "is_fully_evolved": false,
@@ -1206,7 +1479,20 @@
             "status"
         ],
         "role": "special attacker",
-        "bst": 400
+        "bst": 400,
+        "weaknesses": {
+            "fire": 2.0,
+            "ice": 2.0,
+            "flying": 2.0,
+            "psychic": 2.0
+        },
+        "resistances": {
+            "water": 0.5,
+            "electric": 0.5,
+            "grass": 0.25,
+            "fighting": 0.5,
+            "fairy": 0.5
+        }
     },
     "roserade": {
         "is_fully_evolved": true,
@@ -1248,7 +1534,20 @@
             "status"
         ],
         "role": "special attacker",
-        "bst": 515
+        "bst": 515,
+        "weaknesses": {
+            "fire": 2.0,
+            "ice": 2.0,
+            "flying": 2.0,
+            "psychic": 2.0
+        },
+        "resistances": {
+            "water": 0.5,
+            "electric": 0.5,
+            "grass": 0.25,
+            "fighting": 0.5,
+            "fairy": 0.5
+        }
     },
     "zubat": {
         "is_fully_evolved": false,
@@ -1297,7 +1596,21 @@
             "status"
         ],
         "role": "versatile",
-        "bst": 245
+        "bst": 245,
+        "weaknesses": {
+            "electric": 2.0,
+            "ice": 2.0,
+            "psychic": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "grass": 0.25,
+            "fighting": 0.25,
+            "poison": 0.5,
+            "ground": 0.0,
+            "bug": 0.25,
+            "fairy": 0.5
+        }
     },
     "golbat": {
         "is_fully_evolved": false,
@@ -1346,7 +1659,21 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 455
+        "bst": 455,
+        "weaknesses": {
+            "electric": 2.0,
+            "ice": 2.0,
+            "psychic": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "grass": 0.25,
+            "fighting": 0.25,
+            "poison": 0.5,
+            "ground": 0.0,
+            "bug": 0.25,
+            "fairy": 0.5
+        }
     },
     "crobat": {
         "is_fully_evolved": true,
@@ -1396,7 +1723,21 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 535
+        "bst": 535,
+        "weaknesses": {
+            "electric": 2.0,
+            "ice": 2.0,
+            "psychic": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "grass": 0.25,
+            "fighting": 0.25,
+            "poison": 0.5,
+            "ground": 0.0,
+            "bug": 0.25,
+            "fairy": 0.5
+        }
     },
     "geodude": {
         "is_fully_evolved": false,
@@ -1442,7 +1783,21 @@
             "status"
         ],
         "role": "physical attacker",
-        "bst": 300
+        "bst": 300,
+        "weaknesses": {
+            "water": 4.0,
+            "grass": 4.0,
+            "ice": 2.0,
+            "fighting": 2.0,
+            "ground": 2.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "fire": 0.5,
+            "poison": 0.25,
+            "flying": 0.5,
+            "rock": 0.5
+        }
     },
     "graveler": {
         "is_fully_evolved": false,
@@ -1489,7 +1844,21 @@
             "status"
         ],
         "role": "physical attacker",
-        "bst": 390
+        "bst": 390,
+        "weaknesses": {
+            "water": 4.0,
+            "grass": 4.0,
+            "ice": 2.0,
+            "fighting": 2.0,
+            "ground": 2.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "fire": 0.5,
+            "poison": 0.25,
+            "flying": 0.5,
+            "rock": 0.5
+        }
     },
     "golem": {
         "is_fully_evolved": true,
@@ -1536,7 +1905,21 @@
             "physical"
         ],
         "role": "physical attacker",
-        "bst": 495
+        "bst": 495,
+        "weaknesses": {
+            "water": 4.0,
+            "grass": 4.0,
+            "ice": 2.0,
+            "fighting": 2.0,
+            "ground": 2.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "fire": 0.5,
+            "poison": 0.25,
+            "flying": 0.5,
+            "rock": 0.5
+        }
     },
     "onix": {
         "is_fully_evolved": false,
@@ -1582,7 +1965,21 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 385
+        "bst": 385,
+        "weaknesses": {
+            "water": 4.0,
+            "grass": 4.0,
+            "ice": 2.0,
+            "fighting": 2.0,
+            "ground": 2.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "fire": 0.5,
+            "poison": 0.25,
+            "flying": 0.5,
+            "rock": 0.5
+        }
     },
     "steelix": {
         "is_fully_evolved": true,
@@ -1636,7 +2033,24 @@
             "physical"
         ],
         "role": "versatile",
-        "bst": 510
+        "bst": 510,
+        "weaknesses": {
+            "fire": 2.0,
+            "water": 2.0,
+            "fighting": 2.0,
+            "ground": 2.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "poison": 0.0,
+            "flying": 0.5,
+            "psychic": 0.5,
+            "bug": 0.5,
+            "rock": 0.25,
+            "dragon": 0.5,
+            "steel": 0.5,
+            "fairy": 0.5
+        }
     },
     "cranidos": {
         "is_fully_evolved": false,
@@ -1685,7 +2099,19 @@
             "physical"
         ],
         "role": "physical attacker",
-        "bst": 350
+        "bst": 350,
+        "weaknesses": {
+            "water": 2.0,
+            "grass": 2.0,
+            "fighting": 2.0,
+            "ground": 2.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "fire": 0.5,
+            "poison": 0.5,
+            "flying": 0.5
+        }
     },
     "rampardos": {
         "is_fully_evolved": true,
@@ -1738,7 +2164,19 @@
             "physical"
         ],
         "role": "physical attacker",
-        "bst": 495
+        "bst": 495,
+        "weaknesses": {
+            "water": 2.0,
+            "grass": 2.0,
+            "fighting": 2.0,
+            "ground": 2.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "fire": 0.5,
+            "poison": 0.5,
+            "flying": 0.5
+        }
     },
     "shieldon": {
         "is_fully_evolved": false,
@@ -1785,7 +2223,24 @@
             "status"
         ],
         "role": "tank",
-        "bst": 350
+        "bst": 350,
+        "weaknesses": {
+            "water": 2.0,
+            "fighting": 4.0,
+            "ground": 4.0
+        },
+        "resistances": {
+            "normal": 0.25,
+            "ice": 0.5,
+            "poison": 0.0,
+            "flying": 0.25,
+            "psychic": 0.5,
+            "bug": 0.5,
+            "rock": 0.5,
+            "dragon": 0.5,
+            "steel": 0.5,
+            "fairy": 0.5
+        }
     },
     "bastiodon": {
         "is_fully_evolved": true,
@@ -1835,7 +2290,24 @@
             "status"
         ],
         "role": "tank",
-        "bst": 495
+        "bst": 495,
+        "weaknesses": {
+            "water": 2.0,
+            "fighting": 4.0,
+            "ground": 4.0
+        },
+        "resistances": {
+            "normal": 0.25,
+            "ice": 0.5,
+            "poison": 0.0,
+            "flying": 0.25,
+            "psychic": 0.5,
+            "bug": 0.5,
+            "rock": 0.5,
+            "dragon": 0.5,
+            "steel": 0.5,
+            "fairy": 0.5
+        }
     },
     "machop": {
         "is_fully_evolved": false,
@@ -1882,7 +2354,17 @@
             "physical"
         ],
         "role": "physical attacker",
-        "bst": 305
+        "bst": 305,
+        "weaknesses": {
+            "flying": 2.0,
+            "psychic": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "bug": 0.5,
+            "rock": 0.5,
+            "dark": 0.5
+        }
     },
     "machoke": {
         "is_fully_evolved": false,
@@ -1929,7 +2411,17 @@
             "physical"
         ],
         "role": "physical attacker",
-        "bst": 405
+        "bst": 405,
+        "weaknesses": {
+            "flying": 2.0,
+            "psychic": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "bug": 0.5,
+            "rock": 0.5,
+            "dark": 0.5
+        }
     },
     "machamp": {
         "is_fully_evolved": true,
@@ -1977,7 +2469,17 @@
             "physical"
         ],
         "role": "physical attacker",
-        "bst": 505
+        "bst": 505,
+        "weaknesses": {
+            "flying": 2.0,
+            "psychic": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "bug": 0.5,
+            "rock": 0.5,
+            "dark": 0.5
+        }
     },
     "psyduck": {
         "is_fully_evolved": false,
@@ -2029,7 +2531,17 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 320
+        "bst": 320,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "steel": 0.5
+        }
     },
     "golduck": {
         "is_fully_evolved": true,
@@ -2083,7 +2595,17 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 500
+        "bst": 500,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "steel": 0.5
+        }
     },
     "burmy": {
         "is_fully_evolved": false,
@@ -2114,7 +2636,17 @@
             "special"
         ],
         "role": "tank",
-        "bst": 224
+        "bst": 224,
+        "weaknesses": {
+            "fire": 2.0,
+            "flying": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "fighting": 0.5,
+            "ground": 0.5
+        }
     },
     "mothim": {
         "is_fully_evolved": true,
@@ -2159,7 +2691,20 @@
             "special"
         ],
         "role": "mixed attacker",
-        "bst": 424
+        "bst": 424,
+        "weaknesses": {
+            "fire": 2.0,
+            "electric": 2.0,
+            "ice": 2.0,
+            "flying": 2.0,
+            "rock": 4.0
+        },
+        "resistances": {
+            "grass": 0.25,
+            "fighting": 0.25,
+            "ground": 0.0,
+            "bug": 0.5
+        }
     },
     "wurmple": {
         "is_fully_evolved": false,
@@ -2189,7 +2734,17 @@
             "physical"
         ],
         "role": "physical attacker",
-        "bst": 195
+        "bst": 195,
+        "weaknesses": {
+            "fire": 2.0,
+            "flying": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "fighting": 0.5,
+            "ground": 0.5
+        }
     },
     "silcoon": {
         "is_fully_evolved": true,
@@ -2220,7 +2775,17 @@
             "status"
         ],
         "role": "physical wall",
-        "bst": 205
+        "bst": 205,
+        "weaknesses": {
+            "fire": 2.0,
+            "flying": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "fighting": 0.5,
+            "ground": 0.5
+        }
     },
     "beautifly": {
         "is_fully_evolved": true,
@@ -2266,7 +2831,20 @@
             "special"
         ],
         "role": "special attacker",
-        "bst": 395
+        "bst": 395,
+        "weaknesses": {
+            "fire": 2.0,
+            "electric": 2.0,
+            "ice": 2.0,
+            "flying": 2.0,
+            "rock": 4.0
+        },
+        "resistances": {
+            "grass": 0.25,
+            "fighting": 0.25,
+            "ground": 0.0,
+            "bug": 0.5
+        }
     },
     "cascoon": {
         "is_fully_evolved": false,
@@ -2297,7 +2875,17 @@
             "status"
         ],
         "role": "physical wall",
-        "bst": 205
+        "bst": 205,
+        "weaknesses": {
+            "fire": 2.0,
+            "flying": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "fighting": 0.5,
+            "ground": 0.5
+        }
     },
     "dustox": {
         "is_fully_evolved": true,
@@ -2343,7 +2931,20 @@
             "special"
         ],
         "role": "mixed attacker",
-        "bst": 385
+        "bst": 385,
+        "weaknesses": {
+            "fire": 2.0,
+            "flying": 2.0,
+            "psychic": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "grass": 0.25,
+            "fighting": 0.25,
+            "poison": 0.5,
+            "bug": 0.5,
+            "fairy": 0.5
+        }
     },
     "combee": {
         "is_fully_evolved": false,
@@ -2378,7 +2979,20 @@
             "special"
         ],
         "role": "mixed attacker",
-        "bst": 244
+        "bst": 244,
+        "weaknesses": {
+            "fire": 2.0,
+            "electric": 2.0,
+            "ice": 2.0,
+            "flying": 2.0,
+            "rock": 4.0
+        },
+        "resistances": {
+            "grass": 0.25,
+            "fighting": 0.25,
+            "ground": 0.0,
+            "bug": 0.5
+        }
     },
     "vespiquen": {
         "is_fully_evolved": true,
@@ -2428,7 +3042,20 @@
             "status"
         ],
         "role": "tank",
-        "bst": 474
+        "bst": 474,
+        "weaknesses": {
+            "fire": 2.0,
+            "electric": 2.0,
+            "ice": 2.0,
+            "flying": 2.0,
+            "rock": 4.0
+        },
+        "resistances": {
+            "grass": 0.25,
+            "fighting": 0.25,
+            "ground": 0.0,
+            "bug": 0.5
+        }
     },
     "pachirisu": {
         "is_fully_evolved": true,
@@ -2477,7 +3104,15 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 405
+        "bst": 405,
+        "weaknesses": {
+            "ground": 2.0
+        },
+        "resistances": {
+            "electric": 0.5,
+            "flying": 0.5,
+            "steel": 0.5
+        }
     },
     "buizel": {
         "is_fully_evolved": false,
@@ -2521,7 +3156,17 @@
             "physical"
         ],
         "role": "physical sweeper",
-        "bst": 330
+        "bst": 330,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "steel": 0.5
+        }
     },
     "floatzel": {
         "is_fully_evolved": true,
@@ -2566,7 +3211,17 @@
             "physical"
         ],
         "role": "physical sweeper",
-        "bst": 495
+        "bst": 495,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "steel": 0.5
+        }
     },
     "cherubi": {
         "is_fully_evolved": false,
@@ -2602,7 +3257,20 @@
             "status"
         ],
         "role": "special attacker",
-        "bst": 275
+        "bst": 275,
+        "weaknesses": {
+            "fire": 2.0,
+            "ice": 2.0,
+            "poison": 2.0,
+            "flying": 2.0,
+            "bug": 2.0
+        },
+        "resistances": {
+            "water": 0.5,
+            "electric": 0.5,
+            "grass": 0.5,
+            "ground": 0.5
+        }
     },
     "cherrim": {
         "is_fully_evolved": true,
@@ -2639,7 +3307,20 @@
             "status"
         ],
         "role": "special sweeper",
-        "bst": 450
+        "bst": 450,
+        "weaknesses": {
+            "fire": 2.0,
+            "ice": 2.0,
+            "poison": 2.0,
+            "flying": 2.0,
+            "bug": 2.0
+        },
+        "resistances": {
+            "water": 0.5,
+            "electric": 0.5,
+            "grass": 0.5,
+            "ground": 0.5
+        }
     },
     "shellos": {
         "is_fully_evolved": false,
@@ -2688,7 +3369,17 @@
             "status"
         ],
         "role": "special wall",
-        "bst": 325
+        "bst": 325,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "steel": 0.5
+        }
     },
     "gastrodon": {
         "is_fully_evolved": true,
@@ -2736,7 +3427,17 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 475
+        "bst": 475,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 4.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "poison": 0.5,
+            "rock": 0.5,
+            "steel": 0.5
+        }
     },
     "heracross": {
         "is_fully_evolved": true,
@@ -2784,7 +3485,20 @@
             "physical"
         ],
         "role": "physical attacker",
-        "bst": 500
+        "bst": 500,
+        "weaknesses": {
+            "fire": 2.0,
+            "flying": 4.0,
+            "psychic": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "fighting": 0.5,
+            "ground": 0.5,
+            "bug": 0.5,
+            "dark": 0.5
+        }
     },
     "aipom": {
         "is_fully_evolved": false,
@@ -2840,7 +3554,13 @@
             "physical"
         ],
         "role": "physical sweeper",
-        "bst": 360
+        "bst": 360,
+        "weaknesses": {
+            "fighting": 2.0
+        },
+        "resistances": {
+            "ghost": 0.0
+        }
     },
     "ambipom": {
         "is_fully_evolved": true,
@@ -2897,7 +3617,13 @@
             "physical"
         ],
         "role": "physical sweeper",
-        "bst": 482
+        "bst": 482,
+        "weaknesses": {
+            "fighting": 2.0
+        },
+        "resistances": {
+            "ghost": 0.0
+        }
     },
     "drifloon": {
         "is_fully_evolved": false,
@@ -2950,7 +3676,22 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 348
+        "bst": 348,
+        "weaknesses": {
+            "electric": 2.0,
+            "ice": 2.0,
+            "rock": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "normal": 0.0,
+            "grass": 0.5,
+            "fighting": 0.0,
+            "poison": 0.5,
+            "ground": 0.0,
+            "bug": 0.25
+        }
     },
     "drifblim": {
         "is_fully_evolved": true,
@@ -3002,7 +3743,22 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 498
+        "bst": 498,
+        "weaknesses": {
+            "electric": 2.0,
+            "ice": 2.0,
+            "rock": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "normal": 0.0,
+            "grass": 0.5,
+            "fighting": 0.0,
+            "poison": 0.5,
+            "ground": 0.0,
+            "bug": 0.25
+        }
     },
     "buneary": {
         "is_fully_evolved": false,
@@ -3054,7 +3810,13 @@
             "physical"
         ],
         "role": "versatile",
-        "bst": 350
+        "bst": 350,
+        "weaknesses": {
+            "fighting": 2.0
+        },
+        "resistances": {
+            "ghost": 0.0
+        }
     },
     "lopunny": {
         "is_fully_evolved": true,
@@ -3109,7 +3871,13 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 480
+        "bst": 480,
+        "weaknesses": {
+            "fighting": 2.0
+        },
+        "resistances": {
+            "ghost": 0.0
+        }
     },
     "gastly": {
         "is_fully_evolved": false,
@@ -3158,7 +3926,21 @@
             "special"
         ],
         "role": "special sweeper",
-        "bst": 310
+        "bst": 310,
+        "weaknesses": {
+            "ground": 2.0,
+            "psychic": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "normal": 0.0,
+            "grass": 0.5,
+            "fighting": 0.0,
+            "poison": 0.25,
+            "bug": 0.25,
+            "fairy": 0.5
+        }
     },
     "haunter": {
         "is_fully_evolved": false,
@@ -3208,7 +3990,21 @@
             "special"
         ],
         "role": "special sweeper",
-        "bst": 405
+        "bst": 405,
+        "weaknesses": {
+            "ground": 2.0,
+            "psychic": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "normal": 0.0,
+            "grass": 0.5,
+            "fighting": 0.0,
+            "poison": 0.25,
+            "bug": 0.25,
+            "fairy": 0.5
+        }
     },
     "gengar": {
         "is_fully_evolved": true,
@@ -3260,7 +4056,21 @@
             "special"
         ],
         "role": "special sweeper",
-        "bst": 500
+        "bst": 500,
+        "weaknesses": {
+            "ground": 2.0,
+            "psychic": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "normal": 0.0,
+            "grass": 0.5,
+            "fighting": 0.0,
+            "poison": 0.25,
+            "bug": 0.25,
+            "fairy": 0.5
+        }
     },
     "misdreavus": {
         "is_fully_evolved": false,
@@ -3308,7 +4118,17 @@
             "status"
         ],
         "role": "special sweeper",
-        "bst": 435
+        "bst": 435,
+        "weaknesses": {
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "normal": 0.0,
+            "fighting": 0.0,
+            "poison": 0.5,
+            "bug": 0.5
+        }
     },
     "mismagius": {
         "is_fully_evolved": true,
@@ -3356,7 +4176,17 @@
             "status"
         ],
         "role": "special sweeper",
-        "bst": 495
+        "bst": 495,
+        "weaknesses": {
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "normal": 0.0,
+            "fighting": 0.0,
+            "poison": 0.5,
+            "bug": 0.5
+        }
     },
     "murkrow": {
         "is_fully_evolved": false,
@@ -3407,7 +4237,19 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 405
+        "bst": 405,
+        "weaknesses": {
+            "electric": 2.0,
+            "ice": 2.0,
+            "rock": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "ground": 0.0,
+            "ghost": 0.5,
+            "dark": 0.5
+        }
     },
     "honchkrow": {
         "is_fully_evolved": true,
@@ -3460,7 +4302,19 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 505
+        "bst": 505,
+        "weaknesses": {
+            "electric": 2.0,
+            "ice": 2.0,
+            "rock": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "ground": 0.0,
+            "ghost": 0.5,
+            "dark": 0.5
+        }
     },
     "glameow": {
         "is_fully_evolved": false,
@@ -3508,7 +4362,13 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 310
+        "bst": 310,
+        "weaknesses": {
+            "fighting": 2.0
+        },
+        "resistances": {
+            "ghost": 0.0
+        }
     },
     "purugly": {
         "is_fully_evolved": true,
@@ -3555,7 +4415,13 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 452
+        "bst": 452,
+        "weaknesses": {
+            "fighting": 2.0
+        },
+        "resistances": {
+            "ghost": 0.0
+        }
     },
     "goldeen": {
         "is_fully_evolved": false,
@@ -3602,7 +4468,17 @@
             "physical"
         ],
         "role": "physical sweeper",
-        "bst": 320
+        "bst": 320,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "steel": 0.5
+        }
     },
     "seaking": {
         "is_fully_evolved": true,
@@ -3648,7 +4524,17 @@
             "physical"
         ],
         "role": "physical attacker",
-        "bst": 450
+        "bst": 450,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "steel": 0.5
+        }
     },
     "barboach": {
         "is_fully_evolved": false,
@@ -3695,7 +4581,17 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 288
+        "bst": 288,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 4.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "poison": 0.5,
+            "rock": 0.5,
+            "steel": 0.5
+        }
     },
     "whiscash": {
         "is_fully_evolved": true,
@@ -3744,7 +4640,17 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 468
+        "bst": 468,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 4.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "poison": 0.5,
+            "rock": 0.5,
+            "steel": 0.5
+        }
     },
     "chingling": {
         "is_fully_evolved": false,
@@ -3789,7 +4695,16 @@
             "status"
         ],
         "role": "special attacker",
-        "bst": 285
+        "bst": 285,
+        "weaknesses": {
+            "bug": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "psychic": 0.5
+        }
     },
     "chimecho": {
         "is_fully_evolved": true,
@@ -3836,7 +4751,16 @@
             "status"
         ],
         "role": "special attacker",
-        "bst": 455
+        "bst": 455,
+        "weaknesses": {
+            "bug": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "psychic": 0.5
+        }
     },
     "stunky": {
         "is_fully_evolved": false,
@@ -3886,7 +4810,17 @@
             "physical"
         ],
         "role": "physical sweeper",
-        "bst": 329
+        "bst": 329,
+        "weaknesses": {
+            "ground": 2.0,
+            "psychic": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "poison": 0.5,
+            "ghost": 0.5,
+            "dark": 0.5
+        }
     },
     "skuntank": {
         "is_fully_evolved": true,
@@ -3936,7 +4870,17 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 479
+        "bst": 479,
+        "weaknesses": {
+            "ground": 2.0,
+            "psychic": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "poison": 0.5,
+            "ghost": 0.5,
+            "dark": 0.5
+        }
     },
     "meditite": {
         "is_fully_evolved": false,
@@ -3986,7 +4930,16 @@
             "physical"
         ],
         "role": "tank",
-        "bst": 280
+        "bst": 280,
+        "weaknesses": {
+            "flying": 2.0,
+            "ghost": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "rock": 0.5
+        }
     },
     "medicham": {
         "is_fully_evolved": true,
@@ -4035,7 +4988,16 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 410
+        "bst": 410,
+        "weaknesses": {
+            "flying": 2.0,
+            "ghost": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "rock": 0.5
+        }
     },
     "bronzor": {
         "is_fully_evolved": false,
@@ -4084,7 +5046,25 @@
             "status"
         ],
         "role": "tank",
-        "bst": 300
+        "bst": 300,
+        "weaknesses": {
+            "fire": 2.0,
+            "ground": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "grass": 0.5,
+            "ice": 0.5,
+            "poison": 0.0,
+            "flying": 0.5,
+            "psychic": 0.25,
+            "rock": 0.5,
+            "dragon": 0.5,
+            "steel": 0.5,
+            "fairy": 0.5
+        }
     },
     "bronzong": {
         "is_fully_evolved": true,
@@ -4135,7 +5115,25 @@
             "status"
         ],
         "role": "tank",
-        "bst": 500
+        "bst": 500,
+        "weaknesses": {
+            "fire": 2.0,
+            "ground": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "grass": 0.5,
+            "ice": 0.5,
+            "poison": 0.0,
+            "flying": 0.5,
+            "psychic": 0.25,
+            "rock": 0.5,
+            "dragon": 0.5,
+            "steel": 0.5,
+            "fairy": 0.5
+        }
     },
     "ponyta": {
         "is_fully_evolved": false,
@@ -4178,7 +5176,20 @@
             "physical"
         ],
         "role": "physical sweeper",
-        "bst": 410
+        "bst": 410,
+        "weaknesses": {
+            "water": 2.0,
+            "ground": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "grass": 0.5,
+            "ice": 0.5,
+            "bug": 0.5,
+            "steel": 0.5,
+            "fairy": 0.5
+        }
     },
     "rapidash": {
         "is_fully_evolved": true,
@@ -4225,7 +5236,20 @@
             "physical"
         ],
         "role": "physical sweeper",
-        "bst": 500
+        "bst": 500,
+        "weaknesses": {
+            "water": 2.0,
+            "ground": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "grass": 0.5,
+            "ice": 0.5,
+            "bug": 0.5,
+            "steel": 0.5,
+            "fairy": 0.5
+        }
     },
     "bonsly": {
         "is_fully_evolved": false,
@@ -4269,7 +5293,19 @@
             "status"
         ],
         "role": "physical attacker",
-        "bst": 290
+        "bst": 290,
+        "weaknesses": {
+            "water": 2.0,
+            "grass": 2.0,
+            "fighting": 2.0,
+            "ground": 2.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "fire": 0.5,
+            "poison": 0.5,
+            "flying": 0.5
+        }
     },
     "sudowoodo": {
         "is_fully_evolved": true,
@@ -4317,7 +5353,19 @@
             "status"
         ],
         "role": "physical attacker",
-        "bst": 410
+        "bst": 410,
+        "weaknesses": {
+            "water": 2.0,
+            "grass": 2.0,
+            "fighting": 2.0,
+            "ground": 2.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "fire": 0.5,
+            "poison": 0.5,
+            "flying": 0.5
+        }
     },
     "mime-jr": {
         "is_fully_evolved": false,
@@ -4365,7 +5413,17 @@
             "status"
         ],
         "role": "special sweeper",
-        "bst": 310
+        "bst": 310,
+        "weaknesses": {
+            "poison": 2.0,
+            "ghost": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "fighting": 0.25,
+            "psychic": 0.5,
+            "dragon": 0.0
+        }
     },
     "mr-mime": {
         "is_fully_evolved": false,
@@ -4421,7 +5479,17 @@
             "status"
         ],
         "role": "special sweeper",
-        "bst": 460
+        "bst": 460,
+        "weaknesses": {
+            "poison": 2.0,
+            "ghost": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "fighting": 0.25,
+            "psychic": 0.5,
+            "dragon": 0.0
+        }
     },
     "happiny": {
         "is_fully_evolved": false,
@@ -4470,7 +5538,13 @@
             "special"
         ],
         "role": "special wall",
-        "bst": 220
+        "bst": 220,
+        "weaknesses": {
+            "fighting": 2.0
+        },
+        "resistances": {
+            "ghost": 0.0
+        }
     },
     "chansey": {
         "is_fully_evolved": false,
@@ -4529,7 +5603,13 @@
             "status"
         ],
         "role": "special wall",
-        "bst": 450
+        "bst": 450,
+        "weaknesses": {
+            "fighting": 2.0
+        },
+        "resistances": {
+            "ghost": 0.0
+        }
     },
     "blissey": {
         "is_fully_evolved": true,
@@ -4589,7 +5669,13 @@
             "status"
         ],
         "role": "special wall",
-        "bst": 540
+        "bst": 540,
+        "weaknesses": {
+            "fighting": 2.0
+        },
+        "resistances": {
+            "ghost": 0.0
+        }
     },
     "cleffa": {
         "is_fully_evolved": false,
@@ -4645,7 +5731,17 @@
             "status"
         ],
         "role": "special wall",
-        "bst": 218
+        "bst": 218,
+        "weaknesses": {
+            "poison": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "bug": 0.5,
+            "dragon": 0.0,
+            "dark": 0.5
+        }
     },
     "clefairy": {
         "is_fully_evolved": false,
@@ -4706,7 +5802,17 @@
             "special"
         ],
         "role": "special wall",
-        "bst": 323
+        "bst": 323,
+        "weaknesses": {
+            "poison": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "bug": 0.5,
+            "dragon": 0.0,
+            "dark": 0.5
+        }
     },
     "clefable": {
         "is_fully_evolved": true,
@@ -4767,7 +5873,17 @@
             "special"
         ],
         "role": "special attacker",
-        "bst": 483
+        "bst": 483,
+        "weaknesses": {
+            "poison": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "bug": 0.5,
+            "dragon": 0.0,
+            "dark": 0.5
+        }
     },
     "chatot": {
         "is_fully_evolved": true,
@@ -4813,7 +5929,18 @@
             "status"
         ],
         "role": "special sweeper",
-        "bst": 411
+        "bst": 411,
+        "weaknesses": {
+            "electric": 2.0,
+            "ice": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "ground": 0.0,
+            "bug": 0.5,
+            "ghost": 0.0
+        }
     },
     "pichu": {
         "is_fully_evolved": false,
@@ -4861,7 +5988,15 @@
             "status"
         ],
         "role": "physical sweeper",
-        "bst": 205
+        "bst": 205,
+        "weaknesses": {
+            "ground": 2.0
+        },
+        "resistances": {
+            "electric": 0.5,
+            "flying": 0.5,
+            "steel": 0.5
+        }
     },
     "pikachu": {
         "is_fully_evolved": false,
@@ -4911,7 +6046,15 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 320
+        "bst": 320,
+        "weaknesses": {
+            "ground": 2.0
+        },
+        "resistances": {
+            "electric": 0.5,
+            "flying": 0.5,
+            "steel": 0.5
+        }
     },
     "raichu": {
         "is_fully_evolved": true,
@@ -4962,7 +6105,15 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 485
+        "bst": 485,
+        "weaknesses": {
+            "ground": 2.0
+        },
+        "resistances": {
+            "electric": 0.5,
+            "flying": 0.5,
+            "steel": 0.5
+        }
     },
     "hoothoot": {
         "is_fully_evolved": false,
@@ -5011,7 +6162,18 @@
             "status"
         ],
         "role": "special wall",
-        "bst": 262
+        "bst": 262,
+        "weaknesses": {
+            "electric": 2.0,
+            "ice": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "ground": 0.0,
+            "bug": 0.5,
+            "ghost": 0.0
+        }
     },
     "noctowl": {
         "is_fully_evolved": true,
@@ -5060,7 +6222,18 @@
             "status"
         ],
         "role": "special wall",
-        "bst": 452
+        "bst": 452,
+        "weaknesses": {
+            "electric": 2.0,
+            "ice": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "ground": 0.0,
+            "bug": 0.5,
+            "ghost": 0.0
+        }
     },
     "spiritomb": {
         "is_fully_evolved": true,
@@ -5104,7 +6277,15 @@
             "special"
         ],
         "role": "tank",
-        "bst": 485
+        "bst": 485,
+        "weaknesses": {
+            "fairy": 2.0
+        },
+        "resistances": {
+            "normal": 0.0,
+            "fighting": 0.0,
+            "poison": 0.5
+        }
     },
     "gible": {
         "is_fully_evolved": false,
@@ -5153,7 +6334,18 @@
             "physical"
         ],
         "role": "physical attacker",
-        "bst": 300
+        "bst": 300,
+        "weaknesses": {
+            "ice": 4.0,
+            "dragon": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "electric": 0.5,
+            "poison": 0.5,
+            "rock": 0.5
+        }
     },
     "gabite": {
         "is_fully_evolved": false,
@@ -5203,7 +6395,18 @@
             "physical"
         ],
         "role": "physical sweeper",
-        "bst": 410
+        "bst": 410,
+        "weaknesses": {
+            "ice": 4.0,
+            "dragon": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "electric": 0.5,
+            "poison": 0.5,
+            "rock": 0.5
+        }
     },
     "garchomp": {
         "is_fully_evolved": true,
@@ -5256,7 +6459,18 @@
             "physical"
         ],
         "role": "physical attacker",
-        "bst": 600
+        "bst": 600,
+        "weaknesses": {
+            "ice": 4.0,
+            "dragon": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "electric": 0.5,
+            "poison": 0.5,
+            "rock": 0.5
+        }
     },
     "munchlax": {
         "is_fully_evolved": false,
@@ -5312,7 +6526,13 @@
             "physical"
         ],
         "role": "special wall",
-        "bst": 390
+        "bst": 390,
+        "weaknesses": {
+            "fighting": 2.0
+        },
+        "resistances": {
+            "ghost": 0.0
+        }
     },
     "snorlax": {
         "is_fully_evolved": true,
@@ -5371,7 +6591,13 @@
             "physical"
         ],
         "role": "special wall",
-        "bst": 540
+        "bst": 540,
+        "weaknesses": {
+            "fighting": 2.0
+        },
+        "resistances": {
+            "ghost": 0.0
+        }
     },
     "unown": {
         "is_fully_evolved": true,
@@ -5395,7 +6621,16 @@
             "special"
         ],
         "role": "mixed attacker",
-        "bst": 336
+        "bst": 336,
+        "weaknesses": {
+            "bug": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "psychic": 0.5
+        }
     },
     "riolu": {
         "is_fully_evolved": false,
@@ -5448,7 +6683,17 @@
             "physical"
         ],
         "role": "physical sweeper",
-        "bst": 285
+        "bst": 285,
+        "weaknesses": {
+            "flying": 2.0,
+            "psychic": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "bug": 0.5,
+            "rock": 0.5,
+            "dark": 0.5
+        }
     },
     "lucario": {
         "is_fully_evolved": true,
@@ -5507,7 +6752,23 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 525
+        "bst": 525,
+        "weaknesses": {
+            "fire": 2.0,
+            "fighting": 2.0,
+            "ground": 2.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "grass": 0.5,
+            "ice": 0.5,
+            "poison": 0.0,
+            "bug": 0.25,
+            "rock": 0.25,
+            "dragon": 0.5,
+            "dark": 0.5,
+            "steel": 0.5
+        }
     },
     "wooper": {
         "is_fully_evolved": false,
@@ -5556,7 +6817,17 @@
             "status"
         ],
         "role": "physical wall",
-        "bst": 210
+        "bst": 210,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 4.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "poison": 0.5,
+            "rock": 0.5,
+            "steel": 0.5
+        }
     },
     "quagsire": {
         "is_fully_evolved": true,
@@ -5608,7 +6879,17 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 430
+        "bst": 430,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 4.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "poison": 0.5,
+            "rock": 0.5,
+            "steel": 0.5
+        }
     },
     "wingull": {
         "is_fully_evolved": false,
@@ -5654,7 +6935,19 @@
             "special"
         ],
         "role": "special sweeper",
-        "bst": 270
+        "bst": 270,
+        "weaknesses": {
+            "electric": 4.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "fighting": 0.5,
+            "ground": 0.0,
+            "bug": 0.5,
+            "steel": 0.5
+        }
     },
     "pelipper": {
         "is_fully_evolved": true,
@@ -5703,7 +6996,19 @@
             "special"
         ],
         "role": "special attacker",
-        "bst": 440
+        "bst": 440,
+        "weaknesses": {
+            "electric": 4.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "fighting": 0.5,
+            "ground": 0.0,
+            "bug": 0.5,
+            "steel": 0.5
+        }
     },
     "girafarig": {
         "is_fully_evolved": false,
@@ -5754,7 +7059,15 @@
             "status"
         ],
         "role": "special sweeper",
-        "bst": 455
+        "bst": 455,
+        "weaknesses": {
+            "bug": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "psychic": 0.5,
+            "ghost": 0.0
+        }
     },
     "hippopotas": {
         "is_fully_evolved": false,
@@ -5797,7 +7110,16 @@
             "physical"
         ],
         "role": "physical wall",
-        "bst": 330
+        "bst": 330,
+        "weaknesses": {
+            "water": 2.0,
+            "grass": 2.0,
+            "ice": 2.0
+        },
+        "resistances": {
+            "poison": 0.5,
+            "rock": 0.5
+        }
     },
     "hippowdon": {
         "is_fully_evolved": true,
@@ -5840,7 +7162,16 @@
             "physical"
         ],
         "role": "physical wall",
-        "bst": 525
+        "bst": 525,
+        "weaknesses": {
+            "water": 2.0,
+            "grass": 2.0,
+            "ice": 2.0
+        },
+        "resistances": {
+            "poison": 0.5,
+            "rock": 0.5
+        }
     },
     "azurill": {
         "is_fully_evolved": false,
@@ -5883,7 +7214,17 @@
             "status"
         ],
         "role": "mixed wall",
-        "bst": 190
+        "bst": 190,
+        "weaknesses": {
+            "poison": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "bug": 0.5,
+            "ghost": 0.0,
+            "dragon": 0.0,
+            "dark": 0.5
+        }
     },
     "marill": {
         "is_fully_evolved": false,
@@ -5934,7 +7275,21 @@
             "physical"
         ],
         "role": "mixed wall",
-        "bst": 250
+        "bst": 250,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0,
+            "poison": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "fighting": 0.5,
+            "bug": 0.5,
+            "dragon": 0.0,
+            "dark": 0.5
+        }
     },
     "azumarill": {
         "is_fully_evolved": true,
@@ -5986,7 +7341,21 @@
             "physical"
         ],
         "role": "mixed wall",
-        "bst": 420
+        "bst": 420,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0,
+            "poison": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "fighting": 0.5,
+            "bug": 0.5,
+            "dragon": 0.0,
+            "dark": 0.5
+        }
     },
     "skorupi": {
         "is_fully_evolved": false,
@@ -6035,7 +7404,20 @@
             "physical"
         ],
         "role": "versatile",
-        "bst": 330
+        "bst": 330,
+        "weaknesses": {
+            "fire": 2.0,
+            "flying": 2.0,
+            "psychic": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "grass": 0.25,
+            "fighting": 0.25,
+            "poison": 0.5,
+            "bug": 0.5,
+            "fairy": 0.5
+        }
     },
     "drapion": {
         "is_fully_evolved": true,
@@ -6086,7 +7468,17 @@
             "physical"
         ],
         "role": "versatile",
-        "bst": 500
+        "bst": 500,
+        "weaknesses": {
+            "ground": 2.0,
+            "psychic": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "poison": 0.5,
+            "ghost": 0.5,
+            "dark": 0.5
+        }
     },
     "croagunk": {
         "is_fully_evolved": false,
@@ -6140,7 +7532,20 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 300
+        "bst": 300,
+        "weaknesses": {
+            "ground": 2.0,
+            "flying": 2.0,
+            "psychic": 4.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "fighting": 0.5,
+            "poison": 0.5,
+            "bug": 0.25,
+            "rock": 0.5,
+            "dark": 0.5
+        }
     },
     "toxicroak": {
         "is_fully_evolved": true,
@@ -6193,7 +7598,20 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 490
+        "bst": 490,
+        "weaknesses": {
+            "ground": 2.0,
+            "flying": 2.0,
+            "psychic": 4.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "fighting": 0.5,
+            "poison": 0.5,
+            "bug": 0.25,
+            "rock": 0.5,
+            "dark": 0.5
+        }
     },
     "carnivine": {
         "is_fully_evolved": true,
@@ -6232,7 +7650,20 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 454
+        "bst": 454,
+        "weaknesses": {
+            "fire": 2.0,
+            "ice": 2.0,
+            "poison": 2.0,
+            "flying": 2.0,
+            "bug": 2.0
+        },
+        "resistances": {
+            "water": 0.5,
+            "electric": 0.5,
+            "grass": 0.5,
+            "ground": 0.5
+        }
     },
     "remoraid": {
         "is_fully_evolved": false,
@@ -6283,7 +7714,17 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 300
+        "bst": 300,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "steel": 0.5
+        }
     },
     "octillery": {
         "is_fully_evolved": true,
@@ -6336,7 +7777,17 @@
             "special"
         ],
         "role": "mixed attacker",
-        "bst": 480
+        "bst": 480,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "steel": 0.5
+        }
     },
     "finneon": {
         "is_fully_evolved": false,
@@ -6383,7 +7834,17 @@
             "special"
         ],
         "role": "mixed attacker",
-        "bst": 330
+        "bst": 330,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "steel": 0.5
+        }
     },
     "lumineon": {
         "is_fully_evolved": true,
@@ -6430,7 +7891,17 @@
             "special"
         ],
         "role": "mixed attacker",
-        "bst": 460
+        "bst": 460,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "steel": 0.5
+        }
     },
     "tentacool": {
         "is_fully_evolved": false,
@@ -6476,7 +7947,22 @@
             "special"
         ],
         "role": "mixed attacker",
-        "bst": 335
+        "bst": 335,
+        "weaknesses": {
+            "electric": 2.0,
+            "ground": 2.0,
+            "psychic": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "fighting": 0.5,
+            "poison": 0.5,
+            "bug": 0.5,
+            "steel": 0.5,
+            "fairy": 0.5
+        }
     },
     "tentacruel": {
         "is_fully_evolved": true,
@@ -6522,7 +8008,22 @@
             "special"
         ],
         "role": "mixed attacker",
-        "bst": 515
+        "bst": 515,
+        "weaknesses": {
+            "electric": 2.0,
+            "ground": 2.0,
+            "psychic": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "fighting": 0.5,
+            "poison": 0.5,
+            "bug": 0.5,
+            "steel": 0.5,
+            "fairy": 0.5
+        }
     },
     "feebas": {
         "is_fully_evolved": false,
@@ -6564,7 +8065,17 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 200
+        "bst": 200,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "steel": 0.5
+        }
     },
     "milotic": {
         "is_fully_evolved": true,
@@ -6611,7 +8122,17 @@
             "physical"
         ],
         "role": "versatile",
-        "bst": 540
+        "bst": 540,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "steel": 0.5
+        }
     },
     "mantyke": {
         "is_fully_evolved": false,
@@ -6658,7 +8179,19 @@
             "status"
         ],
         "role": "versatile",
-        "bst": 345
+        "bst": 345,
+        "weaknesses": {
+            "electric": 4.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "fighting": 0.5,
+            "ground": 0.0,
+            "bug": 0.5,
+            "steel": 0.5
+        }
     },
     "mantine": {
         "is_fully_evolved": true,
@@ -6712,7 +8245,19 @@
             "status"
         ],
         "role": "versatile",
-        "bst": 485
+        "bst": 485,
+        "weaknesses": {
+            "electric": 4.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "fighting": 0.5,
+            "ground": 0.0,
+            "bug": 0.5,
+            "steel": 0.5
+        }
     },
     "snover": {
         "is_fully_evolved": false,
@@ -6753,7 +8298,22 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 334
+        "bst": 334,
+        "weaknesses": {
+            "fire": 4.0,
+            "fighting": 2.0,
+            "poison": 2.0,
+            "flying": 2.0,
+            "bug": 2.0,
+            "rock": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "water": 0.5,
+            "electric": 0.5,
+            "grass": 0.5,
+            "ground": 0.5
+        }
     },
     "abomasnow": {
         "is_fully_evolved": true,
@@ -6800,7 +8360,22 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 494
+        "bst": 494,
+        "weaknesses": {
+            "fire": 4.0,
+            "fighting": 2.0,
+            "poison": 2.0,
+            "flying": 2.0,
+            "bug": 2.0,
+            "rock": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "water": 0.5,
+            "electric": 0.5,
+            "grass": 0.5,
+            "ground": 0.5
+        }
     },
     "sneasel": {
         "is_fully_evolved": false,
@@ -6853,7 +8428,20 @@
             "physical"
         ],
         "role": "physical sweeper",
-        "bst": 430
+        "bst": 430,
+        "weaknesses": {
+            "fire": 2.0,
+            "fighting": 4.0,
+            "bug": 2.0,
+            "rock": 2.0,
+            "steel": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "ice": 0.5,
+            "ghost": 0.5,
+            "dark": 0.5
+        }
     },
     "weavile": {
         "is_fully_evolved": true,
@@ -6905,7 +8493,20 @@
             "physical"
         ],
         "role": "physical sweeper",
-        "bst": 510
+        "bst": 510,
+        "weaknesses": {
+            "fire": 2.0,
+            "fighting": 4.0,
+            "bug": 2.0,
+            "rock": 2.0,
+            "steel": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "ice": 0.5,
+            "ghost": 0.5,
+            "dark": 0.5
+        }
     },
     "uxie": {
         "is_fully_evolved": true,
@@ -6957,7 +8558,16 @@
             "physical"
         ],
         "role": "tank",
-        "bst": 580
+        "bst": 580,
+        "weaknesses": {
+            "bug": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "psychic": 0.5
+        }
     },
     "mesprit": {
         "is_fully_evolved": true,
@@ -7011,7 +8621,16 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 580
+        "bst": 580,
+        "weaknesses": {
+            "bug": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "psychic": 0.5
+        }
     },
     "azelf": {
         "is_fully_evolved": true,
@@ -7064,7 +8683,16 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 580
+        "bst": 580,
+        "weaknesses": {
+            "bug": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "psychic": 0.5
+        }
     },
     "dialga": {
         "is_fully_evolved": true,
@@ -7116,7 +8744,23 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 680
+        "bst": 680,
+        "weaknesses": {
+            "fighting": 2.0,
+            "ground": 2.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "water": 0.5,
+            "electric": 0.5,
+            "grass": 0.25,
+            "poison": 0.0,
+            "flying": 0.5,
+            "psychic": 0.5,
+            "bug": 0.5,
+            "rock": 0.5,
+            "steel": 0.5
+        }
     },
     "palkia": {
         "is_fully_evolved": true,
@@ -7171,7 +8815,16 @@
             "physical"
         ],
         "role": "mixed attacker",
-        "bst": 680
+        "bst": 680,
+        "weaknesses": {
+            "dragon": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "fire": 0.25,
+            "water": 0.25,
+            "steel": 0.5
+        }
     },
     "manaphy": {
         "is_fully_evolved": true,
@@ -7218,7 +8871,17 @@
             "special"
         ],
         "role": "versatile",
-        "bst": 600
+        "bst": 600,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "steel": 0.5
+        }
     },
     "rotom": {
         "is_fully_evolved": true,
@@ -7260,7 +8923,21 @@
             "status"
         ],
         "role": "special sweeper",
-        "bst": 440
+        "bst": 440,
+        "weaknesses": {
+            "ground": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "normal": 0.0,
+            "electric": 0.5,
+            "fighting": 0.0,
+            "poison": 0.5,
+            "flying": 0.5,
+            "bug": 0.5,
+            "steel": 0.5
+        }
     },
     "gligar": {
         "is_fully_evolved": false,
@@ -7317,7 +8994,18 @@
             "physical"
         ],
         "role": "versatile",
-        "bst": 430
+        "bst": 430,
+        "weaknesses": {
+            "water": 2.0,
+            "electric": 2.0,
+            "ice": 4.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "poison": 0.5,
+            "ground": 0.0,
+            "bug": 0.5
+        }
     },
     "gliscor": {
         "is_fully_evolved": true,
@@ -7371,7 +9059,18 @@
             "physical"
         ],
         "role": "versatile",
-        "bst": 510
+        "bst": 510,
+        "weaknesses": {
+            "water": 2.0,
+            "electric": 2.0,
+            "ice": 4.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "poison": 0.5,
+            "ground": 0.0,
+            "bug": 0.5
+        }
     },
     "nosepass": {
         "is_fully_evolved": false,
@@ -7419,7 +9118,19 @@
             "status"
         ],
         "role": "tank",
-        "bst": 375
+        "bst": 375,
+        "weaknesses": {
+            "water": 2.0,
+            "grass": 2.0,
+            "fighting": 2.0,
+            "ground": 2.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "fire": 0.5,
+            "poison": 0.5,
+            "flying": 0.5
+        }
     },
     "probopass": {
         "is_fully_evolved": true,
@@ -7467,7 +9178,24 @@
             "status"
         ],
         "role": "tank",
-        "bst": 525
+        "bst": 525,
+        "weaknesses": {
+            "water": 2.0,
+            "fighting": 4.0,
+            "ground": 4.0
+        },
+        "resistances": {
+            "normal": 0.25,
+            "ice": 0.5,
+            "poison": 0.0,
+            "flying": 0.25,
+            "psychic": 0.5,
+            "bug": 0.5,
+            "rock": 0.5,
+            "dragon": 0.5,
+            "steel": 0.5,
+            "fairy": 0.5
+        }
     },
     "ralts": {
         "is_fully_evolved": false,
@@ -7518,7 +9246,17 @@
             "special"
         ],
         "role": "special sweeper",
-        "bst": 198
+        "bst": 198,
+        "weaknesses": {
+            "poison": 2.0,
+            "ghost": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "fighting": 0.25,
+            "psychic": 0.5,
+            "dragon": 0.0
+        }
     },
     "kirlia": {
         "is_fully_evolved": false,
@@ -7568,7 +9306,17 @@
             "status"
         ],
         "role": "special attacker",
-        "bst": 278
+        "bst": 278,
+        "weaknesses": {
+            "poison": 2.0,
+            "ghost": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "fighting": 0.25,
+            "psychic": 0.5,
+            "dragon": 0.0
+        }
     },
     "gardevoir": {
         "is_fully_evolved": true,
@@ -7619,7 +9367,17 @@
             "special"
         ],
         "role": "special attacker",
-        "bst": 518
+        "bst": 518,
+        "weaknesses": {
+            "poison": 2.0,
+            "ghost": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "fighting": 0.25,
+            "psychic": 0.5,
+            "dragon": 0.0
+        }
     },
     "gallade": {
         "is_fully_evolved": true,
@@ -7682,7 +9440,16 @@
             "physical"
         ],
         "role": "physical attacker",
-        "bst": 518
+        "bst": 518,
+        "weaknesses": {
+            "flying": 2.0,
+            "ghost": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "rock": 0.5
+        }
     },
     "lickitung": {
         "is_fully_evolved": false,
@@ -7738,7 +9505,13 @@
             "physical"
         ],
         "role": "mixed wall",
-        "bst": 385
+        "bst": 385,
+        "weaknesses": {
+            "fighting": 2.0
+        },
+        "resistances": {
+            "ghost": 0.0
+        }
     },
     "lickilicky": {
         "is_fully_evolved": true,
@@ -7793,7 +9566,13 @@
             "physical"
         ],
         "role": "mixed wall",
-        "bst": 515
+        "bst": 515,
+        "weaknesses": {
+            "fighting": 2.0
+        },
+        "resistances": {
+            "ghost": 0.0
+        }
     },
     "eevee": {
         "is_fully_evolved": false,
@@ -7839,7 +9618,13 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 325
+        "bst": 325,
+        "weaknesses": {
+            "fighting": 2.0
+        },
+        "resistances": {
+            "ghost": 0.0
+        }
     },
     "vaporeon": {
         "is_fully_evolved": true,
@@ -7889,7 +9674,17 @@
             "status"
         ],
         "role": "special wall",
-        "bst": 525
+        "bst": 525,
+        "weaknesses": {
+            "electric": 2.0,
+            "grass": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "ice": 0.5,
+            "steel": 0.5
+        }
     },
     "jolteon": {
         "is_fully_evolved": true,
@@ -7940,7 +9735,15 @@
             "status"
         ],
         "role": "special sweeper",
-        "bst": 525
+        "bst": 525,
+        "weaknesses": {
+            "ground": 2.0
+        },
+        "resistances": {
+            "electric": 0.5,
+            "flying": 0.5,
+            "steel": 0.5
+        }
     },
     "flareon": {
         "is_fully_evolved": true,
@@ -7989,7 +9792,20 @@
             "status"
         ],
         "role": "physical attacker",
-        "bst": 525
+        "bst": 525,
+        "weaknesses": {
+            "water": 2.0,
+            "ground": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "grass": 0.5,
+            "ice": 0.5,
+            "bug": 0.5,
+            "steel": 0.5,
+            "fairy": 0.5
+        }
     },
     "espeon": {
         "is_fully_evolved": true,
@@ -8039,7 +9855,16 @@
             "status"
         ],
         "role": "special sweeper",
-        "bst": 525
+        "bst": 525,
+        "weaknesses": {
+            "bug": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "psychic": 0.5
+        }
     },
     "umbreon": {
         "is_fully_evolved": true,
@@ -8086,7 +9911,16 @@
             "status"
         ],
         "role": "tank",
-        "bst": 525
+        "bst": 525,
+        "weaknesses": {
+            "fighting": 2.0,
+            "bug": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "ghost": 0.5,
+            "dark": 0.5
+        }
     },
     "leafeon": {
         "is_fully_evolved": true,
@@ -8134,7 +9968,20 @@
             "status"
         ],
         "role": "physical sweeper",
-        "bst": 525
+        "bst": 525,
+        "weaknesses": {
+            "fire": 2.0,
+            "ice": 2.0,
+            "poison": 2.0,
+            "flying": 2.0,
+            "bug": 2.0
+        },
+        "resistances": {
+            "water": 0.5,
+            "electric": 0.5,
+            "grass": 0.5,
+            "ground": 0.5
+        }
     },
     "glaceon": {
         "is_fully_evolved": true,
@@ -8183,7 +10030,16 @@
             "status"
         ],
         "role": "special attacker",
-        "bst": 525
+        "bst": 525,
+        "weaknesses": {
+            "fire": 2.0,
+            "fighting": 2.0,
+            "rock": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "ice": 0.5
+        }
     },
     "swablu": {
         "is_fully_evolved": false,
@@ -8234,7 +10090,18 @@
             "special"
         ],
         "role": "tank",
-        "bst": 310
+        "bst": 310,
+        "weaknesses": {
+            "electric": 2.0,
+            "ice": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "ground": 0.0,
+            "bug": 0.5,
+            "ghost": 0.0
+        }
     },
     "altaria": {
         "is_fully_evolved": true,
@@ -8290,7 +10157,21 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 490
+        "bst": 490,
+        "weaknesses": {
+            "ice": 4.0,
+            "rock": 2.0,
+            "dragon": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "water": 0.5,
+            "grass": 0.25,
+            "fighting": 0.5,
+            "ground": 0.0,
+            "bug": 0.5
+        }
     },
     "togepi": {
         "is_fully_evolved": false,
@@ -8345,7 +10226,17 @@
             "status"
         ],
         "role": "tank",
-        "bst": 245
+        "bst": 245,
+        "weaknesses": {
+            "poison": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "fighting": 0.5,
+            "bug": 0.5,
+            "dragon": 0.0,
+            "dark": 0.5
+        }
     },
     "togetic": {
         "is_fully_evolved": false,
@@ -8402,7 +10293,22 @@
             "special"
         ],
         "role": "tank",
-        "bst": 405
+        "bst": 405,
+        "weaknesses": {
+            "electric": 2.0,
+            "ice": 2.0,
+            "poison": 2.0,
+            "rock": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "fighting": 0.25,
+            "ground": 0.0,
+            "bug": 0.25,
+            "dragon": 0.0,
+            "dark": 0.5
+        }
     },
     "togekiss": {
         "is_fully_evolved": true,
@@ -8458,7 +10364,22 @@
             "special"
         ],
         "role": "special attacker",
-        "bst": 545
+        "bst": 545,
+        "weaknesses": {
+            "electric": 2.0,
+            "ice": 2.0,
+            "poison": 2.0,
+            "rock": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "grass": 0.5,
+            "fighting": 0.25,
+            "ground": 0.0,
+            "bug": 0.25,
+            "dragon": 0.0,
+            "dark": 0.5
+        }
     },
     "houndour": {
         "is_fully_evolved": false,
@@ -8509,7 +10430,21 @@
             "status"
         ],
         "role": "special sweeper",
-        "bst": 330
+        "bst": 330,
+        "weaknesses": {
+            "water": 2.0,
+            "fighting": 2.0,
+            "ground": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "grass": 0.5,
+            "ice": 0.5,
+            "ghost": 0.5,
+            "dark": 0.5,
+            "steel": 0.5
+        }
     },
     "houndoom": {
         "is_fully_evolved": true,
@@ -8560,7 +10495,21 @@
             "status"
         ],
         "role": "special sweeper",
-        "bst": 500
+        "bst": 500,
+        "weaknesses": {
+            "water": 2.0,
+            "fighting": 2.0,
+            "ground": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "grass": 0.5,
+            "ice": 0.5,
+            "ghost": 0.5,
+            "dark": 0.5,
+            "steel": 0.5
+        }
     },
     "magnemite": {
         "is_fully_evolved": false,
@@ -8602,7 +10551,26 @@
             "status"
         ],
         "role": "special attacker",
-        "bst": 325
+        "bst": 325,
+        "weaknesses": {
+            "fire": 2.0,
+            "fighting": 2.0,
+            "ground": 4.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "electric": 0.5,
+            "grass": 0.5,
+            "ice": 0.5,
+            "poison": 0.0,
+            "flying": 0.25,
+            "psychic": 0.5,
+            "bug": 0.5,
+            "rock": 0.5,
+            "dragon": 0.5,
+            "steel": 0.25,
+            "fairy": 0.5
+        }
     },
     "magneton": {
         "is_fully_evolved": false,
@@ -8644,7 +10612,26 @@
             "status"
         ],
         "role": "special attacker",
-        "bst": 465
+        "bst": 465,
+        "weaknesses": {
+            "fire": 2.0,
+            "fighting": 2.0,
+            "ground": 4.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "electric": 0.5,
+            "grass": 0.5,
+            "ice": 0.5,
+            "poison": 0.0,
+            "flying": 0.25,
+            "psychic": 0.5,
+            "bug": 0.5,
+            "rock": 0.5,
+            "dragon": 0.5,
+            "steel": 0.25,
+            "fairy": 0.5
+        }
     },
     "magnezone": {
         "is_fully_evolved": true,
@@ -8688,7 +10675,26 @@
             "status"
         ],
         "role": "special attacker",
-        "bst": 535
+        "bst": 535,
+        "weaknesses": {
+            "fire": 2.0,
+            "fighting": 2.0,
+            "ground": 4.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "electric": 0.5,
+            "grass": 0.5,
+            "ice": 0.5,
+            "poison": 0.0,
+            "flying": 0.25,
+            "psychic": 0.5,
+            "bug": 0.5,
+            "rock": 0.5,
+            "dragon": 0.5,
+            "steel": 0.25,
+            "fairy": 0.5
+        }
     },
     "tangela": {
         "is_fully_evolved": false,
@@ -8732,7 +10738,20 @@
             "status"
         ],
         "role": "special attacker",
-        "bst": 435
+        "bst": 435,
+        "weaknesses": {
+            "fire": 2.0,
+            "ice": 2.0,
+            "poison": 2.0,
+            "flying": 2.0,
+            "bug": 2.0
+        },
+        "resistances": {
+            "water": 0.5,
+            "electric": 0.5,
+            "grass": 0.5,
+            "ground": 0.5
+        }
     },
     "tangrowth": {
         "is_fully_evolved": true,
@@ -8779,7 +10798,20 @@
             "special"
         ],
         "role": "mixed attacker",
-        "bst": 535
+        "bst": 535,
+        "weaknesses": {
+            "fire": 2.0,
+            "ice": 2.0,
+            "poison": 2.0,
+            "flying": 2.0,
+            "bug": 2.0
+        },
+        "resistances": {
+            "water": 0.5,
+            "electric": 0.5,
+            "grass": 0.5,
+            "ground": 0.5
+        }
     },
     "yanma": {
         "is_fully_evolved": false,
@@ -8825,7 +10857,20 @@
             "status"
         ],
         "role": "special sweeper",
-        "bst": 390
+        "bst": 390,
+        "weaknesses": {
+            "fire": 2.0,
+            "electric": 2.0,
+            "ice": 2.0,
+            "flying": 2.0,
+            "rock": 4.0
+        },
+        "resistances": {
+            "grass": 0.25,
+            "fighting": 0.25,
+            "ground": 0.0,
+            "bug": 0.5
+        }
     },
     "yanmega": {
         "is_fully_evolved": true,
@@ -8871,7 +10916,20 @@
             "special"
         ],
         "role": "special sweeper",
-        "bst": 515
+        "bst": 515,
+        "weaknesses": {
+            "fire": 2.0,
+            "electric": 2.0,
+            "ice": 2.0,
+            "flying": 2.0,
+            "rock": 4.0
+        },
+        "resistances": {
+            "grass": 0.25,
+            "fighting": 0.25,
+            "ground": 0.0,
+            "bug": 0.5
+        }
     },
     "tropius": {
         "is_fully_evolved": true,
@@ -8924,7 +10982,20 @@
             "status"
         ],
         "role": "mixed wall",
-        "bst": 460
+        "bst": 460,
+        "weaknesses": {
+            "fire": 2.0,
+            "ice": 4.0,
+            "poison": 2.0,
+            "flying": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "water": 0.5,
+            "grass": 0.25,
+            "fighting": 0.5,
+            "ground": 0.0
+        }
     },
     "rhyhorn": {
         "is_fully_evolved": false,
@@ -8977,7 +11048,21 @@
             "physical"
         ],
         "role": "physical wall",
-        "bst": 345
+        "bst": 345,
+        "weaknesses": {
+            "water": 4.0,
+            "grass": 4.0,
+            "ice": 2.0,
+            "fighting": 2.0,
+            "ground": 2.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "fire": 0.5,
+            "poison": 0.25,
+            "flying": 0.5,
+            "rock": 0.5
+        }
     },
     "rhydon": {
         "is_fully_evolved": false,
@@ -9034,7 +11119,21 @@
             "physical"
         ],
         "role": "physical wall",
-        "bst": 485
+        "bst": 485,
+        "weaknesses": {
+            "water": 4.0,
+            "grass": 4.0,
+            "ice": 2.0,
+            "fighting": 2.0,
+            "ground": 2.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "fire": 0.5,
+            "poison": 0.25,
+            "flying": 0.5,
+            "rock": 0.5
+        }
     },
     "rhyperior": {
         "is_fully_evolved": true,
@@ -9091,7 +11190,21 @@
             "physical"
         ],
         "role": "physical wall",
-        "bst": 535
+        "bst": 535,
+        "weaknesses": {
+            "water": 4.0,
+            "grass": 4.0,
+            "ice": 2.0,
+            "fighting": 2.0,
+            "ground": 2.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "fire": 0.5,
+            "poison": 0.25,
+            "flying": 0.5,
+            "rock": 0.5
+        }
     },
     "duskull": {
         "is_fully_evolved": false,
@@ -9137,7 +11250,17 @@
             "status"
         ],
         "role": "tank",
-        "bst": 295
+        "bst": 295,
+        "weaknesses": {
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "normal": 0.0,
+            "fighting": 0.0,
+            "poison": 0.5,
+            "bug": 0.5
+        }
     },
     "dusclops": {
         "is_fully_evolved": false,
@@ -9188,7 +11311,17 @@
             "physical"
         ],
         "role": "tank",
-        "bst": 455
+        "bst": 455,
+        "weaknesses": {
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "normal": 0.0,
+            "fighting": 0.0,
+            "poison": 0.5,
+            "bug": 0.5
+        }
     },
     "dusknoir": {
         "is_fully_evolved": true,
@@ -9241,7 +11374,17 @@
             "physical"
         ],
         "role": "tank",
-        "bst": 525
+        "bst": 525,
+        "weaknesses": {
+            "ghost": 2.0,
+            "dark": 2.0
+        },
+        "resistances": {
+            "normal": 0.0,
+            "fighting": 0.0,
+            "poison": 0.5,
+            "bug": 0.5
+        }
     },
     "porygon": {
         "is_fully_evolved": false,
@@ -9287,7 +11430,13 @@
             "status"
         ],
         "role": "special attacker",
-        "bst": 395
+        "bst": 395,
+        "weaknesses": {
+            "fighting": 2.0
+        },
+        "resistances": {
+            "ghost": 0.0
+        }
     },
     "porygon2": {
         "is_fully_evolved": false,
@@ -9332,7 +11481,13 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 515
+        "bst": 515,
+        "weaknesses": {
+            "fighting": 2.0
+        },
+        "resistances": {
+            "ghost": 0.0
+        }
     },
     "porygon-z": {
         "is_fully_evolved": true,
@@ -9378,7 +11533,13 @@
             "special"
         ],
         "role": "special attacker",
-        "bst": 535
+        "bst": 535,
+        "weaknesses": {
+            "fighting": 2.0
+        },
+        "resistances": {
+            "ghost": 0.0
+        }
     },
     "scyther": {
         "is_fully_evolved": false,
@@ -9425,7 +11586,20 @@
             "physical"
         ],
         "role": "physical sweeper",
-        "bst": 500
+        "bst": 500,
+        "weaknesses": {
+            "fire": 2.0,
+            "electric": 2.0,
+            "ice": 2.0,
+            "flying": 2.0,
+            "rock": 4.0
+        },
+        "resistances": {
+            "grass": 0.25,
+            "fighting": 0.25,
+            "ground": 0.0,
+            "bug": 0.5
+        }
     },
     "scizor": {
         "is_fully_evolved": true,
@@ -9478,7 +11652,21 @@
             "status"
         ],
         "role": "physical attacker",
-        "bst": 500
+        "bst": 500,
+        "weaknesses": {
+            "fire": 4.0
+        },
+        "resistances": {
+            "normal": 0.5,
+            "grass": 0.25,
+            "ice": 0.5,
+            "poison": 0.0,
+            "psychic": 0.5,
+            "bug": 0.5,
+            "dragon": 0.5,
+            "steel": 0.5,
+            "fairy": 0.5
+        }
     },
     "elekid": {
         "is_fully_evolved": false,
@@ -9525,7 +11713,15 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 360
+        "bst": 360,
+        "weaknesses": {
+            "ground": 2.0
+        },
+        "resistances": {
+            "electric": 0.5,
+            "flying": 0.5,
+            "steel": 0.5
+        }
     },
     "electabuzz": {
         "is_fully_evolved": false,
@@ -9574,7 +11770,15 @@
             "status"
         ],
         "role": "special sweeper",
-        "bst": 490
+        "bst": 490,
+        "weaknesses": {
+            "ground": 2.0
+        },
+        "resistances": {
+            "electric": 0.5,
+            "flying": 0.5,
+            "steel": 0.5
+        }
     },
     "electivire": {
         "is_fully_evolved": true,
@@ -9624,7 +11828,15 @@
             "physical"
         ],
         "role": "physical attacker",
-        "bst": 540
+        "bst": 540,
+        "weaknesses": {
+            "ground": 2.0
+        },
+        "resistances": {
+            "electric": 0.5,
+            "flying": 0.5,
+            "steel": 0.5
+        }
     },
     "magby": {
         "is_fully_evolved": false,
@@ -9667,7 +11879,20 @@
             "physical"
         ],
         "role": "physical sweeper",
-        "bst": 365
+        "bst": 365,
+        "weaknesses": {
+            "water": 2.0,
+            "ground": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "grass": 0.5,
+            "ice": 0.5,
+            "bug": 0.5,
+            "steel": 0.5,
+            "fairy": 0.5
+        }
     },
     "magmar": {
         "is_fully_evolved": false,
@@ -9712,7 +11937,20 @@
             "physical"
         ],
         "role": "special sweeper",
-        "bst": 495
+        "bst": 495,
+        "weaknesses": {
+            "water": 2.0,
+            "ground": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "grass": 0.5,
+            "ice": 0.5,
+            "bug": 0.5,
+            "steel": 0.5,
+            "fairy": 0.5
+        }
     },
     "magmortar": {
         "is_fully_evolved": true,
@@ -9760,7 +11998,20 @@
             "physical"
         ],
         "role": "special attacker",
-        "bst": 540
+        "bst": 540,
+        "weaknesses": {
+            "water": 2.0,
+            "ground": 2.0,
+            "rock": 2.0
+        },
+        "resistances": {
+            "fire": 0.5,
+            "grass": 0.5,
+            "ice": 0.5,
+            "bug": 0.5,
+            "steel": 0.5,
+            "fairy": 0.5
+        }
     },
     "swinub": {
         "is_fully_evolved": false,
@@ -9806,7 +12057,17 @@
             "status"
         ],
         "role": "physical sweeper",
-        "bst": 250
+        "bst": 250,
+        "weaknesses": {
+            "fire": 2.0,
+            "water": 2.0,
+            "grass": 2.0,
+            "fighting": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "poison": 0.5
+        }
     },
     "piloswine": {
         "is_fully_evolved": false,
@@ -9853,7 +12114,17 @@
             "status"
         ],
         "role": "physical attacker",
-        "bst": 450
+        "bst": 450,
+        "weaknesses": {
+            "fire": 2.0,
+            "water": 2.0,
+            "grass": 2.0,
+            "fighting": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "poison": 0.5
+        }
     },
     "mamoswine": {
         "is_fully_evolved": true,
@@ -9901,7 +12172,17 @@
             "physical"
         ],
         "role": "physical attacker",
-        "bst": 530
+        "bst": 530,
+        "weaknesses": {
+            "fire": 2.0,
+            "water": 2.0,
+            "grass": 2.0,
+            "fighting": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "poison": 0.5
+        }
     },
     "snorunt": {
         "is_fully_evolved": false,
@@ -9944,7 +12225,16 @@
             "status"
         ],
         "role": "versatile",
-        "bst": 300
+        "bst": 300,
+        "weaknesses": {
+            "fire": 2.0,
+            "fighting": 2.0,
+            "rock": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "ice": 0.5
+        }
     },
     "glalie": {
         "is_fully_evolved": true,
@@ -9992,7 +12282,16 @@
             "status"
         ],
         "role": "versatile",
-        "bst": 480
+        "bst": 480,
+        "weaknesses": {
+            "fire": 2.0,
+            "fighting": 2.0,
+            "rock": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "ice": 0.5
+        }
     },
     "froslass": {
         "is_fully_evolved": true,
@@ -10042,7 +12341,21 @@
             "status"
         ],
         "role": "mixed attacker",
-        "bst": 480
+        "bst": 480,
+        "weaknesses": {
+            "fire": 2.0,
+            "rock": 2.0,
+            "ghost": 2.0,
+            "dark": 2.0,
+            "steel": 2.0
+        },
+        "resistances": {
+            "normal": 0.0,
+            "ice": 0.5,
+            "fighting": 0.0,
+            "poison": 0.5,
+            "bug": 0.5
+        }
     },
     "absol": {
         "is_fully_evolved": true,
@@ -10098,6 +12411,15 @@
             "status"
         ],
         "role": "physical attacker",
-        "bst": 465
+        "bst": 465,
+        "weaknesses": {
+            "fighting": 2.0,
+            "bug": 2.0,
+            "fairy": 2.0
+        },
+        "resistances": {
+            "ghost": 0.5,
+            "dark": 0.5
+        }
     }
 }
