@@ -121,7 +121,7 @@ def define_pokemon_role(filename: str) -> None:
 
 def add_bst(filename: str) -> None:
     """
-    Calculates a Pokemon's base stat total (BST) by finding the sum of all stats (HP, attack, defense, etc.).
+    Calculates a Pokémon's base stat total (BST) by finding the sum of all stats (HP, attack, defense, etc.).
     """
     data_path: str = os.path.join(os.getcwd(), 'data', 'pokemon_data')
     file_path: str = os.path.join(data_path, filename)

@@ -78,3 +78,22 @@ def file_exists(filename: str) -> bool:
     print(f'Filepath: "{file_path}"')
 
     return os.path.exists(file_path)
+
+
+def ask_if_using_legends() -> bool:
+    user_input: str = input('Would you like to potentially use legendaries in your team composition?\n(y/n) > ')
+
+    if user_input.lower() == 'y' or 'yes':
+        return True
+
+    return False
+
+
+def ask_if_only_using_babies() -> bool:
+    user_input: str = input('Would you like to only use baby Pokemon in your team composition? '
+                            '(Legendaries will not be used)\n(y/n) > ')
+
+    if user_input.lower() == 'y' or 'yes':
+        return True
+
+    return False
