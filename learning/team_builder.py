@@ -22,8 +22,8 @@ from utils import get_role_description
 
 class TeamBuilder:
     def __init__(self, use_babies: bool, use_legends: bool, file_to_use: str, preferences: dict[str, bool]):
-        self.use_babies: bool = use_babies
-        self.use_legends: bool = use_legends
+        self.using_babies: bool = use_babies
+        self.using_legends: bool = use_legends
         self.file_to_use: str = file_to_use
         self.data = dict()
 
@@ -44,7 +44,7 @@ class TeamBuilder:
         temp: dict = dict()
 
         # if using baby Pokémon, filter the data to those only and return that data
-        if self.use_babies:
+        if self.using_babies:
             for name, info in self.data.items():
                 if info['evo_weight'] == 0.0:
                     temp.update({name: info})
@@ -55,7 +55,7 @@ class TeamBuilder:
         # filter the data to the default information: any Pokémon with an evo_weight > 0.0; i.e., exclude baby Pokémon
         for name, info in self.data.items():
             # if not using legends, skip to the next entry
-            if not self.use_legends and info['is_legend_or_mythical']:
+            if not self.using_legends and info['is_legend_or_mythical']:
                 continue
 
             # exclude any Pokémon that are babies or have too low of a BST
@@ -430,7 +430,7 @@ class TeamBuilder:
 
         team_comments: str = self.get_team_synergy_desc(team_df, team_types)
 
-        print(f'\n----- Generated Team -----\n\n' + '\n\n'.join(team_details))
+        print(f'----- Generated Team -----\n\n' + '\n\n'.join(team_details))
         print(f'\nTeam Synergy Notes:\n{team_comments}')
 
         return team_details

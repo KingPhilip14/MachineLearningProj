@@ -81,22 +81,16 @@ def file_exists(filename: str) -> bool:
 
 
 def ask_if_using_legends() -> bool:
-    user_input: str = input('Would you like to potentially use legendaries in your team composition?\n(y/n) > ')
+    user_input: str = input('\nWould you like to potentially use legendaries in your team composition?\n(y/n) > ')
 
-    if user_input.lower() == 'y' or 'yes':
-        return True
-
-    return False
+    return user_input.lower() in ['y', 'yes']
 
 
 def ask_if_only_using_babies() -> bool:
     user_input: str = input('Would you like to only use baby Pokemon in your team composition? '
                             '(Legendaries will not be used)\n(y/n) > ')
 
-    if user_input.lower() == 'y' or 'yes':
-        return True
-
-    return False
+    return user_input.lower() in ['y', 'yes']
 
 
 def ask_for_team_preferences() -> dict[str, bool]:
@@ -113,19 +107,19 @@ def ask_for_team_preferences() -> dict[str, bool]:
         'more_balanced': False
     }
 
-    user_input: str = input('Would you like a more offensive team composition?\n(y/n) > ')
+    user_input: str = input('\nWould you like a more offensive team composition?\n(y/n) > ')
 
-    if user_input.lower() == 'y' or 'yes':
+    if user_input.lower() in ['y', 'yes']:
         preferences['more_offensive'] = True
         return preferences
 
-    user_input = input('Would you like a more defense team composition instead?\n(y/n) > ')
+    user_input = input('\nWould you like a more defense team composition instead?\n(y/n) > ')
 
-    if user_input.lower() == 'y' or 'yes':
+    if user_input.lower() in ['y', 'yes']:
         preferences['more_defensive'] = True
         return preferences
 
-    print('The balanced composition will be used by default.')
+    print('\nThe balanced composition will be used by default.')
     preferences['more_balanced'] = True
 
     return preferences
@@ -144,9 +138,10 @@ def get_role_description(role: str) -> str:
         'Special Attacker': 'Focuses on dealing special damage.',
         'Mixed Attacker': 'Provides flexibility by being capable of attacking both physically and specially.',
         'Physical Wall': 'Eats physical hits without taking much of a scratch. Both HP and Defense are notably high.',
-        'Special Wall': 'Absorbs special attacks, walling out special attackers. Both HP and SpDef are notably high.',
-        'Bulky Wall': 'Can take both physical and damage well. Both Defense and SpDef are notably high, but HP may '
-                      'not be.',
+        'Special Wall': 'Absorbs special attacks, walling out special attackers. Both HP and Special Defense are '
+                        'notably high.',
+        'Bulky Wall': 'Can take both physical and damage well. Both Defense and Special Defense are notably high, '
+                      'but HP may not be.',
         'Speedster': 'Focuses on speed, providing a variety of uses like maintaining momentum, revenge kills, or '
                      'occasional utility and setup.',
         'Utility/Support': 'Excels at using status moves, setup, or field control moves to aid the rest of the team.',
@@ -157,3 +152,7 @@ def get_role_description(role: str) -> str:
     }
 
     return descriptions.get(role, 'A Pokémon with a lot of potential to fit on different teams.')
+
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')

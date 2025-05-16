@@ -5,7 +5,7 @@ from typing import Any
 from utils import save_json_file
 
 
-def clean_data(filename: str) -> None:
+def cleaned_data(filename: str) -> bool:
     """
     Looks at every Pokémon stored in a JSON file. If the entry is missing the 'hp' key, the data is identified as
     malformed as is removed.
@@ -32,9 +32,11 @@ def clean_data(filename: str) -> None:
 
     if modified:
         save_json_file(data, filename, os.path.exists(file_path))
-        return
+        return modified
 
     print(f'No malformed/incomplete data was found in {filename}')
+
+    return modified
 
 
 def __classify_role_by_dynamic_stats(data: dict[str, Any]) -> str:
@@ -163,7 +165,11 @@ def clean_and_update_data_files() -> None:
     for filename in os.listdir(data_path):
         # clean data
         print(f'Filename: {filename}')
-        clean_data(filename)
+        modified: bool = cleaned_data(filename)
+
+        if not modified:
+            continue
+
         define_pokemon_role(filename)
         add_bst(filename)
         add_type_matchups(filename)
@@ -203,7 +209,7 @@ def calculate_type_effectiveness(primary_type: str, secondary_type: str) -> dict
     """
     type_chart: dict[str, dict[str, float]]
 
-    data_path: str = os.path.join(os.getcwd(), '..', 'data', 'extra_data')
+    data_path: str = os.path.join(os.getcwd(), 'data', 'extra_data')
     file_path: str = os.path.join(data_path, 'defensive_type_chart.json')
 
     # read in the type chart data
