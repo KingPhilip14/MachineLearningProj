@@ -129,3 +129,31 @@ def ask_for_team_preferences() -> dict[str, bool]:
     preferences['more_balanced'] = True
 
     return preferences
+
+
+def get_role_description(role: str) -> str:
+    """
+    Returns a description for the given role of a Pokémon. If an invalid role is given, a default description is
+    returned.
+    :param role:
+    """
+    descriptions: dict[str, str] = {
+        'Physical Sweeper': 'A fast, hard-hitting attacker that uses their astounding physical damage.',
+        'Special Sweeper': 'An attacker excelling in special damage and speed to overwhelm the opponent.',
+        'Physical Attacker': 'An attacker that uses their reliable physical damage.',
+        'Special Attacker': 'Focuses on dealing special damage.',
+        'Mixed Attacker': 'Provides flexibility by being capable of attacking both physically and specially.',
+        'Physical Wall': 'Eats physical hits without taking much of a scratch. Both HP and Defense are notably high.',
+        'Special Wall': 'Absorbs special attacks, walling out special attackers. Both HP and SpDef are notably high.',
+        'Bulky Wall': 'Can take both physical and damage well. Both Defense and SpDef are notably high, but HP may '
+                      'not be.',
+        'Speedster': 'Focuses on speed, providing a variety of uses like maintaining momentum, revenge kills, or '
+                     'occasional utility and setup.',
+        'Utility/Support': 'Excels at using status moves, setup, or field control moves to aid the rest of the team.',
+        'Bulky': 'Provides a general form of tankiness without having high defenses thanks to its high HP.',
+        'Versatile': 'A flexible role that provides relatively balanced stats and can have unpredictable usage.',
+        'Eviolite User': 'While not fully evolved, an Eviolite will make this Pokémon as bulky as another Wall '
+                         'archetype, providing unique usage.',
+    }
+
+    return descriptions.get(role, 'A Pokémon with a lot of potential to fit on different teams.')

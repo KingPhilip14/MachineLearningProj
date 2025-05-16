@@ -4,6 +4,8 @@ from collections import Counter
 
 import matplotlib
 
+import utils
+
 matplotlib.use('tkAgg')
 import matplotlib.pyplot as plt
 
@@ -15,6 +17,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 
 from ingestion.data_processing import calculate_type_effectiveness
+from utils import get_role_description
 
 
 class TeamBuilder:
@@ -55,7 +58,8 @@ class TeamBuilder:
             if not self.use_legends and info['is_legend_or_mythical']:
                 continue
 
-            if info['evo_weight'] > 0.0:
+            # exclude any Pokémon that are babies or have too low of a BST
+            if info['evo_weight'] > 0.0 and info['bst'] >= 300:
                 temp.update({name: info})
 
         self.data = temp
@@ -235,7 +239,7 @@ class TeamBuilder:
 
         return weaknesses
 
-    def build_team(self) -> list[str]:
+    def build_team(self) -> tuple[list[str], DataFrame, list[list[str]]]:
         """
         Creates a team of Pokémon for the end user to use. The team is created based on the cluster roles and inputs
         from the user.
@@ -256,7 +260,6 @@ class TeamBuilder:
 
             # checks if a role is not in the groups of clusters; some clusters may not exist depending on the data file
             if role not in grouped.groups:
-                print(f'Role {role} not found in grouped.groups roles: {list(grouped.groups.keys())}')
                 continue
 
             # shuffles the rows of the cluster
@@ -265,8 +268,6 @@ class TeamBuilder:
             for _, row in candidates.iterrows():
                 if len(team) >= 6:
                     break
-
-                print(f"Trying role: {role} with {len(candidates)} candidates.")
 
                 name: str = row['name']
                 types: list[str] = row['types'] if isinstance(row['types'], list) else [row['types']]
@@ -277,10 +278,8 @@ class TeamBuilder:
 
                 # if a specific weakness will have more than 2 overlaps, don't add the Pokémon to the team
                 if any(count > 2 for count in weaknesses.values()):
-                    print(f"Skipping {name} due to excessive shared weaknesses: {weaknesses}")
                     continue
 
-                print(f'Added {name} to the team')
                 team.append(name)
                 team_types.append(types)
                 break
@@ -292,33 +291,64 @@ class TeamBuilder:
             team.extend(additional)
 
         if not team:
-            print('Warning: no Pokemon added to the team')
+            print('Warning: no Pokémon added to the team')
 
-        return team
+        # add the role the Pokémon will fulfill next to its name for the output
+        team_with_details: list[str] = []
 
-    def visualize(self) -> None:
-        """
-        Used to visualize the Elbow Method of determining appropriate cluster sizing. Not necessary to use for the
-        application, but to understand how to improve it.
-        """
-        inertias = []
-        k_range = range(1, 30)
+        # build a detailed string for each Pokémon in the generated team
+        for name in team:
+            role_row: DataFrame = self.df_encoded[self.df_encoded['name'] == name]
+            role: str = role_row.iloc[0]['cluster_name'] if not role_row.empty else 'Versatile'
 
-        # Use only numeric columns
-        numeric_columns = self.df_encoded.select_dtypes(include='number').columns
-        features = self.df_encoded[numeric_columns]
+            info = self.data.get(name)
 
-        for k in k_range:
-            model = KMeans(n_clusters=k, random_state=42)
-            model.fit(features)
-            inertias.append(model.inertia_)
+            # get the type(s) of the Pokémon
+            type_1: str = info.get('type_1', '')
+            type_2: str = info.get('type_2', '')
+            type_str: str = f'{type_1.title()}/{type_2.title()}' if type_2 else type_1.title()
 
-        plt.plot(k_range, inertias, marker='o')
-        plt.xlabel('Number of Clusters (k)')
-        plt.ylabel('Inertia (Distortion)')
-        plt.title('Elbow Method for Optimal k')
-        plt.grid(True)
-        plt.show()
+            # get the stats of the Pokémon
+            stats: dict[str, int] = {
+                'hp': info['hp'],
+                'attack': info['attack'],
+                'defense': info['defense'],
+                'special-attack': info['special-attack'],
+                'special-defense': info['special-defense'],
+                'speed': info['speed'],
+                'bst': info['bst'],
+            }
+
+            # get all abilities
+            abilities: list[str] = info['abilities']
+            abilities_str: str = ', '.join(ability.title().replace('-', ' ') for ability in abilities)
+
+            details: str = (
+                f'{name.title()} ({type_str}) - {role}\n'
+                f'Role Description: {get_role_description(role)}\n'
+                f'\tStats:\n'
+                f'\t\tHP: {stats["hp"]}\n'
+                f'\t\tAttack: {stats["attack"]}\n'
+                f'\t\tDefense: {stats["defense"]}\n'
+                f'\t\tSpecial Attack: {stats["special-attack"]}\n'
+                f'\t\tSpecial Defense: {stats["special-defense"]}\n'
+                f'\t\tSpeed: {stats["speed"]}\n'
+                f'\t\tBST: {stats["bst"]}\n'
+                f'\tAbilities: {abilities_str}'
+            )
+
+            team_with_details.append(details)
+
+        # build a DataFrame to use later
+        team_df: DataFrame = self.df_encoded[self.df_encoded['name'].isin(team)]
+
+        team_types: list[list[str]] = [
+            [self.data[name]['type_1']] if not self.data[name]['type_2']
+            else [self.data[name]['type_1'], self.data[name]['type_2']]
+            for name in team
+        ]
+
+        return team_with_details, team_df, team_types
 
     def __convert_preferences(self) -> list[str]:
         """
@@ -337,6 +367,74 @@ class TeamBuilder:
             return ['Physical Sweeper', 'Special Sweeper', 'Physical Wall', 'Special Wall', 'Mixed Attacker',
                     'Speedster', 'Bulky', 'Bulky Wall', 'Utility/Support', 'Eviolite User', 'Versatile']
 
+    def get_team_synergy_desc(self, team_df: pd.DataFrame, team_types: list[list[str]]) -> str:
+        """
+        A description of the team's synergy and how each Pokémon complements each other is returned to give the user a
+        better understand of how they may be able to use their team.
+        :param team_df:
+        :param team_types:
+        """
+        comments: list[str] = []
+
+        # look at type coverage
+        all_weaknesses: Counter = Counter()
+
+        for types in team_types:
+            effectiveness = calculate_type_effectiveness(types[0], types[1] if len(types) > 1 else '')
+            for t, mult in effectiveness.items():
+                if mult > 1.0:
+                    all_weaknesses[t] += 1
+
+        # find if the team has many overlapping weaknesses that would be concerning
+        weak_types: list[str] = [f'{type_} (x{c})' for type_, c in all_weaknesses.items() if c >= 2]
+
+        if weak_types:
+            formatted_types: str = ', '.join(type_[0].upper() + type_[1:] for type_ in weak_types)
+            comments.append(f'The team has overlapping weaknesses to: {formatted_types}. Be mindful of these!')
+        else:
+            comments.append('The team has good type coverage, so no major weaknesses are shared.')
+
+        # look at stat synergy
+        average_stats = team_df[['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed']].mean()
+
+        if average_stats['speed'] > 0.5:
+            comments.append('This team has many fast Pokémon. Use that speed to your advantage as you move first.')
+        elif average_stats['defense'] > 0.5 and average_stats['special-defense'] > 0.5:
+            comments.append(
+                'Playing defensively with this team is how you\'ll find success. Use your defenses to control '
+                'the pace of the match!')
+        elif average_stats['attack'] + average_stats['special-attack'] > 1.0:
+            comments.append(
+                'The offensive pressure from this team will be expected. End the match quickly and watch for '
+                'your lack of defenses.')
+        else:
+            comments.append('This team is well balanced overall. Do what you can with it!')
+
+        return '\n'.join(comments)
+
+    def generate_team(self) -> list[str]:
+        """
+        Combines all methods used to build a team, then builds a string to print to the user for what their new team
+        is.
+        """
+        self.create_df()
+        self.encode_and_normalize()
+        self.clustering()
+        self.categorize()
+
+        built_team_result: tuple[list[str], DataFrame, list[list[str]]] = self.build_team()
+
+        team_details: list[str] = built_team_result[0]
+        team_df: DataFrame = built_team_result[1]
+        team_types: list[list[str]] = built_team_result[2]
+
+        team_comments: str = self.get_team_synergy_desc(team_df, team_types)
+
+        print(f'\n----- Generated Team -----\n\n' + '\n\n'.join(team_details))
+        print(f'\nTeam Synergy Notes:\n{team_comments}')
+
+        return team_details
+
 
 if __name__ == '__main__':
     preferences: dict[str, bool] = {
@@ -346,14 +444,19 @@ if __name__ == '__main__':
     }
 
     tb: TeamBuilder = TeamBuilder(False, False,
-                                  '../data/pokemon_data/gen_1_data.json', preferences)
+                                  '../data/pokemon_data/gen_3_data.json', preferences)
     tb.create_df()
     tb.encode_and_normalize()
     tb.clustering()
     tb.categorize()
 
-    # tb.print_clusters()
+    built_team_result: tuple[list[str], DataFrame, list[list[str]]] = tb.build_team()
 
-    team: list[str] = tb.build_team()
-    print(f'Generated team: {team}')
-    print(f"Team size: {len(team)}")
+    team_details: list[str] = built_team_result[0]
+    team_df: DataFrame = built_team_result[1]
+    team_types: list[list[str]] = built_team_result[2]
+
+    team_comments: str = tb.get_team_synergy_desc(team_df, team_types)
+
+    print(f'\n----- Generated Team -----\n\n' + '\n\n'.join(team_details))
+    print(f'\nTeam Synergy Notes:\n{team_comments}')
