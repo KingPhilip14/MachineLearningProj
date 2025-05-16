@@ -97,3 +97,35 @@ def ask_if_only_using_babies() -> bool:
         return True
 
     return False
+
+
+def ask_for_team_preferences() -> dict[str, bool]:
+    """
+    Asks the user for how they want their team composition. They can choose between a more offensive, defensive, or
+    balanced composition.
+
+    When asking the user, each question will be asked until they say yes to one of the compositions. If they say no
+    to all three, the default composition will be the balanced composition.
+    """
+    preferences: dict[str, bool] = {
+        'more_offensive': False,
+        'more_defensive': False,
+        'more_balanced': False
+    }
+
+    user_input: str = input('Would you like a more offensive team composition?\n(y/n) > ')
+
+    if user_input.lower() == 'y' or 'yes':
+        preferences['more_offensive'] = True
+        return preferences
+
+    user_input = input('Would you like a more defense team composition instead?\n(y/n) > ')
+
+    if user_input.lower() == 'y' or 'yes':
+        preferences['more_defensive'] = True
+        return preferences
+
+    print('The balanced composition will be used by default.')
+    preferences['more_balanced'] = True
+
+    return preferences

@@ -1,6 +1,6 @@
 from ingestion.api_functions import collect_data
 from ingestion.data_processing import clean_and_update_data_files
-from utils import input_generation, ask_if_using_legends, ask_if_only_using_babies
+from utils import input_generation, ask_if_using_legends, ask_if_only_using_babies, ask_for_team_preferences
 
 
 if __name__ == '__main__':
@@ -12,7 +12,9 @@ if __name__ == '__main__':
     clean_and_update_data_files()
 
     using_babies: bool = ask_if_only_using_babies()
-    using_legends: bool
+    using_legends: bool = False
 
     if not using_babies:
         using_legends = ask_if_using_legends()
+
+    preferences: dict[str, bool] = ask_for_team_preferences()

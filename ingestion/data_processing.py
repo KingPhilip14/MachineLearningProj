@@ -181,7 +181,7 @@ def add_type_matchups(filename: str) -> None:
         data = json.load(f)
 
         for pokemon_name, pokemon_data in data.items():
-            matchups: dict[str, float] = __calculate_type_effectiveness(pokemon_data['type_1'], pokemon_data['type_2'])
+            matchups: dict[str, float] = calculate_type_effectiveness(pokemon_data['type_1'], pokemon_data['type_2'])
             weaknesses: dict[str, float] = {t: val for t, val in matchups.items() if val > 1.0}
             resistances: dict[str, float] = {t: val for t, val in matchups.items() if val < 1.0}
 
@@ -193,7 +193,7 @@ def add_type_matchups(filename: str) -> None:
     print(f'Type effectiveness and weaknesses have been added to {filename}')
 
 
-def __calculate_type_effectiveness(primary_type: str, secondary_type: str) -> dict[str, float]:
+def calculate_type_effectiveness(primary_type: str, secondary_type: str) -> dict[str, float]:
     """
     By using a given Pokémon's primary and potential secondary typing, a list is created to determine how many
     weaknesses the Pokémon has.
@@ -203,7 +203,7 @@ def __calculate_type_effectiveness(primary_type: str, secondary_type: str) -> di
     """
     type_chart: dict[str, dict[str, float]]
 
-    data_path: str = os.path.join(os.getcwd(), 'data', 'extra_data')
+    data_path: str = os.path.join(os.getcwd(), '..', 'data', 'extra_data')
     file_path: str = os.path.join(data_path, 'defensive_type_chart.json')
 
     # read in the type chart data
