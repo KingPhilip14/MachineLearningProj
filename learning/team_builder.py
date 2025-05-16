@@ -1,7 +1,10 @@
+import matplotlib
+matplotlib.use('tkAgg')
+import matplotlib.pyplot as plt
+
 import json
 
 import pandas as pd
-import matplotlib.pyplot as plt
 from pandas import DataFrame
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
@@ -111,7 +114,7 @@ class TeamBuilder:
 
         cluster_features = self.df_encoded.drop(columns=drop_columns)
 
-        k: int = 15
+        k: int = 8
         k_means = KMeans(n_clusters=k, random_state=42)
         self.df_encoded['cluster'] = k_means.fit_predict(cluster_features)
 
@@ -128,10 +131,10 @@ class TeamBuilder:
 
         # determine thresholds to use for labeling
         support_score = row.get('role_Utility/Support', 0)
-        wall_threshold = 0.75
-        sweeper_speed_threshold = 0.5
-        offense_threshold = 0.60
-        mixed_threshold = 0.50
+        wall_threshold = 0.70
+        sweeper_speed_threshold = 0.50
+        offense_threshold = 0.55
+        mixed_threshold = 0.45
 
         # determine "Sweeper" archetypes
         if attack > offense_threshold and speed > sweeper_speed_threshold:
@@ -169,17 +172,22 @@ class TeamBuilder:
 
     def visualize(self) -> None:
         inertias = []
-        k_range = range(1, 20)
+        k_range = range(1, 30)
+
+        # Use only numeric columns
+        numeric_columns = self.df_encoded.select_dtypes(include='number').columns
+        features = self.df_encoded[numeric_columns]
 
         for k in k_range:
             model = KMeans(n_clusters=k, random_state=42)
-            model.fit(tb.df_encoded.drop(columns=['name']))
+            model.fit(features)
             inertias.append(model.inertia_)
 
         plt.plot(k_range, inertias, marker='o')
         plt.xlabel('Number of Clusters (k)')
         plt.ylabel('Inertia (Distortion)')
         plt.title('Elbow Method for Optimal k')
+        plt.grid(True)
         plt.show()
 
 
@@ -189,9 +197,11 @@ if __name__ == '__main__':
     tb.encode_and_normalize()
     tb.clustering()
 
+    # tb.visualize()
+
     numeric_columns = tb.df_encoded.select_dtypes(include='number').columns
     cluster_profiles = tb.df_encoded[numeric_columns].groupby(tb.df_encoded['cluster']).mean()
-    print(f'\n--- Cluster profiles ---\n{cluster_profiles}')
+    # print(f'\n--- Cluster profiles ---\n{cluster_profiles}')
 
     # assign names to the clusters
     cluster_profiles['cluster_name'] = cluster_profiles.apply(tb.name_clusters, axis=1)
