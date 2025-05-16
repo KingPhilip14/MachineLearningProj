@@ -1,3 +1,5 @@
+import math
+
 import matplotlib
 matplotlib.use('tkAgg')
 import matplotlib.pyplot as plt
@@ -6,7 +8,6 @@ import json
 
 import pandas as pd
 from pandas import DataFrame
-from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 
@@ -39,14 +40,12 @@ class TeamBuilder:
 
         # filter the data to the default information: any Pokémon with an evo_weight > 0.0; i.e., exclude baby Pokémon
         for name, info in self.data.items():
+            # if not using legends, skip to the next entry
+            if not self.use_legends and info['is_legend_or_mythical']:
+                continue
+
             if info['evo_weight'] > 0.0:
                 temp.update({name: info})
-
-        # add legendaries to the collected data if legends were requested
-        if self.use_legends:
-            for name, info in self.data.items():
-                if info['is_legend_or_mythical']:
-                    temp.update({name: info})
 
         self.data = temp
 
@@ -68,6 +67,7 @@ class TeamBuilder:
                 'speed': info['speed'],
                 'role': info['role'],
                 'is_fully_evolved': info['is_fully_evolved'],
+                'evo_weight': info['evo_weight']
             }
 
             df_entries.append(df_entry)
@@ -114,7 +114,12 @@ class TeamBuilder:
 
         cluster_features = self.df_encoded.drop(columns=drop_columns)
 
-        k: int = 8
+        # used for creating a dynamically adjustable number of clusters
+        data_size: int = len(self.df_encoded)
+
+        # the following formula will adjust the number of k, capping at 15 to reduce extra noise
+        k = min(15, max(4, round(math.log2(data_size) + data_size / 50)))
+
         k_means = KMeans(n_clusters=k, random_state=42)
         self.df_encoded['cluster'] = k_means.fit_predict(cluster_features)
 
@@ -131,13 +136,19 @@ class TeamBuilder:
         speed = row['speed']
 
         # determine thresholds to use for labeling
-        support_score = row.get('role_Utility/Support', 0)
-        hp_threshold = 0.5
-        wall_threshold = 0.60
-        sweeper_speed_threshold = 0.50
-        offense_threshold = 0.60
-        mixed_threshold = 0.40
-        speed_threshold = 0.50
+        evo_weight: float = row.get('evo_weight', 1.0)
+        support_score: float = row.get('role_Utility/Support', 0)
+        hp_threshold: float = 0.5
+        wall_threshold: float = 0.60
+        sweeper_speed_threshold: float = 0.50
+        offense_threshold: float = 0.60
+        mixed_threshold: float = 0.40
+        speed_threshold: float = 0.50
+
+        # determine if the cluster is Pokémon that can use an Eviolite (a very useful item competitively)
+        # this only applies to partially evolved Pokémon (i.e., Pokémon with an evo_weight of 0.5)
+        if evo_weight == 0.5:
+            return 'Eviolite User'
 
         # determine "Sweeper" archetypes
         if attack > offense_threshold and speed > sweeper_speed_threshold:
@@ -181,7 +192,26 @@ class TeamBuilder:
         # default edge case
         return 'Versatile'
 
+    def categorize(self) -> None:
+        """
+        Assigns each Pokémon to a cluster to categorize them.
+        :return:
+        """
+        # assign category names to each Pokémon in a cluster
+        self.df_encoded['cluster_name'] = self.df_encoded.apply(self.name_clusters, axis=1)
+
+    def print_clusters(self) -> None:
+        """
+        Prints the different named clusters and all Pokémon in them. Primarily used for debugging purposes.
+        """
+        for name, group in self.df_encoded.groupby('cluster_name'):
+            print(f'{name}: {group["name"].tolist()}\n')
+
     def visualize(self) -> None:
+        """
+        Used to visualize the Elbow Method of determining appropriate cluster sizing. Not necessary to use for the
+        application, but to understand how to improve it.
+        """
         inertias = []
         k_range = range(1, 30)
 
@@ -207,18 +237,6 @@ if __name__ == '__main__':
     tb.create_df()
     tb.encode_and_normalize()
     tb.clustering()
+    tb.categorize()
 
-    # tb.visualize()
-
-    numeric_columns = tb.df_encoded.select_dtypes(include='number').columns
-    cluster_profiles = tb.df_encoded[numeric_columns].groupby(tb.df_encoded['cluster']).mean()
-    # print(f'\n--- Cluster profiles ---\n{cluster_profiles}')
-
-    # assign names to the clusters
-    cluster_profiles['cluster_name'] = cluster_profiles.apply(tb.name_clusters, axis=1)
-
-    cluster_name_map = cluster_profiles['cluster_name'].to_dict()
-    tb.df_encoded['cluster_name'] = tb.df_encoded['cluster'].map(cluster_name_map)
-
-    for name, group in tb.df_encoded.groupby('cluster_name'):
-        print(f'{name}: {group["name"].tolist()}\n')
+    tb.print_clusters()
