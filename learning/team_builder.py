@@ -1,9 +1,11 @@
 import json
 
 import pandas as pd
+import matplotlib.pyplot as plt
 from pandas import DataFrame
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
 
 
 class TeamBuilder:
@@ -63,7 +65,6 @@ class TeamBuilder:
                 'speed': info['speed'],
                 'role': info['role'],
                 'is_fully_evolved': info['is_fully_evolved'],
-                'highest_move_categories': '-'.join(sorted(info['highest_move_categories'])),
             }
 
             df_entries.append(df_entry)
@@ -75,8 +76,8 @@ class TeamBuilder:
         Encodes and normalizes the data collected in the dataframe.
 
         Encoded features:
-            - Pokémon Role
-            - Highest Move Categories
+            - Role
+            - Is Fully Evolved
 
         Normalized features:
             - HP
@@ -87,86 +88,99 @@ class TeamBuilder:
             - Speed
         """
 
-        # encode features of the dataframe
-        self.df_encoded: DataFrame = pd.get_dummies(self.df, columns=['role'])
+        # keep the names separated from the df_encoded DataFrame
+        names: DataFrame = self.df['name']
 
-        # encode the move categories too
-        move_categories = ['status', 'physical', 'special']
-
-        for category in move_categories:
-            self.df_encoded[category] = self.df['highest_move_categories'].apply(lambda x: int(category in x))
+        # encode features of the dataframe using one-hot encoding
+        self.df_encoded: DataFrame = pd.get_dummies(self.df.drop(columns=['name']), columns=['role'], dtype=int)
+        self.df_encoded['is_fully_evolved'] = self.df_encoded['is_fully_evolved'].astype(int)
 
         # normalize features
-        scaler = StandardScaler()
-        stat_columns = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed']
+        sc = StandardScaler()
+        stat_columns = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed', 'bst']
 
         # drop the name column to only fit based on the numeric values
-        self.df_encoded[stat_columns] = scaler.fit_transform(self.df_encoded[stat_columns])
+        self.df_encoded[stat_columns] = sc.fit_transform(self.df_encoded[stat_columns])
+
+        # add the names back for display later
+        self.df_encoded['name'] = names
 
     def clustering(self) -> None:
         # determine columns that need to be dropped to fit the data without crashing
-        drop_columns: list[str] = ['name', 'highest_move_categories']
+        drop_columns: list[str] = ['name']
 
-        k_means = KMeans(n_clusters=10, random_state=42)
-        self.df_encoded['cluster'] = k_means.fit_predict(self.df_encoded.drop(columns=drop_columns))
+        cluster_features = self.df_encoded.drop(columns=drop_columns)
 
-    def name_clusters(self) -> None:
+        k: int = 15
+        k_means = KMeans(n_clusters=k, random_state=42)
+        self.df_encoded['cluster'] = k_means.fit_predict(cluster_features)
+
+    def name_clusters(self, row) -> str:
         """
-        Gives names to each cluster group based on the dominant role in each cluster.
+        Assigns cluster names using by analyzing the mean of the stats of the Pokémon in a cluster and its role.
         """
-        role_columns = [col for col in self.df_encoded.columns if col.startswith('role_')]
+        # get the stats from the cluster
+        attack = row['attack']
+        defense = row['defense']
+        special_attack = row['special-attack']
+        special_defense = row['special-defense']
+        speed = row['speed']
 
-        # calculate average role presence per cluster
-        cluster_profiles = self.df_encoded.groupby('cluster')[role_columns].mean()
+        # determine thresholds to use for labeling
+        support_score = row.get('role_Utility/Support', 0)
+        wall_threshold = 0.75
+        sweeper_speed_threshold = 0.5
+        offense_threshold = 0.60
+        mixed_threshold = 0.50
 
-        print(f'\nCluster Role Averages:\n{cluster_profiles}')
+        # determine "Sweeper" archetypes
+        if attack > offense_threshold and speed > sweeper_speed_threshold:
+            return 'Physical Sweeper'
 
-        # assign the most common role to each cluster
-        cluster_names = {}
-        for cluster_id_, row in cluster_profiles.iterrows():
-            dominant_role_col = row.idxmax()
-            cluster_names[cluster_id_] = dominant_role_col.replace('role_', '').replace('_', ' ')
+        if special_attack > offense_threshold and speed > sweeper_speed_threshold:
+            return 'Special Sweeper'
 
-        # map cluster ID to name
-        self.df_encoded['cluster_name'] = self.df_encoded['cluster'].map(cluster_names)
+        # determine "Attacker" archetypes (still good attacking Pokémon, but not fast enough to be a sweeper)
+        if attack > offense_threshold:
+            return 'Physical Attacker'
 
-    # def name_clusters(self) -> None:
-    #     """
-    #     Gives names to each cluster group based on the average stats and roles of the Pokémon.
-    #     """
-    #     # get average stats and role composition per cluster
-    #     stat_columns = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed']
-    #     role_columns = [col for col in self.df_encoded.columns if col.startswith('role_')]
-    #     move_columns = ['status', 'physical', 'special']
-    #
-    #     # combine the numeric columns
-    #     profile_columns = stat_columns + role_columns + move_columns
-    #     cluster_profiles = self.df_encoded.groupby('cluster')[profile_columns].mean()
-    #
-    #     print(f'\nCluster Profiles\n{cluster_profiles}')
-    #
-    #     # assign cluster names
-    #     cluster_names = {
-    #         0: "Physical Sweepers",
-    #         1: "Bulky Walls",
-    #         2: "Special Sweepers",
-    #         3: "Utility/Support",
-    #         4: "Mixed Attackers",
-    #         5: "Balanced All-Rounders"
-    #     }
-    #
-    #     # add labels to the dataframe
-    #     self.df_encoded['cluster_name'] = self.df_encoded['cluster'].map(cluster_names)
+        if special_attack > offense_threshold:
+            return 'Special Attacker'
 
-    def override_cluster(self, row):
-        """
-        Overrides blatantly misclassified Pokémon to correct mistakes. This is done by looking at the Bast Stat Total
-        (BST) and the attacking stats of the Pokémon.
-        """
-        if row['bst'] < 300 and row['status'] == 1 and row['attack'] < 40 and row['special-attack'] < 40:
+        if attack > mixed_threshold and special_attack > mixed_threshold:
+            return 'Mixed Attacker'
+
+        # determine "Wall" archetype
+        if defense > wall_threshold and special_defense < 0.2:
+            return 'Physical Wall'
+
+        if special_defense > wall_threshold and defense < 0.2:
+            return 'Special Wall'
+
+        if defense > wall_threshold and special_defense > wall_threshold:
+            return 'Bulky Wall'
+
+        # determine if Utility/Support
+        if support_score > 0.5:
             return 'Utility/Support'
 
-        return row['cluster_name']
+        # default edge case
+        return 'Versatile'
+
+    def visualize(self) -> None:
+        inertias = []
+        k_range = range(1, 20)
+
+        for k in k_range:
+            model = KMeans(n_clusters=k, random_state=42)
+            model.fit(tb.df_encoded.drop(columns=['name']))
+            inertias.append(model.inertia_)
+
+        plt.plot(k_range, inertias, marker='o')
+        plt.xlabel('Number of Clusters (k)')
+        plt.ylabel('Inertia (Distortion)')
+        plt.title('Elbow Method for Optimal k')
+        plt.show()
 
 
 if __name__ == '__main__':
@@ -174,26 +188,16 @@ if __name__ == '__main__':
     tb.create_df()
     tb.encode_and_normalize()
     tb.clustering()
-    tb.name_clusters()
 
-    tb.df_encoded['cluster_name_corrected'] = tb.df_encoded.apply(tb.override_cluster, axis=1)
+    numeric_columns = tb.df_encoded.select_dtypes(include='number').columns
+    cluster_profiles = tb.df_encoded[numeric_columns].groupby(tb.df_encoded['cluster']).mean()
+    print(f'\n--- Cluster profiles ---\n{cluster_profiles}')
 
-    # for cluster_id in sorted(tb.df_encoded['cluster'].unique()):
-    #     subset = tb.df_encoded[tb.df_encoded['cluster'] == cluster_id]
-    #     label_counts = subset['cluster_name_corrected'].value_counts()
-    #     dominant_label = label_counts.idxmax()
-    #     names = subset['name'].tolist()
-    #     print(f'Cluster {cluster_id} ({dominant_label}): {names}\n')
+    # assign names to the clusters
+    cluster_profiles['cluster_name'] = cluster_profiles.apply(tb.name_clusters, axis=1)
 
-    for cluster_id in sorted(tb.df_encoded['cluster'].unique()):
-        subset = tb.df_encoded[tb.df_encoded['cluster'] == cluster_id]
-        original_label = tb.df_encoded[tb.df_encoded['cluster'] == cluster_id]['cluster_name'].iloc[0]
-        corrected_names = subset[subset['cluster_name'] != subset['cluster_name_corrected']]['name'].tolist()
-        all_names = subset['name'].tolist()
+    cluster_name_map = cluster_profiles['cluster_name'].to_dict()
+    tb.df_encoded['cluster_name'] = tb.df_encoded['cluster'].map(cluster_name_map)
 
-        print(f'Cluster {cluster_id} ({original_label}):')
-        print(f'  Pokémon: {all_names}')
-        if corrected_names:
-            print(f'  Manually overridden to another label: {corrected_names}')
-        print()
-
+    for name, group in tb.df_encoded.groupby('cluster_name'):
+        print(f'{name}: {group["name"].tolist()}\n')
