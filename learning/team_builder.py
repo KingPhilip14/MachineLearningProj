@@ -123,6 +123,7 @@ class TeamBuilder:
         Assigns cluster names using by analyzing the mean of the stats of the Pokémon in a cluster and its role.
         """
         # get the stats from the cluster
+        hp = row['hp']
         attack = row['attack']
         defense = row['defense']
         special_attack = row['special-attack']
@@ -131,10 +132,12 @@ class TeamBuilder:
 
         # determine thresholds to use for labeling
         support_score = row.get('role_Utility/Support', 0)
-        wall_threshold = 0.70
+        hp_threshold = 0.5
+        wall_threshold = 0.60
         sweeper_speed_threshold = 0.50
-        offense_threshold = 0.55
-        mixed_threshold = 0.45
+        offense_threshold = 0.60
+        mixed_threshold = 0.40
+        speed_threshold = 0.50
 
         # determine "Sweeper" archetypes
         if attack > offense_threshold and speed > sweeper_speed_threshold:
@@ -163,8 +166,16 @@ class TeamBuilder:
         if defense > wall_threshold and special_defense > wall_threshold:
             return 'Bulky Wall'
 
+        # determine if Bulky based on HP without high defenses
+        if hp > hp_threshold:
+            return 'Bulky'
+
+        # determine if speedy without much offense
+        if speed > speed_threshold:
+            return 'Speedster'
+
         # determine if Utility/Support
-        if support_score > 0.5:
+        if support_score > 0.35:
             return 'Utility/Support'
 
         # default edge case
