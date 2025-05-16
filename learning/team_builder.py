@@ -434,29 +434,3 @@ class TeamBuilder:
         print(f'\nTeam Synergy Notes:\n{team_comments}')
 
         return team_details
-
-
-if __name__ == '__main__':
-    preferences: dict[str, bool] = {
-        'more_offensive': False,
-        'more_defensive': False,
-        'more_balanced': True
-    }
-
-    tb: TeamBuilder = TeamBuilder(False, False,
-                                  '../data/pokemon_data/gen_3_data.json', preferences)
-    tb.create_df()
-    tb.encode_and_normalize()
-    tb.clustering()
-    tb.categorize()
-
-    built_team_result: tuple[list[str], DataFrame, list[list[str]]] = tb.build_team()
-
-    team_details: list[str] = built_team_result[0]
-    team_df: DataFrame = built_team_result[1]
-    team_types: list[list[str]] = built_team_result[2]
-
-    team_comments: str = tb.get_team_synergy_desc(team_df, team_types)
-
-    print(f'\n----- Generated Team -----\n\n' + '\n\n'.join(team_details))
-    print(f'\nTeam Synergy Notes:\n{team_comments}')
