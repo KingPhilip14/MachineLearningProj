@@ -91,3 +91,5 @@ future with the following goals:
 - Include Pokémon that may have been excluded
   - Pokémon with forms (Rotom, Giratina, Palafin, etc.) were excluded due to difficulties reading in the 
   data during ingestion
+- Saving functionality to save any teams the user enjoys and would like to revisit. This would be saved to 
+  the local device
