@@ -7,17 +7,12 @@ from utils import input_generation, ask_if_using_legends, ask_if_only_using_babi
 from learning.team_builder import TeamBuilder
 
 if __name__ == '__main__':
-    utils.clear_screen()
+    # utils.clear_screen()
 
     # ask for and collect data using API calls
     print('Welcome to the ML Pokémon Team Generator!\n')
     filename, pokedex_ids = input_generation()
 
-    collect_data(filename, pokedex_ids)
-
-    clean_and_update_data_files()
-
-    print('\n\nAll data files have been cleaned/updated.')
     input('Press "Enter" to continue > ')
 
     utils.clear_screen()

@@ -45,7 +45,15 @@ class TeamBuilder:
 
         # if using baby Pokémon, filter the data to those only and return that data
         if self.using_babies:
+            # Some Pokémon are banned from the Little Cup format, so they will be excluded
+            banned_list: list[str] = ['Scyther', 'Sneasel', 'Yanma', 'Tangela', 'Swirlix', 'Gligar', 'Meditite',
+                                      'Murkrow', 'Misdreavus', 'Drifloon', 'Porygon', 'Cutiefly', 'Gothita']
+
             for name, info in self.data.items():
+                # Exclude banned Pokémon
+                if name in banned_list:
+                    continue
+
                 if info['evo_weight'] == 0.0:
                     temp.update({name: info})
 
@@ -397,13 +405,13 @@ class TeamBuilder:
         # look at stat synergy
         average_stats = team_df[['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed']].mean()
 
-        if average_stats['speed'] > 0.5:
+        if average_stats['speed'] > 0.35:
             comments.append('This team has many fast Pokémon. Use that speed to your advantage as you move first.')
-        elif average_stats['defense'] > 0.5 and average_stats['special-defense'] > 0.5:
+        elif average_stats['defense'] > 0.35 and average_stats['special-defense'] > 0.35:
             comments.append(
                 'Playing defensively with this team is how you\'ll find success. Use your defenses to control '
                 'the pace of the match!')
-        elif average_stats['attack'] + average_stats['special-attack'] > 1.0:
+        elif average_stats['attack'] + average_stats['special-attack'] > .50:
             comments.append(
                 'The offensive pressure from this team will be expected. End the match quickly and watch for '
                 'your lack of defenses.')

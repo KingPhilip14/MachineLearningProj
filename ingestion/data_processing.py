@@ -174,6 +174,8 @@ def clean_and_update_data_files() -> None:
         add_bst(filename)
         add_type_matchups(filename)
 
+    print('\n\nAll data files have been cleaned/updated.')
+
 
 def add_type_matchups(filename: str) -> None:
     data_path: str = os.path.join(os.getcwd(), 'data', 'pokemon_data')

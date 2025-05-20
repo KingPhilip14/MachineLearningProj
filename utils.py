@@ -87,8 +87,8 @@ def ask_if_using_legends() -> bool:
 
 
 def ask_if_only_using_babies() -> bool:
-    user_input: str = input('Would you like to only use baby Pokemon in your team composition? '
-                            '(Legendaries will not be used)\n(y/n) > ')
+    user_input: str = input('Would you like to generate a team for the Little Cup format '
+                            '(only unevolved Pokémon are used; legendaries will not be used)\n(y/n) > ')
 
     return user_input.lower() in ['y', 'yes']
 
