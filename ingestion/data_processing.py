@@ -31,7 +31,7 @@ def cleaned_data(filename: str) -> bool:
         print(f'Removed "{name}" because its data was incomplete.')
 
     if modified:
-        save_json_file(data, filename, os.path.exists(file_path))
+        save_json_file(data, filename)
         return modified
 
     print(f'No malformed/incomplete data was found in {filename}')
@@ -116,7 +116,7 @@ def define_pokemon_role(filename: str) -> None:
 
             data[pokemon_name].update({'role': role})
 
-    save_json_file(data, filename, os.path.exists(file_path))
+    save_json_file(data, filename)
 
     print(f'Pokemon roles have been saved to {filename}')
 
@@ -150,7 +150,7 @@ def add_bst(filename: str) -> None:
 
             data[pokemon_name].update({'bst': bst})
 
-    save_json_file(data, filename, os.path.exists(file_path))
+    save_json_file(data, filename)
 
     print(f'Base stat totals have been saved to {filename}')
 
@@ -196,7 +196,7 @@ def add_type_matchups(filename: str) -> None:
             data[pokemon_name].update({'weaknesses': weaknesses})
             data[pokemon_name].update({'resistances': resistances})
 
-    save_json_file(data, filename, os.path.exists(file_path))
+    save_json_file(data, filename)
 
     print(f'Type effectiveness and weaknesses have been added to {filename}')
 

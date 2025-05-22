@@ -2,6 +2,38 @@
 import json
 import os
 
+from config import POKEMON_DATA_DIR
+
+
+def gen_roman_converter(filename: str) -> str:
+    """
+    Takes the filename of the generation to use converts it to a string with roman numeral representation. If
+    "everything" was selected, return an empty string.
+    :param filename:
+    :return:
+    """
+    if filename.__contains__('everything'):
+        return ''
+
+    gen_num: int = int(filename.split('_')[1])
+
+    roman_map: dict[int, str] = {1: 'i', 2: 'ii', 3: 'iii', 4: 'iv', 5: 'v', 6: 'vi', 7: 'vii', 8: 'viii', 9: 'ix',
+                                 10: 'x'}
+
+    return f'generation-{roman_map[gen_num]}'
+
+
+def roman_to_int(roman: str) -> int:
+    """
+    Given a roman numeral, it is converted to a standard integer. If the given roman numeral is not in the dictionary,
+    -1 is returned.
+    :param roman:
+    """
+    roman_map: dict[str, int] = {'i': 1, 'ii': 2, 'iii': 3, 'iv': 4, 'v': 5, 'vi': 6, 'vii': 7, 'viii': 8, 'ix': 9,
+                                 'x': 10}
+
+    return roman_map.get(roman, -1)
+
 
 def input_generation() -> tuple[str, list[int]]:
     # this is a dict that maps a string representation of a generation to the int(s) used for the API for Pokédex calls
@@ -52,17 +84,17 @@ def make_menu(options: dict[str, list[int]]) -> str:
     return output
 
 
-def save_json_file(data: dict[str, dict], filename: str, exists: bool) -> None:
+def save_json_file(data: dict[str, dict], filename: str) -> None:
     """
     Uses the given dictionary to save the data in a JSON file.
     :param data:
     :param filename:
     """
-    data_path: str = os.path.join(os.getcwd(), 'data', 'pokemon_data')
+    filename = filename + '.json'
 
-    filename = filename + '.json' if not exists else filename
+    exists: bool = pokemon_data_file_exists(filename)
 
-    file_path: str = os.path.join(data_path, filename)
+    file_path: str = os.path.join(POKEMON_DATA_DIR, filename)
 
     with open(file_path, 'w') as file:
         json.dump(data, file, indent=4)
@@ -71,11 +103,8 @@ def save_json_file(data: dict[str, dict], filename: str, exists: bool) -> None:
             print(f'Replaced data in file {filename}')
 
 
-def file_exists(filename: str) -> bool:
-    data_path: str = os.path.join(os.getcwd(), 'data', 'pokemon_data')
-    file_path: str = os.path.join(data_path, filename + '.json')
-
-    print(f'Filepath: "{file_path}"')
+def pokemon_data_file_exists(filename: str) -> bool:
+    file_path: str = os.path.join(POKEMON_DATA_DIR, filename + '.json')
 
     return os.path.exists(file_path)
 

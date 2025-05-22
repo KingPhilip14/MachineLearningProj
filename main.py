@@ -1,15 +1,12 @@
 import os
 
 import utils
-from ingestion.api_functions import collect_data
-from ingestion.data_processing import clean_and_update_data_files
 from utils import input_generation, ask_if_using_legends, ask_if_only_using_babies, ask_for_team_preferences
 from learning.team_builder import TeamBuilder
 
 if __name__ == '__main__':
     # utils.clear_screen()
 
-    # ask for and collect data using API calls
     print('Welcome to the ML Pokémon Team Generator!\n')
     filename, pokedex_ids = input_generation()
 

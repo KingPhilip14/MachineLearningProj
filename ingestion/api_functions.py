@@ -1,264 +1,358 @@
 #%%
-import os
-
+import aiohttp
+import asyncio
+import async_timeout
 import requests
 import time
 
 from tqdm import tqdm
-from utils import file_exists, save_json_file
+from utils import pokemon_data_file_exists, save_json_file, roman_to_int
+from config import PAUSE_TIME
+from typing import List, Dict
 
-base_url: str = 'https://pokeapi.co/api/v2/'
 
+class ApiFunctions:
+    def __init__(self, filename: str, pokedex_ids:list[int]):
+        self.base_url: str = 'https://pokeapi.co/api/v2/'
+        self.filename: str = filename
+        self.pokedex_ids: list[int] = pokedex_ids
+        self.pokedex_entries: list[str] = []
+        self.generation: int = int(filename.split('_')[1])
 
-def get_generation_pokedex(pokedex_ids: list[int]) -> dict[str, str]:
-    """
-    Using the Pokédex endpoint and the list of Pokédex IDs given, a new dictionary is created combining the info of
-    all Pokémon found. The first step in collecting data.
-    :param pokedex_ids:
-    :return:
-    """
-    url: str = base_url + 'pokedex/'
+    def get_generation_pokedex(self, pokedex_ids: list[int]) -> dict[str, str]:
+        """
+        Using the Pokédex endpoint and the list of Pokédex IDs given, a new dictionary is created combining the info of
+        all Pokémon found. The first step in collecting data.
+        :param pokedex_ids:
+        :return:
+        """
+        url: str = self.base_url + 'pokedex/'
 
-    pokedexes: list[dict] = list()
-    collection: dict[str, str] = dict()
+        pokedexes: list[dict] = list()
+        collection: dict[str, str] = dict()
 
-    print('Collecting Pokédex info for the selected generation...')
+        print('Collecting Pokédex info for the selected generation...')
 
-    # collect the JSON for every Pokédex from the API
-    for index, pokedex_id in enumerate(pokedex_ids):
-        data: dict = requests.get(url + f'{pokedex_id}/').json()
-        pokedexes.append(data)
+        # collect the JSON for every Pokédex from the API
+        for index, pokedex_id in enumerate(pokedex_ids):
+            data: dict = requests.get(url + f'{pokedex_id}/').json()
+            pokedexes.append(data)
 
-    for pokedex in tqdm(pokedexes):
-        # find each Pokémon's species name
-        for entry in pokedex['pokemon_entries']:
-            species_name: str = entry['pokemon_species']['name']
+        for pokedex in tqdm(pokedexes):
+            # find each Pokémon's species name
+            for entry in pokedex['pokemon_entries']:
+                species_name: str = entry['pokemon_species']['name']
 
-            # if the species name is not in the output dict, add it with it's "pokemon-species/" URL
-            if species_name not in collection:
+                # if the species name is not in the output dict, add it with it's "pokemon-species/" URL
+                # if species_name not in collection:
                 collection.update({
                     species_name: entry['pokemon_species']['url']
                 })
 
-    print('Pokédex info collected.')
+        # find all significant forms
 
-    return collection
+        # remake the dict with each form being its own entry
 
+        print('Pokédex info collected.')
 
-def get_species_data(pokemon_species: dict[str, str]) -> dict[str, dict]:
-    """
-    Given the data of a Pokémon species, extra information is gathered, such as if the Pokémon is fully evolved
-    and if it's a legendary or mythical. The third step in the data collection.
-    :param pokemon_species:
-    :return:
-    """
-    print('\nAdding "is_fully_evolved" to all collected Pokémon...\n')
+        return collection
 
-    result: dict[str, dict] = dict()
+    def add_extra_info_to_data(self, pokemon_data: dict[str, dict]) -> dict[str, dict]:
+        """
+        Adds the additional information for a Pokémon needed and returns a dict with the info. The third step
+        in data collection.
+        :param pokemon_data:
+        :return:
+        """
+        print('\nGetting extra info for all pokemon in Pokédex(s)\n')
 
-    for pokemon_name, species_url in tqdm(pokemon_species.items()):
-        # will be used to add weight to how desirable a Pokémon is; increases by 0.5 for criteria met
-        evo_weight: float = 0.0
+        more_info: dict[str, dict] = dict()
 
-        species_json: dict = requests.get(species_url).json()
+        for species_name, species_data in tqdm(pokemon_data.items()):
+            more_info.update(self.__get_additional_info(species_name, species_data['varieties']))
 
-        is_legend_or_mythical: bool = species_json['is_legendary'] or species_json['is_mythical']
+        return more_info
 
-        # get the evolution chain from the URL
-        chain_url: str = requests.get(species_url).json()['evolution_chain']['url']
-        evolution_chain: dict | None = requests.get(chain_url).json()['chain']
+    def get_species_data(self, pokemon_species: dict[str, str]) -> dict[str, dict]:
+        """
+        Given the data of a Pokémon species, extra information is gathered, such as if the Pokémon is fully evolved
+        and if it's a legendary or mythical. The second step in the data collection.
+        :param pokemon_species:
+        :return:
+        """
+        print('\nAdding "is_fully_evolved" to all collected Pokémon...\n')
 
-        if evolution_chain["species"]["name"] == pokemon_name:
-            fully_evolved = len(evolution_chain["evolves_to"]) == 0
+        result: dict[str, dict] = dict()
 
-            # If it has no further evolutions, it's fully evolved
-            result.update(
-                {
-                    pokemon_name: {
-                        'is_fully_evolved': fully_evolved,
-                        'evo_weight': 1.0 if fully_evolved else evo_weight,
-                        'is_legend_or_mythical': is_legend_or_mythical
-                    }
-                })
+        for pokemon_name, species_url in tqdm(pokemon_species.items()):
+            # will be used to add weight to how desirable a Pokémon is; increases by 0.5 for criteria met
+            evo_weight: float = 0.0
 
-            # print(f'{pokemon_name} added to result')
-            continue
+            species_json: dict = requests.get(species_url).json()
 
-        for evolution in evolution_chain["evolves_to"]:
-            evo_chain_result: tuple[bool, float] | None = __find_pokemon_in_chain(pokemon_name, evolution, evo_weight)
+            is_legend_or_mythical: bool = species_json['is_legendary'] or species_json['is_mythical']
 
-            if evo_chain_result is not None:
+            # get the evolution chain from the URL
+            chain_url: str = species_json['evolution_chain']['url']
+            evolution_chain: dict | None = requests.get(chain_url).json()['chain']
+
+            # a list containing the names for different forms of the species
+            varieties: list[str] = [variety['pokemon']['name'] for variety in species_json['varieties']]
+
+            if evolution_chain["species"]["name"] == pokemon_name:
+                fully_evolved = len(evolution_chain["evolves_to"]) == 0
+
+                # If it has no further evolutions, it's fully evolved
                 result.update(
                     {
                         pokemon_name: {
-                            'is_fully_evolved': evo_chain_result[0],
-                            'evo_weight': evo_chain_result[1],
-                            'is_legend_or_mythical': is_legend_or_mythical
+                            'is_fully_evolved': fully_evolved,
+                            'evo_weight': 1.0 if fully_evolved else evo_weight,
+                            'is_legend_or_mythical': is_legend_or_mythical,
+                            'varieties': varieties
                         }
                     })
+
                 # print(f'{pokemon_name} added to result')
+                continue
 
-    return result
+            for evolution in evolution_chain["evolves_to"]:
+                evo_chain_result: tuple[bool, float] | None = self.__find_pokemon_in_chain(pokemon_name, evolution, evo_weight)
+
+                if evo_chain_result is not None:
+                    result.update(
+                        {
+                            pokemon_name: {
+                                'is_fully_evolved': evo_chain_result[0],
+                                'evo_weight': evo_chain_result[1],
+                                'is_legend_or_mythical': is_legend_or_mythical,
+                                'varieties': varieties
+                            }
+                        })
+                    # print(f'{pokemon_name} added to result')
+
+        return result
+
+    def __find_pokemon_in_chain(self, pokemon_name: str, chain: dict, evo_weight: float) -> tuple[bool, float] | None:
+        """
+        Moves up the chained JSON objects to find the given Pokémon. Returns if that Pokémon is fully evolved or not
+        (single-stage Pokémon count as fully evolved). If a Pokémon is partially evolved, its weight will be 0.5.
+        :param pokemon_name:
+        :param chain:
+        :param evo_weight:
+        :return:
+        """
+        evo_weight += 0.5
+
+        if chain["species"]["name"] == pokemon_name:
+            # if the Pokémon can't evolve, it's fully evolved
+            fully_evolved = len(chain["evolves_to"]) == 0
+            return fully_evolved, 1.0 if fully_evolved else evo_weight
+
+        for evolution in chain["evolves_to"]:
+            # recursively climb up the chain
+            result = self.__find_pokemon_in_chain(evolution['species']['name'], evolution, evo_weight)
+            if result is not None:
+                return result
+
+        return None
+
+    def __get_move_coverage(self, moves: list[dict]) -> set:
+        coverage_collection: set = set()
+
+        for move in moves:
+            move_url: str = move['move']['url']
+            move_data: dict = requests.get(move_url).json()
+
+            result: str = move_data['type']['name'] + ' ' + move_data['damage_class']['name']
+            coverage_collection.add(result)
+
+        return coverage_collection
+
+    def __get_most_common_move_categories(self, moves: list[str]) -> list[str]:
+        categories: dict[str, int] = {
+            'physical': 0,
+            'special': 0,
+            'status': 0
+        }
+
+        for move in moves:
+            # get the category from the string (e.g., 'Dragon Special' returns 'special')
+            category: str = move.split()[1]
+
+            # increase the amount of times the category is present in the dict
+            if category in categories:
+                categories[category] += 1
+
+        maximum: int = max(categories.values())
+
+        # return the move categories that equal the maximum number of appearances
+        return [key for key, value in categories.items() if value == maximum]
+
+    def __get_additional_info(self, species_name: str, varieties: list[str]) -> dict[str, dict]:
+        output: dict[str, dict] = dict()
+        wanted_data: dict = dict()
+
+        # the default form is always the first in the list
+        default_form_name: str = varieties[0]
+
+        # every other form is used to determine their significance
+        other_forms: list[str] = varieties[1:]
+
+        # collect any significant forms
+        significant_forms: list[str] = self.get_significant_forms(species_name, default_form_name, other_forms)
+
+        for variety_form in significant_forms:
+            url: str = f'{self.base_url}/pokemon/{variety_form}/'
+
+            response = requests.get(url)
+
+            if response.status_code != 200:
+                print(f'\nCould not collect data for "{variety_form}". API response text: "{response.text}"\n')
+                continue
+
+            all_data: dict = response.json()
+
+            wanted_data.update({
+                'species': all_data['species']['name'],
+                'type_1': all_data['types'][0]['type']['name'],
+                'type_2': all_data['types'][1]['type']['name'] if len(all_data['types']) > 1 and all_data['types'][1]['type'][
+                    'name'] is not None else '',
+                'hp': all_data['stats'][0]['base_stat'],
+                'attack': all_data['stats'][1]['base_stat'],
+                'defense': all_data['stats'][2]['base_stat'],
+                'special-attack': all_data['stats'][3]['base_stat'],
+                'special-defense': all_data['stats'][4]['base_stat'],
+                'speed': all_data['stats'][5]['base_stat'],
+                'abilities': [ability_dict['ability']['name'] for ability_dict in all_data['abilities']],
+                'move_coverage': list(self.__get_move_coverage(all_data['moves'])),
+            })
+
+            # call update again to get the data already collected from the 'move_coverage' key
+            wanted_data.update({
+                'highest_move_categories': self.__get_most_common_move_categories(wanted_data['move_coverage'])
+            })
+
+            output.update({variety_form: wanted_data})
+
+        return output
+
+    def get_significant_forms(self, species_name: str, default_form_name: str, other_forms: list[str]) -> list[str]:
+        """
+        By comparing the default form's stats with the comparable form's stats, it is determined if a variety form is
+        significant for the data. A significant form is a form that changes a Pokémon's stats compared to the default form.
+        :param species_name:
+        :param default_form_name:
+        :param other_forms:
+        """
+        default_form_data: dict = requests.get(f'{self.base_url}/pokemon/{default_form_name}/').json()
+
+        # start the list of significant forms with the default form name
+        significant_forms: list[str] = [default_form_name]
+
+        # a list of Pokémon that should be included no matter what
+        exceptions: list[str] = ['mimikyu-disguised', 'basculin']
+
+        for form in other_forms:
+            form_data: dict = requests.get(f'{self.base_url}/pokemon/{form}/').json()
+
+            # find the form's generation through a series of endpoint calls
+            version_group_url: str = requests.get(f'{self.base_url}/pokemon-form/{form}/').json()['version_group']['url']
+            form_generation: str = requests.get(version_group_url).json()['generation']['name']
+
+            form_generation_num: int = roman_to_int(form_generation.split('-')[-1])
+
+            # if the form of the Pokémon comes after the generation currently in use, skip it
+            # (e.g., Hisuian Zorua (gen 8) cannot be used in Unova (gen 5))
+            if self.generation < form_generation_num:
+                print(f'Cannot add {form} because it is not in generation {self.generation}')
+                continue
+
+            # check if the stats, type(s), and abilities match
+            stats_equal: bool = default_form_data['stats'] == form_data['stats']
+            typing_equals: bool = default_form_data['types'] == form_data['types']
+            abilities_equal: bool = default_form_data['abilities'] == form_data['abilities']
 
 
-def __find_pokemon_in_chain(pokemon_name: str, chain: dict, evo_weight: float) -> tuple[bool, float] | None:
-    """
-    Moves up the chained JSON objects to find the given Pokémon. Returns if that Pokémon is fully evolved or not 
-    (single-stage Pokémon count as fully evolved). If a Pokémon is partially evolved, its weight will be 0.5.
-    :param pokemon_name: 
-    :param chain: 
-    :param evo_weight:
-    :return: 
-    """
-    evo_weight += 0.5
+            # if the conditions are not met to be a significant form, skip it
+            if form not in exceptions and stats_equal and typing_equals and abilities_equal:
+                print(f'Cannot add the "{form}" form because it does not meet the significance criteria.\n')
+                continue
 
-    if chain["species"]["name"] == pokemon_name:
-        # if the Pokémon can't evolve, it's fully evolved
-        fully_evolved = len(chain["evolves_to"]) == 0
-        return fully_evolved, 1.0 if fully_evolved else evo_weight
+            # only add the significant forms
+            significant_forms.append(form)
 
-    for evolution in chain["evolves_to"]:
-        # recursively climb up the chain
-        result = __find_pokemon_in_chain(evolution['species']['name'], evolution, evo_weight)
-        if result is not None:
-            return result
+        # return the list if it isn't empty; if no alternate forms are significant, return the species name
+        return significant_forms if len(significant_forms) > 0 else [species_name]
 
-    return None
+    def combine_data(self, species_data: dict[str, dict], pokemon_data: dict[str, dict]) -> dict[str, dict]:
+        """
+        Adds the data from more_info to the given add_to dict. The final step in data collection,
+        :param species_data:
+        :param pokemon_data:
+        :return:
+        """
+        print('Combining extra info to species data\n\n')
+        output: dict[str, dict] = dict()
+        species_names: list[str] = list(species_data.keys())
 
+        # add the species data to the individual Pokémon's data
+        for pokemon_name, data in pokemon_data.items():
+            pokemon_species_name: str = data['species']
 
-def __get_move_coverage(moves: list[dict]) -> set:
-    coverage_collection: set = set()
+            # create a new entry for the output by combining the species data with the individual Pokémon's data
+            output.update({pokemon_name: data | species_data[pokemon_species_name]})
 
-    for move in moves:
-        move_url: str = move['move']['url']
-        move_data: dict = requests.get(move_url).json()
+        # for species_name in species_data.keys():
+        #     if more_info[species_name] is None:
+        #         species_data.pop(species_name)
+        #         print(f'Removed {species_name} from data since the additional gathered data cannot be accessed.')
+        #         continue
+        #
+        #     species_data[species_name].update(more_info[species_name])
 
-        result: str = move_data['type']['name'] + ' ' + move_data['damage_class']['name']
-        coverage_collection.add(result)
+        return output
 
-    return coverage_collection
+    def collect_data(self) -> None:
+        """
+        Using the filename and given Pokédex IDs, it is first determined if the given file exists. If not, methods are
+        called to start the data collection. The program will pause for a few seconds after each step to not
+        receive a timeout by the API.
+        :return:
+        """
+        if pokemon_data_file_exists(self.filename):
+            print(f'The file "{self.filename}" already exists containing the Pokédex data requested. '
+                  f'A new one will not be created.')
+            return
 
+        collected_pokemon: dict[str, str] = self.get_generation_pokedex(self.pokedex_ids)
 
-def __get_most_common_move_categories(moves: list[str]) -> list[str]:
-    categories: dict[str, int] = {
-        'physical': 0,
-        'special': 0,
-        'status': 0
-    }
+        print(f'\nPausing for {PAUSE_TIME} seconds to not time out during data collection. Please wait...')
+        time.sleep(PAUSE_TIME)
 
-    for move in moves:
-        # get the category from the string (e.g., 'Dragon Special' returns 'special')
-        category: str = move.split()[1]
+        # collect the species data
+        species_data: dict[str, dict] = self.get_species_data(collected_pokemon)
 
-        # increase the amount of times the category is present in the dict
-        if category in categories:
-            categories[category] += 1
+        print(f'\nPausing again for {PAUSE_TIME} seconds to not time out during data collection. Please wait...')
+        time.sleep(PAUSE_TIME)
 
-    maximum: int = max(categories.values())
+        print(f'Species data below:\n\n{species_data}\n\n')
+        input('Press Enter >')
 
-    # return the move categories that equal the maximum amount of appearances
-    return [key for key, value in categories.items() if value == maximum]
+        # get the extra info for each Pokémon species
+        extra_info: dict[str, dict] = self.add_extra_info_to_data(species_data)
 
+        print(f'Extra info:\n{extra_info}\n\n')
+        input('Press Enter >')
 
-def __get_additional_info(pokemon_name: str) -> dict[str, dict]:
-    output: dict[str, dict] = dict()
-    wanted_data: dict = dict()
+        output: dict[str, dict] = self.combine_data(species_data, extra_info)
 
-    url: str = f'{base_url}/pokemon/{pokemon_name}/'
-
-    response = requests.get(url)
-
-    if response.status_code != 200:
-        print(f'\nCould not collect data for "{pokemon_name}". API response text: "{response.text}"\n')
-        return {pokemon_name: None}
-
-    all_data: dict = response.json()
-
-    wanted_data.update({
-        'type_1': all_data['types'][0]['type']['name'],
-        'type_2': all_data['types'][1]['type']['name'] if len(all_data['types']) > 1 and all_data['types'][1]['type'][
-            'name'] is not None else '',
-        'hp': all_data['stats'][0]['base_stat'],
-        'attack': all_data['stats'][1]['base_stat'],
-        'defense': all_data['stats'][2]['base_stat'],
-        'special-attack': all_data['stats'][3]['base_stat'],
-        'special-defense': all_data['stats'][4]['base_stat'],
-        'speed': all_data['stats'][5]['base_stat'],
-        'abilities': [ability_dict['ability']['name'] for ability_dict in all_data['abilities']],
-        'move_coverage': list(__get_move_coverage(all_data['moves'])),
-    })
-
-    # call update again to get the data already collected from the 'move_coverage' key
-    wanted_data.update({
-        'highest_move_categories': __get_most_common_move_categories(wanted_data['move_coverage'])
-    })
-
-    output.update({pokemon_name: wanted_data})
-
-    return output
+        save_json_file(output, self.filename)
 
 
-def add_extra_info_to_data(pokemon_data: dict[str, dict]) -> dict[str, dict]:
-    """
-    Adds the additional information for a Pokémon needed and returns a dict with the info. The second step
-    in data collection.
-    :param pokemon_data:
-    :return:
-    """
-    print('\nGetting extra info for all pokemon in Pokédex(s)\n')
-
-    more_info: dict[str, dict] = dict()
-
-    for pokemon_name in tqdm(pokemon_data.keys()):
-        more_info.update(__get_additional_info(pokemon_name))
-
-    return more_info
-
-
-def combine_data(add_to: dict[str, dict], more_info: dict[str, dict]) -> None:
-    """
-    Adds the data from more_info to the given add_to dict. The final step in data collection,
-    :param add_to:
-    :param more_info:
-    :return:
-    """
-    print('Combining extra info to fully evolved data\n\n')
-    for pokemon_name in add_to.keys():
-        if more_info[pokemon_name] is None:
-            add_to.pop(pokemon_name)
-            print(f'Removed {pokemon_name} from data since the additional gathered data cannot be accessed.')
-            continue
-
-        add_to[pokemon_name].update(more_info[pokemon_name])
-
-
-def collect_data(filename: str, pokedex_ids: list[int]) -> None:
-    """
-    Using the filename and given Pokédex IDs, it is first determined if the given file exists. If not, methods are
-    called to start the data collection. The program will pause for a few seconds after each step to not
-    receive a timeout by the API.
-    :param filename:
-    :param pokedex_ids:
-    :return:
-    """
-    if file_exists(filename):
-        print(f'The file "{filename}" already exists containing the Pokédex data requested. '
-              f'A new one will not be created.')
-        return
-
-    pause_time: int = 10
-    pokemon: dict[str, str] = get_generation_pokedex(pokedex_ids)
-
-    print(f'\nPausing for {pause_time} seconds to not time out during data collection. Please wait...')
-    time.sleep(pause_time)
-
-    output: dict[str, dict] = get_species_data(pokemon)
-
-    print(f'\nPausing again for {pause_time} seconds to not time out during data collection. Please wait...')
-    time.sleep(pause_time)
-
-    extra_info: dict[str, dict] = add_extra_info_to_data(output)
-
-    combine_data(output, extra_info)
-
-    save_json_file(output, filename, False)
+if __name__ == '__main__':
+    functions: ApiFunctions = ApiFunctions('gen_7_data', [21])
+    # forms: list[str] = functions.get_significant_forms('basculin', 'basculin-red-striped',
+    #                                 ['basculin-blue-striped', 'basculin-white-striped'])
+    # print(f'Mimikyu forms: {forms}\n')
+    functions.collect_data()
