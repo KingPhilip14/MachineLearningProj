@@ -3,3 +3,5 @@ scikit-learn~=1.7.0rc1
 matplotlib~=3.10.3
 pandas~=2.2.3
 requests~=2.32.3
+aiohttp~=3.11.18
+async-timeout~=5.0.1
