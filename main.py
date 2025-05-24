@@ -8,7 +8,7 @@ if __name__ == '__main__':
     # utils.clear_screen()
 
     print('Welcome to the ML Pokémon Team Generator!\n')
-    filename, pokedex_ids = input_generation()
+    filename, pokedex_ids = input_generation('What generation of Pokemon would you like to generate a team for?')
 
     input('Press "Enter" to continue > ')
 

@@ -16,7 +16,7 @@ from pandas import DataFrame
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 
-from ingestion.data_processing import calculate_type_effectiveness
+from ingestion.data_processing import __calculate_type_effectiveness
 from utils import get_role_description
 
 
@@ -239,7 +239,7 @@ class TeamBuilder:
         weaknesses: Counter = Counter()
 
         for types in team_types:
-            effectiveness = calculate_type_effectiveness(types[0], types[1] if len(types) > 1 else '')
+            effectiveness = __calculate_type_effectiveness(types[0], types[1] if len(types) > 1 else '')
 
             for type_, multiplier in effectiveness.items():
                 if multiplier > 1.0:
@@ -388,7 +388,7 @@ class TeamBuilder:
         all_weaknesses: Counter = Counter()
 
         for types in team_types:
-            effectiveness = calculate_type_effectiveness(types[0], types[1] if len(types) > 1 else '')
+            effectiveness = __calculate_type_effectiveness(types[0], types[1] if len(types) > 1 else '')
             for t, mult in effectiveness.items():
                 if mult > 1.0:
                     all_weaknesses[t] += 1

@@ -2,41 +2,53 @@ import json
 import os
 
 from typing import Any
+
+from config import POKEMON_DATA_DIR, EXTRA_DATA_DIR
 from utils import save_json_file
 
 
-def cleaned_data(filename: str) -> bool:
+def clean_and_update_pokemon_data_files(filename) -> None:
+    """
+    Calls the helper methods to add extra data as necessary.
+    :return:
+    """
+    __define_pokemon_role(filename)
+    __add_type_matchups(filename)
+
+    print('\nAll data files have been cleaned/updated.')
+
+
+def __clean_data(filename: str):
     """
     Looks at every Pokémon stored in a JSON file. If the entry is missing the 'hp' key, the data is identified as
     malformed as is removed.
     :return:
     """
-    print('\n\n---------------------------------------------------------')
-    data_path: str = os.path.join(os.getcwd(), 'data', 'pokemon_data')
-    file_path: str = os.path.join(data_path, filename)
+    print('\n---------------------------------------------------------')
+    file_path: str = os.path.join(POKEMON_DATA_DIR, filename)
 
-    with open(file_path, 'r') as f:
+    with open(file_path, 'w') as f:
         data = json.load(f)
 
-    to_remove: list[str] = []
-    modified: bool = False
+        to_remove: list[str] = []
+        modified: bool = False
 
-    for pokemon_name, pokemon_data in data.items():
-        if data[pokemon_name].get('hp', None) is None:
-            modified = True
-            to_remove.append(pokemon_name)
+        for pokemon_name, pokemon_data in data.items():
+            if data[pokemon_name].get('hp', None) is None:
+                modified = True
+                to_remove.append(pokemon_name)
 
-    for name in to_remove:
-        data.pop(name)
-        print(f'Removed "{name}" because its data was incomplete.')
+        for name in to_remove:
+            data.pop(name)
+            print(f'Removed "{name}" because its data was incomplete.')
 
-    if modified:
-        save_json_file(data, filename)
-        return modified
+        if modified:
+            json.dump(data, f, indent=4)
+            return
 
-    print(f'No malformed/incomplete data was found in {filename}')
+        print(f'No malformed/incomplete data was found in {filename}\n')
 
-    return modified
+    return
 
 
 def __classify_role_by_dynamic_stats(data: dict[str, Any]) -> str:
@@ -96,12 +108,11 @@ def __classify_role_by_dynamic_stats(data: dict[str, Any]) -> str:
     return 'versatile'
 
 
-def define_pokemon_role(filename: str) -> None:
+def __define_pokemon_role(filename: str) -> None:
     """
     By calling another method to define a Pokémon's role, it's then saved in the JSON file for each Pokémon stored.
     """
-    data_path: str = os.path.join(os.getcwd(), 'data', 'pokemon_data')
-    file_path: str = os.path.join(data_path, filename)
+    file_path: str = os.path.join(POKEMON_DATA_DIR, filename)
 
     data: dict[str, dict]
 
@@ -109,24 +120,28 @@ def define_pokemon_role(filename: str) -> None:
 
     with open(file_path, 'r') as f:
         data = json.load(f)
+        f.close()
 
+    with open(file_path, 'w') as f:
         for pokemon_name, pokemon_data in data.items():
             poke_data: dict[str, Any] = data[pokemon_name]
             role: str = __classify_role_by_dynamic_stats(poke_data)
 
             data[pokemon_name].update({'role': role})
 
-    save_json_file(data, filename)
+        json.dump(data, f, indent=4)
+        f.close()
 
-    print(f'Pokemon roles have been saved to {filename}')
+    # save_json_file(data, filename)
+
+    print(f'Pokemon roles have been saved to {filename}\n')
 
 
-def add_bst(filename: str) -> None:
+def __add_bst(filename: str) -> None:
     """
     Calculates a Pokémon's base stat total (BST) by finding the sum of all stats (HP, attack, defense, etc.).
     """
-    data_path: str = os.path.join(os.getcwd(), 'data', 'pokemon_data')
-    file_path: str = os.path.join(data_path, filename)
+    file_path: str = os.path.join(POKEMON_DATA_DIR, filename)
 
     data: dict[str, dict]
 
@@ -134,7 +149,9 @@ def add_bst(filename: str) -> None:
 
     with open(file_path, 'r') as f:
         data = json.load(f)
+        f.close()
 
+    with open(file_path, 'w') as f:
         for pokemon_name, pokemon_data in data.items():
             poke_data: dict[str, Any] = data[pokemon_name]
 
@@ -150,36 +167,16 @@ def add_bst(filename: str) -> None:
 
             data[pokemon_name].update({'bst': bst})
 
-    save_json_file(data, filename)
+        json.dump(data, f, indent=4)
+        f.close()
 
-    print(f'Base stat totals have been saved to {filename}')
+    # save_json_file(data, filename)
 
-
-def clean_and_update_data_files() -> None:
-    """
-    Iterates through every file in the /data folder to clean and update the stored data.
-    :return:
-    """
-    data_path: str = os.path.join(os.getcwd(), 'data', 'pokemon_data')
-
-    for filename in os.listdir(data_path):
-        # clean data
-        print(f'Filename: {filename}')
-        modified: bool = cleaned_data(filename)
-
-        if not modified:
-            continue
-
-        define_pokemon_role(filename)
-        add_bst(filename)
-        add_type_matchups(filename)
-
-    print('\n\nAll data files have been cleaned/updated.')
+    print(f'Base stat totals have been saved to {filename}\n')
 
 
-def add_type_matchups(filename: str) -> None:
-    data_path: str = os.path.join(os.getcwd(), 'data', 'pokemon_data')
-    file_path: str = os.path.join(data_path, filename)
+def __add_type_matchups(filename: str) -> None:
+    file_path: str = os.path.join(POKEMON_DATA_DIR, filename)
 
     data: dict[str, dict]
 
@@ -187,21 +184,26 @@ def add_type_matchups(filename: str) -> None:
 
     with open(file_path, 'r') as f:
         data = json.load(f)
+        f.close()
 
+    with open(file_path, 'w') as f:
         for pokemon_name, pokemon_data in data.items():
-            matchups: dict[str, float] = calculate_type_effectiveness(pokemon_data['type_1'], pokemon_data['type_2'])
+            matchups: dict[str, float] = __calculate_type_effectiveness(pokemon_data['type_1'], pokemon_data['type_2'])
             weaknesses: dict[str, float] = {t: val for t, val in matchups.items() if val > 1.0}
             resistances: dict[str, float] = {t: val for t, val in matchups.items() if val < 1.0}
 
             data[pokemon_name].update({'weaknesses': weaknesses})
             data[pokemon_name].update({'resistances': resistances})
 
-    save_json_file(data, filename)
+        json.dump(data, f, indent=4)
+        f.close()
 
-    print(f'Type effectiveness and weaknesses have been added to {filename}')
+    # save_json_file(data, filename)
+
+    print(f'Type effectiveness and weaknesses have been added to {filename}\n')
 
 
-def calculate_type_effectiveness(primary_type: str, secondary_type: str) -> dict[str, float]:
+def __calculate_type_effectiveness(primary_type: str, secondary_type: str) -> dict[str, float]:
     """
     By using a given Pokémon's primary and potential secondary typing, a list is created to determine how many
     weaknesses the Pokémon has.
@@ -211,12 +213,12 @@ def calculate_type_effectiveness(primary_type: str, secondary_type: str) -> dict
     """
     type_chart: dict[str, dict[str, float]]
 
-    data_path: str = os.path.join(os.getcwd(), 'data', 'extra_data')
-    file_path: str = os.path.join(data_path, 'defensive_type_chart.json')
+    file_path: str = os.path.join(EXTRA_DATA_DIR, 'defensive_type_chart.json')
 
     # read in the type chart data
     with open(file_path, 'r') as f:
         type_chart = json.load(f)
+        f.close()
 
     types: dict[str, float] = {t: 1.0 for t in type_chart.keys()}
 
