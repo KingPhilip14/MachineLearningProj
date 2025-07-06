@@ -58,6 +58,18 @@ def input_generation(prompt: str) -> tuple[str, list[int]]:
     return result
 
 
+def get_generation_num(filename: str) -> int:
+    """
+    Returns the generation number from the given filename. If the filename contains "everything," -1 is returned
+    instead.
+    :param filename:
+    """
+    if filename.__contains__('everything'):
+        return -1
+
+    return int(filename.split('_')[1])
+
+
 def make_menu(options: dict[str, list[int]]) -> str:
     output: str = ''
 
