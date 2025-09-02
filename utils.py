@@ -45,7 +45,7 @@ def input_generation(prompt: str) -> tuple[str, list[int]]:
     # if the user's input is invalid, loop until it is valid
     while selected_gens is None:
         user_input = input('\nPlease enter the generation you want as you see it appear in the list (e.g., "Gen 1" or '
-                           '"Everything")\n> ')
+                           '"National")\n> ')
 
         selected_gens = GEN_TO_POKEDEX_MAP.get(user_input, None)
 
@@ -64,7 +64,7 @@ def get_generation_num(filename: str) -> int:
     instead.
     :param filename:
     """
-    if filename.__contains__('everything'):
+    if filename.__contains__('national'):
         return -1
 
     return int(filename.split('_')[1])

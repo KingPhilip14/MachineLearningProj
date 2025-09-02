@@ -3,11 +3,11 @@ import os
 
 from typing import Any
 
-from config import POKEMON_DATA_DIR, EXTRA_DATA_DIR
+from config import POKEMON_DATA_DIR, EXTRA_DATA_DIR, NAMES_TO_FILTER, WORDS_TO_FILTER
 from utils import save_json_file
 
 
-def clean_and_update_pokemon_data_files(filename) -> None:
+def update_data_file(filename) -> None:
     """
     Calls the helper methods to add extra data as necessary.
     :return:
@@ -15,7 +15,44 @@ def clean_and_update_pokemon_data_files(filename) -> None:
     __define_pokemon_role(filename)
     __add_type_matchups(filename)
 
-    print('\nAll data files have been cleaned/updated.')
+    print('\nAll data files have been updated.')
+
+
+def clean_data_files() -> None:
+    """
+    Goes through all data files and removes any entries that are insignificant (i.e., cosmetic forms).
+    """
+    file_path: str
+
+    for filename in os.listdir(POKEMON_DATA_DIR):
+        file_path = os.path.join(POKEMON_DATA_DIR, filename)
+        data: dict[str, dict]
+
+        with open(file_path, 'r') as f:
+            data = json.load(f)
+            f.close()
+
+        names_to_remove: list[str] = []
+
+        # remove any unnecessary data collected from ingestion (e.g., extra cosmetic forms)
+        for name in data.keys():
+            if name in NAMES_TO_FILTER:
+                names_to_remove.append(name)
+                continue
+
+            for word in WORDS_TO_FILTER:
+                if name.__contains__(word):
+                    names_to_remove.append(name)
+                    continue
+
+        for name in names_to_remove:
+            print(f'Removing {name} from data file {filename}')
+            data.pop(name)
+            names_to_remove.remove(name)
+
+        with open(file_path, 'w') as f:
+            json.dump(data, f, indent=4)
+            f.close()
 
 
 def __clean_data(filename: str):

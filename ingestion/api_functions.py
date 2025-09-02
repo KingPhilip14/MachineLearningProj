@@ -22,7 +22,7 @@ class ApiFunctions:
             try:
                 async with async_timeout.timeout(10):
                     async with session.get(url) as response:
-                        return await response.json()
+                        return await response.json(content_type='application/json')
             except Exception as e:
                 print(f'Failed to fetch {url}: {e}')
                 return dict()
@@ -46,7 +46,7 @@ class ApiFunctions:
 
                 # used to include all National Pokédex Pokémon without including potential duplicates
                 if species_name not in collection:
-                    collection[species_name] = entry['pokemon_species']['url']
+                    collection[species_name] = entry['pokemon_species']['url'][:-1]
 
         print('Pokémon info collected')
         return collection
@@ -62,14 +62,24 @@ class ApiFunctions:
 
         result: dict[str, dict] = dict()
 
+        # print(f'pokemon species: {pokemon_species}')
+        # input('Press Enter to continue...')
+
         async with aiohttp.ClientSession() as session:
             species_jsons: list[dict] = await asyncio.gather(*[self.fetch_json(session, url) for url in pokemon_species.values()])
 
             # map each species name with its appropriate data retrieved
             species_name_map: dict[str, dict] = dict(zip(pokemon_species.keys(), species_jsons))
 
+            # print(f'Species JSON for first: {species_jsons[0]['evolution_chain']}\n\n')
+            # input('Press Enter to continue...')
+
+            # for species in species_jsons:
+            #     print(species['evolution_chain']['url'])
+            #     input('press enter to continue...\n')
+
             # get the evolution chain URLs
-            evo_urls: list[str] = [species['evolution_chain']['url'] for species in species_jsons]
+            evo_urls: list[str] = [species['evolution_chain']['url'][:-1] for species in species_jsons]
             evo_chains: list[dict] = await asyncio.gather(*[self.fetch_json(session, url) for url in evo_urls])
 
             # map each species name to its evolution chain data
@@ -201,8 +211,7 @@ class ApiFunctions:
         :param form_name:
         :param default_form_data:
         """
-        # a list of form type names ('mega', 'gmax') and the generations they're available in
-        # form_type_gens: list[tuple[str, list[int]]] = ['mega', 'gmax']
+        form_suffixes: list[str] = ['mega', 'primal', 'gmax', 'alola', 'hisui', 'galar']
 
         valid_forms_in_gens: dict[int, list[str]] = {
             6: ['mega', 'primal'],
@@ -210,31 +219,9 @@ class ApiFunctions:
             8: ['hisui', 'galar', 'alola', 'gmax'],
             9: ['hisui', 'galar', 'alola']
         }
-        # valid_forms_in_gens: dict[str, list[int]] = {
-        #     'mega': [6, 7],
-        #     'primal': [6, 7],
-        #     'gmax': [8],
-        #     # 'alola': [7, 8, 9],
-        # }
-
-        # a list of Pokémon that should be included no matter what
-        form_exceptions: list[str] = ['mimikyu-disguised', 'basculin', 'keldeo-ordinary', 'deoxys-attack',
-                                      'deoxys-defense', 'deoxys-speed', 'gourgeist-small', 'gourgeist-large',
-                                      'gourgeist-super', 'pumpkaboo-small', 'pumpkaboo-large', 'pumpkaboo-super']
-
-        # a list of Pokémon that should be excluded due to being cosmetic changes and not being significant
-        cosmetic_form_exclusions: list[str] = ['minior-red-meteor', 'minior-orange-meteor', 'minior-yellow-meteor',
-                                               'minior-green-meteor', 'minior-blue-meteor', 'minior-indigo-meteor',
-                                               'minior-violet-meteor', 'minior-red', 'minior-orange', 'minior-yellow',
-                                               'minior-green', 'minior-blue', 'minior-indigo', 'minior-violet',
-                                               'keldeo-resolute']
 
         form_url: str = f'{self.base_url}pokemon/{form_name}/'
         form_data: dict[str, dict] = await self.fetch_json(session, form_url)
-
-        # if collecting data for everything, only filter the cosmetic forms and return immediately
-        if self.generation == -1 and form_name not in cosmetic_form_exclusions:
-            return form_data
 
         form_meta_url: str = f'{self.base_url}pokemon-form/{form_name}'
         form_meta_data: dict[str, dict] = await self.fetch_json(session, form_meta_url)
@@ -247,52 +234,54 @@ class ApiFunctions:
         form_generation: str = version_data['generation']['name']
         form_generation_num: int = roman_to_int(form_generation.split('-')[-1])
 
-        # if the form of the Pokémon comes after the generation currently in use, skip it
-        # (e.g., Hisuian Zorua (gen 8) cannot be used in Unova (gen 5))
-        if self.generation < form_generation_num:
-            print(f'Cannot add {form_name} because it does not exist in generation {self.generation}')
-            return None
-
-        # # if the form isn't in the valid forms dict and is in the correct generation, it's immediately valid
-        # if not any([form_name.__contains__(form) for form in valid_forms_in_gens.get(form_generation_num, list())]):
-        #     print(f'Cannot add {form_name} because it is not a valid form in generation {self.generation}')
-        #     return None
-
-        # for form_type in valid_forms_in_gens:
-        #     if form_name.__contains__(form_type) and form_generation_num in valid_forms_in_gens[form_type]:
-        #         print(f'\nForm that was added from the "form_type in form_type_gens" if statement: {form_name}\n'
-        #               f'Info to be added: Form name contains a form type: {form_name.__contains__(form_type)}\n'
-        #               f'Form\'s generation: {form_generation_num}\n'
-        #               f'Form is in {form_type} key\'s value of {valid_forms_in_gens[form_type]}: '
-        #               f'{form_type in valid_forms_in_gens}\n')
-        #         return form_data
-
         # check if the stats, type(s), abilities match, and movesets match
         stats_equal: bool = default_form_data['stats'] == form_data['stats']
         typing_equals: bool = default_form_data['types'] == form_data['types']
         abilities_equal: bool = default_form_data['abilities'] == form_data['abilities']
         movesets_equal: bool = default_form_data['moves'] == form_data['moves']
 
-        # if the conditions are not met to be a significant form, skip it
-        # if the form is cosmetic,
+        # if collecting date for national dex, only check for cosmetic forms
+        if self.generation == -1 and stats_equal and typing_equals and abilities_equal and movesets_equal:
+                print(f'Cannot add '
+                      f'the "{form_name}" form because it is either cosmetic or is not significance criteria.')
+                return None
+
+        if self.generation == -1:
+            return form_data
+
+        # if the form of the Pokémon comes after the generation currently in use, skip it
+        # (e.g., Hisuian Zorua (gen 8) cannot be used in Unova (gen 5))
+        if self.generation < form_generation_num and self.generation != -1:
+            print(f'Cannot add {form_name} because it didn\'t exist before generation {self.generation}')
+            return None
+
+        # # if the form has a suffix (i.e., 'mega', 'gmax', etc.), store the string
+        form_suffix: str = ''
+        for suffix in form_suffixes:
+            if form_name.endswith(suffix):
+                form_suffix = suffix
+                break
+
+        # if there is a form suffix that is valid, return it immediately
+        if form_suffix and form_suffix in valid_forms_in_gens.get(self.generation, []):
+            return form_data
+        elif form_suffix and form_suffix not in valid_forms_in_gens.get(self.generation, []):
+            # if there is a form suffix that is not valid, return None immediately
+            print(f'Cannot add {form_name} because it is not a valid form in generation {self.generation}')
+            return None
+
         # if the form doesn't change anything noteworthy, it's insignificant
-        if (
-                form_name in cosmetic_form_exclusions or
-                # (all(not form_name.__contains__(form_type) for form_type in form_type_exceptions)) or
-                (form_name not in form_exceptions and stats_equal and typing_equals
-                 and abilities_equal and movesets_equal)
-        ):
-            print(f'Cannot add the "{form_name}" form because it is either cosmetic or does not meet the '
-                  f'significance criteria.')
+        if stats_equal and typing_equals and abilities_equal and movesets_equal:
+            print(f'Cannot add the "{form_name}" form because it is either cosmetic or is not significance criteria.')
             return None
 
         return form_data
 
     async def __get_move_coverage(self, session: aiohttp.ClientSession, moves: list[dict]) -> set:
-        move_urls: list[str] = [move['move']['url'] for move in moves]
+        move_urls: list[str] = [move['move']['url'][:-1] for move in moves]
         move_data: list[dict] = await asyncio.gather(*[self.fetch_json(session, url) for url in move_urls])
 
-        return {f'{move["type"]["name"]} {move["damage_class"]["name"]}' for move in move_data}
+        return {f'{move['type']['name']} {move['damage_class']['name']}' for move in move_data}
 
     def __get_most_common_move_categories(self, moves: list[str]) -> list[str]:
         categories: dict[str, int] = {
