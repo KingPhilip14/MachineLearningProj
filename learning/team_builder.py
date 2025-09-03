@@ -3,9 +3,6 @@ import random
 from collections import Counter
 
 import matplotlib
-
-import utils
-
 matplotlib.use('tkAgg')
 import matplotlib.pyplot as plt
 
@@ -16,8 +13,7 @@ from pandas import DataFrame
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 
-from ingestion.data_processing import __calculate_type_effectiveness
-from utils import get_role_description
+from utils import get_role_description, calculate_type_effectiveness
 
 
 class TeamBuilder:
@@ -66,8 +62,8 @@ class TeamBuilder:
             if not self.using_legends and info['is_legend_or_mythical']:
                 continue
 
-            # exclude any Pokémon that are babies or have too low of a BST
-            if info['evo_weight'] > 0.0 and info['bst'] >= 300:
+            # always include fully evolved forms; exclude any Pokémon that are babies or have a low BST
+            if info['evo_weight'] == 1.0 or (info['evo_weight'] > 0.0 and info['bst'] >= 350):
                 temp.update({name: info})
 
         self.data = temp
@@ -239,7 +235,7 @@ class TeamBuilder:
         weaknesses: Counter = Counter()
 
         for types in team_types:
-            effectiveness = __calculate_type_effectiveness(types[0], types[1] if len(types) > 1 else '')
+            effectiveness = calculate_type_effectiveness(types[0], types[1] if len(types) > 1 else '')
 
             for type_, multiplier in effectiveness.items():
                 if multiplier > 1.0:
@@ -388,13 +384,13 @@ class TeamBuilder:
         all_weaknesses: Counter = Counter()
 
         for types in team_types:
-            effectiveness = __calculate_type_effectiveness(types[0], types[1] if len(types) > 1 else '')
+            effectiveness = calculate_type_effectiveness(types[0], types[1] if len(types) > 1 else '')
             for t, mult in effectiveness.items():
                 if mult > 1.0:
                     all_weaknesses[t] += 1
 
         # find if the team has many overlapping weaknesses that would be concerning
-        weak_types: list[str] = [f'{type_} (x{c})' for type_, c in all_weaknesses.items() if c >= 2]
+        weak_types: list[str] = [f'{type_}' for type_, count in all_weaknesses.items() if count >= 2]
 
         if weak_types:
             formatted_types: str = ', '.join(type_[0].upper() + type_[1:] for type_ in weak_types)

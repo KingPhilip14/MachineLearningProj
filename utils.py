@@ -1,8 +1,8 @@
-#%%
+# %%
 import json
 import os
 
-from config import POKEMON_DATA_DIR, GEN_TO_POKEDEX_MAP
+from config import POKEMON_DATA_DIR, GEN_TO_POKEDEX_MAP, EXTRA_DATA_DIR
 
 
 def gen_roman_converter(filename: str) -> str:
@@ -178,6 +178,37 @@ def get_role_description(role: str) -> str:
     }
 
     return descriptions.get(role, 'A Pokémon with a lot of potential to fit on different teams.')
+
+
+def calculate_type_effectiveness(primary_type: str, secondary_type: str) -> dict[str, float]:
+    """
+    By using a given Pokémon's primary and potential secondary typing, a list is created to determine how many
+    weaknesses the Pokémon has.
+    :param primary_type:
+    :param secondary_type:
+    :return:
+    """
+    type_chart: dict[str, dict[str, float]]
+
+    file_path: str = os.path.join(EXTRA_DATA_DIR, 'defensive_type_chart.json')
+
+    # read in the type chart data
+    with open(file_path, 'r') as f:
+        type_chart = json.load(f)
+        f.close()
+
+    types: dict[str, float] = {t: 1.0 for t in type_chart.keys()}
+
+    for current_type in [primary_type, secondary_type]:
+        if current_type == '':
+            continue
+
+        for t in types.keys():
+            # whatever the current type is, multiply it by the effectiveness found in the type_chart
+            effectiveness: float = type_chart[current_type].get(t, 1.0)
+            types[t] *= effectiveness
+
+    return types
 
 
 def clear_screen():

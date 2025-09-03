@@ -20,7 +20,6 @@ GEN_TO_POKEDEX_MAP: dict[str, list[int]] = {
     'gen 7': [21],
     'gen 8': [27, 28, 29, 30],  # Galar, its DLCs, and Hisui
     'gen 9': [31, 32, 33, 30],  # Paldea, its DLCs, and Hisui
-    'clean': [] # used for data cleaning (if files are collected)
 }
 
 # if a Pokémon's name contains or is any of the following, it will be removed from the data files
