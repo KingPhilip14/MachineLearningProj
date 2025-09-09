@@ -4,7 +4,7 @@ import os
 from typing import Any
 
 from config import POKEMON_DATA_DIR, EXTRA_DATA_DIR, NAMES_TO_FILTER, WORDS_TO_FILTER
-from utils import save_json_file
+from utils import save_json_file, calculate_type_effectiveness
 
 
 def update_data_file(filename) -> None:
@@ -32,23 +32,26 @@ def clean_data_files() -> None:
             data = json.load(f)
             f.close()
 
-        names_to_remove: list[str] = []
+        names_to_remove: set[str] = set()
 
         # remove any unnecessary data collected from ingestion (e.g., extra cosmetic forms)
         for name in data.keys():
             if name in NAMES_TO_FILTER:
-                names_to_remove.append(name)
+                names_to_remove.add(name)
                 continue
 
             for word in WORDS_TO_FILTER:
                 if name.__contains__(word):
-                    names_to_remove.append(name)
+                    names_to_remove.add(name)
                     continue
 
-        for name in names_to_remove:
-            print(f'Removing {name} from data file {filename}')
-            data.pop(name)
-            names_to_remove.remove(name)
+        # convert to a list to help with logging
+        names_to_remove: list[str] = list(names_to_remove)
+
+        while len(names_to_remove) != 0:
+            print(f'Removing {names_to_remove[0]} from data file {filename}')
+            data.pop(names_to_remove[0])
+            names_to_remove.remove(names_to_remove[0])
 
         with open(file_path, 'w') as f:
             json.dump(data, f, indent=4)
@@ -225,7 +228,7 @@ def __add_type_matchups(filename: str) -> None:
 
     with open(file_path, 'w') as f:
         for pokemon_name, pokemon_data in data.items():
-            matchups: dict[str, float] = __calculate_type_effectiveness(pokemon_data['type_1'], pokemon_data['type_2'])
+            matchups: dict[str, float] = calculate_type_effectiveness(pokemon_data['type_1'], pokemon_data['type_2'])
             weaknesses: dict[str, float] = {t: val for t, val in matchups.items() if val > 1.0}
             resistances: dict[str, float] = {t: val for t, val in matchups.items() if val < 1.0}
 

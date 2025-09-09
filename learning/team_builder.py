@@ -3,8 +3,10 @@ import random
 from collections import Counter
 
 import matplotlib
+
+from config import BST_BARRIER
+
 matplotlib.use('tkAgg')
-import matplotlib.pyplot as plt
 
 import json
 
@@ -36,6 +38,8 @@ class TeamBuilder:
             'more_balanced': preferences['more_balanced'],
         }
 
+        self.gimmick_found: bool = False
+
     def filter_data(self) -> None:
         temp: dict = dict()
 
@@ -63,7 +67,7 @@ class TeamBuilder:
                 continue
 
             # always include fully evolved forms; exclude any Pokémon that are babies or have a low BST
-            if info['evo_weight'] == 1.0 or (info['evo_weight'] > 0.0 and info['bst'] >= 350):
+            if info['evo_weight'] == 1.0 or (info['evo_weight'] > 0.0 and info['bst'] >= BST_BARRIER):
                 temp.update({name: info})
 
         self.data = temp
@@ -165,7 +169,7 @@ class TeamBuilder:
         mixed_threshold: float = 0.40
         speed_threshold: float = 0.50
 
-        # determine if the cluster is Pokémon that can use an Eviolite (a very useful item competitively)
+        # determine if the cluster is Pokémon that can use an Eviolite (a very useful item competitively),
         # this only applies to partially evolved Pokémon (i.e., Pokémon with an evo_weight of 0.5)
         if evo_weight == 0.5:
             return 'Eviolite User'
@@ -258,6 +262,9 @@ class TeamBuilder:
         # shuffle the preferences to not have the same result of clusters frequently
         random.shuffle(preferred_roles)
 
+        # used to potentially select one gimmick form for the team
+        gimmick: str = random.choice(['mega', 'gmax', 'none'])
+
         for role in preferred_roles:
             if len(team) >= 6:
                 break
@@ -278,14 +285,21 @@ class TeamBuilder:
 
                 # calculate the potential weaknesses
                 potential_types: list[list[str]] = team_types + [types]
-                weaknesses = self.get_team_weaknesses(potential_types)
+                weaknesses: Counter = self.get_team_weaknesses(potential_types)
 
-                # if a specific weakness will have more than 2 overlaps, don't add the Pokémon to the team
+                # if a specific weakness has more than 2 overlaps, don't add the Pokémon to the team
                 if any(count > 2 for count in weaknesses.values()):
+                    continue
+
+                # ensure other gimmicks cannot be added if one is found
+                if name.__contains__(gimmick) and not self.gimmick_found:
+                    self.gimmick_found = True
+                elif name.__contains__(gimmick) and self.gimmick_found:
                     continue
 
                 team.append(name)
                 team_types.append(types)
+
                 break
 
         # a fallback system to include other clusters if there is room in the team
@@ -362,38 +376,31 @@ class TeamBuilder:
         if self.preferences['more_offensive']:
             return ['Physical Sweeper', 'Special Sweeper', 'Physical Sweeper', 'Special Sweeper', 'Utility/Support',
                     'Mixed Attacker', 'Physical Attacker', 'Special Attacker', 'Speedster', 'Bulky', 'Bulky Wall']
-
-        if self.preferences['more_defensive']:
+        elif self.preferences['more_defensive']:
             return ['Physical Wall', 'Special Wall', 'Physical Wall', 'Special Wall', 'Bulky', 'Bulky Wall',
                     'Physical Attacker', 'Special Attacker', 'Versatile', 'Utility/Support', 'Eviolite User']
-
-        if self.preferences['more_balanced']:
+        else:
             return ['Physical Sweeper', 'Special Sweeper', 'Physical Wall', 'Special Wall', 'Mixed Attacker',
                     'Speedster', 'Bulky', 'Bulky Wall', 'Utility/Support', 'Eviolite User', 'Versatile']
 
     def get_team_synergy_desc(self, team_df: pd.DataFrame, team_types: list[list[str]]) -> str:
         """
         A description of the team's synergy and how each Pokémon complements each other is returned to give the user a
-        better understand of how they may be able to use their team.
+        better understanding of how they may be able to use their team.
         :param team_df:
         :param team_types:
         """
         comments: list[str] = []
 
         # look at type coverage
-        all_weaknesses: Counter = Counter()
-
-        for types in team_types:
-            effectiveness = calculate_type_effectiveness(types[0], types[1] if len(types) > 1 else '')
-            for t, mult in effectiveness.items():
-                if mult > 1.0:
-                    all_weaknesses[t] += 1
+        all_weaknesses: Counter = self.get_team_weaknesses(team_types)
 
         # find if the team has many overlapping weaknesses that would be concerning
         weak_types: list[str] = [f'{type_}' for type_, count in all_weaknesses.items() if count >= 2]
 
         if weak_types:
-            formatted_types: str = ', '.join(type_[0].upper() + type_[1:] for type_ in weak_types)
+            formatted_types: str = ', '.join(type_[0].upper() + type_[1:] for type_ in weak_types[:-1]) + ', and ' + \
+                                   weak_types[-1][0].upper() + weak_types[-1][1:]
             comments.append(f'The team has overlapping weaknesses to: {formatted_types}. Be mindful of these!')
         else:
             comments.append('The team has good type coverage, so no major weaknesses are shared.')

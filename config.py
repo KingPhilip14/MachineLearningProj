@@ -8,6 +8,9 @@ EXTRA_DATA_DIR: str = os.path.join(DATA_DIR, 'extra_data')
 
 PAUSE_TIME: int = 3
 
+# the minimum BST for a Pokémon to be considered when creating a team
+BST_BARRIER: int = 350
+
 # this is a dict that maps a string representation of a generation to the int(s) used for the API for Pokédex calls
 GEN_TO_POKEDEX_MAP: dict[str, list[int]] = {
     'national': [1],
@@ -31,4 +34,4 @@ NAMES_TO_FILTER: list[str] = ['pikachu-starter', 'eevee-starter', 'castform-sunn
                               'zarude-dada', 'maushold-family-of-three', 'palafin-zero', 'tatsugiri-droopy',
                               'tatsugiri-stretchy', 'dudunsparce-three-segment', 'gimmighoul-roaming']
 
-WORDS_TO_FILTER: list[str] = ['busted', 'cap', 'totem']
+WORDS_TO_FILTER: list[str] = ['busted', '-cap', 'totem']

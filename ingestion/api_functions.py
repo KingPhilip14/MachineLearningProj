@@ -1,4 +1,6 @@
 #%%
+from itertools import chain
+
 import aiohttp
 import asyncio
 import async_timeout
@@ -9,7 +11,7 @@ from config import PAUSE_TIME
 
 
 class ApiFunctions:
-    def __init__(self, filename: str, pokedex_ids:list[int]):
+    def __init__(self, filename: str = 'national', pokedex_ids:list[int] = [1]):
         self.base_url: str = 'https://pokeapi.co/api/v2/'
         self.filename: str = filename
         self.pokedex_ids: list[int] = pokedex_ids
@@ -92,7 +94,7 @@ class ApiFunctions:
 
                 is_legend_or_mythical: bool = species_json['is_legendary'] or species_json['is_mythical']
 
-                #a list containing the names for different forms of the species
+                # a list containing the names for different forms of the species
                 varieties: list[str] = [variety['pokemon']['name'] for variety in species_json['varieties']]
 
                 evo_weight: float = 0.0
@@ -100,11 +102,11 @@ class ApiFunctions:
                 fully_evolved: bool
 
                 if evolution_chain['species']['name'] == pokemon_name:
-                    # if the species is found in the chain, check if it's fully evolved
+                    # checks if the current Pokémon is the species; if so, check if it's fully evolved
                     fully_evolved = len(evolution_chain['evolves_to']) == 0
                 else:
                     # otherwise, recursively determine if the Pokémon is fully evolved and its evo_weight
-                    fully_evolved, evo_weight = self.__find_pokemon_in_chain(pokemon_name, evolution_chain, evo_weight)
+                    fully_evolved, evo_weight = self.find_pokemon_in_chain(pokemon_name, evolution_chain, evo_weight)
 
                 result[pokemon_name] = {
                     'is_fully_evolved': fully_evolved,
@@ -115,29 +117,42 @@ class ApiFunctions:
 
         return result
 
-    def __find_pokemon_in_chain(self, pokemon_name: str, chain: dict, evo_weight: float) -> tuple[bool, float] | None:
+    def find_pokemon_in_chain(self, pokemon_name: str, chain: dict, evo_weight: float) -> tuple[bool, float] | None:
         """
         Moves up the chained JSON objects to find the given Pokémon. Returns if that Pokémon is fully evolved or not
         (single-stage Pokémon count as fully evolved). If a Pokémon is partially evolved, its weight will be 0.5.
         :param pokemon_name:
         :param chain:
         :param evo_weight:
-        :return:
         """
-        evo_weight += 0.5
+        evo_weight = 0.5
 
-        if chain["species"]["name"] == pokemon_name:
+        if chain['species']['name'] == pokemon_name:
             # if the Pokémon can't evolve, it's fully evolved
-            fully_evolved = len(chain["evolves_to"]) == 0
+            fully_evolved = len(chain['evolves_to']) == 0
             return fully_evolved, 1.0 if fully_evolved else evo_weight
 
-        for evolution in chain["evolves_to"]:
+        for evolution in chain['evolves_to']:
             # recursively climb up the chain
-            result = self.__find_pokemon_in_chain(evolution['species']['name'], evolution, evo_weight)
+            result = self.find_pokemon_in_chain(evolution['species']['name'], evolution, evo_weight)
             if result is not None:
                 return result
 
         return None
+
+        # print(f'{chain}\n\n\n')
+        #
+        # if chain['species']['name'] == pokemon_name:
+        #     fully_evolved = len(chain['evolves_to']) == 0
+        #     evo_weight = 1.0 if fully_evolved else 0.5
+        #     return fully_evolved, evo_weight
+        #
+        # evolves_to: list[dict] = chain['evolves_to']
+        #
+        # for evolution_data in evolves_to:
+        #    return self.find_pokemon_in_chain(pokemon_name, evolution_data, evo_weight)
+        #
+        # return None
 
     async def get_additional_info(self, species_data: dict[str, dict]) -> dict[str, dict]:
         print('Collecting addtional info\n\n')
@@ -182,6 +197,7 @@ class ApiFunctions:
             move_coverage: set[str] = await self.__get_move_coverage(session, data['moves'])
 
             forms_data[name] = {
+                'id': data['id'],
                 'species': data['species']['name'],
                 'type_1': data['types'][0]['type']['name'],
                 'type_2': data['types'][1]['type']['name'] if len(data['types']) > 1 and data['types'][1]['type'][
