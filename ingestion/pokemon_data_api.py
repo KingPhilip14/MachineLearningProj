@@ -1,5 +1,6 @@
 #%%
 from itertools import chain
+from typing import Any, Generator
 
 import aiohttp
 import asyncio
@@ -106,7 +107,7 @@ class ApiFunctions:
                     fully_evolved = len(evolution_chain['evolves_to']) == 0
                 else:
                     # otherwise, recursively determine if the Pokémon is fully evolved and its evo_weight
-                    fully_evolved, evo_weight = self.find_pokemon_in_chain(pokemon_name, evolution_chain, evo_weight)
+                    fully_evolved, evo_weight = self.find_pokemon_in_chain(pokemon_name, evolution_chain)
 
                 result[pokemon_name] = {
                     'is_fully_evolved': fully_evolved,
@@ -117,7 +118,8 @@ class ApiFunctions:
 
         return result
 
-    def find_pokemon_in_chain(self, pokemon_name: str, chain: dict, evo_weight: float) -> tuple[bool, float] | None:
+    def find_pokemon_in_chain(self, pokemon_name: str, chain: dict,
+                              evo_weight: float = 0.0) -> tuple[bool, float] | None:
         """
         Moves up the chained JSON objects to find the given Pokémon. Returns if that Pokémon is fully evolved or not
         (single-stage Pokémon count as fully evolved). If a Pokémon is partially evolved, its weight will be 0.5.
@@ -125,34 +127,27 @@ class ApiFunctions:
         :param chain:
         :param evo_weight:
         """
-        evo_weight = 0.5
+        current_name = chain['species']['name']
 
-        if chain['species']['name'] == pokemon_name:
-            # if the Pokémon can't evolve, it's fully evolved
-            fully_evolved = len(chain['evolves_to']) == 0
-            return fully_evolved, 1.0 if fully_evolved else evo_weight
+        # if the current Pokémon is the one to look for; the edge case if statement
+        if current_name == pokemon_name:
+            if len(chain['evolves_to']) == 0:
+                # if it has no further evolutions, it's fully evolved
+                return True, 1.0
+            else:
+                # otherwise, it's not fully evolved
+                return False, evo_weight
 
-        for evolution in chain['evolves_to']:
-            # recursively climb up the chain
-            result = self.find_pokemon_in_chain(evolution['species']['name'], evolution, evo_weight)
+        # move up the chain
+        for evo in chain['evolves_to']:
+            # adjust the evo_weight as needed to properly represent the Pokémon's stage
+            next_stage = 0.5 if evo_weight == 0.0 else 1.0
+            result = self.find_pokemon_in_chain(pokemon_name, evo, next_stage)
+
             if result is not None:
                 return result
 
-        return None
-
-        # print(f'{chain}\n\n\n')
-        #
-        # if chain['species']['name'] == pokemon_name:
-        #     fully_evolved = len(chain['evolves_to']) == 0
-        #     evo_weight = 1.0 if fully_evolved else 0.5
-        #     return fully_evolved, evo_weight
-        #
-        # evolves_to: list[dict] = chain['evolves_to']
-        #
-        # for evolution_data in evolves_to:
-        #    return self.find_pokemon_in_chain(pokemon_name, evolution_data, evo_weight)
-        #
-        # return None
+        return None  # not found
 
     async def get_additional_info(self, species_data: dict[str, dict]) -> dict[str, dict]:
         print('Collecting addtional info\n\n')

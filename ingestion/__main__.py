@@ -1,6 +1,6 @@
 import asyncio
 
-from ingestion.api_functions import ApiFunctions
+from ingestion.pokemon_data_api import ApiFunctions
 from ingestion.data_processing import update_data_file, clean_data_files
 from utils import input_generation
 

@@ -1,4 +1,4 @@
-from ingestion.api_functions import ApiFunctions
+from ingestion.pokemon_data_api import ApiFunctions
 
 data = {
     "baby_trigger_item": None,
@@ -154,4 +154,4 @@ chain = data['chain']
 
 
 if __name__ == '__main__':
-    api.find_pokemon_in_chain('cascoon', chain, 0.0)
+    print(api.find_pokemon_in_chain('dustox', chain))
