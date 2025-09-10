@@ -1,34 +1,19 @@
-#%%
-from itertools import chain
-from typing import Any, Generator
-
 import aiohttp
 import asyncio
-import async_timeout
 
 from tqdm import tqdm
+
+from ingestion.base_api import BaseApi
 from utils import pokemon_data_file_exists, save_json_file, roman_to_int, get_generation_num
-from config import PAUSE_TIME
 
 
-class ApiFunctions:
-    def __init__(self, filename: str = 'national', pokedex_ids:list[int] = [1]):
-        self.base_url: str = 'https://pokeapi.co/api/v2/'
+class ApiFunctions(BaseApi):
+    def __init__(self, filename: str = 'national', pokedex_ids: list[int] = [1]):
+        super().__init__()
         self.filename: str = filename
         self.pokedex_ids: list[int] = pokedex_ids
         self.pokedex_entries: list[str] = []
         self.generation: int = get_generation_num(filename)
-        self.sem: asyncio.Semaphore = asyncio.Semaphore(10)
-
-    async def fetch_json(self, session: aiohttp.ClientSession, url: str) -> dict:
-        async with self.sem:
-            try:
-                async with async_timeout.timeout(10):
-                    async with session.get(url) as response:
-                        return await response.json(content_type='application/json')
-            except Exception as e:
-                print(f'Failed to fetch {url}: {e}')
-                return dict()
 
     async def get_generation_pokedex(self, pokedex_ids: list[int]) -> dict[str, str]:
         """
@@ -65,21 +50,11 @@ class ApiFunctions:
 
         result: dict[str, dict] = dict()
 
-        # print(f'pokemon species: {pokemon_species}')
-        # input('Press Enter to continue...')
-
         async with aiohttp.ClientSession() as session:
             species_jsons: list[dict] = await asyncio.gather(*[self.fetch_json(session, url) for url in pokemon_species.values()])
 
             # map each species name with its appropriate data retrieved
             species_name_map: dict[str, dict] = dict(zip(pokemon_species.keys(), species_jsons))
-
-            # print(f'Species JSON for first: {species_jsons[0]['evolution_chain']}\n\n')
-            # input('Press Enter to continue...')
-
-            # for species in species_jsons:
-            #     print(species['evolution_chain']['url'])
-            #     input('press enter to continue...\n')
 
             # get the evolution chain URLs
             evo_urls: list[str] = [species['evolution_chain']['url'][:-1] for species in species_jsons]
@@ -107,7 +82,7 @@ class ApiFunctions:
                     fully_evolved = len(evolution_chain['evolves_to']) == 0
                 else:
                     # otherwise, recursively determine if the Pokémon is fully evolved and its evo_weight
-                    fully_evolved, evo_weight = self.find_pokemon_in_chain(pokemon_name, evolution_chain)
+                    fully_evolved, evo_weight = self.__find_pokemon_in_chain(pokemon_name, evolution_chain)
 
                 result[pokemon_name] = {
                     'is_fully_evolved': fully_evolved,
@@ -117,37 +92,6 @@ class ApiFunctions:
                 }
 
         return result
-
-    def find_pokemon_in_chain(self, pokemon_name: str, chain: dict,
-                              evo_weight: float = 0.0) -> tuple[bool, float] | None:
-        """
-        Moves up the chained JSON objects to find the given Pokémon. Returns if that Pokémon is fully evolved or not
-        (single-stage Pokémon count as fully evolved). If a Pokémon is partially evolved, its weight will be 0.5.
-        :param pokemon_name:
-        :param chain:
-        :param evo_weight:
-        """
-        current_name = chain['species']['name']
-
-        # if the current Pokémon is the one to look for; the edge case if statement
-        if current_name == pokemon_name:
-            if len(chain['evolves_to']) == 0:
-                # if it has no further evolutions, it's fully evolved
-                return True, 1.0
-            else:
-                # otherwise, it's not fully evolved
-                return False, evo_weight
-
-        # move up the chain
-        for evo in chain['evolves_to']:
-            # adjust the evo_weight as needed to properly represent the Pokémon's stage
-            next_stage = 0.5 if evo_weight == 0.0 else 1.0
-            result = self.find_pokemon_in_chain(pokemon_name, evo, next_stage)
-
-            if result is not None:
-                return result
-
-        return None  # not found
 
     async def get_additional_info(self, species_data: dict[str, dict]) -> dict[str, dict]:
         print('Collecting addtional info\n\n')
@@ -163,7 +107,7 @@ class ApiFunctions:
                 # every other form is used to determine their significance
                 other_forms: list[str] = data['varieties'][1:]
 
-                tasks.append(asyncio.create_task(self.process_forms(session, species_name, default_form_name, other_forms)))
+                tasks.append(asyncio.create_task(self.process_forms(session, default_form_name, other_forms)))
 
             # get the data from all the tasks
             results: list[dict] = await asyncio.gather(*tasks)
@@ -173,15 +117,12 @@ class ApiFunctions:
 
         return output
 
-    async def process_forms(self, session: aiohttp.ClientSession, species_name: str, default_form_name: str,
+    async def process_forms(self, session: aiohttp.ClientSession, default_form_name: str,
                             other_forms: list[str]) -> dict[str, dict]:
         forms_data: dict[str, dict] = dict()
 
         default_url: str = f'{self.base_url}pokemon/{default_form_name}/'
         default_data: dict = await self.fetch_json(session, default_url)
-
-        # start by providing the default form as a significant form
-        significant_forms: list[str] = [default_form_name]
 
         tasks: list[asyncio.Task] = [asyncio.create_task(self.__get_significant_forms(session, form, default_data))
                                      for form in other_forms]
@@ -190,6 +131,7 @@ class ApiFunctions:
         for data in [default_data] + [form for form in significant_form_data if form]:
             name: str = data['name']
             move_coverage: set[str] = await self.__get_move_coverage(session, data['moves'])
+            moveset: list[dict] = await self.__get_moveset(session, data['moves'])
 
             forms_data[name] = {
                 'id': data['id'],
@@ -207,6 +149,7 @@ class ApiFunctions:
                 'abilities': [ability_dict['ability']['name'] for ability_dict in data['abilities']],
                 'move_coverage': list(move_coverage),
                 'highest_move_categories': self.__get_most_common_move_categories(list(move_coverage)),
+                'moveset': moveset,
             }
 
         return forms_data
@@ -294,6 +237,26 @@ class ApiFunctions:
 
         return {f'{move['type']['name']} {move['damage_class']['name']}' for move in move_data}
 
+    async def __get_moveset(self, session: aiohttp.ClientSession, moves: list[dict]) -> list[dict]:
+        move_urls: list[str] = [move['move']['url'][:-1] for move in moves]
+        move_data: list[dict] = await asyncio.gather(*[self.fetch_json(session, url) for url in move_urls])
+
+        collected_data: list[dict] = []
+
+        # collected the desired data from each move from the data
+        for move in move_data:
+            collected_data.append({
+                'id': move['id'],
+                'damage_class': move['damage_class']['name'],
+                'type': move['type']['name'],
+                'accuracy': move['accuracy'],
+                'power': move['power'],
+                'pp': move['pp'],
+                'priority': move['priority']
+            })
+
+        return collected_data
+
     def __get_most_common_move_categories(self, moves: list[str]) -> list[str]:
         categories: dict[str, int] = {
             'physical': 0,
@@ -312,7 +275,7 @@ class ApiFunctions:
         # return the move categories that equal the maximum number of appearances
         return [key for key, value in categories.items() if value == maximum]
 
-    def combine_data(self, species_data: dict[str, dict], pokemon_data: dict[str, dict]) -> dict[str, dict]:
+    def __combine_data(self, species_data: dict[str, dict], pokemon_data: dict[str, dict]) -> dict[str, dict]:
         """
         Adds the data from more_info to the given add_to dict. The final step in data collection,
         :param species_data:
@@ -321,7 +284,6 @@ class ApiFunctions:
         """
         print('Combining extra info to species data\n\n')
         output: dict[str, dict] = dict()
-        species_names: list[str] = list(species_data.keys())
 
         # add the species data to the individual Pokémon's data
         for pokemon_name, data in tqdm(pokemon_data.items()):
@@ -331,6 +293,37 @@ class ApiFunctions:
             output.update({pokemon_name: data | species_data[pokemon_species_name]})
 
         return output
+
+    def __find_pokemon_in_chain(self, pokemon_name: str, chain: dict,
+                                evo_weight: float = 0.0) -> tuple[bool, float] | None:
+        """
+        Moves up the chained JSON objects to find the given Pokémon. Returns if that Pokémon is fully evolved or not
+        (single-stage Pokémon count as fully evolved). If a Pokémon is partially evolved, its weight will be 0.5.
+        :param pokemon_name:
+        :param chain:
+        :param evo_weight:
+        """
+        current_name = chain['species']['name']
+
+        # if the current Pokémon is the one to look for; the edge case if statement
+        if current_name == pokemon_name:
+            if len(chain['evolves_to']) == 0:
+                # if it has no further evolutions, it's fully evolved
+                return True, 1.0
+            else:
+                # otherwise, it's not fully evolved
+                return False, evo_weight
+
+        # move up the chain
+        for evo in chain['evolves_to']:
+            # adjust the evo_weight as needed to properly represent the Pokémon's stage
+            next_stage = 0.5 if evo_weight == 0.0 else 1.0
+            result = self.__find_pokemon_in_chain(pokemon_name, evo, next_stage)
+
+            if result is not None:
+                return result
+
+        return None
 
     async def collect_data(self) -> None:
         """
@@ -346,18 +339,12 @@ class ApiFunctions:
 
         collected_pokemon: dict[str, str] = await self.get_generation_pokedex(self.pokedex_ids)
 
-        # print(f'\nPausing for {PAUSE_TIME} seconds to not time out during data collection. Please wait...')
-        # await asyncio.sleep(PAUSE_TIME)
-
         # collect the species data
         species_data: dict[str, dict] = await self.get_species_data(collected_pokemon)
-
-        # print(f'\nPausing again for {PAUSE_TIME} seconds to not time out during data collection. Please wait...')
-        # await asyncio.sleep(PAUSE_TIME)
 
         # get the extra info for each Pokémon species
         extra_info: dict[str, dict] = await self.get_additional_info(species_data)
 
-        output: dict[str, dict] = self.combine_data(species_data, extra_info)
+        output: dict[str, dict] = self.__combine_data(species_data, extra_info)
 
         save_json_file(output, self.filename)

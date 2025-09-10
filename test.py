@@ -154,4 +154,4 @@ chain = data['chain']
 
 
 if __name__ == '__main__':
-    print(api.find_pokemon_in_chain('dustox', chain))
+    print(api.__find_pokemon_in_chain('dustox', chain))
