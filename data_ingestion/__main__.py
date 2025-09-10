@@ -1,0 +1,16 @@
+import asyncio
+
+from data_ingestion.data_api import DataApi
+from data_ingestion.data_processing import update_data_file, clean_data_files
+from utils import input_generation
+
+
+if __name__ == '__main__':
+    # Data can be collected by running this file
+    filename, pokedex_ids = input_generation('What generation of Pokemon would you like to collect data for?')
+
+    data_api: DataApi = DataApi(filename, pokedex_ids)
+    asyncio.run(data_api.collect_data())
+    update_data_file(f'{filename}.json')
+    clean_data_files()
+

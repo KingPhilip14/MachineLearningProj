@@ -5,6 +5,7 @@ ROOT_DIR: str = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR: str = os.path.join(ROOT_DIR, 'data')
 POKEMON_DATA_DIR: str = os.path.join(DATA_DIR, 'pokemon_data')
 EXTRA_DATA_DIR: str = os.path.join(DATA_DIR, 'extra_data')
+SPRITES_DIR: str = os.path.join(DATA_DIR, 'sprites')
 
 PAUSE_TIME: int = 3
 
