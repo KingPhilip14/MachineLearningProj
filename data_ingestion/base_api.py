@@ -7,8 +7,9 @@ from utils import pokemon_data_file_exists, save_json_file, roman_to_int, get_ge
 
 
 class BaseApi:
-    def __init__(self):
+    def __init__(self, filename: str = 'national'):
         self.base_url: str = 'https://pokeapi.co/api/v2/'
+        self.filename: str = filename
         self.sem: asyncio.Semaphore = asyncio.Semaphore(10)
 
     async def fetch_json(self, session: aiohttp.ClientSession, url: str) -> dict:

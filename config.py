@@ -7,7 +7,7 @@ POKEMON_DATA_DIR: str = os.path.join(DATA_DIR, 'pokemon_data')
 EXTRA_DATA_DIR: str = os.path.join(DATA_DIR, 'extra_data')
 SPRITES_DIR: str = os.path.join(DATA_DIR, 'sprites')
 
-PAUSE_TIME: int = 3
+PAUSE_TIME: int = 5
 
 # the minimum BST for a Pokémon to be considered when creating a team
 BST_BARRIER: int = 350
