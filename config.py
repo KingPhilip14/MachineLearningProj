@@ -6,6 +6,10 @@ DATA_DIR: str = os.path.join(ROOT_DIR, 'data')
 POKEMON_DATA_DIR: str = os.path.join(DATA_DIR, 'pokemon_data')
 EXTRA_DATA_DIR: str = os.path.join(DATA_DIR, 'extra_data')
 SPRITES_DIR: str = os.path.join(DATA_DIR, 'sprites')
+ERR_SPRITES_DIR: str = os.path.join(SPRITES_DIR, 'errors')
+
+ERR_SPRITES_FILENAME: str = 'error_sprite_urls.txt'
+ERR_NO_SPRITES_FILENAME: str = 'error_no_sprites.txt'
 
 PAUSE_TIME: int = 5
 
@@ -33,6 +37,9 @@ NAMES_TO_FILTER: list[str] = ['pikachu-starter', 'eevee-starter', 'castform-sunn
                               'meloetta-pirouette', 'aegislash-blade', 'wishiwashi-solo', 'magearna-original',
                               'cramorant-gulping', 'cramorant-gorging', 'eiscue-noice', 'morpeko-hangry',
                               'zarude-dada', 'maushold-family-of-three', 'palafin-zero', 'tatsugiri-droopy',
-                              'tatsugiri-stretchy', 'dudunsparce-three-segment', 'gimmighoul-roaming']
+                              'tatsugiri-stretchy', 'dudunsparce-three-segment', 'gimmighoul-roaming',
+                              'miraidon-low-power-mode', 'miraidon-drive-mode', 'miraidon-aquatic-mode',
+                              'miraidon-glide-mode', 'koraidon-limited-build', 'koraidon-sprinting-build',
+                              'koraidon-swimming-build', 'koraidon-gliding-build']
 
 WORDS_TO_FILTER: list[str] = ['busted', '-cap', 'totem']

@@ -11,7 +11,8 @@ from PIL import Image
 
 from rembg import remove
 from tqdm.auto import tqdm
-from config import POKEMON_DATA_DIR, SPRITES_DIR, PAUSE_TIME
+from config import POKEMON_DATA_DIR, SPRITES_DIR, PAUSE_TIME, ERR_SPRITES_DIR, ERR_SPRITES_FILENAME, \
+    ERR_NO_SPRITES_FILENAME
 from data_ingestion.base_api import BaseApi
 from utils import pokemon_data_file_exists
 
@@ -69,21 +70,22 @@ class SpriteApi(BaseApi):
 
         count: int = 0
 
-        for sprite_info_tuple in tqdm(sprite_urls[1645:1660]):
+        for sprite_info_tuple in tqdm(sprite_urls):
             # Pause after collecting 1000 sprites to not time out
             if count % 250 == 0 and count != 0:
-                print(f'Pausing for {PAUSE_TIME} seconds to not time out while collecting sprites...')
+                tqdm.write(f'Pausing for {PAUSE_TIME} seconds to not time out while collecting sprites...')
                 time.sleep(PAUSE_TIME)
-                print(f'Continuing to collect sprites...')
+                tqdm.write(f'Continuing to collect sprites...')
 
             try:
                 response = requests.get(sprite_info_tuple[1], timeout=PAUSE_TIME)
 
                 # make an Image object with the image URL
-                input_image = Image.open(BytesIO(response.content)).convert('RGBA')
+                output_image = Image.open(BytesIO(response.content)).convert('RGBA')
 
+                # commented out due to inconsistent results
                 # remove the background
-                output_image = remove(input_image)
+                # output_image = remove(output_image)
 
                 is_shiny: bool = sprite_info_tuple[2]
                 img_file_name: str = f'{sprite_info_tuple[0]}-sprite_shiny.png' \
@@ -93,14 +95,40 @@ class SpriteApi(BaseApi):
 
                 # save the new image with the removed background
                 output_image.save(f'{SPRITES_DIR}/{img_file_name}')
-            except PIL.UnidentifiedImageError:
+            except PIL.UnidentifiedImageError as e:
                 tqdm.write(f'\nUnidentified error downloading sprite for: {sprite_info_tuple[0]}'
                            f'\nImage link: {sprite_info_tuple[1]}\n')
-            except requests.exceptions.MissingSchema:
+                self.__save_uncollected_sprite(sprite_info_tuple)
+            except requests.exceptions.MissingSchema as e:
                 tqdm.write(f'\nMissing schema error downloading sprite for: {sprite_info_tuple[0]}\n')
+                self.__save_uncollected_sprite(sprite_info_tuple)
 
             count += 1
 
-            # write to a file the URLs that failed and script how to recover the lost sprites separately
-
         print('Sprite collection complete.')
+
+    def __save_uncollected_sprite(self, sprite_info_tuple: tuple[str, str, bool]) -> None:
+        """
+        If a sprite wasn't collected because:
+        - No sprite was found (i.e., a None value was returned), write the name in the error_no_sprites.txt file
+        - The Image object wasn't created successfully, write the URL of the sprite in the error_sprite_urls.txt file
+        """
+        sprite_url: str | None = sprite_info_tuple[1]
+        file_path: str
+
+        if sprite_url is None:
+            file_path = os.path.join(ERR_SPRITES_DIR, ERR_NO_SPRITES_FILENAME)
+
+            with open(file_path, 'a') as f:
+                f.write(f'{sprite_info_tuple[0]}\n')
+
+            tqdm.write(f'No sprite for {sprite_info_tuple[0]} and saved its name to {file_path}. '
+                       f'Please recover a sprite for this in the clean up collection method')
+            return
+
+        file_path = os.path.join(ERR_SPRITES_DIR, ERR_SPRITES_FILENAME)
+
+        with open(file_path, 'a') as f:
+            f.write(sprite_url + '\n')
+            tqdm.write(f'Wrote error sprite URL {sprite_url} to {file_path}. Please run the sprite clean up collection '
+                  f'method')
