@@ -3,16 +3,14 @@ import json
 import os
 import time
 from io import BytesIO
-
 import PIL
 import aiohttp
 import requests
-from PIL import Image
 
-from rembg import remove
+from PIL import Image
 from tqdm.auto import tqdm
-from config import POKEMON_DATA_DIR, SPRITES_DIR, PAUSE_TIME, ERR_SPRITES_DIR, ERR_SPRITES_FILENAME, \
-    ERR_NO_SPRITES_FILENAME
+from config import (POKEMON_DATA_DIR, PAUSE_TIME, ERR_SPRITES_DIR, ERR_SPRITES_FILENAME,
+                    ERR_NO_SPRITES_FILENAME, POKEMON_SPRITES_DIR)
 from data_ingestion.base_api import BaseApi
 from utils import pokemon_data_file_exists
 
@@ -36,11 +34,11 @@ class SpriteApi(BaseApi):
 
         print('Starting sprite collection...')
 
+        file_path: str = os.path.join(POKEMON_DATA_DIR, self.filename)
         pokemon_data_urls: list[str] = []
 
         # list of tuples containing Pokémon name, sprite URL, and if it's shiny
         sprite_info_collection: list[tuple[str, str, bool]] = []
-        file_path: str = os.path.join(POKEMON_DATA_DIR, self.filename)
 
         # open the data file
         with open(file_path, 'r') as f:
@@ -66,7 +64,7 @@ class SpriteApi(BaseApi):
         self.__download_sprites(sprite_info_collection)
 
     def __download_sprites(self, sprite_urls: list[tuple[str, str, bool]]):
-        print('Downloading sprites and removing their backgrounds...')
+        print('Downloading sprites...')
 
         count: int = 0
 
@@ -78,14 +76,8 @@ class SpriteApi(BaseApi):
                 tqdm.write(f'Continuing to collect sprites...')
 
             try:
-                response = requests.get(sprite_info_tuple[1], timeout=PAUSE_TIME)
-
                 # make an Image object with the image URL
-                output_image = Image.open(BytesIO(response.content)).convert('RGBA')
-
-                # commented out due to inconsistent results
-                # remove the background
-                # output_image = remove(output_image)
+                output_image = Image.open(requests.get(sprite_info_tuple[1], stream=True).raw).convert('RGBA')
 
                 is_shiny: bool = sprite_info_tuple[2]
                 img_file_name: str = f'{sprite_info_tuple[0]}-sprite_shiny.png' \
@@ -94,7 +86,7 @@ class SpriteApi(BaseApi):
                 tqdm.write(f'Downloading sprite: {img_file_name}')
 
                 # save the new image with the removed background
-                output_image.save(f'{SPRITES_DIR}/{img_file_name}')
+                output_image.save(f'{POKEMON_SPRITES_DIR}/{img_file_name}')
             except PIL.UnidentifiedImageError as e:
                 tqdm.write(f'\nUnidentified error downloading sprite for: {sprite_info_tuple[0]}'
                            f'\nImage link: {sprite_info_tuple[1]}\n')
@@ -132,3 +124,20 @@ class SpriteApi(BaseApi):
             f.write(sprite_url + '\n')
             tqdm.write(f'Wrote error sprite URL {sprite_url} to {file_path}. Please run the sprite clean up collection '
                   f'method')
+
+    def __recover_lost_sprites(self):
+        ...
+
+    def __recover_no_sprite_err(self):
+        no_sprite_file_path: str = os.path.join(ERR_SPRITES_DIR, ERR_NO_SPRITES_FILENAME)
+
+        with open(no_sprite_file_path, 'r') as f:
+            lines: list[str] = f.readlines()
+
+        for pokemon_name in lines:
+            # reverse the list of sprites in the folder since errors occur later in the collection
+            for filename in os.listdir(POKEMON_SPRITES_DIR)[::-1]:
+                # if the file name contains the Pokémon name and is not a shiny, save it as a new file for the Pokémon
+                if filename.__contains__(pokemon_name) and not filename.__contains__('shiny'):
+
+                    # make an Image object from a directory file with file name from pokemon_name

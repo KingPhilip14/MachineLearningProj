@@ -6,6 +6,7 @@ DATA_DIR: str = os.path.join(ROOT_DIR, 'data')
 POKEMON_DATA_DIR: str = os.path.join(DATA_DIR, 'pokemon_data')
 EXTRA_DATA_DIR: str = os.path.join(DATA_DIR, 'extra_data')
 SPRITES_DIR: str = os.path.join(DATA_DIR, 'sprites')
+POKEMON_SPRITES_DIR: str = os.path.join(SPRITES_DIR, 'pokemon_sprites')
 ERR_SPRITES_DIR: str = os.path.join(SPRITES_DIR, 'errors')
 
 ERR_SPRITES_FILENAME: str = 'error_sprite_urls.txt'
