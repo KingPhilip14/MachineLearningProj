@@ -44,3 +44,5 @@ NAMES_TO_FILTER: list[str] = ['pikachu-starter', 'eevee-starter', 'castform-sunn
                               'koraidon-swimming-build', 'koraidon-gliding-build']
 
 WORDS_TO_FILTER: list[str] = ['busted', '-cap', 'totem']
+
+EXPECTED_SPRITE_COUNT: int = 2474

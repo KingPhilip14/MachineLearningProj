@@ -1,5 +1,5 @@
-https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/678.png
-https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/678.png
-https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10186.png
-https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/10226.png
-https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/10227.png
+https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/678.png,meowstic-male
+https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/678.png,meowstic-male
+https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10186.png,indeedee-female
+https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/10226.png,urshifu-single-strike-gmax
+https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/10227.png,urshifu-rapid-strike-gmax

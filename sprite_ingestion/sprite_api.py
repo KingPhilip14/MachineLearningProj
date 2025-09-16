@@ -9,7 +9,7 @@ import requests
 from PIL import Image
 from tqdm.auto import tqdm
 from config import (POKEMON_DATA_DIR, PAUSE_TIME, ERR_SPRITES_DIR, ERR_SPRITES_FILENAME,
-                    ERR_NO_SPRITES_FILENAME, POKEMON_SPRITES_DIR)
+                    ERR_NO_SPRITES_FILENAME, POKEMON_SPRITES_DIR, EXPECTED_SPRITE_COUNT)
 from data_ingestion.base_api import BaseApi
 from utils import pokemon_data_file_exists
 
@@ -60,7 +60,10 @@ class SpriteApi(BaseApi):
                                            pokemon_data['sprites']['front_shiny'],
                                            True))
 
-        self.__download_sprites(sprite_info_collection)
+        # if the expected amount of sprites is in the folder, don't download them
+        if len(os.listdir(POKEMON_SPRITES_DIR)) >= EXPECTED_SPRITE_COUNT:
+            self.__download_sprites(sprite_info_collection)
+
         self.__recover_no_sprite_err()
         self.__recover_lost_sprites()
 
@@ -81,7 +84,7 @@ class SpriteApi(BaseApi):
                 output_image = Image.open(requests.get(sprite_info_tuple[1], stream=True).raw).convert('RGBA')
 
                 is_shiny: bool = sprite_info_tuple[2]
-                img_file_name: str = f'{sprite_info_tuple[0]}-sprite_shiny.png' \
+                img_file_name: str = f'{sprite_info_tuple[0]}-sprite-shiny.png' \
                     if is_shiny else f'{sprite_info_tuple[0]}-sprite.png'
 
                 tqdm.write(f'Downloading sprite: {img_file_name}')
@@ -98,7 +101,7 @@ class SpriteApi(BaseApi):
 
             count += 1
 
-        print('Sprite collection complete.')
+        print('Sprite collection complete.\n\n')
 
     def __save_uncollected_sprite(self, sprite_info_tuple: tuple[str, str, bool]) -> None:
         """
@@ -127,27 +130,30 @@ class SpriteApi(BaseApi):
                        f'sprite clean up collection method')
 
     def __recover_lost_sprites(self):
+        print('Starting recovery process for data that has sprites but could not be collected...')
         err_sprite_file_path: str = os.path.join(ERR_SPRITES_DIR, ERR_SPRITES_FILENAME)
 
         with open(err_sprite_file_path, 'r') as f:
             lines: list[str] = f.readlines()
 
         for line in lines:
-            # split the URL from the name of the Pokémon
-            url, name = line.split(',')
+            # split the URL from the name of the Pokémon and remove any newline/white characters
+            url, name = line.strip().split(',')
 
             is_shiny: bool = url.__contains__('shiny')
-            img_file_name: str = f'{name}-sprite_shiny.png' if is_shiny else f'{name}-sprite.png'
+            img_file_name: str = f'{name}-sprite-shiny.png' if is_shiny else f'{name}-sprite.png'
 
             try:
-                print(f'Re-downloading error sprite: {img_file_name}')
+                print(f'\nRe-downloading error sprite: {img_file_name}')
                 image = Image.open(requests.get(url, stream=True).raw).convert('RGBA')
                 image.save(f'{POKEMON_SPRITES_DIR}/{img_file_name}')
             except PIL.UnidentifiedImageError as e:
                 print(f'Failed to collect the sprite for "{name}." This sprite will need to be downloaded manually.\n'
                       f'Image link: {url}\n')
 
-    def __recover_no_sprite_err(self):
+    def __recover_no_sprite_err(self) -> None:
+        print('Starting recovery process for data with no sprites found...')
+
         no_sprite_file_path: str = os.path.join(ERR_SPRITES_DIR, ERR_NO_SPRITES_FILENAME)
 
         with open(no_sprite_file_path, 'r') as f:
@@ -164,4 +170,3 @@ class SpriteApi(BaseApi):
                     image.save(f'{POKEMON_SPRITES_DIR}/{pokemon_name}')
 
                     return
-
