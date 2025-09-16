@@ -8,11 +8,12 @@ EXTRA_DATA_DIR: str = os.path.join(DATA_DIR, 'extra_data')
 SPRITES_DIR: str = os.path.join(DATA_DIR, 'sprites')
 POKEMON_SPRITES_DIR: str = os.path.join(SPRITES_DIR, 'pokemon_sprites')
 ERR_SPRITES_DIR: str = os.path.join(SPRITES_DIR, 'errors')
+TYPE_SPRITES_DIR: str = os.path.join(SPRITES_DIR, 'types_sprites')
 
 ERR_SPRITES_FILENAME: str = 'error_sprite_urls.txt'
 ERR_NO_SPRITES_FILENAME: str = 'error_no_sprites.txt'
 
-PAUSE_TIME: int = 5
+PAUSE_TIME: int = 10
 
 # the minimum BST for a Pokémon to be considered when creating a team
 BST_BARRIER: int = 350
@@ -46,3 +47,4 @@ NAMES_TO_FILTER: list[str] = ['pikachu-starter', 'eevee-starter', 'castform-sunn
 WORDS_TO_FILTER: list[str] = ['busted', '-cap', 'totem']
 
 EXPECTED_SPRITE_COUNT: int = 2474
+EXPECTED_TYPE_COUNT: int = 18 + 1
