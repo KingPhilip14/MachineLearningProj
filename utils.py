@@ -2,7 +2,8 @@
 import json
 import os
 
-from config import POKEMON_DATA_DIR, GEN_TO_POKEDEX_MAP, EXTRA_DATA_DIR
+from config import (EXTRA_DATA_DIR, POKEMON_DATA_DIR, ERR_SPRITES_DIR, POKEMON_SPRITES_DIR, TYPE_SPRITES_DIR,
+                    GEN_TO_POKEDEX_MAP, EXTRA_DATA_DIR)
 
 
 def gen_roman_converter(filename: str) -> str:
@@ -104,6 +105,22 @@ def pokemon_data_file_exists(filename: str) -> bool:
     file_path: str = os.path.join(POKEMON_DATA_DIR, filename + '.json')
 
     return os.path.exists(file_path)
+
+def create_dirs() -> None:
+    dirs: list[str] = [EXTRA_DATA_DIR, POKEMON_DATA_DIR, ERR_SPRITES_DIR, POKEMON_SPRITES_DIR, TYPE_SPRITES_DIR]
+
+    print(f'Attempting to make data directories...')
+    created: bool = False
+
+    for directory in dirs:
+        if os.path.exists(directory):
+            os.makedirs(directory, exist_ok=True)
+            created = True
+            print(f'Created directory "{directory}"')
+
+    input('Directories created. Press enter to continue >' if created
+          else print('Directories were already created. Press enter to continue >'))
+    clear_screen()
 
 
 def ask_if_using_legends() -> bool:

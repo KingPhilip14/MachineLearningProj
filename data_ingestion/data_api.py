@@ -133,6 +133,7 @@ class DataApi(BaseApi):
             name: str = data['name']
             move_coverage: set[str] = await self.__get_move_coverage(session, data['moves'])
             moveset: list[dict] = await self.__get_moveset(session, data['moves'])
+            abilities: list[dict] = await self.__get_abilities(session, data['abilities'])
 
             forms_data[name] = {
                 'id': data['id'],
@@ -140,17 +141,17 @@ class DataApi(BaseApi):
                 'type_1': data['types'][0]['type']['name'],
                 'type_2': data['types'][1]['type']['name'] if len(data['types']) > 1 and data['types'][1]['type'][
                     'name'] is not None else '',
+                'bst': sum([stat['base_stat'] for stat in data['stats']]),
                 'hp': data['stats'][0]['base_stat'],
                 'attack': data['stats'][1]['base_stat'],
                 'defense': data['stats'][2]['base_stat'],
                 'special-attack': data['stats'][3]['base_stat'],
                 'special-defense': data['stats'][4]['base_stat'],
                 'speed': data['stats'][5]['base_stat'],
-                'bst': sum([stat['base_stat'] for stat in data['stats']]),
-                'abilities': [ability_dict['ability']['name'] for ability_dict in data['abilities']],
+                'abilities': abilities,
+                'moveset': moveset,
                 'move_coverage': list(move_coverage),
                 'highest_move_categories': self.__get_most_common_move_categories(list(move_coverage)),
-                'moveset': moveset,
             }
 
         return forms_data
@@ -244,7 +245,7 @@ class DataApi(BaseApi):
 
         collected_data: list[dict] = []
 
-        # collected the desired data from each move from the data
+        # collecting the desired data from each move from the data
         for move in move_data:
             to_add: dict[str, dict] = {
                 move['name']:
@@ -256,6 +257,27 @@ class DataApi(BaseApi):
                         'power': move['power'],
                         'pp': move['pp'],
                         'priority': move['priority']
+                    }
+            }
+
+            collected_data.append(to_add)
+
+        return collected_data
+
+    async def __get_abilities(self, session: aiohttp.ClientSession, abilities: list[dict]):
+        ability_urls: list[str] = [ability['ability']['url'][:-1] for ability in abilities]
+        ability_data: list[dict] = await asyncio.gather(*[self.fetch_json(session, url) for url in ability_urls])
+
+        collected_data: list[dict] = []
+
+        # collecting the desired data from each move from the data
+        for ability in ability_data:
+            to_add: dict[str, dict] = {
+                ability['name']:
+                    {
+                        'id': ability['id'],
+                        'effect_desc': [entry['effect'] for entry in ability['effect_entries']
+                                        if entry['language'] == 'en'][0],
                     }
             }
 

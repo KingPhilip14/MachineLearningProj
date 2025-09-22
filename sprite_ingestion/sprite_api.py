@@ -24,7 +24,7 @@ class SpriteApi(BaseApi):
         Check the pokemon_data folder for the 'national.json' file. If it doesn't exist, exit.
         If the data file exists, collect all the IDs from all Pokémon and store them in a list to use later.
         """
-        # if the expected amount of sprites is not in the folder, download them all
+        # if the expected number of sprites is not in the folder, download them all
         if len(os.listdir(POKEMON_SPRITES_DIR)) < EXPECTED_SPRITE_COUNT:
             if not pokemon_data_file_exists(self.filename):
                 print(f'{self.filename} data was not found. Please download the data and try again.')
