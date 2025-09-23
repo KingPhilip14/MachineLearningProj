@@ -161,8 +161,7 @@ class SpriteApi(BaseApi):
             lines: list[str] = f.readlines()
 
         for pokemon_name in lines:
-            # reverse the list of sprites in the folder since errors occur later in the collection
-            for filename in os.listdir(POKEMON_SPRITES_DIR)[::-1]:
+            for filename in os.listdir(POKEMON_SPRITES_DIR):
                 # if the file name contains the Pokémon name and is not a shiny, save it as a new file for the Pokémon
                 if filename.__contains__(pokemon_name) and not filename.__contains__('shiny'):
                     # make an Image object from a directory file with file name from pokemon_name

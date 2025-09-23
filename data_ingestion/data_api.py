@@ -199,7 +199,7 @@ class DataApi(BaseApi):
         # if collecting date for national dex, only check for cosmetic forms
         if self.generation == -1 and stats_equal and typing_equals and abilities_equal and movesets_equal:
             print(f'Cannot add '
-                  f'the "{form_name}" form because it is either cosmetic or is not significance criteria.')
+                  f'the "{form_name}" form because it is either cosmetic or does not meet the significance criteria.')
             return None
 
         if self.generation == -1:
@@ -269,17 +269,31 @@ class DataApi(BaseApi):
         ability_data: list[dict] = await asyncio.gather(*[self.fetch_json(session, url) for url in ability_urls])
 
         collected_data: list[dict] = []
+        to_add: dict[str, dict]
 
         # collecting the desired data from each move from the data
         for ability in ability_data:
-            to_add: dict[str, dict] = {
-                ability['name']:
-                    {
-                        'id': ability['id'],
-                        'effect_desc': [entry['effect'] for entry in ability['effect_entries']
-                                        if entry['language'] == 'en'][0],
-                    }
-            }
+            try:
+                to_add = {
+                    ability['name']:
+                        {
+                            'id': ability['id'],
+                            'effect_desc': [entry['effect'] for entry in ability['effect_entries']
+                                            if entry['language']['name'] == 'en'][0],
+                        }
+                }
+
+            except IndexError:
+                print(f'Cannot add ability "{ability["name"]}" because getting its English effect description failed\n'
+                      f'Adding empty string instead.')
+
+                to_add = {
+                    ability['name']:
+                        {
+                            'id': ability['id'],
+                            'effect_desc': '',
+                        }
+                }
 
             collected_data.append(to_add)
 

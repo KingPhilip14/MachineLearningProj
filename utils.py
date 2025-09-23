@@ -113,13 +113,14 @@ def create_dirs() -> None:
     created: bool = False
 
     for directory in dirs:
-        if os.path.exists(directory):
+        if not os.path.exists(directory):
             os.makedirs(directory, exist_ok=True)
             created = True
             print(f'Created directory "{directory}"')
+            continue
 
     input('Directories created. Press enter to continue >' if created
-          else print('Directories were already created. Press enter to continue >'))
+          else 'Directories were already created. Press enter to continue >')
     clear_screen()
 
 
