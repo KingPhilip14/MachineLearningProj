@@ -338,8 +338,15 @@ class TeamBuilder:
             }
 
             # get all abilities
-            abilities: list[str] = info['abilities']
-            abilities_str: str = ', '.join(ability.title().replace('-', ' ') for ability in abilities)
+            ability_dicts: list[dict] = info['abilities']
+            temp: list[str] = [next(iter(ability)).replace('-', ' ') for ability in ability_dicts]
+            ability_names: list[str] = []
+
+            for ability_name in temp:
+                ability: list[str] = [name_part[0].upper() + name_part[1:] for name_part in ability_name.split(' ')]
+                ability_names.append(' '.join(ability))
+
+            abilities_str: str = ', '.join(ability_names)
 
             details: str = (
                 f'{name.title()} ({type_str}) - {role}\n'
