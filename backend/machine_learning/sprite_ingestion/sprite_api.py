@@ -11,7 +11,7 @@ from tqdm.auto import tqdm
 from config import (POKEMON_DATA_DIR, PAUSE_TIME, ERR_SPRITES_DIR, ERR_SPRITES_FILENAME,
                     ERR_NO_SPRITES_FILENAME, POKEMON_SPRITES_DIR, EXPECTED_SPRITE_COUNT, EXPECTED_TYPE_COUNT,
                     TYPE_SPRITES_DIR)
-from data_ingestion.base_api import BaseApi
+from backend.machine_learning.data_ingestion.base_api import BaseApi
 from utils import pokemon_data_file_exists
 
 

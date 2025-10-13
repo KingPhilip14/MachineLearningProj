@@ -3,7 +3,7 @@ import asyncio
 import aiohttp
 from tqdm import tqdm
 
-from data_ingestion.base_api import BaseApi
+from backend.machine_learning.data_ingestion.base_api import BaseApi
 from utils import pokemon_data_file_exists, save_json_file, roman_to_int, get_generation_num
 
 
