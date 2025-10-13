@@ -2,7 +2,7 @@ import os
 
 import utils
 from utils import input_generation, ask_if_using_legends, ask_if_only_using_babies, ask_for_team_preferences
-from backend.machine_learning.learning import TeamBuilder
+from backend.machine_learning.learning.team_builder import TeamBuilder
 
 if __name__ == '__main__':
     # utils.clear_screen()

@@ -3,8 +3,8 @@ import os
 
 from typing import Any
 
-from config import POKEMON_DATA_DIR, EXTRA_DATA_DIR, NAMES_TO_FILTER, WORDS_TO_FILTER
-from utils import save_json_file, calculate_type_effectiveness
+from config import POKEMON_DATA_DIR, NAMES_TO_FILTER, WORDS_TO_FILTER
+from utils import calculate_type_effectiveness
 
 
 def update_data_file(filename) -> None:
