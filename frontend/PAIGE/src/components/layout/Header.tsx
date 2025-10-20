@@ -8,10 +8,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 export default function Header() {
   return (
     <AppBar
-      position="sticky"
       style={{
         background: "linear-gradient(45deg, #1f271b, #0b4f6c)",
       }}
+      sx={{ minHeight: "50px", position: "sticky" }}
     >
       <Toolbar>
         <IconButton
