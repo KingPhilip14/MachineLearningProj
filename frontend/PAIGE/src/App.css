@@ -1,0 +1,15 @@
+.rectangle {
+    display: inline-block;
+    width: 864px;
+    height: 140px;
+    background: #E5E5E5;
+    padding: 5px;
+    position: relative;
+    border-radius: 30px;
+}
+
+.vert-hor-center-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

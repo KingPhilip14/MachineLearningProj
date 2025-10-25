@@ -1,8 +1,6 @@
 import Header from "./components/layout/Header.tsx";
 import Footer from "./components/layout/Footer.tsx";
-import { ThemeProvider } from "styled-components";
-import { GlobalStyles } from "./themes/GlobalStyles.tsx";
-import { lightTheme, darkTheme } from "./themes/Themes.tsx";
+import Home from "./components/Home.tsx";
 
 function App() {
   // const [theme, setTheme] = useState("light");
@@ -11,15 +9,11 @@ function App() {
   // };
 
   return (
-    // <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
     <>
       <Header />
-      {/*<div className="alert alert-primary">*/}
-      {/*  <Alert children={"Hello World"} />*/}
-      {/*</div>*/}
+      <Home />
       <Footer />
     </>
-    // </ThemeProvider>
   );
 }
 
