@@ -5,7 +5,7 @@ export default function Footer() {
     <Box
       component="footer"
       sx={{
-        background: "linear-gradient(45deg, #1f271b, #0b4f6c)",
+        background: "linear-gradient(45deg, #304fa3, #892A3A)",
         py: 1,
         mt: "auto",
         position: "fixed",

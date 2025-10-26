@@ -1,15 +1,69 @@
-.rectangle {
-    display: inline-block;
-    width: 864px;
-    height: 140px;
-    background: #E5E5E5;
-    padding: 5px;
-    position: relative;
-    border-radius: 30px;
+.home-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertical centering */
+    align-items: center; /* horizontal centering */
+    min-height: 35vh;
+    text-align: center;
+
+    box-sizing: border-box;
+    padding-top: 102px;
 }
 
-.vert-hor-center-text {
+.rounded-rectangle {
+    max-width: 90%; /* for responsive scaling on different screens */
+    background: #E5E5E5;
+    padding: 5px;
+    border-radius: 30px;
+
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.mascot {
+    padding: 30px;
+}
+
+.rectangle-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.floating-label {
+    /* helps to make text half in/half out of a div to create a "floating" effect*/
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+
+    font-weight: 800;
+    border-radius: 8px;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+
+    background: -webkit-linear-gradient(45deg, #304fa3, #892A3A);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.large-rectangle {
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.button {
+    margin: 14px;
+}
+
+.scrollable {
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
 }

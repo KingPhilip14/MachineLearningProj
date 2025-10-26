@@ -2,27 +2,24 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+import mascot from "../../assets/floette-eternal.gif";
 
 export default function Header() {
   return (
     <AppBar
       style={{
-        background: "linear-gradient(45deg, #1f271b, #0b4f6c)",
+        background: "linear-gradient(45deg, #304fa3, #892A3A)",
       }}
-      sx={{ minHeight: "50px", position: "sticky" }}
+      sx={{ minHeight: "60px", position: "sticky" }}
     >
       <Toolbar>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-        >
-          <MenuIcon />
-        </IconButton>
+        <img
+          src={mascot}
+          className="mascot"
+          alt={"PAIGE Mascot"}
+          // height="80px"
+          style={{ padding: "15px" }}
+        />
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           PAIGE
         </Typography>
