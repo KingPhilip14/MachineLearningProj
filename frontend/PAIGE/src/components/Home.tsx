@@ -19,21 +19,16 @@ export default function Home() {
             The Pokémon AI Generation Engine
           </Typography>
         </div>
-        <Typography style={{ padding: "55px", textAlign: "center" }}>
-          Select a generation to get started!
+        <Typography style={{ padding: "75px", textAlign: "center" }}>
+          Select a generation below to get started!
         </Typography>
 
-        <div className={"rectangle-wrapper scrollable"}>
-          <Typography variant={"h6"} className={"floating-label"}>
+        <div className={"rectangle-wrapper"}>
+          <Typography variant={"h5"} className={"floating-label"}>
             Generations
           </Typography>
 
-          <div
-            className={"rounded-rectangle large-rectangle"}
-            style={{ width: "864px", height: "474px" }}
-          >
-            <GenerationSelect />
-          </div>
+          <GenerationSelect />
         </div>
       </div>
     </>

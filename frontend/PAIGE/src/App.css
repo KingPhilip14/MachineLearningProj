@@ -8,6 +8,8 @@
 
     box-sizing: border-box;
     padding-top: 102px;
+
+    animation: fade-in 1.5s;
 }
 
 .rounded-rectangle {
@@ -38,7 +40,7 @@
     top: 0;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 2;
+    margin: 50px;
 
     font-weight: 800;
     border-radius: 8px;
@@ -66,4 +68,13 @@
     overflow-y: auto;
     border: 1px solid #ccc;
     padding: 10px;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1.0;
+  }
 }

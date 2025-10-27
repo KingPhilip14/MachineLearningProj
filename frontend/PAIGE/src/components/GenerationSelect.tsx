@@ -28,7 +28,7 @@ export default function GenerationSelect() {
               borderRadius: "30px",
               color: "#FFFFFF",
             }}
-            sx={{ fontSize: "1rem", margin: "14px" }}
+            sx={{ fontSize: "1rem", margin: "45px" }}
           >
             {gen}
           </Button>

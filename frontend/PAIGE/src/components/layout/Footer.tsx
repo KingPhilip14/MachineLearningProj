@@ -1,18 +1,9 @@
 import { Box, Container, Typography } from "@mui/material";
+import "./Layout.css";
 
 export default function Footer() {
   return (
-    <Box
-      component="footer"
-      sx={{
-        background: "linear-gradient(45deg, #304fa3, #892A3A)",
-        py: 1,
-        mt: "auto",
-        position: "fixed",
-        bottom: 0,
-        width: "100%",
-      }}
-    >
+    <Box component="footer" className={"footer"}>
       <Container maxWidth="lg">
         <Typography align="center" style={{ color: "white" }}>
           Report bugs or leave feedback by creating an issue on <a />
