@@ -1,6 +1,6 @@
 import Header from "./components/layout/Header.tsx";
 import Footer from "./components/layout/Footer.tsx";
-import Home from "./components/Home.tsx";
+import Home from "./components/home/Home.tsx";
 
 function App() {
   // const [theme, setTheme] = useState("light");

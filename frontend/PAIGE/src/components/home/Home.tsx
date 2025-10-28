@@ -1,6 +1,6 @@
-import "../App.css";
+import "../../App.css";
 import Typography from "@mui/material/Typography";
-import GenerationSelect from "./GenerationSelect.tsx";
+import GenerationSelect from "../GenerationSelect.tsx";
 
 export default function Home() {
   return (
@@ -24,10 +24,6 @@ export default function Home() {
         </Typography>
 
         <div className={"rectangle-wrapper"}>
-          <Typography variant={"h5"} className={"floating-label"}>
-            Generations
-          </Typography>
-
           <GenerationSelect />
         </div>
       </div>
