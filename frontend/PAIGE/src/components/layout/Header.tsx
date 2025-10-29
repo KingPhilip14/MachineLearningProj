@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -21,10 +22,12 @@ export default function Header() {
           style={{ padding: "15px" }}
         />
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          PAIGE
+          <Link to={"/"}>PAIGE</Link>
         </Typography>
         <Button color="inherit">Login</Button>
-        <Button color="inherit">About</Button>
+        <Link to={"/about"}>
+          <Button color="inherit">About</Button>
+        </Link>
         <Button color="inherit">Saved Teams</Button>
       </Toolbar>
     </AppBar>
