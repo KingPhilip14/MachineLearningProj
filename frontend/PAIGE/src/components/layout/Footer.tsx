@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Box, Container, Typography } from "@mui/material";
 import "./Layout.css";
 
@@ -7,11 +8,13 @@ export default function Footer() {
       <Container maxWidth="lg">
         <Typography align="center" style={{ color: "white" }}>
           Report bugs or leave feedback by creating an issue on <a />
-          <a
-            href={"https://github.com/KingPhilip14/MachineLearningProj/issues"}
+          <Link
+            className={"footer-link"}
+            target={"_blank"}
+            to={"https://github.com/KingPhilip14/MachineLearningProj/issues"}
           >
             GitHub
-          </a>
+          </Link>
         </Typography>
         <Typography align="center" style={{ color: "white" }}>
           Pokémon is © of Nintendo, 1995-2025

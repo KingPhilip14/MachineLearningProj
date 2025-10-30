@@ -18,14 +18,16 @@ export default function Header() {
           src={mascot}
           className="mascot"
           alt={"PAIGE Mascot"}
-          // height="80px"
+          height="80px"
           style={{ padding: "15px" }}
         />
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <Link to={"/"}>PAIGE</Link>
+          <Link className={"header-link"} to={"/"}>
+            PAIGE
+          </Link>
         </Typography>
         <Button color="inherit">Login</Button>
-        <Link to={"/about"}>
+        <Link className={"header-link"} to={"/about"}>
           <Button color="inherit">About</Button>
         </Link>
         <Button color="inherit">Saved Teams</Button>

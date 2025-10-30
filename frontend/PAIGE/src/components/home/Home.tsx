@@ -1,6 +1,8 @@
 import "../../App.css";
+import "./Home.css";
 import Typography from "@mui/material/Typography";
 import GenerationSelect from "../GenerationSelect.tsx";
+import { LinearGradient } from "react-text-gradients";
 
 export default function Home() {
   return (
@@ -22,6 +24,15 @@ export default function Home() {
         <Typography style={{ padding: "75px", textAlign: "center" }}>
           Select a generation below to get started!
         </Typography>
+
+        <h3>
+          <LinearGradient
+            gradient={["to left", "#304fa3, #892A3A"]}
+            fallbackColor="black"
+          >
+            Generations
+          </LinearGradient>
+        </h3>
 
         <div className={"rectangle-wrapper"}>
           <GenerationSelect />

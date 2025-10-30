@@ -1,3 +1,9 @@
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 .header {
     background-image: linear-gradient(45deg, #304fa3, #892A3A);
     min-height: 60px;
@@ -8,7 +14,18 @@
     background-image: linear-gradient(45deg, #304fa3, #892A3A);
     padding: 1vh;
     margin-top: auto;
-    position: fixed;
+    position: sticky;
+    left: 0;
+    right: 0;
     bottom: 0;
     width: 100%;
+}
+
+.header-link {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-link {
+    color: white;
 }
