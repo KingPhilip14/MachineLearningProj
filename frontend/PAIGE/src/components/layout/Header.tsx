@@ -26,11 +26,11 @@ export default function Header() {
             PAIGE
           </Link>
         </Typography>
-        <Button color="inherit">Login</Button>
         <Link className={"header-link"} to={"/about"}>
           <Button color="inherit">About</Button>
         </Link>
         <Button color="inherit">Saved Teams</Button>
+        <Button color="inherit">Login</Button>
       </Toolbar>
     </AppBar>
   );

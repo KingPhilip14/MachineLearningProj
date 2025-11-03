@@ -1,5 +1,7 @@
 import "../App.css";
+import "./home/Home.css";
 import Button from "@mui/material/Button";
+import { styled } from "@mui/material/styles";
 
 export default function GenerationSelect() {
   const gens = [
@@ -15,23 +17,29 @@ export default function GenerationSelect() {
     "National",
   ];
 
+  const GenSelectBtn = styled(Button)({
+    width: "248px",
+    height: "128px",
+    borderRadius: "30px",
+    color: "black",
+    boxShadow: "3px 3px 8px",
+  });
+
   return (
     <>
       <ul>
         {gens.map((gen) => (
-          <Button
-            className={"rounded-rectangle button"}
-            style={{
-              background: "linear-gradient(45deg, #304fa3, #892A3A)",
-              width: "248px",
-              height: "128px",
-              borderRadius: "30px",
-              color: "#FFFFFF",
+          <GenSelectBtn
+            sx={{
+              fontSize: "1rem",
+              margin: "45px",
+              border: 1,
+              borderStyle: "solid",
+              borderColor: "black",
             }}
-            sx={{ fontSize: "1rem", margin: "45px" }}
           >
             {gen}
-          </Button>
+          </GenSelectBtn>
         ))}
       </ul>
     </>
