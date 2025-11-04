@@ -1,20 +1,21 @@
-export const Themes = {
-  dark: {
-    primary: "#892A3A",
-    secondary: "#C1C1C1",
-    accent: "#9A8F97",
-    text: "#FFFFFF",
-    background: "#403F3F",
-  },
-
-  light: {
-    primary: "#304FA3",
-    secondary: "#E5E5E5",
-    accent: "#D6EAD7",
-    text: "#403F3F",
-    background: "#FFFFFF",
-  },
-};
+// export const Themes = {
+//   light: {
+//     primary: "#304FA3",
+//     secondary: "#B9D6F2",
+//     tertiary: "#E5E5E5",
+//     accent: "#D6EAD7",
+//     text: "#403F3F",
+//     background: "#FFFFFF",
+//   },
+//   dark: {
+//     primary: "#892A3A",
+//     secondary: "#9A8F97",
+//     tertiary: "#C1C1C1",
+//     accent: "#BBDBB4",
+//     text: "#FFFFFF",
+//     background: "#403F3F",
+//   },
+// };
 
 // export const lightTheme = {
 //   primary: "#304fa3",

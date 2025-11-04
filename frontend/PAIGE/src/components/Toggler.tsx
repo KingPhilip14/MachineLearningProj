@@ -13,12 +13,12 @@
 //   }
 // `;
 //
-// const Toggle = ({ theme, toggleTheme }) => {
+// const toggle = ({ theme, toggleTheme }) => {
 //   return <Button onClick={toggleTheme}>Switch Theme</Button>;
 // };
 //
-// Toggle.propTypes = {
+// toggle.propTypes = {
 //   theme: string.isRequired,
 //   toggleTheme: func.isRequired,
 // };
-// export default Toggle;
+// export default toggle;

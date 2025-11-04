@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <Box component="footer" className={"footer"}>
       <Container maxWidth="lg">
-        <Typography align="center" style={{ color: "white" }}>
+        <Typography className={"footer-text"}>
           Report bugs or leave feedback by creating an issue on <a />
           <Link
             className={"footer-link"}
@@ -16,7 +16,7 @@ export default function Footer() {
             GitHub
           </Link>
         </Typography>
-        <Typography align="center" style={{ color: "white" }}>
+        <Typography className={"footer-text"}>
           Pokémon is © of Nintendo, 1995-2025
         </Typography>
       </Container>

@@ -1,20 +1,23 @@
+import "../../App.css";
 import "./Layout.css";
 import Header from "./Header.tsx";
 import Footer from "./Footer.tsx";
 import { Outlet } from "react-router-dom";
-// import { useColorScheme } from "@mui/material";
-// import { Themes } from "../../themes/Themes.tsx";
+import { Toggle } from "../toggle/Toggle.tsx";
+import { useState } from "react";
 
 const Layout = () => {
-  // const colorScheme = useColorScheme();
-  // const theme = Themes[colorScheme] ?? Themes.light;
+  const [isDark, setIsDark] = useState(false);
 
   return (
-    <div className={"page-container"}>
-      <Header />
-      <Outlet />
-      <Footer />
-    </div>
+    <>
+      <div className={"app"} data-theme={isDark ? "dark" : "light"}>
+        <Header />
+        <Toggle isChecked={isDark} handleChange={() => setIsDark(!isDark)} />
+        <Outlet />
+        <Footer />
+      </div>
+    </>
   );
 };
 

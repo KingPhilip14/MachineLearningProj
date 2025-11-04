@@ -1,0 +1,27 @@
+:root {
+    --light-primary: #304FA3;
+    --dark-primary: #892A3A;
+
+    --primary: #304FA3; /*Polynesian blue*/
+    --secondary: #4191DC; /*United Nations Blue*/
+    --tertiary: #E5E5E5; /*Platinum*/
+    --accent: #4CAF50; /*Pigment green*/
+    --text: #000000; /*Onyx*/
+    --text-light: #FFFFFF; /*White*/
+    --background-color: #FFFFFF; /*White*/
+    --linear-gradient: linear-gradient(45deg, var(--primary), var(--secondary));
+    --toggle-bg: #f0eb9d;
+    --toggle-fg: #ffd000;
+}
+
+[data-theme="dark"] {
+    --primary: #892A3A; /*Claret*/
+    --secondary: #BB3A4F; /*Redwood*/
+    --tertiary: #010101; /*Silver*/
+    --accent: #BBDBB4; /*Celadon*/
+    --text: #FFFFFF; /*White*/
+    --background-color: #403F3F; /*Onyx*/
+    --linear-gradient: linear-gradient(45deg, var(--primary), var(--secondary));
+    --toggle-bg: #283452;
+    --toggle-fg: #00a6ff;
+}

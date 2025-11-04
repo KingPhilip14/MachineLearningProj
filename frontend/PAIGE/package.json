@@ -21,7 +21,8 @@
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.5",
     "react-text-gradients": "^1.0.2",
-    "styled-components": "^6.1.19"
+    "styled-components": "^6.1.19",
+    "use-local-storage": "^3.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",

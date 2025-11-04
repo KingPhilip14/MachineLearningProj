@@ -5,13 +5,17 @@
 }
 
 .header {
-    background-image: linear-gradient(45deg, #304fa3, #892A3A);
+    background-image: var(--linear-gradient);
     min-height: 60px;
     position: sticky;
 }
 
+.header-btn {
+    color: var(--text-light)
+}
+
 .footer {
-    background-image: linear-gradient(45deg, #304fa3, #892A3A);
+    background-image: var(--linear-gradient);
     padding: 1vh;
     margin-top: auto;
     position: sticky;
@@ -21,11 +25,16 @@
     width: 100%;
 }
 
+.footer-text {
+    color: var(--text-light);
+    text-align: center;
+}
+
 .header-link {
-    color: white;
+    color: var(--text-light);
     text-decoration: none;
 }
 
 .footer-link {
-    color: white;
+    color: var(--text-light);
 }

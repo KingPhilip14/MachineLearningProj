@@ -4,12 +4,16 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import mascot from "../../assets/floette-eternal.gif";
+// import { Toggle } from "../toggle/Toggle.tsx";
+// import { useState } from "react";
 
 export default function Header() {
+  // const [isDark, setIsDark] = useState(false);
+
   return (
     <AppBar
       style={{
-        background: "linear-gradient(45deg, #304fa3, #892A3A)",
+        background: "var(--linear-gradient)",
       }}
       sx={{ minHeight: "60px", position: "sticky" }}
     >
@@ -26,6 +30,7 @@ export default function Header() {
             PAIGE
           </Link>
         </Typography>
+        {/*<Toggle isChecked={isDark} handleChange={() => setIsDark(!isDark)} />*/}
         <Link className={"header-link"} to={"/about"}>
           <Button color="inherit">About</Button>
         </Link>

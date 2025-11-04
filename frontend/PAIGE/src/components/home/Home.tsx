@@ -27,8 +27,8 @@ export default function Home() {
 
         <h3>
           <LinearGradient
-            gradient={["to left", "#304fa3, #892A3A"]}
-            fallbackColor="black"
+            gradient={["to left", "var(--light-primary), var(--dark-primary)"]}
+            fallbackColor="var(--text)"
           >
             Generations
           </LinearGradient>
