@@ -1,0 +1,2151 @@
+{
+    "stench": {
+        "id": 1,
+        "name": "stench",
+        "short_desc": "Has a 10% chance of making target Pok\u00e9mon flinch with each hit.",
+        "effect_desc": "This Pok\u00e9mon's damaging moves have a 10% chance to make the target flinch with each hit if they do not already cause flinching as a secondary effect.\n\nThis ability does not stack with a held item.\n\nOverworld: The wild encounter rate is halved while this Pok\u00e9mon is first in the party.",
+        "flavor_text": "Helps repel wild POK\u00e9MON."
+    },
+    "drizzle": {
+        "id": 2,
+        "name": "drizzle",
+        "short_desc": "Summons rain that lasts indefinitely upon entering battle.",
+        "effect_desc": "The weather changes to rain when this Pok\u00e9mon enters battle and does not end unless replaced by another weather condition.\n\nIf multiple Pok\u00e9mon with this ability, drought, sand stream, or snow warning are sent out at the same time, the abilities will activate in order of Speed, respecting trick room.  Each ability's weather will cancel the previous weather, and only the weather summoned by the slowest of the Pok\u00e9mon will stay.",
+        "flavor_text": "Summons rain in battle."
+    },
+    "speed-boost": {
+        "id": 3,
+        "name": "speed-boost",
+        "short_desc": "Raises Speed one stage after each turn.",
+        "effect_desc": "This Pok\u00e9mon's Speed rises one stage after each turn.",
+        "flavor_text": "Gradually boosts SPEED."
+    },
+    "battle-armor": {
+        "id": 4,
+        "name": "battle-armor",
+        "short_desc": "Protects against critical hits.",
+        "effect_desc": "Moves cannot score critical hits against this Pok\u00e9mon.\n\nThis ability functions identically to shell armor.",
+        "flavor_text": "Blocks critical hits."
+    },
+    "sturdy": {
+        "id": 5,
+        "name": "sturdy",
+        "short_desc": "Prevents being KOed from full HP, leaving 1 HP instead.  Protects against the one-hit KO moves regardless of HP.",
+        "effect_desc": "When this Pok\u00e9mon is at full HP, any hit that would knock it out will instead leave it with 1 HP.  Regardless of its current HP, it is also immune to the one-hit KO moves: fissure, guillotine, horn drill, and sheer cold.\n\nIf this Pok\u00e9mon is holding a focus sash, this ability takes precedence and the item will not be consumed.",
+        "flavor_text": "Negates 1-hit KO attacks."
+    },
+    "damp": {
+        "id": 6,
+        "name": "damp",
+        "short_desc": "Prevents self destruct, explosion, and aftermath from working while the Pok\u00e9mon is in battle.",
+        "effect_desc": "While this Pok\u00e9mon is in battle, self destruct and explosion will fail and aftermath will not take effect.",
+        "flavor_text": "Prevents self-destruction."
+    },
+    "limber": {
+        "id": 7,
+        "name": "limber",
+        "short_desc": "Prevents paralysis.",
+        "effect_desc": "This Pok\u00e9mon cannot be paralyzed.\n\nIf a Pok\u00e9mon is paralyzed and acquires this ability, its paralysis is healed; this includes when regaining a lost ability upon leaving battle.",
+        "flavor_text": "Prevents paralysis."
+    },
+    "sand-veil": {
+        "id": 8,
+        "name": "sand-veil",
+        "short_desc": "Increases evasion to 1.25\u00d7 during a sandstorm.  Protects against sandstorm damage.",
+        "effect_desc": "During a sandstorm, this Pok\u00e9mon has 1.25\u00d7 its evasion, and it does not take sandstorm damage regardless of type.\n\nThe evasion bonus does not count as a stat modifier.\n\nOverworld: If the lead Pok\u00e9mon has this ability, the wild encounter rate is halved in a sandstorm.",
+        "flavor_text": "Ups evasion in a sandstorm."
+    },
+    "static": {
+        "id": 9,
+        "name": "static",
+        "short_desc": "Has a 30% chance of paralyzing attacking Pok\u00e9mon on contact.",
+        "effect_desc": "Whenever a move makes contact with this Pok\u00e9mon, the move's user has a 30% chance of being paralyzed.\n\nPok\u00e9mon that are immune to electric-type moves can still be paralyzed by this ability.\n\nOverworld: If the lead Pok\u00e9mon has this ability, there is a 50% chance that encounters will be with an electric Pok\u00e9mon, if applicable.",
+        "flavor_text": "Paralyzes on contact."
+    },
+    "volt-absorb": {
+        "id": 10,
+        "name": "volt-absorb",
+        "short_desc": "Absorbs electric moves, healing for 1/4 max HP.",
+        "effect_desc": "Whenever an electric-type move hits this Pok\u00e9mon, it heals for 1/4 of its maximum HP, negating any other effect on it.\n\nThis ability will not take effect if this Pok\u00e9mon is ground-type and thus immune to Electric moves.  Electric moves will ignore this Pok\u00e9mon's substitute.\n\nThis effect includes non-damaging moves, i.e. thunder wave.",
+        "flavor_text": "Turns electricity into HP."
+    },
+    "water-absorb": {
+        "id": 11,
+        "name": "water-absorb",
+        "short_desc": "Absorbs water moves, healing for 1/4 max HP.",
+        "effect_desc": "Whenever a water-type move hits this Pok\u00e9mon, it heals for 1/4 of its maximum HP, negating any other effect on it.\n\nWater moves will ignore this Pok\u00e9mon's substitute.",
+        "flavor_text": "Restores HP if hit by a\nWater-type move."
+    },
+    "oblivious": {
+        "id": 12,
+        "name": "oblivious",
+        "short_desc": "Prevents infatuation and protects against captivate.",
+        "effect_desc": "This Pok\u00e9mon cannot be infatuated and is immune to captivate.\n\nIf a Pok\u00e9mon is infatuated and acquires this ability, its infatuation is cleared.",
+        "flavor_text": "Prevents attraction."
+    },
+    "cloud-nine": {
+        "id": 13,
+        "name": "cloud-nine",
+        "short_desc": "Negates all effects of weather, but does not prevent the weather itself.",
+        "effect_desc": "While this Pok\u00e9mon is in battle, weather can still be in play, but will not have any of its effects.\n\nThis ability functions identically to air lock.",
+        "flavor_text": "Negates weather effects."
+    },
+    "compound-eyes": {
+        "id": 14,
+        "name": "compound-eyes",
+        "short_desc": "Increases moves' accuracy to 1.3\u00d7.",
+        "effect_desc": "This Pok\u00e9mon's moves have 1.3\u00d7 their accuracy.\n\nThis ability has no effect on the one-hit KO moves (fissure, guillotine, horn drill, and sheer cold).\n\nOverworld: If the first Pok\u00e9mon in the party has this ability, the chance of a wild Pok\u00e9mon holding a particular item is raised from 50%, 5%, or 1% to 60%, 20%, or 5%, respectively.",
+        "flavor_text": "Raises accuracy."
+    },
+    "insomnia": {
+        "id": 15,
+        "name": "insomnia",
+        "short_desc": "Prevents sleep.",
+        "effect_desc": "This Pok\u00e9mon cannot be asleep.\n\nThis causes rest to fail altogether.  If a Pok\u00e9mon is asleep and acquires this ability, it will immediately wake up; this includes when regaining a lost ability upon leaving battle.\n\nThis ability functions identically to vital spirit in battle.",
+        "flavor_text": "Prevents sleep."
+    },
+    "color-change": {
+        "id": 16,
+        "name": "color-change",
+        "short_desc": "Changes type to match when hit by a damaging move.",
+        "effect_desc": "Whenever this Pok\u00e9mon takes damage from a move, the Pok\u00e9mon's type changes to match the move.\n\nIf the Pok\u00e9mon has two types, both are overridden.  The Pok\u00e9mon must directly take damage; for example, moves blocked by a substitute will not trigger this ability, nor will moves that deal damage indirectly, such as spikes.\n\nThis ability takes effect on only the last hit of a multiple-hit attack.\n\nIn Pok\u00e9mon Colosseum and XD: Gale of Darkness, this ability does not take effect on Shadow-type moves.",
+        "flavor_text": "Changes type to foe\u2019s move."
+    },
+    "immunity": {
+        "id": 17,
+        "name": "immunity",
+        "short_desc": "Prevents poison.",
+        "effect_desc": "This Pok\u00e9mon cannot be poisoned.  This includes bad poison.\n\nIf a Pok\u00e9mon is poisoned and acquires this ability, its poison is healed; this includes when regaining a lost ability upon leaving battle.",
+        "flavor_text": "Prevents poisoning."
+    },
+    "flash-fire": {
+        "id": 18,
+        "name": "flash-fire",
+        "short_desc": "Protects against fire moves.  Once one has been blocked, the Pok\u00e9mon's own Fire moves inflict 1.5\u00d7 damage until it leaves battle.",
+        "effect_desc": "This Pok\u00e9mon is immune to fire-type moves.  Once this Pok\u00e9mon has been hit by a Fire move, its own Fire moves will inflict 1.5\u00d7 as much damage until it leaves battle.\n\nThis ability has no effect while the Pok\u00e9mon is frozen.  The Fire damage bonus is retained even if the Pok\u00e9mon is frozen and thawed or the ability is lost or disabled.  Fire moves will ignore this Pok\u00e9mon's substitute.  This ability takes effect even on non-damaging moves, i.e. will o wisp.",
+        "flavor_text": "Powers up if hit by fire."
+    },
+    "shield-dust": {
+        "id": 19,
+        "name": "shield-dust",
+        "short_desc": "Protects against incoming moves' extra effects.",
+        "effect_desc": "This Pok\u00e9mon is immune to the extra effects of moves used against it.\n\nAn extra effect is a move's chance, listed as an \"effect chance\", to inflict a status ailment, cause a stat change, or make the target flinch in addition to the move's main effect.  For example, thunder shock's paralysis is an extra effect, but thunder wave's is not, nor are knock off's item removal and air cutter's increased critical hit rate.",
+        "flavor_text": "Prevents added effects."
+    },
+    "own-tempo": {
+        "id": 20,
+        "name": "own-tempo",
+        "short_desc": "Prevents confusion.",
+        "effect_desc": "This Pok\u00e9mon cannot be confused.\n\nIf a Pok\u00e9mon is confused and acquires this ability, its confusion will immediately be healed.",
+        "flavor_text": "Prevents confusion."
+    },
+    "suction-cups": {
+        "id": 21,
+        "name": "suction-cups",
+        "short_desc": "Prevents being forced out of battle by other Pok\u00e9mon's moves.",
+        "effect_desc": "This Pok\u00e9mon cannot be forced out of battle by moves such as whirlwind.\n\ndragon tail and circle throw still inflict damage against this Pok\u00e9mon.\n\nOverworld: If the lead Pok\u00e9mon has this ability, the success rate while fishing is increased.",
+        "flavor_text": "Firmly anchors the body."
+    },
+    "intimidate": {
+        "id": 22,
+        "name": "intimidate",
+        "short_desc": "Lowers opponents' Attack one stage upon entering battle.",
+        "effect_desc": "When this Pok\u00e9mon enters battle, the opponent's Attack is lowered by one stage.  In a double battle, both opponents are affected.\n\nThis ability also takes effect when acquired during a battle, but will not take effect again if lost and reobtained without leaving battle.\n\nThis ability has no effect on an opponent that has a substitute.\n\nOverworld: If the first Pok\u00e9mon in the party has this ability, any random encounter with a Pok\u00e9mon five or more levels lower than it has a 50% chance of being skipped.",
+        "flavor_text": "Lowers the foe\u2019s ATTACK."
+    },
+    "shadow-tag": {
+        "id": 23,
+        "name": "shadow-tag",
+        "short_desc": "Prevents opponents from fleeing or switching out.",
+        "effect_desc": "While this Pok\u00e9mon is in battle, opposing Pok\u00e9mon cannot flee or switch out.\n\nOther Pok\u00e9mon with this ability are unaffected.  Pok\u00e9mon with run away can still flee.  Pok\u00e9mon can still switch out with the use of a move or item.",
+        "flavor_text": "Prevents the foe\u2019s escape."
+    },
+    "rough-skin": {
+        "id": 24,
+        "name": "rough-skin",
+        "short_desc": "Damages attacking Pok\u00e9mon for 1/8 their max HP on contact.",
+        "effect_desc": "Whenever a move makes contact with this Pok\u00e9mon, the move's user takes 1/8 of its maximum HP in damage.\n\nThis ability functions identically to iron barbs.",
+        "flavor_text": "Hurts to touch."
+    },
+    "wonder-guard": {
+        "id": 25,
+        "name": "wonder-guard",
+        "short_desc": "Protects against damaging moves that are not super effective.",
+        "effect_desc": "This Pok\u00e9mon is immune to damaging moves that are not super effective against it.\n\nMoves that inflict fixed damage, such as night shade or seismic toss, are considered super effective if their types are.  Damage not directly dealt by moves, such as damage from weather, a status ailment, or spikes, is not prevented.\n\nThis ability cannot be copied with role play or traded away with skill swap, but it can be copied with trace, disabled with gastro acid, or changed with worry seed.  This Pok\u00e9mon can still use Role Play itself to lose this ability, but not Skill Swap.\n\nIf this Pok\u00e9mon has a substitute, this ability will block moves as usual and any moves not blocked will react to the Substitute as usual.",
+        "flavor_text": "\u201cSuper effective\u201d hits."
+    },
+    "levitate": {
+        "id": 26,
+        "name": "levitate",
+        "short_desc": "Evades ground moves.",
+        "effect_desc": "This Pok\u00e9mon is immune to ground-type moves, spikes, toxic spikes, and arena trap.\n\nThis ability is disabled during gravity or ingrain, or while holding an iron ball.  This ability is not disabled during roost.",
+        "flavor_text": "Gives full immunity to all\nGround-type moves."
+    },
+    "effect-spore": {
+        "id": 27,
+        "name": "effect-spore",
+        "short_desc": "Has a 30% chance of inflcting either paralysis, poison, or sleep on attacking Pok\u00e9mon on contact.",
+        "effect_desc": "Whenever a move makes contact with this Pok\u00e9mon, the move's user has a 30% chance of being paralyzed, poisoned, or put to sleep, chosen at random.\n\nNothing is done to compensate if the move's user is immune to one of these ailments; there is simply a lower chance that the move's user will be affected.",
+        "flavor_text": "Leaves spores on contact."
+    },
+    "synchronize": {
+        "id": 28,
+        "name": "synchronize",
+        "short_desc": "Copies burns, paralysis, and poison received onto the Pok\u00e9mon that inflicted them.",
+        "effect_desc": "Whenever this Pok\u00e9mon is burned, paralyzed, or poisoned, the Pok\u00e9mon who gave this Pok\u00e9mon that ailment is also given the ailment.\n\nThis ability passes back bad poison when this Pok\u00e9mon is badly poisoned.  This ability cannot pass on a status ailment that the Pok\u00e9mon did not directly receive from another Pok\u00e9mon, such as the poison from toxic spikes or the burn from a flame orb.\n\nOverworld: If the lead Pok\u00e9mon has this ability, wild Pok\u00e9mon have a 50% chance of having the lead Pok\u00e9mon's nature, and a 50% chance of being given a random nature as usual, including the lead Pok\u00e9mon's nature.  This does not work on Pok\u00e9mon received outside of battle or roaming legendaries.",
+        "flavor_text": "Passes on status problems."
+    },
+    "clear-body": {
+        "id": 29,
+        "name": "clear-body",
+        "short_desc": "Prevents stats from being lowered by other Pok\u00e9mon.",
+        "effect_desc": "This Pok\u00e9mon cannot have its stats lowered by other Pok\u00e9mon.\n\nThis ability does not prevent any stat losses other than stat modifiers, such as the Speed cut from paralysis.  This Pok\u00e9mon can still be passed negative stat modifiers through guard swap, heart swap, or power swap.\n\nThis ability functions identically to white smoke in battle.",
+        "flavor_text": "Prevents ability reduction."
+    },
+    "natural-cure": {
+        "id": 30,
+        "name": "natural-cure",
+        "short_desc": "Cures any major status ailment upon switching out.",
+        "effect_desc": "This Pok\u00e9mon is cured of any major status ailment when it is switched out for another Pok\u00e9mon.\n\nIf this ability is acquired during battle, the Pok\u00e9mon is cured upon leaving battle before losing the temporary ability.",
+        "flavor_text": "Heals upon switching out."
+    },
+    "lightning-rod": {
+        "id": 31,
+        "name": "lightning-rod",
+        "short_desc": "Redirects single-target electric moves to this Pok\u00e9mon where possible.  Absorbs Electric moves, raising Special Attack one stage.",
+        "effect_desc": "All other Pok\u00e9mon's single-target electric-type moves are redirected to this Pok\u00e9mon if it is an eligible target.  Other Pok\u00e9mon's Electric moves raise this Pok\u00e9mon's Special Attack one stage, negating any other effect on it, and cannot miss it.\n\nIf the move's intended target also has this ability, the move is not redirected.  When multiple Pok\u00e9mon with this ability are possible targets for redirection, the move is redirected to the one with the highest Speed stat, or, in the case of a tie, to a random tied Pok\u00e9mon.  follow me takes precedence over this ability.\n\nIf the Pok\u00e9mon is a ground-type and thus immune to Electric moves, its immunity prevents the Special Attack boost.",
+        "flavor_text": "Draws electrical moves."
+    },
+    "serene-grace": {
+        "id": 32,
+        "name": "serene-grace",
+        "short_desc": "Doubles the chance of moves' extra effects occurring.",
+        "effect_desc": "This Pok\u00e9mon's moves have twice their usual effect chance.\n\nAn effect chance is a move's chance to inflict a status ailment, cause a stat change, or make the target flinch in addition to the move's main effect.  For example, flamethrower's chance of burning the target is doubled, but protect's chance of success and air cutter's increased critical hit rate are unaffected.\n\nsecret power is unaffected.",
+        "flavor_text": "Promotes added effects."
+    },
+    "swift-swim": {
+        "id": 33,
+        "name": "swift-swim",
+        "short_desc": "Doubles Speed during rain.",
+        "effect_desc": "This Pok\u00e9mon's Speed is doubled during rain.\n\nThis bonus does not count as a stat modifier.",
+        "flavor_text": "Raises SPEED in rain."
+    },
+    "chlorophyll": {
+        "id": 34,
+        "name": "chlorophyll",
+        "short_desc": "Doubles Speed during strong sunlight.",
+        "effect_desc": "This Pok\u00e9mon's Speed is doubled during strong sunlight.\n\nThis bonus does not count as a stat modifier.",
+        "flavor_text": "Raises SPEED in sunshine."
+    },
+    "illuminate": {
+        "id": 35,
+        "name": "illuminate",
+        "short_desc": "Doubles the wild encounter rate.",
+        "effect_desc": "Overworld: If the lead Pok\u00e9mon has this ability, the wild encounter rate is doubled.\n\nThis ability has no effect in battle.",
+        "flavor_text": "Encounter rate increases."
+    },
+    "trace": {
+        "id": 36,
+        "name": "trace",
+        "short_desc": "Copies an opponent's ability upon entering battle.",
+        "effect_desc": "When this Pok\u00e9mon enters battle, it copies a random opponent's ability.\n\nThis ability cannot copy flower gift, forecast, illusion, imposter, multitype, trace, wonder guard, or zen mode.",
+        "flavor_text": "Copies special ability."
+    },
+    "huge-power": {
+        "id": 37,
+        "name": "huge-power",
+        "short_desc": "Doubles Attack in battle.",
+        "effect_desc": "This Pok\u00e9mon's Attack is doubled while in battle.\n\nThis bonus does not count as a stat modifier.\n\nThis ability functions identically to pure power.",
+        "flavor_text": "Raises ATTACK."
+    },
+    "poison-point": {
+        "id": 38,
+        "name": "poison-point",
+        "short_desc": "Has a 30% chance of poisoning attacking Pok\u00e9mon on contact.",
+        "effect_desc": "Whenever a move makes contact with this Pok\u00e9mon, the move's user has a 30% chance of being poisoned.",
+        "flavor_text": "Poisons foe on contact."
+    },
+    "inner-focus": {
+        "id": 39,
+        "name": "inner-focus",
+        "short_desc": "Prevents flinching.",
+        "effect_desc": "This Pok\u00e9mon cannot flinch.",
+        "flavor_text": "Prevents flinching."
+    },
+    "magma-armor": {
+        "id": 40,
+        "name": "magma-armor",
+        "short_desc": "Prevents freezing.",
+        "effect_desc": "This Pok\u00e9mon cannot be frozen.\n\nIf a Pok\u00e9mon is frozen and acquires this ability, it will immediately thaw out; this includes when regaining a lost ability upon leaving battle.\n\nOverworld: If any Pok\u00e9mon in the party has this ability, each egg in the party has its hatch counter decreased by 2 (rather than 1) each step cycle, making eggs hatch roughly twice as quickly.  This effect does not stack if multiple Pok\u00e9mon have this ability or flame body.",
+        "flavor_text": "Prevents freezing."
+    },
+    "water-veil": {
+        "id": 41,
+        "name": "water-veil",
+        "short_desc": "Prevents burns.",
+        "effect_desc": "This Pok\u00e9mon cannot be burned.\n\nIf a Pok\u00e9mon is burned and acquires this ability, its burn is healed; this includes when regaining a lost ability upon leaving battle.",
+        "flavor_text": "Prevents burns."
+    },
+    "magnet-pull": {
+        "id": 42,
+        "name": "magnet-pull",
+        "short_desc": "Prevents steel opponents from fleeing or switching out.",
+        "effect_desc": "While this Pok\u00e9mon is in battle, opposing steel-type Pok\u00e9mon cannot flee or switch out.\n\nPok\u00e9mon with run away can still flee.  Pok\u00e9mon can still switch out with the use of a move or item.\n\nOverworld: If the lead Pok\u00e9mon has this ability, Steel-type Pok\u00e9mon have a higher encounter rate.",
+        "flavor_text": "Traps STEEL-type POK\u00e9MON."
+    },
+    "soundproof": {
+        "id": 43,
+        "name": "soundproof",
+        "short_desc": "Protects against sound-based moves.",
+        "effect_desc": "This Pok\u00e9mon is immune to moves flagged as being sound-based.\n\nheal bell is unaffected.  uproar still prevents this Pok\u00e9mon from sleeping.  This Pok\u00e9mon can still receive a Perish Song counter through baton pass, and will retain a Perish Song counter if it acquires this ability after Perish Song is used.\n\nhowl, roar of time, sonic boom, and yawn are not flagged as sound-based.",
+        "flavor_text": "Avoids sound-based moves."
+    },
+    "rain-dish": {
+        "id": 44,
+        "name": "rain-dish",
+        "short_desc": "Heals for 1/16 max HP after each turn during rain.",
+        "effect_desc": "This Pok\u00e9mon heals for 1/16 of its maximum HP after each turn during rain.",
+        "flavor_text": "Slight HP recovery in rain."
+    },
+    "sand-stream": {
+        "id": 45,
+        "name": "sand-stream",
+        "short_desc": "Summons a sandstorm that lasts indefinitely upon entering battle.",
+        "effect_desc": "The weather changes to a sandstorm when this Pok\u00e9mon enters battle and does not end unless cancelled by another weather condition.\n\nIf multiple Pok\u00e9mon with this ability, drizzle, drought, or snow warning are sent out at the same time, the abilities will activate in order of Speed, respecting trick room.  Each ability's weather will cancel the previous weather, and only the weather summoned by the slowest of the Pok\u00e9mon will stay.\n\nOverworld: If the lead Pok\u00e9mon has this ability, the wild encounter rate is halved in a sandstorm.",
+        "flavor_text": "Summons a sandstorm."
+    },
+    "pressure": {
+        "id": 46,
+        "name": "pressure",
+        "short_desc": "Increases the PP cost of moves targetting the Pok\u00e9mon by one.",
+        "effect_desc": "Moves targetting this Pok\u00e9mon use one extra PP.\n\nThis ability stacks if multiple targets have it.  This ability still affects moves that fail or miss.  This ability does not affect ally moves that target either the entire field or just its side, nor this Pok\u00e9mon's self-targetted moves; it does, however, affect single-targetted ally moves aimed at this Pok\u00e9mon, ally moves that target all other Pok\u00e9mon, and opponents' moves that target the entire field.  If this ability raises a move's PP cost above its remaining PP, it will use all remaining PP.\n\nWhen this Pok\u00e9mon enters battle, all participating trainers are notified that it has this ability.\n\nOverworld: If the lead Pok\u00e9mon has this ability, higher-levelled Pok\u00e9mon have their encounter rate increased.",
+        "flavor_text": "Raises foe\u2019s PP usage."
+    },
+    "thick-fat": {
+        "id": 47,
+        "name": "thick-fat",
+        "short_desc": "Halves damage from fire and ice moves.",
+        "effect_desc": "This Pok\u00e9mon takes half as much damage from fire- and ice-type moves.",
+        "flavor_text": "Heat-and-cold protection."
+    },
+    "early-bird": {
+        "id": 48,
+        "name": "early-bird",
+        "short_desc": "Makes sleep pass twice as quickly.",
+        "effect_desc": "This Pok\u00e9mon's remaining sleep turn count falls by 2 rather than 1.\n\nIf this Pok\u00e9mon's sleep counter is at 1, it will fall to 0 and then the Pok\u00e9mon will wake up.",
+        "flavor_text": "Awakens quickly from sleep."
+    },
+    "flame-body": {
+        "id": 49,
+        "name": "flame-body",
+        "short_desc": "Has a 30% chance of burning attacking Pok\u00e9mon on contact.",
+        "effect_desc": "Whenever a move makes contact with this Pok\u00e9mon, the move's user has a 30% chance of being burned.\n\nOverworld: If any Pok\u00e9mon in the party has this ability, each egg in the party has its hatch counter decreased by 2 (rather than 1) each step cycle, making eggs hatch roughly twice as quickly.  This effect does not stack if multiple Pok\u00e9mon have this ability or magma armor.",
+        "flavor_text": "Burns the foe on contact."
+    },
+    "run-away": {
+        "id": 50,
+        "name": "run-away",
+        "short_desc": "Ensures success fleeing from wild battles.",
+        "effect_desc": "This Pok\u00e9mon is always successful fleeing from wild battles, even if trapped by a move or ability.",
+        "flavor_text": "Makes escaping easier."
+    },
+    "keen-eye": {
+        "id": 51,
+        "name": "keen-eye",
+        "short_desc": "Prevents accuracy from being lowered.",
+        "effect_desc": "This Pok\u00e9mon cannot have its accuracy lowered.\n\nThis ability does not prevent any accuracy losses other than stat modifiers, such as the accuracy cut from fog; nor does it prevent other Pok\u00e9mon's evasion from making this Pok\u00e9mon's moves less accurate.  This Pok\u00e9mon can still be passed negative accuracy modifiers through heart swap.\n\nOverworld: If the first Pok\u00e9mon in the party has this ability, any random encounter with a Pok\u00e9mon five or more levels lower than it has a 50% chance of being skipped.",
+        "flavor_text": "Prevents loss of accuracy."
+    },
+    "hyper-cutter": {
+        "id": 52,
+        "name": "hyper-cutter",
+        "short_desc": "Prevents Attack from being lowered by other Pok\u00e9mon.",
+        "effect_desc": "This Pok\u00e9mon's Attack cannot be lowered by other Pok\u00e9mon.\n\nThis ability does not prevent any Attack losses other than stat modifiers, such as the Attack cut from a burn.  This Pok\u00e9mon can still be passed negative Attack modifiers through heart swap or power swap.",
+        "flavor_text": "Prevents ATTACK reduction."
+    },
+    "pickup": {
+        "id": 53,
+        "name": "pickup",
+        "short_desc": "Picks up other Pok\u00e9mon's used and Flung held items.  May also pick up an item after battle.",
+        "effect_desc": "At the end of each turn, if another Pok\u00e9mon consumed or Flung a held item that turn, this Pok\u00e9mon picks up the item if it is not already holding one.  After each battle, this Pok\u00e9mon has a 10% chance of picking up an item if it is not already holding one.\n\nThe air balloon and eject button cannot be picked up.\n\nThe items that may be found vary by game, and, since Pok\u00e9mon Emerald, by the Pok\u00e9mon's level.  This ability is checked after the battle ends, at which point any temporary ability changes have worn off.",
+        "flavor_text": "May pick up items."
+    },
+    "truant": {
+        "id": 54,
+        "name": "truant",
+        "short_desc": "Skips every second turn.",
+        "effect_desc": "Every second turn on which this Pok\u00e9mon should attempt to use a move, it will instead do nothing (\"loaf around\").\n\nLoafing around interrupts moves that take multiple turns the same way paralysis, flinching, etc do.  Most such moves, for example bide or rollout, are simply cut off upon loafing around.  Attacks with a recharge turn, such as hyper beam, do not have to recharge; attacks with a preparation turn, such as fly, do not end up being used.  Moves that are forced over multiple turns and keep going through failure, such as outrage, uproar, or any move forced by encore, keep going as usual.\n\nIf this Pok\u00e9mon is confused, its confusion is not checked when loafing around; the Pok\u00e9mon cannot hurt itself, and its confusion does not end or come closer to ending.\n\nIf this Pok\u00e9mon attempts to move but fails, e.g. because of paralysis or gravity, it still counts as having moved and will loaf around the next turn.  If it does not attempt to move, e.g. because it is asleep or frozen, whatever it would have done will be postponed until its next attempt; that is, it will either loaf around or move as usual, depending on what it last did.\n\nThis ability cannot be changed with worry seed, but it can be disabled with gastro acid, changed with role play, or traded away with skill swap.",
+        "flavor_text": "Moves only every two turns."
+    },
+    "hustle": {
+        "id": 55,
+        "name": "hustle",
+        "short_desc": "Strengthens physical moves to inflict 1.5\u00d7 damage, but decreases their accuracy to 0.8\u00d7.",
+        "effect_desc": "This Pok\u00e9mon's physical moves do 1.5\u00d7 as much regular damage, but have 0.8\u00d7 their usual accuracy.\n\nSpecial moves are unaffected.  Moves that do set damage, such as seismic toss, have their accuracy affected, but not their damage.\n\nOverworld: If the lead Pok\u00e9mon has this ability, higher-levelled Pok\u00e9mon have their encounter rate increased.",
+        "flavor_text": "Trades accuracy for power."
+    },
+    "cute-charm": {
+        "id": 56,
+        "name": "cute-charm",
+        "short_desc": "Has a 30% chance of infatuating attacking Pok\u00e9mon on contact.",
+        "effect_desc": "Whenever a move makes contact with this Pok\u00e9mon, the move's user has a 30% chance of being infatuated.\n\nOverworld: If the first Pok\u00e9mon in the party has this ability, any wild Pok\u00e9mon whose species can be either gender has a 2/3 chance of being set to the opposite gender, and a 1/3 chance of having a random gender as usual.",
+        "flavor_text": "Infatuates on contact."
+    },
+    "plus": {
+        "id": 57,
+        "name": "plus",
+        "short_desc": "Increases Special Attack to 1.5\u00d7 when a friendly Pok\u00e9mon has plus or minus.",
+        "effect_desc": "This Pok\u00e9mon has 1.5\u00d7 its Special Attack if any friendly Pok\u00e9mon has plus or minus.\n\nThis bonus does not count as a stat modifier.  If either ability is disabled by gastro acid, both lose their effect.",
+        "flavor_text": "Powers up with MINUS."
+    },
+    "minus": {
+        "id": 58,
+        "name": "minus",
+        "short_desc": "Increases Special Attack to 1.5\u00d7 when a friendly Pok\u00e9mon has plus or minus.",
+        "effect_desc": "This Pok\u00e9mon has 1.5\u00d7 its Special Attack if any friendly Pok\u00e9mon has plus or minus.\n\nThis bonus does not count as a stat modifier.  If either ability is disabled by gastro acid, both lose their effect.",
+        "flavor_text": "Powers up with PLUS."
+    },
+    "forecast": {
+        "id": 59,
+        "name": "forecast",
+        "short_desc": "Changes castform's type and form to match the weather.",
+        "effect_desc": "During rain, strong sunlight, or hail, this Pok\u00e9mon's type changes to water, fire, or ice, respectively, and its form changes to match.\n\nThis ability has no effect for any Pok\u00e9mon other than castform.\n\nIf the weather ends or becomes anything that does not trigger this ability, or a Pok\u00e9mon with air lock or cloud nine enters battle, this Pok\u00e9mon's type and form revert to their default.  If this ability is lost or disabled, this Pok\u00e9mon cannot change its current type and form until it regains its ability.",
+        "flavor_text": "Changes with the weather."
+    },
+    "sticky-hold": {
+        "id": 60,
+        "name": "sticky-hold",
+        "short_desc": "Prevents a held item from being removed by other Pok\u00e9mon.",
+        "effect_desc": "This Pok\u00e9mon's hold item cannot be removed by other Pok\u00e9mon.\n\nDamaging moves that would remove this Pok\u00e9mon's item can still inflict damage against this Pok\u00e9mon, e.g. knock off or pluck.  This Pok\u00e9mon can still use moves that involve the loss of its own item, e.g. fling or trick.\n\nOverworld: If the lead Pok\u00e9mon has this ability, the encounter rate while fishing is increased.",
+        "flavor_text": "Prevents item theft."
+    },
+    "shed-skin": {
+        "id": 61,
+        "name": "shed-skin",
+        "short_desc": "Has a 33% chance of curing any major status ailment after each turn.",
+        "effect_desc": "After each turn, this Pok\u00e9mon has a 33% of being cured of any major status ailment.",
+        "flavor_text": "Heals the body by shedding."
+    },
+    "guts": {
+        "id": 62,
+        "name": "guts",
+        "short_desc": "Increases Attack to 1.5\u00d7 with a major status ailment.",
+        "effect_desc": "Whenever this Pok\u00e9mon is asleep, burned, paralyzed, or poisoned, it has 1.5\u00d7 its Attack.  This Pok\u00e9mon is not affected by the usual Attack cut from a burn.\n\nThis bonus does not count as a stat modifier.",
+        "flavor_text": "Ups ATTACK if suffering."
+    },
+    "marvel-scale": {
+        "id": 63,
+        "name": "marvel-scale",
+        "short_desc": "Increases Defense to 1.5\u00d7 with a major status ailment.",
+        "effect_desc": "Whenever this Pok\u00e9mon has a major status ailment, it has 1.5\u00d7 its Defense.\n\nThis bonus does not count as a stat modifier.",
+        "flavor_text": "Ups DEFENSE if suffering."
+    },
+    "liquid-ooze": {
+        "id": 64,
+        "name": "liquid-ooze",
+        "short_desc": "Damages opponents using leeching moves for as much as they would heal.",
+        "effect_desc": "Whenever a Pok\u00e9mon would heal after hitting this Pok\u00e9mon with a leeching move like absorb, it instead loses as many HP as it would usually gain.\n\ndream eater is unaffected.",
+        "flavor_text": "Draining causes injury."
+    },
+    "overgrow": {
+        "id": 65,
+        "name": "overgrow",
+        "short_desc": "Strengthens grass moves to inflict 1.5\u00d7 damage at 1/3 max HP or less.",
+        "effect_desc": "When this Pok\u00e9mon has 1/3 or less of its HP remaining, its grass-type moves inflict 1.5\u00d7 as much regular damage.",
+        "flavor_text": "Powers up Grass-type\nmoves in a pinch."
+    },
+    "blaze": {
+        "id": 66,
+        "name": "blaze",
+        "short_desc": "Strengthens fire moves to inflict 1.5\u00d7 damage at 1/3 max HP or less.",
+        "effect_desc": "When this Pok\u00e9mon has 1/3 or less of its HP remaining, its fire-type moves inflict 1.5\u00d7 as much regular damage.",
+        "flavor_text": "Ups FIRE moves in a pinch."
+    },
+    "torrent": {
+        "id": 67,
+        "name": "torrent",
+        "short_desc": "Strengthens water moves to inflict 1.5\u00d7 damage at 1/3 max HP or less.",
+        "effect_desc": "When this Pok\u00e9mon has 1/3 or less of its HP remaining, its water-type moves inflict 1.5\u00d7 as much regular damage.",
+        "flavor_text": "Ups WATER moves in a pinch."
+    },
+    "swarm": {
+        "id": 68,
+        "name": "swarm",
+        "short_desc": "Strengthens bug moves to inflict 1.5\u00d7 damage at 1/3 max HP or less.",
+        "effect_desc": "When this Pok\u00e9mon has 1/3 or less of its HP remaining, its bug-type moves inflict 1.5\u00d7 as much regular damage.\n\nOverworld: If the lead Pok\u00e9mon has this ability, the wild encounter rate is increased.",
+        "flavor_text": "Ups BUG moves in a pinch."
+    },
+    "rock-head": {
+        "id": 69,
+        "name": "rock-head",
+        "short_desc": "Protects against recoil damage.",
+        "effect_desc": "This Pok\u00e9mon does not receive recoil damage from its recoil moves.\n\nstruggle's recoil is unaffected.  This ability does not prevent crash damage from missing with jump kick or high jump kick.",
+        "flavor_text": "Protects the Pok\u00e9mon from recoil damage."
+    },
+    "drought": {
+        "id": 70,
+        "name": "drought",
+        "short_desc": "Summons strong sunlight that lasts indefinitely upon entering battle.",
+        "effect_desc": "The weather changes to strong sunlight when this Pok\u00e9mon enters battle and does not end unless cancelled by another weather condition.\n\nIf multiple Pok\u00e9mon with this ability, drizzle, sand stream, or snow warning are sent out at the same time, the abilities will activate in order of Speed, respecting trick room.  Each ability's weather will cancel the previous weather, and only the weather summoned by the slowest of the Pok\u00e9mon will stay.",
+        "flavor_text": "Summons sunlight in battle."
+    },
+    "arena-trap": {
+        "id": 71,
+        "name": "arena-trap",
+        "short_desc": "Prevents opponents from fleeing or switching out.  Eluded by flying-types and Pok\u00e9mon in the air.",
+        "effect_desc": "While this Pok\u00e9mon is in battle, opposing Pok\u00e9mon cannot flee or switch out.  flying-type Pok\u00e9mon and Pok\u00e9mon in the air, e.g. due to levitate or magnet rise, are unaffected.\n\nPok\u00e9mon with run away can still flee.  Pok\u00e9mon can still switch out with the use of a move or item.\n\nOverworld: If the lead Pok\u00e9mon has this ability, the wild encounter rate is doubled.",
+        "flavor_text": "Prevents fleeing."
+    },
+    "vital-spirit": {
+        "id": 72,
+        "name": "vital-spirit",
+        "short_desc": "Prevents sleep.",
+        "effect_desc": "This Pok\u00e9mon cannot be asleep.\n\nThis causes rest to fail altogether.  If a Pok\u00e9mon is asleep and acquires this ability, it will immediately wake up; this includes when regaining a lost ability upon leaving battle.\n\nThis ability functions identically to insomnia in battle.\n\nOverworld: If the lead Pok\u00e9mon has this ability, higher-levelled Pok\u00e9mon have their encounter rate increased.",
+        "flavor_text": "Prevents sleep."
+    },
+    "white-smoke": {
+        "id": 73,
+        "name": "white-smoke",
+        "short_desc": "Prevents stats from being lowered by other Pok\u00e9mon.",
+        "effect_desc": "This Pok\u00e9mon cannot have its stats lowered by other Pok\u00e9mon.\n\nThis ability does not prevent any stat losses other than stat modifiers, such as the Speed cut from paralysis; nor self-inflicted stat drops, such as the Special Attack drop from overheat; nor opponent-triggered stat boosts, such as the Attack boost from swagger.  This Pok\u00e9mon can still be passed negative stat modifiers through guard swap, heart swap, or power swap.\n\nThis ability functions identically to clear body in battle.\n\nOverworld: If the lead Pok\u00e9mon has this ability, the wild encounter rate is halved.",
+        "flavor_text": "Prevents ability reduction."
+    },
+    "pure-power": {
+        "id": 74,
+        "name": "pure-power",
+        "short_desc": "Doubles Attack in battle.",
+        "effect_desc": "This Pok\u00e9mon's Attack is doubled in battle.\n\nThis bonus does not count as a stat modifier.\n\nThis ability functions identically to huge power.",
+        "flavor_text": "Raises ATTACK."
+    },
+    "shell-armor": {
+        "id": 75,
+        "name": "shell-armor",
+        "short_desc": "Protects against critical hits.",
+        "effect_desc": "Moves cannot score critical hits against this Pok\u00e9mon.\n\nThis ability functions identically to battle armor.",
+        "flavor_text": "Blocks critical hits."
+    },
+    "air-lock": {
+        "id": 76,
+        "name": "air-lock",
+        "short_desc": "Negates all effects of weather, but does not prevent the weather itself.",
+        "effect_desc": "While this Pok\u00e9mon is in battle, weather can still be in play, but will not have any of its effects.\n\nThis ability functions identically to cloud nine.",
+        "flavor_text": "Negates weather effects."
+    },
+    "tangled-feet": {
+        "id": 77,
+        "name": "tangled-feet",
+        "short_desc": "Doubles evasion when confused.",
+        "effect_desc": "When this Pok\u00e9mon is confused, it has twice its evasion.",
+        "flavor_text": "Raises evasion if the\nPok\u00e9mon is confused."
+    },
+    "motor-drive": {
+        "id": 78,
+        "name": "motor-drive",
+        "short_desc": "Absorbs electric moves, raising Speed one stage.",
+        "effect_desc": "Whenever an electric-type move hits this Pok\u00e9mon, its Speed rises one stage, negating any other effect on it.\n\nThis ability will not take effect if this Pok\u00e9mon is immune to Electric moves.  Electric moves will ignore this Pok\u00e9mon's substitute.\n\nThis effect includes non-damaging moves, i.e. thunder wave.",
+        "flavor_text": "Raises Speed if hit by an\nElectric-type move."
+    },
+    "rivalry": {
+        "id": 79,
+        "name": "rivalry",
+        "short_desc": "Increases damage inflicted to 1.25\u00d7 against Pok\u00e9mon of the same gender, but decreases damage to 0.75\u00d7 against the opposite gender.",
+        "effect_desc": "This Pok\u00e9mon inflicts 1.25\u00d7 as much regular damage against Pok\u00e9mon of the same gender and 0.75\u00d7 as much regular damage against Pok\u00e9mon of the opposite gender.\n\nIf either Pok\u00e9mon is genderless, damage is unaffected.",
+        "flavor_text": "Raises Attack if the foe\nis of the same gender."
+    },
+    "steadfast": {
+        "id": 80,
+        "name": "steadfast",
+        "short_desc": "Raises Speed one stage upon flinching.",
+        "effect_desc": "Whenever this Pok\u00e9mon flinches, its Speed rises one stage.",
+        "flavor_text": "Raises Speed each time\nthe Pok\u00e9mon flinches."
+    },
+    "snow-cloak": {
+        "id": 81,
+        "name": "snow-cloak",
+        "short_desc": "Increases evasion to 1.25\u00d7 during hail.  Protects against hail damage.",
+        "effect_desc": "During hail, this Pok\u00e9mon has 1.25\u00d7 its evasion, and it does not take hail damage regardless of type.\n\nThe evasion bonus does not count as a stat modifier.\n\nOverworld: If the lead Pok\u00e9mon has this ability, the wild encounter rate is halved in snow.",
+        "flavor_text": "Raises evasion in a\nhailstorm."
+    },
+    "gluttony": {
+        "id": 82,
+        "name": "gluttony",
+        "short_desc": "Makes the Pok\u00e9mon eat any held Berry triggered by low HP below 1/2 its max HP.",
+        "effect_desc": "This Pok\u00e9mon eats any held Berry triggered by low HP when it falls below 50% of its HP, regardless of the Berry's usual threshold.",
+        "flavor_text": "Encourages the early use\nof a held Berry."
+    },
+    "anger-point": {
+        "id": 83,
+        "name": "anger-point",
+        "short_desc": "Raises Attack to the maximum of six stages upon receiving a critical hit.",
+        "effect_desc": "Whenever this Pok\u00e9mon receives a critical hit, its Attack rises to the maximum of 6 stages.\n\nThis ability will still take effect if the critical hit is received by a substitute.",
+        "flavor_text": "Raises Attack upon taking\na critical hit."
+    },
+    "unburden": {
+        "id": 84,
+        "name": "unburden",
+        "short_desc": "Doubles Speed upon using or losing a held item.",
+        "effect_desc": "When this Pok\u00e9mon uses or loses its held item, its Speed is doubled.  If it gains another item or leaves battle, this bonus is lost.\n\nThis includes when the Pok\u00e9mon drops its item because of knock off.  This bonus does not count as a stat modifier.  There is no notification when this ability takes effect.",
+        "flavor_text": "Raises Speed if a held\nitem is used."
+    },
+    "heatproof": {
+        "id": 85,
+        "name": "heatproof",
+        "short_desc": "Halves damage from fire moves and burns.",
+        "effect_desc": "This Pok\u00e9mon takes half as much damage from fire-type moves and burns.",
+        "flavor_text": "Weakens the power of\nFire-type moves."
+    },
+    "simple": {
+        "id": 86,
+        "name": "simple",
+        "short_desc": "Doubles the Pok\u00e9mon's stat modifiers.  These doubled modifiers are still capped at -6 or 6 stages.",
+        "effect_desc": "Each stage of this Pok\u00e9mon's stat modifiers acts as two stages.  These doubled stages are still limited to a minimum of -6 and a maximum of 6.\n\nThis Pok\u00e9mon can still accumulate less than -3 or more than 3 stages of stat modifiers, even though the extra ones have no effect after doubling.",
+        "flavor_text": "The Pok\u00e9mon is prone to\nwild stat changes."
+    },
+    "dry-skin": {
+        "id": 87,
+        "name": "dry-skin",
+        "short_desc": "Causes 1/8 max HP in damage each turn during strong sunlight, but heals for 1/8 max HP during rain.  Increases damage from fire moves to 1.25\u00d7, but absorbs water moves, healing for 1/4 max HP.",
+        "effect_desc": "This Pok\u00e9mon takes 1/8 of its maximum HP in damage after each turn during strong sunlight, but it heals for 1/8 of its HP each turn during rain.  This Pok\u00e9mon takes 1.25\u00d7 as much damage from fire-type moves, but whenever a water move hits it, it heals for 1/4 its maximum HP instead.",
+        "flavor_text": "Reduces HP if it is hot.\nWater restores HP."
+    },
+    "download": {
+        "id": 88,
+        "name": "download",
+        "short_desc": "Raises the attack stat corresponding to the opponents' weaker defense one stage upon entering battle.",
+        "effect_desc": "When this Pok\u00e9mon enters battle, its Attack or Special Attack, whichever corresponds to its opponents' weaker total defensive stat, rises one stage.  In the event of a tie, Special Attack is raised.\n\nThis ability also takes effect when acquired during a battle.",
+        "flavor_text": "Adjusts power according\nto the foe\u2019s ability."
+    },
+    "iron-fist": {
+        "id": 89,
+        "name": "iron-fist",
+        "short_desc": "Strengthens punch-based moves to 1.2\u00d7 their power.",
+        "effect_desc": "Moves flagged as being punch-based have 1.2\u00d7 their base power for this Pok\u00e9mon.\n\nsucker punch is not flagged as punch-based; its original, Japanese name only means \"surprise attack\".",
+        "flavor_text": "Boosts the power of\npunching moves."
+    },
+    "poison-heal": {
+        "id": 90,
+        "name": "poison-heal",
+        "short_desc": "Heals for 1/8 max HP after each turn when poisoned in place of damage.",
+        "effect_desc": "If this Pok\u00e9mon is poisoned, it will heal for 1/8 of its maximum HP after each turn rather than taking damage.  This includes bad poison.",
+        "flavor_text": "Restores HP if the\nPok\u00e9mon is poisoned."
+    },
+    "adaptability": {
+        "id": 91,
+        "name": "adaptability",
+        "short_desc": "Increases the same-type attack bonus from 1.5\u00d7 to 2\u00d7.",
+        "effect_desc": "This Pok\u00e9mon inflicts twice as much damage with moves whose types match its own, rather than the usual same-type attack bonus of 1.5\u00d7.",
+        "flavor_text": "Powers up moves of the\nsame type."
+    },
+    "skill-link": {
+        "id": 92,
+        "name": "skill-link",
+        "short_desc": "Extends two-to-five-hit moves and triple kick to their full length every time.",
+        "effect_desc": "This Pok\u00e9mon always hits five times with two-to-five-hit moves, such as icicle spear.  It also bypasses the accuracy checks on triple kick's second and third hits.",
+        "flavor_text": "Increases the frequency\nof multi-strike moves."
+    },
+    "hydration": {
+        "id": 93,
+        "name": "hydration",
+        "short_desc": "Cures any major status ailment after each turn during rain.",
+        "effect_desc": "This Pok\u00e9mon is cured of any major status ailment after each turn during rain.",
+        "flavor_text": "Heals status problems if\nit is raining."
+    },
+    "solar-power": {
+        "id": 94,
+        "name": "solar-power",
+        "short_desc": "Increases Special Attack to 1.5\u00d7 but costs 1/8 max HP after each turn during strong sunlight.",
+        "effect_desc": "During strong sunlight, this Pok\u00e9mon has 1.5\u00d7 its Special Attack but takes 1/8 of its maximum HP in damage after each turn.",
+        "flavor_text": "Boosts Sp. Atk, but\nlowers HP in sunshine."
+    },
+    "quick-feet": {
+        "id": 95,
+        "name": "quick-feet",
+        "short_desc": "Increases Speed to 1.5\u00d7 with a major status ailment.",
+        "effect_desc": "Whenever this Pok\u00e9mon has a major status ailment, it has 1.5\u00d7 its Speed.  This Pok\u00e9mon is not affected by the usual Speed cut from paralysis.\n\nOverworld: If the lead Pok\u00e9mon has this ability, the wild encounter rate is halved.",
+        "flavor_text": "Boosts Speed if there is a\nstatus problem."
+    },
+    "normalize": {
+        "id": 96,
+        "name": "normalize",
+        "short_desc": "Makes the Pok\u00e9mon's moves all act normal-type.",
+        "effect_desc": "This Pok\u00e9mon's moves all act as if they were normal-type.\n\nMoves that inflict typeless damage do so as usual.  Moves of variable type, such as hidden power, are affected.  They otherwise work as usual, however; weather ball, for example, is always forced to be Normal, but it still has doubled power and looks different during weather.\n\nAs thunder wave is prevented by immunities, unlike most non-damaging moves, it does not affect ghost-type Pok\u00e9mon under the effect of this ability.",
+        "flavor_text": "All the Pok\u00e9mon\u2019s moves\nbecome the Normal type."
+    },
+    "sniper": {
+        "id": 97,
+        "name": "sniper",
+        "short_desc": "Strengthens critical hits to inflict 3\u00d7 damage rather than 2\u00d7.",
+        "effect_desc": "This Pok\u00e9mon inflicts triple damage with critical hits, rather than the usual double damage.",
+        "flavor_text": "Powers up moves if they\nbecome critical hits."
+    },
+    "magic-guard": {
+        "id": 98,
+        "name": "magic-guard",
+        "short_desc": "Protects against damage not directly caused by a move.",
+        "effect_desc": "This Pok\u00e9mon is immune to damage not directly caused by a move.\n\nFor example, this Pok\u00e9mon takes no damage from from weather, recoil, status ailments, or spikes, but it still suffers from the Attack cut when burned, and a life orb will still power up this Pok\u00e9mon's moves without damaging it.  Anything that directly depends on such damage will also not happen; for example, leech seed will neither hurt this Pok\u00e9mon nor heal the opponent, and Pok\u00e9mon with a jaboca berry or rowap berry will not consume the berry when hit by this Pok\u00e9mon.\n\nThe following are unaffected: struggle, pain split (whether used by or against this Pok\u00e9mon), belly drum, substitute, curse, moves that knock the user out, and damage from confusion.\n\nThis Pok\u00e9mon will neither lose nor regain HP if it drains HP from a Pok\u00e9mon with liquid ooze.\n\nIf this Pok\u00e9mon is badly poisoned, the poison counter is still increased each turn; if the Pok\u00e9mon loses this ability, it will begin taking as much damage as it would be if it had been taking increasing damage each turn.",
+        "flavor_text": "The Pok\u00e9mon only takes\ndamage from attacks."
+    },
+    "no-guard": {
+        "id": 99,
+        "name": "no-guard",
+        "short_desc": "Ensures all moves used by and against the Pok\u00e9mon hit.",
+        "effect_desc": "Moves used by or against this Pok\u00e9mon never miss.\n\nOne-hit KO moves are unaffected.  Moves affected by this ability can hit Pok\u00e9mon during the preparation turn of moves like dig or fly.\n\nOverworld: If the lead Pok\u00e9mon has this ability, the wild encounter rate is doubled.",
+        "flavor_text": "Ensures the Pok\u00e9mon and\nits foe\u2019s attacks land."
+    },
+    "stall": {
+        "id": 100,
+        "name": "stall",
+        "short_desc": "Makes the Pok\u00e9mon move last within its move's priority bracket.",
+        "effect_desc": "This Pok\u00e9mon moves last within its priority bracket.\n\nMultiple Pok\u00e9mon with this ability move in order of Speed amongst themselves.\n\nThe full incense and lagging tail take precedence over this ability; that is, Pok\u00e9mon with these items move after Pok\u00e9mon with this ability.  Pok\u00e9mon with both this ability and one of these items are delayed as much as if they had only the item.\n\nThis ability works as usual during trick room: Pok\u00e9mon with this ability will move in reverse order of Speed after Pok\u00e9mon without it.",
+        "flavor_text": "The Pok\u00e9mon moves after\neven slower foes."
+    },
+    "technician": {
+        "id": 101,
+        "name": "technician",
+        "short_desc": "Strengthens moves of 60 base power or less to 1.5\u00d7 their power.",
+        "effect_desc": "This Pok\u00e9mon's moves have 1.5\u00d7 their power if their base power is 60 or less.\n\nThis includes moves of variable power, such as hidden power and magnitude, when their power is 60 or less.  helping hand's power boost is taken into account for any move, as is defense curl's power boost for rollout.",
+        "flavor_text": "Powers up the Pok\u00e9mon\u2019s\nweaker moves."
+    },
+    "leaf-guard": {
+        "id": 102,
+        "name": "leaf-guard",
+        "short_desc": "Protects against major status ailments during strong sunlight.",
+        "effect_desc": "This Pok\u00e9mon cannot be given a major status ailment during strong sunlight.\n\nThis ability does not heal prior status ailments.  rest will fail altogether with this ability in effect.  yawn will immediately fail if used on this Pok\u00e9mon during strong sunlight, and an already-used Yawn will fail if the weather turns to strong sunlight in the meantime.",
+        "flavor_text": "Prevents status problems\nin sunny weather."
+    },
+    "klutz": {
+        "id": 103,
+        "name": "klutz",
+        "short_desc": "Prevents the Pok\u00e9mon from using its held item in battle.",
+        "effect_desc": "In battle, this Pok\u00e9mon cannot use its held item, nor will the item have any passive effect on the battle, positive or negative.  This Pok\u00e9mon also cannot use fling.\n\nThe Speed cut from the iron ball and the effort items (the macho brace, power weight, power bracer, power belt, power lens, power band, and power anklet) is unaffected.  Items that do not directly affect the battle, such as the exp share, the amulet coin, or the soothe bell, work as usual.  All held items work as usual out of battle.\n\nOther moves that use the held item, such as natural gift and switcheroo, work as usual.",
+        "flavor_text": "The Pok\u00e9mon can\u2019t use\nany held items."
+    },
+    "mold-breaker": {
+        "id": 104,
+        "name": "mold-breaker",
+        "short_desc": "Bypasses targets' abilities if they could hinder or prevent a move.",
+        "effect_desc": "This Pok\u00e9mon's moves completely ignore abilities that could hinder or prevent their effect on the target.\n\nFor example, this Pok\u00e9mon's moves ignore abilities that would fully negate them, such as water absorb; abilities that would prevent any of their effects, such as clear body, shell armor, or sticky hold; and abilities that grant any general protective benefit, such as simple, snow cloak, or thick fat.  If an ability could either hinder or help this Pok\u00e9mon's moves, e.g. dry skin or unaware, the ability is ignored either way.\n\nAbilities that do not fit this description, even if they could hinder moves in some other way, are not affected.  For example, cursed body only affects potential future uses of the move, while liquid ooze and shadow tag can only hinder a move's effect on the user.  This ablity cannot ignore type or form changes granted by abilities, for example color change or forecast; nor effects that were caused by abilities but are no longer tied to an ability, such as the rain from drizzle.  This ability cannot ignore multitype at all.\n\nAn ability ignored by this ability is only nullified while the move is being used.  For example, this Pok\u00e9mon's moves can paralyze a Pok\u00e9mon with limber, but Limber will activate and heal the paralysis immediately thereafter, and this Pok\u00e9mon's spikes are not affected by this ability after they have been placed.\n\nWhen this Pok\u00e9mon enters battle, all participating trainers are notified that it has this ability.\n\nThis ability functions identically to teravolt and turboblaze.",
+        "flavor_text": "Moves can be used\nregardless of abilities."
+    },
+    "super-luck": {
+        "id": 105,
+        "name": "super-luck",
+        "short_desc": "Raises moves' critical hit rates one stage.",
+        "effect_desc": "This Pok\u00e9mon's moves have critical hit rates one stage higher than normal.",
+        "flavor_text": "Heightens the critical-hit\nratios of moves."
+    },
+    "aftermath": {
+        "id": 106,
+        "name": "aftermath",
+        "short_desc": "Damages the attacker for 1/4 its max HP when knocked out by a contact move.",
+        "effect_desc": "When this Pok\u00e9mon is knocked out by a move that makes contact, the move's user takes 1/4 its maximum HP in damage.",
+        "flavor_text": "Damages the foe landing\nthe finishing hit."
+    },
+    "anticipation": {
+        "id": 107,
+        "name": "anticipation",
+        "short_desc": "Notifies all trainers upon entering battle if an opponent has a super-effective move, self destruct, explosion, or a one-hit KO move.",
+        "effect_desc": "When this Pok\u00e9mon enters battle, if one of its opponents has a move that is super effective against it, self destruct, explosion, or a one-hit knockout move, all participating trainers are notified.\n\nThe move itself is not revealed; only that there is such a move.  Moves that inflict typeless damage, such as future sight, and moves of variable type, such as hidden power, count as their listed types.  counter, metal burst, mirror coat, and one-hit KO moves to which this Pok\u00e9mon is immune do not trigger this ability.",
+        "flavor_text": "Senses the foe\u2019s\ndangerous moves."
+    },
+    "forewarn": {
+        "id": 108,
+        "name": "forewarn",
+        "short_desc": "Reveals the opponents' strongest move upon entering battle.",
+        "effect_desc": "When this Pok\u00e9mon enters battle, it reveals the move with the highest base power known by any opposing Pok\u00e9mon to all participating trainers.\n\nIn the event of a tie, one is chosen at random.\n\nMoves without a listed base power are assigned one as follows:\n\nPower | Moves\n----: | -----\n  160 | One-hit KO moves: fissure, guillotine, horn drill, and sheer cold\n  120 | Counter moves: counter, metal burst, and mirror coat\n   80 | Variable power or set damage: crush grip, dragon rage, electro ball, endeavor, final gambit, flail, frustration, grass knot, gyro ball, heat crash, heavy slam, hidden power, low kick, natural gift, night shade, psywave, return, reversal, seismic toss, sonic boom, trump card, and wring out\n    0 | Any such move not listed\n",
+        "flavor_text": "Determines what moves\nthe foe has."
+    },
+    "unaware": {
+        "id": 109,
+        "name": "unaware",
+        "short_desc": "Ignores other Pok\u00e9mon's stat modifiers for damage and accuracy calculation.",
+        "effect_desc": "This Pok\u00e9mon ignores other Pok\u00e9mon's stat modifiers for the purposes of damage and accuracy calculation.\n\nEffectively, this affects modifiers of every stat except Speed.\n\nThe power of punishment and stored power is calculated as usual.  When this Pok\u00e9mon hurts itself in confusion, its stat modifiers affect damage as usual.",
+        "flavor_text": "Ignores any change in\nability by the foe."
+    },
+    "tinted-lens": {
+        "id": 110,
+        "name": "tinted-lens",
+        "short_desc": "Doubles damage inflicted with not-very-effective moves.",
+        "effect_desc": "This Pok\u00e9mon deals twice as much damage with moves that are not very effective against the target.",
+        "flavor_text": "Powers up \u201cnot very\neffective\u201d moves."
+    },
+    "filter": {
+        "id": 111,
+        "name": "filter",
+        "short_desc": "Decreases damage taken from super-effective moves by 1/4.",
+        "effect_desc": "This Pok\u00e9mon takes 0.75\u00d7 as much damage from moves that are super effective against it.\n\nThis ability functions identically to solid rock.",
+        "flavor_text": "Powers down super\u00ad\neffective moves."
+    },
+    "slow-start": {
+        "id": 112,
+        "name": "slow-start",
+        "short_desc": "Halves Attack and Speed for five turns upon entering battle.",
+        "effect_desc": "This Pok\u00e9mon's Attack and Speed are halved for five turns upon entering battle.\n\nThis ability also takes effect when acquired during battle.  If this Pok\u00e9mon loses its ability before the five turns are up, its Attack and Speed return to normal; if it then regains this ability without leaving battle, its Attack and Speed are halved again, but the counter keeps counting from where it was.",
+        "flavor_text": "Temporarily halves Attack\nand Speed."
+    },
+    "scrappy": {
+        "id": 113,
+        "name": "scrappy",
+        "short_desc": "Lets the Pok\u00e9mon's normal and fighting moves hit ghost Pok\u00e9mon.",
+        "effect_desc": "This Pok\u00e9mon ignores ghost-type Pok\u00e9mon's immunity to normal- and fighting-type moves.\n\nGhost Pok\u00e9mon's other types affect damage as usual.",
+        "flavor_text": "Enables moves to hit\nGhost-type foes."
+    },
+    "storm-drain": {
+        "id": 114,
+        "name": "storm-drain",
+        "short_desc": "Redirects single-target water moves to this Pok\u00e9mon where possible.  Absorbs Water moves, raising Special Attack one stage.",
+        "effect_desc": "All other Pok\u00e9mon's single-target water-type moves are redirected to this Pok\u00e9mon, if it is an eligible target.  Other Pok\u00e9mon's Water moves raise this Pok\u00e9mon's Special Attack one stage, negating any other effect on it, and cannot miss it.\n\nIf the move's intended target also has this ability, the move is not redirected.  When multiple Pok\u00e9mon with this ability are possible targets for redirection, the move is redirected to the one with the highest Speed stat, or, in the case of a tie, to a random tied Pok\u00e9mon.  follow me takes precedence over this ability.",
+        "flavor_text": "The Pok\u00e9mon draws in all\nWater-type moves."
+    },
+    "ice-body": {
+        "id": 115,
+        "name": "ice-body",
+        "short_desc": "Heals for 1/16 max HP after each turn during hail.  Protects against hail damage.",
+        "effect_desc": "This Pok\u00e9mon heals for 1/16 of its maximum HP after each turn during hail, and it does not take hail damage regardless of type.",
+        "flavor_text": "The Pok\u00e9mon regains HP in\na hailstorm."
+    },
+    "solid-rock": {
+        "id": 116,
+        "name": "solid-rock",
+        "short_desc": "Decreases damage taken from super-effective moves by 1/4.",
+        "effect_desc": "This Pok\u00e9mon takes 0.75\u00d7 as much damage from moves that are super effective against it.\n\nThis ability functions identically to filter.",
+        "flavor_text": "Powers down super\u00ad\neffective moves."
+    },
+    "snow-warning": {
+        "id": 117,
+        "name": "snow-warning",
+        "short_desc": "Summons hail that lasts indefinitely upon entering battle.",
+        "effect_desc": "The weather changes to hail when this Pok\u00e9mon enters battle and does not end unless cancelled by another weather condition.\n\nIf multiple Pok\u00e9mon with this ability, drizzle, drought, or sand stream are sent out at the same time, the abilities will activate in order of Speed, respecting trick room.  Each ability's weather will cancel the previous weather, and only the weather summoned by the slowest of the Pok\u00e9mon will stay.",
+        "flavor_text": "The Pok\u00e9mon summons a\nhailstorm in battle."
+    },
+    "honey-gather": {
+        "id": 118,
+        "name": "honey-gather",
+        "short_desc": "The Pok\u00e9mon may pick up honey after battle.",
+        "effect_desc": "This Pok\u00e9mon has a chance of picking up honey after each battle.  This chance starts at 5% and rises another 5% after every tenth level: 5% from level 1\u201310, 10% from 11\u201320, and so on, up to 50% from 91\u2013100.\n\nThis ability is checked after the battle ends, at which point any temporary ability changes have worn off.",
+        "flavor_text": "The Pok\u00e9mon may gather\nHoney from somewhere."
+    },
+    "frisk": {
+        "id": 119,
+        "name": "frisk",
+        "short_desc": "Reveals an opponent's held item upon entering battle.",
+        "effect_desc": "When this Pok\u00e9mon enters battle, it reveals an opposing Pok\u00e9mon's held item to all participating trainers.\n\nIn a double battle, if one opponent has an item, this Pok\u00e9mon will Frisk that Pok\u00e9mon; if both have an item, it will Frisk one at random.",
+        "flavor_text": "The Pok\u00e9mon can check\nthe foe\u2019s held item."
+    },
+    "reckless": {
+        "id": 120,
+        "name": "reckless",
+        "short_desc": "Strengthens recoil moves to 1.2\u00d7 their power.",
+        "effect_desc": "This Pok\u00e9mon's recoil moves and crash moves have 1.2\u00d7 their base power.\n\nstruggle is unaffected.\n\nThe \"crash moves\" are the moves that damage the user upon missing: jump kick and high jump kick.",
+        "flavor_text": "Powers up moves that\nhave recoil damage."
+    },
+    "multitype": {
+        "id": 121,
+        "name": "multitype",
+        "short_desc": "Changes arceus's type and form to match its held Plate.",
+        "effect_desc": "If this Pok\u00e9mon is holding an elemental Plate, its type and form change to match the Plate.\n\nThis Pok\u00e9mon's held item, whether or not it is a Plate, cannot be taken by covet or thief, nor removed by knock off, nor traded by switcheroo or trick.  Covet, Thief, and Knock Off still inflict damage against this Pok\u00e9mon.  Unlike with sticky hold, this Pok\u00e9mon cannot use fling, Switcheroo, or Trick to lose its item itself, nor gain an item through Switcheroo or Trick if it does not have one.\n\nThis ability has no effect for any Pok\u00e9mon other than arceus.  This ability cannot be traded with skill swap, nor copied with role play or trace, nor disabled with gastro acid, nor changed with worry seed.  This Pok\u00e9mon cannot use Skill Swap or Role Play to lose its ability itself.  mold breaker cannot ignore this ability.\n\nIf a Pok\u00e9mon Transforms into an Arceus with this ability, it will Transform into Arceus's default, normal-type form.  If the Transforming Pok\u00e9mon is holding a Plate, this ability will then activate and change the Pok\u00e9mon into the corresponding form.",
+        "flavor_text": "Changes type to match\nthe held Plate."
+    },
+    "flower-gift": {
+        "id": 122,
+        "name": "flower-gift",
+        "short_desc": "Increases friendly Pok\u00e9mon's Attack and Special Defense to 1.5\u00d7 during strong sunlight.",
+        "effect_desc": "Friendly Pok\u00e9mon have 1.5\u00d7 their Attack and Special Defense during strong sunlight if any friendly Pok\u00e9mon has this ability.\n\nUnlike forecast, multitype, and zen mode, this ability is not tied to its Pok\u00e9mon's form change; cherrim will switch between its forms even if it loses this ability.  As such, this ability also works if obtained by a Pok\u00e9mon other than Cherrim.",
+        "flavor_text": "Powers up party Pok\u00e9mon\nwhen it is sunny."
+    },
+    "bad-dreams": {
+        "id": 123,
+        "name": "bad-dreams",
+        "short_desc": "Damages sleeping opponents for 1/8 their max HP after each turn.",
+        "effect_desc": "Opposing Pok\u00e9mon take 1/8 of their maximum HP in damage after each turn while they are asleep.",
+        "flavor_text": "Reduces a sleeping foe\u2019s\nHP."
+    },
+    "pickpocket": {
+        "id": 124,
+        "name": "pickpocket",
+        "short_desc": "Steals attacking Pok\u00e9mon's held items on contact.",
+        "effect_desc": "Whenever a move makes contact with this Pok\u00e9mon, if it does not have a held item, it steals the attacker's held item.\n\nThis Pok\u00e9mon cannot steal upon being knocked out.  It can steal if the attacker has a substitute, but cannot steal when its own Substitute is hit.  If a move hits multiple times, only the last hit triggers this ability.  If this Pok\u00e9mon is wild, it cannot steal from a trained Pok\u00e9mon.",
+        "flavor_text": "Steals an item when hit\nby another Pok\u00e9mon."
+    },
+    "sheer-force": {
+        "id": 125,
+        "name": "sheer-force",
+        "short_desc": "Strengthens moves with extra effects to 1.3\u00d7 their power, but prevents their extra effects.",
+        "effect_desc": "This Pok\u00e9mon's moves with extra effects have 1.3\u00d7 their power, but lose their extra effects.\n\nAn effect chance is a move's chance to inflict a status ailment, cause a stat change, or make the target flinch in addition to the move's main effect. For example, thunder shock's paralysis is an extra effect, but thunder wave's is not, nor are knock off's item removal and air cutter's increased critical hit rate.\n\nMoves that lower the user's stats are unaffected.",
+        "flavor_text": "Removes added effects to\nincrease move damage."
+    },
+    "contrary": {
+        "id": 126,
+        "name": "contrary",
+        "short_desc": "Inverts stat changes.",
+        "effect_desc": "Whenever this Pok\u00e9mon's stats would be raised, they are instead lowered by the same amount, and vice versa.",
+        "flavor_text": "Makes stat changes have\nan opposite effect."
+    },
+    "unnerve": {
+        "id": 127,
+        "name": "unnerve",
+        "short_desc": "Prevents opposing Pok\u00e9mon from eating held Berries.",
+        "effect_desc": "Opposing Pok\u00e9mon cannot eat held Berries while this Pok\u00e9mon is in battle.\n\nAffected Pok\u00e9mon can still use bug bite or pluck to eat a target's Berry.",
+        "flavor_text": "Makes the foe nervous and\nunable to eat Berries."
+    },
+    "defiant": {
+        "id": 128,
+        "name": "defiant",
+        "short_desc": "Raises Attack two stages upon having any stat lowered.",
+        "effect_desc": "When any of this Pok\u00e9mon's stats are lowered, its Attack rises by two stages.\n\nIf multiple stats are lowered at once, this ability takes effect with each stat lowered.",
+        "flavor_text": "When its stats are lowered\nits Attack increases."
+    },
+    "defeatist": {
+        "id": 129,
+        "name": "defeatist",
+        "short_desc": "Halves Attack and Special Attack at 50% max HP or less.",
+        "effect_desc": "This Pok\u00e9mon's Attack and Special Attack are halved when it has half its HP or less.",
+        "flavor_text": "Lowers stats when HP\nbecomes half or less."
+    },
+    "cursed-body": {
+        "id": 130,
+        "name": "cursed-body",
+        "short_desc": "Has a 30% chance of Disabling any move that hits the Pok\u00e9mon.",
+        "effect_desc": "Moves that hit this Pok\u00e9mon have a 30% chance of being Disabled afterward.",
+        "flavor_text": "May disable a move used\non the Pok\u00e9mon."
+    },
+    "healer": {
+        "id": 131,
+        "name": "healer",
+        "short_desc": "Has a 30% chance of curing each adjacent ally of any major status ailment after each turn.",
+        "effect_desc": "Friendly Pok\u00e9mon next to this Pok\u00e9mon in double and triple battles each have a 30% chance of being cured of any major status ailment after each turn.",
+        "flavor_text": "May heal an ally\u2019s status\nconditions."
+    },
+    "friend-guard": {
+        "id": 132,
+        "name": "friend-guard",
+        "short_desc": "Decreases all direct damage taken by friendly Pok\u00e9mon to 0.75\u00d7.",
+        "effect_desc": "All friendly Pok\u00e9mon take 0.75\u00d7 as much direct damage from moves while this Pok\u00e9mon is in battle.\n\nThis effect stacks if multiple allied Pok\u00e9mon have it.",
+        "flavor_text": "Reduces damage done\nto allies."
+    },
+    "weak-armor": {
+        "id": 133,
+        "name": "weak-armor",
+        "short_desc": "Raises Speed and lowers Defense by one stage each upon being hit by a physical move.",
+        "effect_desc": "Whenever a physical move hits this Pok\u00e9mon, its Speed rises one stage and its Defense falls one stage.\n\nThis ability triggers on every hit of a multiple-hit move.",
+        "flavor_text": "Physical attacks lower\nDefense and raise Speed."
+    },
+    "heavy-metal": {
+        "id": 134,
+        "name": "heavy-metal",
+        "short_desc": "Doubles the Pok\u00e9mon's weight.",
+        "effect_desc": "This Pok\u00e9mon has double the usual weight for its species.",
+        "flavor_text": "Doubles the Pok\u00e9mon\u2019s\nweight."
+    },
+    "light-metal": {
+        "id": 135,
+        "name": "light-metal",
+        "short_desc": "Halves the Pok\u00e9mon's weight.",
+        "effect_desc": "This Pok\u00e9mon has half the usual weight for its species.",
+        "flavor_text": "Halves the Pok\u00e9mon\u2019s\nweight."
+    },
+    "multiscale": {
+        "id": 136,
+        "name": "multiscale",
+        "short_desc": "Halves damage taken from full HP.",
+        "effect_desc": "This Pok\u00e9mon takes half as much damage when it is hit having full HP.",
+        "flavor_text": "Reduces damage when HP\nis full."
+    },
+    "toxic-boost": {
+        "id": 137,
+        "name": "toxic-boost",
+        "short_desc": "Increases Attack to 1.5\u00d7 when poisoned.",
+        "effect_desc": "This Pok\u00e9mon has 1.5\u00d7 its Attack when poisoned.",
+        "flavor_text": "Powers up physical\nattacks when poisoned."
+    },
+    "flare-boost": {
+        "id": 138,
+        "name": "flare-boost",
+        "short_desc": "Increases Special Attack to 1.5\u00d7 when burned.",
+        "effect_desc": "This Pok\u00e9mon has 1.5\u00d7 its Special Attack when burned.",
+        "flavor_text": "Powers up special attacks\nwhen burned."
+    },
+    "harvest": {
+        "id": 139,
+        "name": "harvest",
+        "short_desc": "Has a 50% chance of restoring a used Berry after each turn if the Pok\u00e9mon has held no items in the meantime.",
+        "effect_desc": "After each turn, if the last item this Pok\u00e9mon consumed was a Berry and it is not currently holding an item, it has a 50% chance of regaining that Berry, or a 100% chance during strong sunlight.",
+        "flavor_text": "May create another\nBerry after one is used."
+    },
+    "telepathy": {
+        "id": 140,
+        "name": "telepathy",
+        "short_desc": "Protects against friendly Pok\u00e9mon's damaging moves.",
+        "effect_desc": "This Pok\u00e9mon does not take damage from friendly Pok\u00e9mon's moves, including single-target moves aimed at it.",
+        "flavor_text": "Anticipates an ally\u2019s\nattack and dodges it."
+    },
+    "moody": {
+        "id": 141,
+        "name": "moody",
+        "short_desc": "Raises a random stat two stages and lowers another one stage after each turn.",
+        "effect_desc": "After each turn, one of this Pok\u00e9mon's stats at random rises two stages, and another falls one stage.\n\nIf a stat is already at 6 or -6 stages, it will not be chosen to be increased or decreased, respectively.",
+        "flavor_text": "Raises one stat and\nlowers another."
+    },
+    "overcoat": {
+        "id": 142,
+        "name": "overcoat",
+        "short_desc": "Protects against damage from weather.",
+        "effect_desc": "This Pok\u00e9mon does not take damage from weather.",
+        "flavor_text": "Protects the Pok\u00e9mon from\ndamage from weather."
+    },
+    "poison-touch": {
+        "id": 143,
+        "name": "poison-touch",
+        "short_desc": "Has a 30% chance of poisoning target Pok\u00e9mon upon contact.",
+        "effect_desc": "This Pok\u00e9mon's contact moves have a 30% chance of poisoning the target with each hit.\n\nThis counts as an extra effect for the purposes of shield dust.  This ability takes effect before mummy.",
+        "flavor_text": "May poison targets when a\nPok\u00e9mon makes contact."
+    },
+    "regenerator": {
+        "id": 144,
+        "name": "regenerator",
+        "short_desc": "Heals for 1/3 max HP upon switching out.",
+        "effect_desc": "This Pok\u00e9mon regains 1/3 of its maximum HP when it is switched out for another Pok\u00e9mon under any circumstances other than having fainted.\n\nThis ability does not take effect when a battle ends.",
+        "flavor_text": "Restores a little HP when\nwithdrawn from battle."
+    },
+    "big-pecks": {
+        "id": 145,
+        "name": "big-pecks",
+        "short_desc": "Protects against Defense drops.",
+        "effect_desc": "This Pok\u00e9mon's Defense cannot be lowered by other Pok\u00e9mon.\n\nThis Pok\u00e9mon can still be passed negative Defense modifiers through heart swap or guard swap.",
+        "flavor_text": "Protects the Pok\u00e9mon from\nDefense-lowering attacks."
+    },
+    "sand-rush": {
+        "id": 146,
+        "name": "sand-rush",
+        "short_desc": "Doubles Speed during a sandstorm.  Protects against sandstorm damage.",
+        "effect_desc": "This Pok\u00e9mon's Speed is doubled during a sandstorm, and it does not take sandstorm damage, regardless of type.",
+        "flavor_text": "Boosts the Pok\u00e9mon\u2019s\nSpeed in a sandstorm."
+    },
+    "wonder-skin": {
+        "id": 147,
+        "name": "wonder-skin",
+        "short_desc": "Lowers incoming non-damaging moves' base accuracy to exactly 50%.",
+        "effect_desc": "Non-damaging moves have exactly 50% base accuracy against this Pok\u00e9mon.",
+        "flavor_text": "Makes status-changing\nmoves more likely to miss."
+    },
+    "analytic": {
+        "id": 148,
+        "name": "analytic",
+        "short_desc": "Strengthens moves to 1.3\u00d7 their power when moving last.",
+        "effect_desc": "This Pok\u00e9mon's moves have 1.3\u00d7 their power when it moves last in a turn.\n\nfuture sight and doom desire are unaffected.",
+        "flavor_text": "Boosts move power when\nthe Pok\u00e9mon moves last."
+    },
+    "illusion": {
+        "id": 149,
+        "name": "illusion",
+        "short_desc": "Takes the appearance of the last conscious party Pok\u00e9mon upon being sent out until hit by a damaging move.",
+        "effect_desc": "This Pok\u00e9mon, upon being sent out, appears to have the species, nickname, and Pok\u00e9 Ball of the last Pok\u00e9mon in the party that is able to battle.  This illusion breaks upon being hit by a damaging move.\n\nOther damage, e.g. from weather or spikes, does not break the illusion, nor does damage done to a substitute.\n\nIf the party order becomes temporarily shuffled around as Pok\u00e9mon are switched out in battle, this ability chooses the last Pok\u00e9mon according to that shuffled order.",
+        "flavor_text": "Comes out disguised as\nthe Pok\u00e9mon in back."
+    },
+    "imposter": {
+        "id": 150,
+        "name": "imposter",
+        "short_desc": "Transforms upon entering battle.",
+        "effect_desc": "This Pok\u00e9mon transforms into a random opponent upon entering battle.  This effect is identical to the move transform.",
+        "flavor_text": "It transforms itself into\nthe Pok\u00e9mon it is facing."
+    },
+    "infiltrator": {
+        "id": 151,
+        "name": "infiltrator",
+        "short_desc": "Bypasses light screen, reflect, and safeguard.",
+        "effect_desc": "This Pok\u00e9mon's moves ignore light screen, reflect, and safeguard.",
+        "flavor_text": "Passes through the foe\u2019s\nbarrier and strikes."
+    },
+    "mummy": {
+        "id": 152,
+        "name": "mummy",
+        "short_desc": "Changes attacking Pok\u00e9mon's abilities to Mummy on contact.",
+        "effect_desc": "Whenever a contact move hits this Pok\u00e9mon, the attacking Pok\u00e9mon's ability changes to Mummy.\n\nmultitype is unaffected.  If a Pok\u00e9mon with moxie knocks this Pok\u00e9mon out, the former's ability will change without taking effect.",
+        "flavor_text": "Contact with this Pok\u00e9mon\nspreads this Ability."
+    },
+    "moxie": {
+        "id": 153,
+        "name": "moxie",
+        "short_desc": "Raises Attack one stage upon KOing a Pok\u00e9mon.",
+        "effect_desc": "This Pok\u00e9mon's Attack rises one stage upon knocking out another Pok\u00e9mon, even a friendly Pok\u00e9mon.\n\nThis ability does not take effect when the Pok\u00e9mon indirectly causes another Pok\u00e9mon to faint, e.g. through poison or spikes.\n\nIf this Pok\u00e9mon knocks out a Pok\u00e9mon with mummy, the former's ability will change without taking effect.",
+        "flavor_text": "Boosts Attack after\nknocking out any Pok\u00e9mon."
+    },
+    "justified": {
+        "id": 154,
+        "name": "justified",
+        "short_desc": "Raises Attack one stage upon taking damage from a dark move.",
+        "effect_desc": "Whenever a dark-type move hits this Pok\u00e9mon, its Attack rises one stage.\n\nThe move is not negated in any way.",
+        "flavor_text": "Raises Attack when hit by\na Dark-type move."
+    },
+    "rattled": {
+        "id": 155,
+        "name": "rattled",
+        "short_desc": "Raises Speed one stage upon being hit by a dark, ghost, or bug move.",
+        "effect_desc": "This Pok\u00e9mon's Speed rises one stage with each hit from a damaging dark-, ghost-, or bug-type move.",
+        "flavor_text": "Some move types scare\nit and boost its Speed."
+    },
+    "magic-bounce": {
+        "id": 156,
+        "name": "magic-bounce",
+        "short_desc": "Reflects most non-damaging moves back at their user.",
+        "effect_desc": "When this Pok\u00e9mon is targeted by a move flagged as being reflectable, the move is redirected to its user.\n\nAll reflectable moves are non-damaging, and most non-damaging moves that target other Pok\u00e9mon are reflectable.\n\nA move reflected by this ability or magic coat cannot be reflected back.",
+        "flavor_text": "Reflects status-\nchanging moves."
+    },
+    "sap-sipper": {
+        "id": 157,
+        "name": "sap-sipper",
+        "short_desc": "Absorbs grass moves, raising Attack one stage.",
+        "effect_desc": "Whenever a grass-type move hits this Pok\u00e9mon, its Attack rises one stage, negating any other effect on it.",
+        "flavor_text": "Boosts Attack when hit by\na Grass-type move."
+    },
+    "prankster": {
+        "id": 158,
+        "name": "prankster",
+        "short_desc": "Raises non-damaging moves' priority by one stage.",
+        "effect_desc": "This Pok\u00e9mon's non-damaging moves have their priority increased by one stage.",
+        "flavor_text": "Gives priority to a\nstatus move."
+    },
+    "sand-force": {
+        "id": 159,
+        "name": "sand-force",
+        "short_desc": "Strengthens rock, ground, and steel moves to 1.3\u00d7 their power during a sandstorm.  Protects against sandstorm damage.",
+        "effect_desc": "During a sandstorm, this Pok\u00e9mon's rock-, ground-, and steel-type moves have 1.3\u00d7 their base power.  This Pok\u00e9mon does not take sandstorm damage, regardless of type.",
+        "flavor_text": "Boosts certain moves\u2019\npower in a sandstorm."
+    },
+    "iron-barbs": {
+        "id": 160,
+        "name": "iron-barbs",
+        "short_desc": "Damages attacking Pok\u00e9mon for 1/8 their max HP on contact.",
+        "effect_desc": "Whenever a move makes contact with this Pok\u00e9mon, the move's user takes 1/8 of its maximum HP in damage.\n\nThis ability functions identically to rough skin.",
+        "flavor_text": "Inflicts damage to the\nPok\u00e9mon on contact."
+    },
+    "zen-mode": {
+        "id": 161,
+        "name": "zen-mode",
+        "short_desc": "Changes darmanitan's form after each turn depending on its HP: Zen Mode below 50% max HP, and Standard Mode otherwise.",
+        "effect_desc": "This Pok\u00e9mon switches between Standard Mode and Zen Mode after each turn depending on its HP.  Below 50% of its maximum HP, it switches to Zen Mode, and at 50% or above, it switches to Standard Mode.\n\nThis Pok\u00e9mon returns to Standard Mode upon leaving battle or losing this ability.  This ability has no effect if this Pok\u00e9mon is not a darmanitan.",
+        "flavor_text": "Changes the Pok\u00e9mon\u2019s\nshape when HP is halved."
+    },
+    "victory-star": {
+        "id": 162,
+        "name": "victory-star",
+        "short_desc": "Increases moves' accuracy to 1.1\u00d7 for friendly Pok\u00e9mon.",
+        "effect_desc": "All friendly Pok\u00e9mon's moves, including this Pok\u00e9mon's own moves, have 1.1\u00d7 their usual accuracy while this Pok\u00e9mon is in battle.",
+        "flavor_text": "Boosts the accuracy of its\nallies and itself."
+    },
+    "turboblaze": {
+        "id": 163,
+        "name": "turboblaze",
+        "short_desc": "Bypasses targets' abilities if they could hinder or prevent moves.",
+        "effect_desc": "This Pok\u00e9mon's moves completely ignore abilities that could hinder or prevent their effect on the target.\n\nFor example, this Pok\u00e9mon's moves ignore abilities that would fully negate them, such as water absorb; abilities that would prevent any of their effects, such as clear body, shell armor, or sticky hold; and abilities that grant any general protective benefit, such as simple, snow cloak, or thick fat.  If an ability could either hinder or help this Pok\u00e9mon's moves, e.g. dry skin or unaware, the ability is ignored either way.\n\nAbilities that do not fit this description, even if they could hinder moves in some other way, are not affected.  For example, cursed body only affects potential future uses of the move, while liquid ooze and shadow tag can only hinder a move's effect on the user.  This ablity cannot ignore type or form changes granted by abilities, for example color change or forecast; nor effects that were caused by abilities but are no longer tied to an ability, such as the rain from drizzle.  This ability cannot ignore multitype at all.\n\nAn ability ignored by this ability is only nullified while the move is being used.  For example, this Pok\u00e9mon's moves can paralyze a Pok\u00e9mon with limber, but Limber will activate and heal the paralysis immediately thereafter, and this Pok\u00e9mon's spikes are not affected by this ability after they have been placed.\n\nWhen this Pok\u00e9mon enters battle, all participating trainers are notified that it has this ability.\n\nThis ability functions identically to mold breaker and teravolt.",
+        "flavor_text": "Moves can be used\nregardless of Abilities."
+    },
+    "teravolt": {
+        "id": 164,
+        "name": "teravolt",
+        "short_desc": "Bypasses targets' abilities if they could hinder or prevent moves.",
+        "effect_desc": "This Pok\u00e9mon's moves completely ignore abilities that could hinder or prevent their effect on the target.\n\nFor example, this Pok\u00e9mon's moves ignore abilities that would fully negate them, such as water absorb; abilities that would prevent any of their effects, such as clear body, shell armor, or sticky hold; and abilities that grant any general protective benefit, such as simple, snow cloak, or thick fat.  If an ability could either hinder or help this Pok\u00e9mon's moves, e.g. dry skin or unaware, the ability is ignored either way.\n\nAbilities that do not fit this description, even if they could hinder moves in some other way, are not affected.  For example, cursed body only affects potential future uses of the move, while liquid ooze and shadow tag can only hinder a move's effect on the user.  This ablity cannot ignore type or form changes granted by abilities, for example color change or forecast; nor effects that were caused by abilities but are no longer tied to an ability, such as the rain from drizzle.  This ability cannot ignore multitype at all.\n\nAn ability ignored by this ability is only nullified while the move is being used.  For example, this Pok\u00e9mon's moves can paralyze a Pok\u00e9mon with limber, but Limber will activate and heal the paralysis immediately thereafter, and this Pok\u00e9mon's spikes are not affected by this ability after they have been placed.\n\nWhen this Pok\u00e9mon enters battle, all participating trainers are notified that it has this ability.\n\nThis ability functions identically to mold breaker and turboblaze.",
+        "flavor_text": "Moves can be used\nregardless of Abilities."
+    },
+    "aroma-veil": {
+        "id": 165,
+        "name": "aroma-veil",
+        "short_desc": "Protects allies against moves that affect their mental state.",
+        "effect_desc": "Protects allies against moves that affect their mental state.",
+        "flavor_text": "Protects allies from attacks that\nlimit their move choices."
+    },
+    "flower-veil": {
+        "id": 166,
+        "name": "flower-veil",
+        "short_desc": "Protects friendly grass Pok\u00e9mon from having their stats lowered by other Pok\u00e9mon.",
+        "effect_desc": "Protects friendly grass Pok\u00e9mon from having their stats lowered by other Pok\u00e9mon.",
+        "flavor_text": "Prevents lowering of ally\nGrass-type Pok\u00e9mon\u2019s stats."
+    },
+    "cheek-pouch": {
+        "id": 167,
+        "name": "cheek-pouch",
+        "short_desc": "Restores HP upon eating a Berry, in addition to the Berry's effect.",
+        "effect_desc": "Restores HP upon eating a Berry, in addition to the Berry's effect.",
+        "flavor_text": "Restores HP as well when\nthe Pok\u00e9mon eats a Berry."
+    },
+    "protean": {
+        "id": 168,
+        "name": "protean",
+        "short_desc": "Changes the bearer's type to match each move it uses.",
+        "effect_desc": "Changes the bearer's type to match each move it uses.\n\nThe type change takes place just before the move is used.",
+        "flavor_text": "Changes the Pok\u00e9mon\u2019s type to\nthe type of the move it\u2019s using."
+    },
+    "fur-coat": {
+        "id": 169,
+        "name": "fur-coat",
+        "short_desc": "Halves damage from physical attacks.",
+        "effect_desc": "Halves damage from physical attacks.",
+        "flavor_text": "Halves damage from\nphysical moves."
+    },
+    "magician": {
+        "id": 170,
+        "name": "magician",
+        "short_desc": "Steals the target's held item when the bearer uses a damaging move.",
+        "effect_desc": "Steals the target's held item when the bearer uses a damaging move.",
+        "flavor_text": "The Pok\u00e9mon steals the held item\nof a Pok\u00e9mon it hits with a move."
+    },
+    "bulletproof": {
+        "id": 171,
+        "name": "bulletproof",
+        "short_desc": "Protects against bullet, ball, and bomb-based moves.",
+        "effect_desc": "Protects against bullet, ball, and bomb-based moves.",
+        "flavor_text": "Protects the Pok\u00e9mon from\nsome ball and bomb moves."
+    },
+    "competitive": {
+        "id": 172,
+        "name": "competitive",
+        "short_desc": "Raises Special Attack by two stages upon having any stat lowered.",
+        "effect_desc": "Raises Special Attack by two stages upon having any stat lowered.",
+        "flavor_text": "Boosts the Sp. Atk stat when\na stat is lowered."
+    },
+    "strong-jaw": {
+        "id": 173,
+        "name": "strong-jaw",
+        "short_desc": "Strengthens biting moves to 1.5\u00d7 their power.",
+        "effect_desc": "Strengthens biting moves to 1.5\u00d7 their power.",
+        "flavor_text": "The Pok\u00e9mon\u2019s strong jaw gives\nit tremendous biting power."
+    },
+    "refrigerate": {
+        "id": 174,
+        "name": "refrigerate",
+        "short_desc": "Turns the bearer's normal moves into ice moves and strengthens them to 1.3\u00d7 their power.",
+        "effect_desc": "Turns the bearer's normal-type moves into ice-type moves.  Moves changed by this ability have 1.3\u00d7 their power.",
+        "flavor_text": "Normal-type moves become\nIce-type moves."
+    },
+    "sweet-veil": {
+        "id": 175,
+        "name": "sweet-veil",
+        "short_desc": "Prevents friendly Pok\u00e9mon from sleeping.",
+        "effect_desc": "Prevents friendly Pok\u00e9mon from sleeping.",
+        "flavor_text": "Prevents itself and ally Pok\u00e9mon\nfrom falling asleep."
+    },
+    "stance-change": {
+        "id": 176,
+        "name": "stance-change",
+        "short_desc": "Changes aegislash to Blade Forme before using a damaging move, or Shield Forme before using kings shield.",
+        "effect_desc": "Changes aegislash to Blade Forme before using a damaging move, or Shield Forme before using kings shield.",
+        "flavor_text": "The Pok\u00e9mon changes form\ndepending on how it battles."
+    },
+    "gale-wings": {
+        "id": 177,
+        "name": "gale-wings",
+        "short_desc": "Raises flying moves' priority by one stage.",
+        "effect_desc": "Raises flying moves' priority by one stage.",
+        "flavor_text": "Gives priority to Flying-type\nmoves."
+    },
+    "mega-launcher": {
+        "id": 178,
+        "name": "mega-launcher",
+        "short_desc": "Strengthens aura and pulse moves to 1.5\u00d7 their power.",
+        "effect_desc": "Strengthens aura and pulse moves to 1.5\u00d7 their power.",
+        "flavor_text": "Powers up aura and pulse moves."
+    },
+    "grass-pelt": {
+        "id": 179,
+        "name": "grass-pelt",
+        "short_desc": "Boosts Defense while grassy terrain is in effect.",
+        "effect_desc": "Boosts Defense while grassy terrain is in effect.",
+        "flavor_text": "Boosts the Defense stat\nin Grassy Terrain."
+    },
+    "symbiosis": {
+        "id": 180,
+        "name": "symbiosis",
+        "short_desc": "Passes the bearer's held item to an ally when the ally uses up its item.",
+        "effect_desc": "Passes the bearer's held item to an ally when the ally uses up its item.",
+        "flavor_text": "The Pok\u00e9mon can pass\nan item to an ally."
+    },
+    "tough-claws": {
+        "id": 181,
+        "name": "tough-claws",
+        "short_desc": "Strengthens moves that make contact to 1.33\u00d7 their power.",
+        "effect_desc": "Strengthens moves that make contact to 1.33\u00d7 their power.",
+        "flavor_text": "Powers up moves that\nmake direct contact."
+    },
+    "pixilate": {
+        "id": 182,
+        "name": "pixilate",
+        "short_desc": "Turns the bearer's normal moves into fairy moves and strengthens them to 1.3\u00d7 their power.",
+        "effect_desc": "Turns the bearer's normal-type moves into fairy moves.  Moves changed by this ability have 1.3\u00d7 their power.",
+        "flavor_text": "Normal-type moves become\nFairy-type moves."
+    },
+    "gooey": {
+        "id": 183,
+        "name": "gooey",
+        "short_desc": "Lowers attacking Pok\u00e9mon's Speed by one stage on contact.",
+        "effect_desc": "Lowers attacking Pok\u00e9mon's Speed by one stage on contact.",
+        "flavor_text": "Contact with the Pok\u00e9mon\nlowers the attacker\u2019s Speed stat."
+    },
+    "aerilate": {
+        "id": 184,
+        "name": "aerilate",
+        "short_desc": "Turns the bearer's normal moves into flying moves and strengthens them to 1.3\u00d7 their power.",
+        "effect_desc": "Turns the bearer's normal-type moves into flying-type moves.  Moves changed by this ability have 1.3\u00d7 their power.",
+        "flavor_text": "Normal-type moves become\nFlying-type moves."
+    },
+    "parental-bond": {
+        "id": 185,
+        "name": "parental-bond",
+        "short_desc": "Lets the bearer hit twice with damaging moves.  The second hit has half power.",
+        "effect_desc": "Lets the bearer hit twice with damaging moves.  The second hit has half power.",
+        "flavor_text": "Parent and child\nattack together."
+    },
+    "dark-aura": {
+        "id": 186,
+        "name": "dark-aura",
+        "short_desc": "Strengthens dark moves to 1.33\u00d7 their power for all friendly and opposing Pok\u00e9mon.",
+        "effect_desc": "Strengthens dark moves for all friendly and opposing Pok\u00e9mon.",
+        "flavor_text": "Powers up each Pok\u00e9mon\u2019s\nDark-type moves."
+    },
+    "fairy-aura": {
+        "id": 187,
+        "name": "fairy-aura",
+        "short_desc": "Strengthens fairy moves to 1.33\u00d7 their power for all friendly and opposing Pok\u00e9mon.",
+        "effect_desc": "Strengthens fairy moves for all friendly and opposing Pok\u00e9mon.",
+        "flavor_text": "Powers up each Pok\u00e9mon\u2019s\nFairy-type moves."
+    },
+    "aura-break": {
+        "id": 188,
+        "name": "aura-break",
+        "short_desc": "Makes dark aura and fairy aura weaken moves of their respective types.",
+        "effect_desc": "While this Pok\u00e9mon is on the field, dark aura and fairy aura weaken moves of their respective types to 2/3 their power, rather than strengthening them.",
+        "flavor_text": "The effects of \u201cAura\u201d Abilities\nare reversed."
+    },
+    "primordial-sea": {
+        "id": 189,
+        "name": "primordial-sea",
+        "short_desc": "Creates heavy rain, which has all the properties of Rain Dance, cannot be replaced, and causes damaging Fire moves to fail.",
+        "effect_desc": "When this Pok\u00e9mon enters battle or gains this ability, the weather becomes heavy rain.  Heavy rain has all the properties of rain dance and also causes damaging Fire moves to fail.\n\nHeavy rain ends when this Pok\u00e9mon leaves battle or loses this ability, or when this ability is nullified.  The weather cannot otherwise be changed except by the effects of delta stream and desolate land.\n\nair lock and cloud nine will prevent the effects of heavy rain, including allowing Fire moves to work, but will not allow the weather to be changed.",
+        "flavor_text": "Affects weather and nullifies any\nFire-type attacks."
+    },
+    "desolate-land": {
+        "id": 190,
+        "name": "desolate-land",
+        "short_desc": "Creates extremely harsh sunlight, which has all the properties of Sunny Day, cannot be replaced, and causes damaging Water moves to fail.",
+        "effect_desc": "When this Pok\u00e9mon enters battle or gains this ability, the weather becomes extremely harsh sunlight.  Extremely harsh sunlight has all the properties of sunny day and also causes damaging Water moves to fail.\n\nExtremely harsh sunlight ends when this Pok\u00e9mon leaves battle or loses this ability, or when this ability is nullified.  The weather cannot otherwise be changed except by the effects of delta stream and primordial sea.\n\nair lock and cloud nine will prevent the effects of extremely harsh sunlight, including allowing Water moves to work, but will not allow the weather to be changed.",
+        "flavor_text": "Affects weather and nullifies any\nWater-type attacks."
+    },
+    "delta-stream": {
+        "id": 191,
+        "name": "delta-stream",
+        "short_desc": "Creates a mysterious air current, which cannot be replaced and causes moves to never be super effective against Flying Pok\u00e9mon.",
+        "effect_desc": "When this Pok\u00e9mon enters battle or gains this ability, the weather becomes a mysterious air current.  A mysterious air current causes moves to not be super effective against Flying; they do neutral damage instead.  anticipation and stealth rock are not affected.\n\nThe mysterious air current ends when this Pok\u00e9mon leaves battle or loses this ability, or when this ability is nullified.  The weather cannot otherwise be changed except by the effects of desolate land and primordial sea.\n\nair lock and cloud nine will prevent the effect of a mysterious air current, but will not allow the weather to be changed.",
+        "flavor_text": "Affects weather and eliminates all\nof the Flying type\u2019s weaknesses."
+    },
+    "stamina": {
+        "id": 192,
+        "name": "stamina",
+        "short_desc": "Raises this Pok\u00e9mon's Defense by one stage when it takes damage from a move.",
+        "effect_desc": "Raises this Pok\u00e9mon's Defense by one stage when it takes damage from a move.",
+        "flavor_text": "Boosts the Defense stat when hit by an attack."
+    },
+    "wimp-out": {
+        "id": 193,
+        "name": "wimp-out",
+        "short_desc": "This Pok\u00e9mon automatically switches out when its HP drops below half.",
+        "effect_desc": "After this Pok\u00e9mon is hit by a move, if that move caused this Pok\u00e9mon's HP to drop below half, it switches out.",
+        "flavor_text": "The Pok\u00e9mon cowardly switches out when its HP\nbecomes half or less."
+    },
+    "emergency-exit": {
+        "id": 194,
+        "name": "emergency-exit",
+        "short_desc": "This Pok\u00e9mon automatically switches out when its HP drops below half.",
+        "effect_desc": "After this Pok\u00e9mon is hit by a move, if that move caused this Pok\u00e9mon's HP to drop below half, it switches out.",
+        "flavor_text": "The Pok\u00e9mon, sensing danger, switches out when its\nHP becomes half or less."
+    },
+    "water-compaction": {
+        "id": 195,
+        "name": "water-compaction",
+        "short_desc": "Raises this Pok\u00e9mon's Defense by two stages when it's hit by a Water move.",
+        "effect_desc": "Raises this Pok\u00e9mon's Defense by two stages when it's hit by a Water move.",
+        "flavor_text": "Boosts the Pok\u00e9mon\u2019s Defense stat sharply when hit\nby a Water-type move."
+    },
+    "merciless": {
+        "id": 196,
+        "name": "merciless",
+        "short_desc": "This Pok\u00e9mon's moves critical hit against poisoned targets.",
+        "effect_desc": "This Pok\u00e9mon's moves critical hit against poisoned targets.",
+        "flavor_text": "The Pok\u00e9mon\u2019s attacks become critical hits if the\ntarget is poisoned."
+    },
+    "shields-down": {
+        "id": 197,
+        "name": "shields-down",
+        "short_desc": "Transforms this Minior between Core Form and Meteor Form.  Prevents major status ailments and drowsiness while in Meteor Form.",
+        "effect_desc": "When this Pok\u00e9mon enters battle and at the end of each turn, if its HP is 50% or above, it changes into Meteor Form; otherwise, it changes into Core Form.  In Meteor Form, it cannot be given a major status ailment (though existing ones are not cured), cannot become drowsy from yawn, and cannot use rest (which will simply fail).\n\nThis ability cannot be copied, replaced, or nullified.  This ability only takes effect for Minior.",
+        "flavor_text": "When its HP becomes half or less, the Pok\u00e9mon\u2019s\nshell breaks and it becomes aggressive."
+    },
+    "stakeout": {
+        "id": 198,
+        "name": "stakeout",
+        "short_desc": "This Pok\u00e9mon's moves have double power against Pok\u00e9mon that switched in this turn.",
+        "effect_desc": "This Pok\u00e9mon's moves have double power against Pok\u00e9mon that switched in this turn.",
+        "flavor_text": "Doubles the damage dealt to the target\u2019s\nreplacement if the target switches out."
+    },
+    "water-bubble": {
+        "id": 199,
+        "name": "water-bubble",
+        "short_desc": "Halves damage from Fire moves, doubles damage of Water moves, and prevents burns.",
+        "effect_desc": "When this Pok\u00e9mon is hit by a Fire move, the damage is halved.  When this Pok\u00e9mon uses a Water move, the power is doubled. This Pok\u00e9mon cannot be burned, and if it becomes burned, the burn is immediately cured.",
+        "flavor_text": "Lowers the power of Fire-type moves done to the\nPok\u00e9mon and prevents the Pok\u00e9mon from getting\na burn."
+    },
+    "steelworker": {
+        "id": 200,
+        "name": "steelworker",
+        "short_desc": "This Pok\u00e9mon's Steel moves have 1.5\u00d7 power.",
+        "effect_desc": "This Pok\u00e9mon's Steel moves have 1.5\u00d7 power.",
+        "flavor_text": "Powers up Steel-type moves."
+    },
+    "berserk": {
+        "id": 201,
+        "name": "berserk",
+        "short_desc": "Raises this Pok\u00e9mon's Special Attack by one stage every time its HP drops below half.",
+        "effect_desc": "Whenever this Pok\u00e9mon takes damage from a move that causes its HP to drop below 50%, its Special Attack rises by one stage.",
+        "flavor_text": "Boosts the Pok\u00e9mon\u2019s Sp. Atk stat when it takes a \nhit that causes its HP to become half or less."
+    },
+    "slush-rush": {
+        "id": 202,
+        "name": "slush-rush",
+        "short_desc": "During Hail, this Pok\u00e9mon has double Speed.",
+        "effect_desc": "During Hail, this Pok\u00e9mon has double Speed.",
+        "flavor_text": "Boosts the Pok\u00e9mon\u2019s Speed stat in a hailstorm."
+    },
+    "long-reach": {
+        "id": 203,
+        "name": "long-reach",
+        "short_desc": "This Pok\u00e9mon's moves do not make contact.",
+        "effect_desc": "A move used by this Pok\u00e9mon will not make contact.",
+        "flavor_text": "The Pok\u00e9mon uses its moves without making contact\nwith the target."
+    },
+    "liquid-voice": {
+        "id": 204,
+        "name": "liquid-voice",
+        "short_desc": "Sound-based moves become Water-type.",
+        "effect_desc": "When this Pok\u00e9mon uses a move that is sound-based, that move's type is Water.",
+        "flavor_text": "All sound-based moves become Water-type moves."
+    },
+    "triage": {
+        "id": 205,
+        "name": "triage",
+        "short_desc": "This Pok\u00e9mon's healing moves have their priority increased by 3.",
+        "effect_desc": "This Pok\u00e9mon's healing moves have their priority increased by 3.",
+        "flavor_text": "Gives priority to a healing move."
+    },
+    "galvanize": {
+        "id": 206,
+        "name": "galvanize",
+        "short_desc": "This Pok\u00e9mon's Normal moves are Electric and have their power increased to 1.2\u00d7.",
+        "effect_desc": "When this Pok\u00e9mon uses a Normal moves, that move is Electric its power is 1.2\u00d7.",
+        "flavor_text": "Normal-type moves become Electric-type moves.\nThe power of those moves is boosted a little."
+    },
+    "surge-surfer": {
+        "id": 207,
+        "name": "surge-surfer",
+        "short_desc": "Doubles this Pok\u00e9mon's Speed on Electric Terrain.",
+        "effect_desc": "Doubles this Pok\u00e9mon's Speed on Electric Terrain.",
+        "flavor_text": "Doubles the Pok\u00e9mon\u2019s Speed stat on\nElectric Terrain."
+    },
+    "schooling": {
+        "id": 208,
+        "name": "schooling",
+        "short_desc": "Wishiwashi becomes Schooling Form when its HP is 25% or higher.",
+        "effect_desc": "If this Pok\u00e9mon is a wishiwashi and level 20 or above, then when it enters battle and at the start of each turn, it becomes Schooling Form if its HP is 25% or higher and Solo Form otherwise.\n\nThis ability cannot be replaced, copied, or nullified.",
+        "flavor_text": "When it has a lot of HP, the Pok\u00e9mon forms a\npowerful school. It stops schooling when its HP\nis low."
+    },
+    "disguise": {
+        "id": 209,
+        "name": "disguise",
+        "short_desc": "Prevents the first instance of battle damage.",
+        "effect_desc": "If this Pok\u00e9mon is in its Disguised Form and takes damage from a move, it switches to its Busted Form and the damage is prevented.  Other effects are not prevented.\n\nThis ability cannot be copied or replaced.  This ability only takes effect for Mimikyu.",
+        "flavor_text": "Once per battle, the shroud that covers the\nPok\u00e9mon can protect it from an attack."
+    },
+    "battle-bond": {
+        "id": 210,
+        "name": "battle-bond",
+        "short_desc": "Transforms this Pok\u00e9mon into Ash-Greninja after fainting an opponent.  Water Shuriken's power is 20 and always hits three times.",
+        "effect_desc": "Transforms this Pok\u00e9mon into Ash-Greninja after fainting an opponent.  Water Shuriken's power is 20 and always hits three times.\n\nThis ability cannot be copied or replaced.  This ability only takes effect for Greninja.",
+        "flavor_text": "Defeating an opposing Pok\u00e9mon strengthens the\nPok\u00e9mon\u2019s bond with its Trainer, and it becomes\nAsh-Greninja. Water Shuriken gets more powerful."
+    },
+    "power-construct": {
+        "id": 211,
+        "name": "power-construct",
+        "short_desc": "Transforms 10% or 50% Zygarde into Complete Forme when its HP is below 50%.",
+        "effect_desc": "Transforms 10% or 50% Zygarde into Complete Forme when its HP is below 50%.\n\nThis ability cannot be copied or replaced.  This ability only takes effect for Zygarde.",
+        "flavor_text": "Other Cells gather to aid when its HP becomes\nhalf or less. Then the Pok\u00e9mon changes\nits form to Complete Forme."
+    },
+    "corrosion": {
+        "id": 212,
+        "name": "corrosion",
+        "short_desc": "This Pok\u00e9mon can inflict poison on Poison and Steel Pok\u00e9mon.",
+        "effect_desc": "This Pok\u00e9mon's moves and item ignore the usual immunity of Poison and Steel Pok\u00e9mon when attempting to inflict poison.",
+        "flavor_text": "The Pok\u00e9mon can poison the target even if it\u2019s\na Steel or Poison type."
+    },
+    "comatose": {
+        "id": 213,
+        "name": "comatose",
+        "short_desc": "This Pok\u00e9mon always  acts as though it were Asleep.",
+        "effect_desc": "This Pok\u00e9mon always acts as though it were Asleep.  It cannot be given another status ailment; it's unaffected by yawn; it can use sleep talk; and so on.",
+        "flavor_text": "It\u2019s always drowsing and will never wake up.\nIt can attack without waking up."
+    },
+    "queenly-majesty": {
+        "id": 214,
+        "name": "queenly-majesty",
+        "short_desc": "Opposing Pok\u00e9mon cannot use priority attacks.",
+        "effect_desc": "When an opposing Pok\u00e9mon attempts to use a move that targets this Pok\u00e9mon or an ally, and that move has priority, it will fail.",
+        "flavor_text": "Its majesty pressures the opposing Pok\u00e9mon,\nmaking it unable to attack using priority moves."
+    },
+    "innards-out": {
+        "id": 215,
+        "name": "innards-out",
+        "short_desc": "When this Pok\u00e9mon faints from an opponent's move, that opponent takes damage equal to the HP this Pok\u00e9mon had remaining.",
+        "effect_desc": "When this Pok\u00e9mon faints from an opponent's move, that opponent takes damage equal to the HP this Pok\u00e9mon had remaining.",
+        "flavor_text": "Damages the attacker landing the finishing hit\nby the amount equal to its last HP."
+    },
+    "dancer": {
+        "id": 216,
+        "name": "dancer",
+        "short_desc": "Whenever another Pok\u00e9mon uses a dance move, this Pok\u00e9mon will use the same move immediately afterwards.",
+        "effect_desc": "Whenever another Pok\u00e9mon uses a dance move, this Pok\u00e9mon will use the same move immediately afterwards.",
+        "flavor_text": "When another Pok\u00e9mon uses a dance move,\nit can use a dance move following it regardless\nof its Speed."
+    },
+    "battery": {
+        "id": 217,
+        "name": "battery",
+        "short_desc": "Ally Pok\u00e9mon's moves have their power increased to 1.3\u00d7.",
+        "effect_desc": "Ally Pok\u00e9mon's moves have their power increased to 1.3\u00d7.",
+        "flavor_text": "Powers up ally Pok\u00e9mon\u2019s special moves."
+    },
+    "fluffy": {
+        "id": 218,
+        "name": "fluffy",
+        "short_desc": "Damage from contact moves is halved.  Damage from Fire moves is doubled.",
+        "effect_desc": "Damage from contact moves is halved.  Damage from Fire moves is doubled.",
+        "flavor_text": "Halves the damage taken from moves that make\ndirect contact, but doubles that of Fire-type moves."
+    },
+    "dazzling": {
+        "id": 219,
+        "name": "dazzling",
+        "short_desc": "Opposing Pok\u00e9mon cannot use priority attacks.",
+        "effect_desc": "When an opposing Pok\u00e9mon attempts to use a move that targets this Pok\u00e9mon or an ally, and that move has priority, it will fail.",
+        "flavor_text": "Surprises the opposing Pok\u00e9mon, making it unable\nto attack using priority moves."
+    },
+    "soul-heart": {
+        "id": 220,
+        "name": "soul-heart",
+        "short_desc": "This Pok\u00e9mon's Special Attack rises by one stage every time any Pok\u00e9mon faints.",
+        "effect_desc": "This Pok\u00e9mon's Special Attack rises by one stage every time any Pok\u00e9mon faints.",
+        "flavor_text": "Boosts its Sp. Atk stat every time a Pok\u00e9mon faints."
+    },
+    "tangling-hair": {
+        "id": 221,
+        "name": "tangling-hair",
+        "short_desc": "When this Pok\u00e9mon takes regular damage from a contact move, the attacking Pok\u00e9mon's Speed lowers by one stage.",
+        "effect_desc": "When this Pok\u00e9mon takes regular damage from a contact move, the attacking Pok\u00e9mon's Speed lowers by one stage.",
+        "flavor_text": "Contact with the Pok\u00e9mon lowers the attacker\u2019s\nSpeed stat."
+    },
+    "receiver": {
+        "id": 222,
+        "name": "receiver",
+        "short_desc": "When an ally faints, this Pok\u00e9mon gains its Ability.",
+        "effect_desc": "When an ally faints, this Pok\u00e9mon gains its Ability.",
+        "flavor_text": "The Pok\u00e9mon copies the Ability of a defeated ally."
+    },
+    "power-of-alchemy": {
+        "id": 223,
+        "name": "power-of-alchemy",
+        "short_desc": "When an ally faints, this Pok\u00e9mon gains its Ability.",
+        "effect_desc": "When an ally faints, this Pok\u00e9mon gains its Ability.",
+        "flavor_text": "The Pok\u00e9mon copies the Ability of a defeated ally."
+    },
+    "beast-boost": {
+        "id": 224,
+        "name": "beast-boost",
+        "short_desc": "Raises this Pok\u00e9mon's highest stat by one stage when it faints another Pok\u00e9mon.",
+        "effect_desc": "Raises this Pok\u00e9mon's highest stat by one stage when it faints another Pok\u00e9mon.",
+        "flavor_text": "The Pok\u00e9mon boosts its most proficient stat each\ntime it knocks out a Pok\u00e9mon."
+    },
+    "rks-system": {
+        "id": 225,
+        "name": "rks-system",
+        "short_desc": "Changes this Pok\u00e9mon's type to match its held Memory.",
+        "effect_desc": "Changes this Pok\u00e9mon's type to match its held Memory.\n\nThis ability cannot be copied, replaced, or nullified.  This ability only takes effect for Silvally.",
+        "flavor_text": "Changes the Pok\u00e9mon\u2019s type to match the\nmemory disc it holds."
+    },
+    "electric-surge": {
+        "id": 226,
+        "name": "electric-surge",
+        "short_desc": "When this Pok\u00e9mon enters battle, it changes the terrain to Electric Terrain.",
+        "effect_desc": "When this Pok\u00e9mon enters battle, it changes the terrain to electric terrain.",
+        "flavor_text": "Turns the ground into Electric Terrain when the\nPok\u00e9mon enters a battle."
+    },
+    "psychic-surge": {
+        "id": 227,
+        "name": "psychic-surge",
+        "short_desc": "When this Pok\u00e9mon enters battle, it changes the terrain to Psychic Terrain.",
+        "effect_desc": "When this Pok\u00e9mon enters battle, it changes the terrain to psychic terrain.",
+        "flavor_text": "Turns the ground into Psychic Terrain when\nthe Pok\u00e9mon enters a battle."
+    },
+    "misty-surge": {
+        "id": 228,
+        "name": "misty-surge",
+        "short_desc": "When this Pok\u00e9mon enters battle, it changes the terrain to Misty Terrain.",
+        "effect_desc": "When this Pok\u00e9mon enters battle, it changes the terrain to misty terrain.",
+        "flavor_text": "Turns the ground into Misty Terrain when\nthe Pok\u00e9mon enters a battle."
+    },
+    "grassy-surge": {
+        "id": 229,
+        "name": "grassy-surge",
+        "short_desc": "When this Pok\u00e9mon enters battle, it changes the terrain to Grassy Terrain.",
+        "effect_desc": "When this Pok\u00e9mon enters battle, it changes the terrain to grassy terrain.",
+        "flavor_text": "Turns the ground into Grassy Terrain when\nthe Pok\u00e9mon enters a battle."
+    },
+    "full-metal-body": {
+        "id": 230,
+        "name": "full-metal-body",
+        "short_desc": "Other Pok\u00e9mon cannot lower this Pok\u00e9mon's stats.",
+        "effect_desc": "This Pok\u00e9mon's stats cannot be lowered by other Pok\u00e9mon's moves or abilities.  This effect only applies to normal stat modifications and not more exotic effects such as topsy turvy or power swap.\n\nThis Ability is not bypassed by mold breaker, teravolt, or turboblaze.",
+        "flavor_text": "Prevents other Pok\u00e9mon\u2019s moves or Abilities from\nlowering the Pok\u00e9mon\u2019s stats."
+    },
+    "shadow-shield": {
+        "id": 231,
+        "name": "shadow-shield",
+        "short_desc": "When this Pok\u00e9mon has full HP, regular damage from moves is halved.",
+        "effect_desc": "When this Pok\u00e9mon has full HP, regular damage (not fixed damage!) from moves is halved.\n\nThis ability cannot be nullified.",
+        "flavor_text": "Reduces the amount of damage the Pok\u00e9mon takes\nwhile its HP is full."
+    },
+    "prism-armor": {
+        "id": 232,
+        "name": "prism-armor",
+        "short_desc": "Reduces super-effective damage to 0.75\u00d7.",
+        "effect_desc": "Super-effective damage this Pok\u00e9mon takes is reduced to 0.75\u00d7.\n\nThis Ability is not bypassed by mold breaker, teravolt, or turboblaze.",
+        "flavor_text": "Reduces the power of supereffective attacks taken."
+    },
+    "neuroforce": {
+        "id": 233,
+        "name": "neuroforce",
+        "short_desc": "Increases super-effective damage dealt to 1.25\u00d7.",
+        "effect_desc": "Increases super-effective damage dealt to 1.25\u00d7.",
+        "flavor_text": "Powers up moves that are super effective."
+    },
+    "intrepid-sword": {
+        "id": 234,
+        "name": "intrepid-sword",
+        "short_desc": "Boosts Attack in battle.",
+        "effect_desc": "Boosts the Pok\u00e9mon\u2019s Attack stat the first time the Pok\u00e9mon enters a battle.",
+        "flavor_text": "Boosts the Pok\u00e9mon\u2019s Attack stat when the Pok\u00e9mon\nenters a battle."
+    },
+    "dauntless-shield": {
+        "id": 235,
+        "name": "dauntless-shield",
+        "short_desc": "Boosts Defense in battle.",
+        "effect_desc": "Boosts the Pok\u00e9mon\u2019s Defense stat the first time the Pok\u00e9mon enters a battle.",
+        "flavor_text": "Boosts the Pok\u00e9mon\u2019s Defense stat when the Pok\u00e9mon\nenters a battle."
+    },
+    "libero": {
+        "id": 236,
+        "name": "libero",
+        "short_desc": "Libero changes the Pok\u00e9mon's type to that of its previously used attack.",
+        "effect_desc": "Changes the Pok\u00e9mon\u2019s type to the type of the move it\u2019s about to use. This works only once each time the Pok\u00e9mon enters battle.",
+        "flavor_text": "Changes the Pok\u00e9mon\u2019s type to the type of the\nmove it\u2019s about to use."
+    },
+    "ball-fetch": {
+        "id": 237,
+        "name": "ball-fetch",
+        "short_desc": "If the Pok\u00e9mon is not holding an item, it will fetch the Pok\u00e9 Ball from the first failed throw of the battle.",
+        "effect_desc": "At any time after the first Pok\u00e9 Ball is thrown and fails to catch a Pok\u00e9mon, at the end of a turn, if a Pok\u00e9mon with Ball Fetch is on the field and not holding another item, it will pick up the same type of ball as the first one thrown.",
+        "flavor_text": "If the Pok\u00e9mon is not holding an item, it will fetch\nthe Pok\u00e9 Ball from the first failed throw\nof the battle."
+    },
+    "cotton-down": {
+        "id": 238,
+        "name": "cotton-down",
+        "short_desc": "When Ignores moves and abilities that draw in moves.",
+        "effect_desc": "When the Pok\u00e9mon is hit by an attack, it scatters cotton fluff around and lowers the Speed stats of all Pok\u00e9mon except itself.",
+        "flavor_text": "When the Pok\u00e9mon is hit by an attack, it scatters\ncotton fluff around and lowers the Speed stat of\nall Pok\u00e9mon except itself."
+    },
+    "propeller-tail": {
+        "id": 239,
+        "name": "propeller-tail",
+        "short_desc": "Ignores moves and abilities that draw in moves.",
+        "effect_desc": "Ignores the effects of opposing Pok\u00e9mon\u2019s Abilities and moves that draw in moves.",
+        "flavor_text": "Ignores the effects of opposing Pok\u00e9mon\u2019s Abilities and\nmoves that draw in moves."
+    },
+    "mirror-armor": {
+        "id": 240,
+        "name": "mirror-armor",
+        "short_desc": "Reflects any stat-lowering effects.",
+        "effect_desc": "Bounces back only the stat-lowering effects that the Pok\u00e9mon receives.",
+        "flavor_text": "Bounces back only the stat-lowering effects that\nthe Pok\u00e9mon receives."
+    },
+    "gulp-missile": {
+        "id": 241,
+        "name": "gulp-missile",
+        "short_desc": "If a Cramorant with Gulp Missile uses Surf or Dive, it catches prey and changes its form depending on its remaining HP.",
+        "effect_desc": "When the Pok\u00e9mon uses Surf or Dive, it will come back with prey. When it takes damage, it will spit out the prey to attack.",
+        "flavor_text": "When the Pok\u00e9mon uses Surf or Dive, it will come back\nwith prey. When it takes damage, it will spit out the prey\nto attack."
+    },
+    "stalwart": {
+        "id": 242,
+        "name": "stalwart",
+        "short_desc": "Ignores moves and abilities that draw in moves.",
+        "effect_desc": "Ignores the effects of opposing Pok\u00e9mon\u2019s Abilities and moves that draw in moves.",
+        "flavor_text": "Ignores the effects of opposing Pok\u00e9mon\u2019s Abilities and\nmoves that draw in moves."
+    },
+    "steam-engine": {
+        "id": 243,
+        "name": "steam-engine",
+        "short_desc": "Boosts the Speed stat drastically when the Pok\u00e9mon is hit by a Fire- or Water-type move.",
+        "effect_desc": "Raises the user's Speed by three stages when it is hit by a Fire- or Water-type attack. The attack still deals damage.",
+        "flavor_text": "Boosts the Pok\u00e9mon\u2019s Speed stat drastically if hit by a\nFire- or Water-type move."
+    },
+    "punk-rock": {
+        "id": 244,
+        "name": "punk-rock",
+        "short_desc": "Boosts sound-based moves and halves damage from the same moves.",
+        "effect_desc": "Boosts the power of sound-based moves. The Pok\u00e9mon also takes half the damage from these kinds of moves.",
+        "flavor_text": "Boosts the power of sound-based moves.\nThe Pok\u00e9mon also takes half the damage from\nthese kinds of moves."
+    },
+    "sand-spit": {
+        "id": 245,
+        "name": "sand-spit",
+        "short_desc": "Creates a sandstorm when hit by an attack.",
+        "effect_desc": "The Pok\u00e9mon creates a sandstorm when it\u2019s hit by an attack.",
+        "flavor_text": "The Pok\u00e9mon creates a sandstorm when it\u2019s hit by\nan attack."
+    },
+    "ice-scales": {
+        "id": 246,
+        "name": "ice-scales",
+        "short_desc": "Halves damage from Special moves.",
+        "effect_desc": "The Pok\u00e9mon is protected by ice scales, which halve the damage taken from special moves.",
+        "flavor_text": "The Pok\u00e9mon is protected by ice scales, which halve\nthe damage taken from special moves."
+    },
+    "ripen": {
+        "id": 247,
+        "name": "ripen",
+        "short_desc": "Doubles the effect of berries.",
+        "effect_desc": "Ripens Berries and doubles their effect.",
+        "flavor_text": "Ripens Berries and doubles their effect."
+    },
+    "ice-face": {
+        "id": 248,
+        "name": "ice-face",
+        "short_desc": "The Pok\u00e9mon\u2019s ice head can take a physical attack as a substitute, but the attack also changes the Pok\u00e9mon\u2019s appearance. The ice will be restored when it snows.",
+        "effect_desc": "When an Eiscue that's in its Ice Face form is hit by a physical move, it takes no damage and changes into its Noice Face form. If a hailstorm or snowstorm begins while Eiscue is in its Noice Face form, or if it is sent out in its Noice Face form during hail, it will immediately revert to its Ice Face form.",
+        "flavor_text": "The Pok\u00e9mon\u2019s ice head can take a physical attack as\na substitute, but the attack also changes the Pok\u00e9mon\u2019s\nappearance. The ice will be restored when it hails."
+    },
+    "power-spot": {
+        "id": 249,
+        "name": "power-spot",
+        "short_desc": "Just being next to the Pok\u00e9mon powers up moves.",
+        "effect_desc": " \"The power of moves used by the allies of the Pok\u00e9mon with Power Spot is increased by 30%.\"",
+        "flavor_text": "Just being next to the Pok\u00e9mon powers up moves."
+    },
+    "mimicry": {
+        "id": 250,
+        "name": "mimicry",
+        "short_desc": "Changes type depending on the terrain.",
+        "effect_desc": "Changes the Pok\u00e9mon\u2019s type depending on the terrain.",
+        "flavor_text": "Changes the Pok\u00e9mon\u2019s type depending on the terrain."
+    },
+    "screen-cleaner": {
+        "id": 251,
+        "name": "screen-cleaner",
+        "short_desc": "Nullifies effects of Light Screen, Reflect, and Aurora Veil.",
+        "effect_desc": "When the Pok\u00e9mon enters a battle, the effects of Light Screen, Reflect, and Aurora Veil are nullified for both opposing and ally Pok\u00e9mon.",
+        "flavor_text": "When the Pok\u00e9mon enters a battle, the effects of\nLight Screen, Reflect, and Aurora Veil are nullified for\nboth opposing and ally Pok\u00e9mon."
+    },
+    "steely-spirit": {
+        "id": 252,
+        "name": "steely-spirit",
+        "short_desc": "Powers up ally Pok\u00e9mon's Steel-type moves.",
+        "effect_desc": "Powers up the Steel-type moves of the Pok\u00e9mon and its allies.",
+        "flavor_text": "Powers up ally Pok\u00e9mon\u2019s Steel-type moves."
+    },
+    "perish-body": {
+        "id": 253,
+        "name": "perish-body",
+        "short_desc": "When hit by a move that makes direct contact, the Pok\u00e9mon and the attacker will faint after three turns unless they switch out of battle.",
+        "effect_desc": "When the Pok\u00e9mon with Perish Body is hit with a contact move, both the attacker and the Pok\u00e9mon with Perish Body will faint in three turns.",
+        "flavor_text": "When hit by a move that makes direct contact,\nthe Pok\u00e9mon and the attacker will faint after three turns\nunless they switch out of battle."
+    },
+    "wandering-spirit": {
+        "id": 254,
+        "name": "wandering-spirit",
+        "short_desc": "Swaps abilities with opponents on contact.",
+        "effect_desc": "The Pok\u00e9mon exchanges Abilities with a Pok\u00e9mon that hits it with a move that makes direct contact.",
+        "flavor_text": "The Pok\u00e9mon exchanges Abilities with a Pok\u00e9mon\nthat hits it with a move that makes direct contact."
+    },
+    "gorilla-tactics": {
+        "id": 255,
+        "name": "gorilla-tactics",
+        "short_desc": "Boosts the Pok\u00e9mon's Attack stat but only allows the use of the first selected move.",
+        "effect_desc": "Boosts the Pok\u00e9mon\u2019s Attack stat but only allows the use of the first selected move.",
+        "flavor_text": "Boosts the Pok\u00e9mon\u2019s Attack stat but only allows\nthe use of the first selected move."
+    },
+    "neutralizing-gas": {
+        "id": 256,
+        "name": "neutralizing-gas",
+        "short_desc": "Neutralizes abilities of all Pok\u00e9mon in battle.",
+        "effect_desc": "While the Pok\u00e9mon is in the battle, the effects of all other Pok\u00e9mon\u2019s Abilities will be nullified or will not be triggered.",
+        "flavor_text": "If the Pok\u00e9mon with Neutralizing Gas is in the battle,\nthe effects of all Pok\u00e9mon\u2019s Abilities will be nullified\nor will not be triggered."
+    },
+    "pastel-veil": {
+        "id": 257,
+        "name": "pastel-veil",
+        "short_desc": "Prevents the Pok\u00e9mon and its allies from being poisoned.",
+        "effect_desc": "Prevents the Pok\u00e9mon and its teammates from being poisoned. It also cures teammates of poisoning when it enters the battlefield.",
+        "flavor_text": "Protects the Pok\u00e9mon and its ally Pok\u00e9mon from\nbeing poisoned."
+    },
+    "hunger-switch": {
+        "id": 258,
+        "name": "hunger-switch",
+        "short_desc": "Causes Morpeko to change its form each turn, alternating between Full Belly Mode and Hangry Mode",
+        "effect_desc": "The Pok\u00e9mon changes its form, alternating between its Full Belly Mode and Hangry Mode after the end of every turn.",
+        "flavor_text": "The Pok\u00e9mon changes its form, alternating between\nits Full Belly Mode and Hangry Mode after the end of\neach turn."
+    },
+    "quick-draw": {
+        "id": 259,
+        "name": "quick-draw",
+        "short_desc": "Enables the Pok\u00e9mon to move first occasionally.",
+        "effect_desc": "If a Pok\u00e9mon with this Ability selects a damaging move, it has a 30% chance of going first in its priority bracket.",
+        "flavor_text": "Enables the Pok\u00e9mon to move first occasionally."
+    },
+    "unseen-fist": {
+        "id": 260,
+        "name": "unseen-fist",
+        "short_desc": "Contact moves can strike through Protect/Detect.",
+        "effect_desc": "If the Pok\u00e9mon uses moves that make direct contact, it can attack the target even if the target protects itself.",
+        "flavor_text": "If the Pok\u00e9mon uses moves that make direct contact,\nit can attack the target even if the target protects itself."
+    },
+    "curious-medicine": {
+        "id": 261,
+        "name": "curious-medicine",
+        "short_desc": "Resets all stat changes upon entering battlefield.",
+        "effect_desc": "When the Pok\u00e9mon enters a battle, it scatters medicine from its shell, which removes all stat changes from allies.",
+        "flavor_text": "When the Pok\u00e9mon enters a battle, it scatters medicine\nfrom its shell, which removes all stat changes\nfrom allies."
+    },
+    "transistor": {
+        "id": 262,
+        "name": "transistor",
+        "short_desc": "Powers up Electric-type moves.",
+        "effect_desc": "Increases the power of Electric-type moves used by this Pok\u00e9mon by 50%.",
+        "flavor_text": "Powers up Electric-type moves."
+    },
+    "dragons-maw": {
+        "id": 263,
+        "name": "dragons-maw",
+        "short_desc": "Powers up Dragon-type moves.",
+        "effect_desc": "Increases the power of Dragon-type moves used by this Pok\u00e9mon by 50%.",
+        "flavor_text": "Powers up Dragon-type moves."
+    },
+    "chilling-neigh": {
+        "id": 264,
+        "name": "chilling-neigh",
+        "short_desc": "Boosts Attack after knocking out a Pok\u00e9mon.",
+        "effect_desc": "When the Pok\u00e9mon knocks out a target, it utters a chilling neigh, which boosts its Attack stat.",
+        "flavor_text": "When the Pok\u00e9mon knocks out a target, it utters a\nchilling neigh, which boosts its Attack stat."
+    },
+    "grim-neigh": {
+        "id": 265,
+        "name": "grim-neigh",
+        "short_desc": "Boosts Special Attack after knocking out a Pok\u00e9mon.",
+        "effect_desc": "When the Pok\u00e9mon knocks out a target, it utters a terrifying neigh, which boosts its Sp. Atk stat.",
+        "flavor_text": "When the Pok\u00e9mon knocks out a target, it utters a\nterrifying neigh, which boosts its Sp. Atk stat."
+    },
+    "as-one-glastrier": {
+        "id": 266,
+        "name": "as-one-glastrier",
+        "short_desc": "",
+        "effect_desc": "",
+        "flavor_text": "This Ability combines the effects of both Calyrex\u2019s\nUnnerve Ability and Glastrier\u2019s Chilling Neigh Ability."
+    },
+    "as-one-spectrier": {
+        "id": 267,
+        "name": "as-one-spectrier",
+        "short_desc": "",
+        "effect_desc": "",
+        "flavor_text": "This Ability combines the effects of both Calyrex\u2019s\nUnnerve Ability and Spectrier\u2019s Grim Neigh Ability."
+    },
+    "lingering-aroma": {
+        "id": 268,
+        "name": "lingering-aroma",
+        "short_desc": "Contact changes the attacker's Ability to Lingering Aroma.",
+        "effect_desc": "Contact with the Pok\u00e9mon changes the attacker\u2019s Ability to Lingering Aroma.",
+        "flavor_text": "Contact with the Pok\u00e9mon changes the attacker's Ability to Lingering Aroma."
+    },
+    "seed-sower": {
+        "id": 269,
+        "name": "seed-sower",
+        "short_desc": "Turns the ground into Grassy Terrain when the Pok\u00e9mon is hit by an attack.",
+        "effect_desc": "Turns the ground into Grassy Terrain when the Pok\u00e9mon is hit by an attack.",
+        "flavor_text": "Turns the ground into Grassy Terrain when the Pok\u00e9mon is hit by an attack."
+    },
+    "thermal-exchange": {
+        "id": 270,
+        "name": "thermal-exchange",
+        "short_desc": "Raises Attack when hit by a Fire-type move. Cannot be burned.",
+        "effect_desc": "Boosts the Attack stat when the Pok\u00e9mon is hit by a Fire-type move. The Pok\u00e9mon also cannot be burned.",
+        "flavor_text": "Boosts the Attack stat when the Pok\u00e9mon is hit by a Fire-type move. The Pok\u00e9mon also cannot be burned."
+    },
+    "anger-shell": {
+        "id": 271,
+        "name": "anger-shell",
+        "short_desc": "When the Pok\u00e9mon's HP drops below half, Anger Shell lowers its Defense and Special Defense but its Attack, Special Attack and Speed are raised.",
+        "effect_desc": "When an attack causes its HP to drop to half or less, the Pok\u00e9mon gets angry. This lowers its Defense and Sp. Def stats but boosts its Attack, Sp. Atk, and Speed stats.",
+        "flavor_text": "When an attack causes its HP to drop to half or less, the Pok\u00e9mon gets angry. This lowers its Defense and Sp. Def stats but boosts its Attack, Sp. Atk, and Speed stats."
+    },
+    "purifying-salt": {
+        "id": 272,
+        "name": "purifying-salt",
+        "short_desc": "Protects from status conditions and halves damage from Ghost-type moves.",
+        "effect_desc": "The Pok\u00e9mon\u2019s pure salt protects it from status conditions and halves the damage taken from Ghost-type moves.",
+        "flavor_text": "The Pok\u00e9mon's pure salt protects it from status conditions and halves the damage taken from Ghost-type moves."
+    },
+    "well-baked-body": {
+        "id": 273,
+        "name": "well-baked-body",
+        "short_desc": "Immune to Fire-type moves, and Defense is sharply boosted.",
+        "effect_desc": "The Pok\u00e9mon takes no damage when hit by Fire-type moves. Instead, its Defense stat is sharply boosted.",
+        "flavor_text": "The Pok\u00e9mon takes no damage when hit by Fire-type moves. Instead, its Defense stat is sharply boosted."
+    },
+    "wind-rider": {
+        "id": 274,
+        "name": "wind-rider",
+        "short_desc": "Gives immunity to wind moves, and causes the Pok\u00e9mon's Attack to increase by one stage when hit by one.",
+        "effect_desc": "Boosts the Pok\u00e9mon\u2019s Attack stat if Tailwind takes effect or if the Pok\u00e9mon is hit by a wind move. The Pok\u00e9mon also takes no damage from wind moves.",
+        "flavor_text": "Boosts the Pok\u00e9mon's Attack stat if Tailwind takes effect or if the Pok\u00e9mon is hit by a wind move. The Pok\u00e9mon also takes no damage from wind moves."
+    },
+    "guard-dog": {
+        "id": 275,
+        "name": "guard-dog",
+        "short_desc": "Boosts Attack if intimidated, and prevents being forced to switch out.",
+        "effect_desc": "Boosts the Pok\u00e9mon\u2019s Attack stat if intimidated. Moves and items that would force the Pok\u00e9mon to switch out also fail to work.",
+        "flavor_text": "Boosts the Pok\u00e9mon\u2019s Attack stat if intimidated. Moves and items that would force the Pok\u00e9mon to switch out also fail to work."
+    },
+    "rocky-payload": {
+        "id": 276,
+        "name": "rocky-payload",
+        "short_desc": "Powers up Rock-type moves.",
+        "effect_desc": "Increases the power of Rock-type moves used by this Pok\u00e9mon by 50%.",
+        "flavor_text": "Powers up Rock-type moves."
+    },
+    "wind-power": {
+        "id": 277,
+        "name": "wind-power",
+        "short_desc": "When hit by a wind move, the power of the next Electric-type move it uses is doubled.",
+        "effect_desc": "The Pok\u00e9mon becomes charged when it is hit by a wind move, boosting the power of the next Electric-type move the Pok\u00e9mon uses.",
+        "flavor_text": "The Pok\u00e9mon becomes charged when it is hit by a wind move, boosting the power of the next Electric-type move the Pok\u00e9mon uses."
+    },
+    "zero-to-hero": {
+        "id": 278,
+        "name": "zero-to-hero",
+        "short_desc": "Transforms into its Hero Form when switching out.",
+        "effect_desc": "The Pok\u00e9mon transforms into its Hero Form when it switches out.",
+        "flavor_text": "The Pok\u00e9mon transforms into its Hero Form when it switches out."
+    },
+    "commander": {
+        "id": 279,
+        "name": "commander",
+        "short_desc": "Goes inside the mouth of an ally Dondozo if one is on the field.",
+        "effect_desc": "When the Pok\u00e9mon enters a battle, it goes inside the mouth of an ally Dondozo if one is on the field. The Pok\u00e9mon then issues commands from there.",
+        "flavor_text": "When the Pok\u00e9mon enters a battle, it goes inside the mouth of an ally Dondozo if one is on the field. The Pok\u00e9mon then issues commands from there."
+    },
+    "electromorphosis": {
+        "id": 280,
+        "name": "electromorphosis",
+        "short_desc": "When hit by an attack, the power of the next Electric-type move it uses is doubled.",
+        "effect_desc": "The Pok\u00e9mon becomes charged when it takes damage, boosting the power of the next Electric-type move the Pok\u00e9mon uses.",
+        "flavor_text": "The Pok\u00e9mon becomes charged when it takes damage, boosting the power of the next Electric-type move the Pok\u00e9mon uses."
+    },
+    "protosynthesis": {
+        "id": 281,
+        "name": "protosynthesis",
+        "short_desc": "Raises highest stat in harsh sunlight, or if holding Booster Energy.",
+        "effect_desc": "Boosts the Pok\u00e9mon\u2019s most proficient stat in harsh sunlight or if the Pok\u00e9mon is holding Booster Energy.",
+        "flavor_text": "Boosts the Pok\u00e9mon's most proficient stat in harsh sunlight or if the Pok\u00e9mon is holding Booster Energy."
+    },
+    "quark-drive": {
+        "id": 282,
+        "name": "quark-drive",
+        "short_desc": "Raises highest stat on Electric Terrain, or if holding Booster Energy.",
+        "effect_desc": "Boosts the Pok\u00e9mon\u2019s most proficient stat on Electric Terrain or if the Pok\u00e9mon is holding Booster Energy.",
+        "flavor_text": "Boosts the Pok\u00e9mon's most proficient stat on Electric Terrain or if the Pok\u00e9mon is holding Booster Energy."
+    },
+    "good-as-gold": {
+        "id": 283,
+        "name": "good-as-gold",
+        "short_desc": "Gives immunity to status moves.",
+        "effect_desc": "A body of pure, solid gold gives the Pok\u00e9mon full immunity to other Pok\u00e9mon\u2019s status moves.",
+        "flavor_text": "A body of pure, solid gold gives the Pok\u00e9mon full immunity to other Pok\u00e9mon's status moves."
+    },
+    "vessel-of-ruin": {
+        "id": 284,
+        "name": "vessel-of-ruin",
+        "short_desc": "Lowers Special Attack of all Pok\u00e9mon except itself.",
+        "effect_desc": "The power of the Pok\u00e9mon\u2019s ruinous vessel lowers the Sp. Atk stats of all Pok\u00e9mon except itself.",
+        "flavor_text": "The power of the Pok\u00e9mon's ruinous vessel lowers the Sp. Atk stats of all Pok\u00e9mon except itself."
+    },
+    "sword-of-ruin": {
+        "id": 285,
+        "name": "sword-of-ruin",
+        "short_desc": "Lowers Defense of all Pok\u00e9mon except itself.",
+        "effect_desc": "The power of the Pok\u00e9mon\u2019s ruinous sword lowers the Defense stats of all Pok\u00e9mon except itself.",
+        "flavor_text": "The power of the Pok\u00e9mon's ruinous sword lowers the Defense stats of all Pok\u00e9mon except itself."
+    },
+    "tablets-of-ruin": {
+        "id": 286,
+        "name": "tablets-of-ruin",
+        "short_desc": "Lowers Attack of all Pok\u00e9mon except itself.",
+        "effect_desc": "The power of the Pok\u00e9mon\u2019s ruinous wooden tablets lowers the Attack stats of all Pok\u00e9mon except itself.",
+        "flavor_text": "The power of the Pok\u00e9mon's ruinous wooden tablets lowers the Attack stats of all Pok\u00e9mon except itself."
+    },
+    "beads-of-ruin": {
+        "id": 287,
+        "name": "beads-of-ruin",
+        "short_desc": "Lowers Special Defense of all Pok\u00e9mon except itself.",
+        "effect_desc": "The power of the Pok\u00e9mon\u2019s ruinous beads lowers the Sp. Def stats of all Pok\u00e9mon except itself.",
+        "flavor_text": "The power of the Pok\u00e9mon's ruinous beads lowers the Sp. Def stats of all Pok\u00e9mon except itself."
+    },
+    "orichalcum-pulse": {
+        "id": 288,
+        "name": "orichalcum-pulse",
+        "short_desc": "Turns the sunlight harsh when entering battle, and boosts Attack while active.",
+        "effect_desc": "Turns the sunlight harsh when the Pok\u00e9mon enters a battle. The ancient pulse thrumming through the Pok\u00e9mon also boosts its Attack stat in harsh sunlight.",
+        "flavor_text": "Turns the sunlight harsh when the Pok\u00e9mon enters a battle. The ancient pulse thrumming through the Pok\u00e9mon also boosts its Attack stat in harsh sunlight."
+    },
+    "hadron-engine": {
+        "id": 289,
+        "name": "hadron-engine",
+        "short_desc": "Creates an Electric Terrain when entering battle, and boosts Special Attack while active.",
+        "effect_desc": "Turns the ground into Electric Terrain when the Pok\u00e9mon enters a battle. The futuristic engine within the Pok\u00e9mon also boosts its Sp. Atk stat on Electric Terrain.",
+        "flavor_text": "Turns the ground into Electric Terrain when the Pok\u00e9mon enters a battle. The futuristic engine within the Pok\u00e9mon also boosts its Sp. Atk stat on Electric Terrain."
+    },
+    "opportunist": {
+        "id": 290,
+        "name": "opportunist",
+        "short_desc": "Copies stat boosts by the opponent.",
+        "effect_desc": "If an opponent\u2019s stat is boosted, the Pok\u00e9mon seizes the opportunity to boost the same stat for itself.",
+        "flavor_text": "If an opponent's stat is boosted, the Pok\u00e9mon seizes the opportunity to boost the same stat for itself."
+    },
+    "cud-chew": {
+        "id": 291,
+        "name": "cud-chew",
+        "short_desc": "Causes the Pok\u00e9mon to reuse an already consumed Berry at the end of the next turn.",
+        "effect_desc": "When the Pok\u00e9mon eats a Berry, it will regurgitate that Berry at the end of the next turn and eat it one more time.",
+        "flavor_text": "When the Pok\u00e9mon eats a Berry, it will regurgitate that Berry at the end of the next turn and eat it one more time."
+    },
+    "sharpness": {
+        "id": 292,
+        "name": "sharpness",
+        "short_desc": "Powers up slicing moves.",
+        "effect_desc": "Increases the power of all 'slicing' moves by 50%.",
+        "flavor_text": "Powers up slicing moves."
+    },
+    "supreme-overlord": {
+        "id": 293,
+        "name": "supreme-overlord",
+        "short_desc": "Attack and Special Attack are boosted for each party Pok\u00e9mon that has been defeated.",
+        "effect_desc": "When the Pok\u00e9mon enters a battle, its Attack and Sp. Atk stats are slightly boosted for each of the allies in its party that have already been defeated.",
+        "flavor_text": "When the Pok\u00e9mon enters a battle, its Attack and Sp. Atk stats are slightly boosted for each of the allies in its party that have already been defeated."
+    },
+    "costar": {
+        "id": 294,
+        "name": "costar",
+        "short_desc": "Copies ally's stat changes on entering battle.",
+        "effect_desc": "When the Pok\u00e9mon enters a battle, it copies an ally\u2019s stat changes.",
+        "flavor_text": "When the Pok\u00e9mon enters a battle, it copies an ally's stat changes."
+    },
+    "toxic-debris": {
+        "id": 295,
+        "name": "toxic-debris",
+        "short_desc": "Scatters poison spikes at the feet of the opposing team when the Pok\u00e9mon takes damage from physical moves.",
+        "effect_desc": "Scatters poison spikes at the feet of the opposing team when the Pok\u00e9mon takes damage from physical moves.",
+        "flavor_text": "Scatters poison spikes at the feet of the opposing team when the Pok\u00e9mon takes damage from physical moves."
+    },
+    "armor-tail": {
+        "id": 296,
+        "name": "armor-tail",
+        "short_desc": "Prevents the opponent from using any moves that have priority, such as Quick Attack.",
+        "effect_desc": "The mysterious tail covering the Pok\u00e9mon\u2019s head makes opponents unable to use priority moves against the Pok\u00e9mon or its allies.",
+        "flavor_text": "The mysterious tail covering the Pok\u00e9mon's head makes opponents unable to use priority moves against the Pok\u00e9mon or its allies."
+    },
+    "earth-eater": {
+        "id": 297,
+        "name": "earth-eater",
+        "short_desc": "Restores HP when hit by a Ground-type move.",
+        "effect_desc": "If hit by a Ground-type move, the Pok\u00e9mon has its HP restored instead of taking damage.",
+        "flavor_text": "If hit by a Ground-type move, the Pok\u00e9mon has its HP restored instead of taking damage."
+    },
+    "mycelium-might": {
+        "id": 298,
+        "name": "mycelium-might",
+        "short_desc": "Status moves go last, but are not affected by the opponent's ability.",
+        "effect_desc": "The Pok\u00e9mon will always act more slowly when using status moves, but these moves will be unimpeded by the Ability of the target.",
+        "flavor_text": "The Pok\u00e9mon will always act more slowly when using status moves, but these moves will be unimpeded by the Ability of the target."
+    },
+    "minds-eye": {
+        "id": 299,
+        "name": "minds-eye",
+        "short_desc": "The Pok\u00e9mon ignores changes to opponents' evasiveness, its accuracy can't be lowered, and it can hit Ghost types with Normal- and Fighting-type moves.",
+        "effect_desc": "Mind's Eye enables the Pok\u00e9mon with this Ability to hit Ghost-type Pok\u00e9mon with damage-dealing Normal- and Fighting-type moves. It also prevents other Pok\u00e9mon from lowering the Pok\u00e9mon's accuracy and ignores changes to the opponents' evasion.",
+        "flavor_text": "The Pok\u00e9mon ignores changes to opponents' evasiveness, its accuracy can't be lowered, and it can hit Ghost types with Normal-type and Fighting-type moves"
+    },
+    "supersweet-syrup": {
+        "id": 300,
+        "name": "supersweet-syrup",
+        "short_desc": "Once per battle, when a Pok\u00e9mon with Supersweet Syrup enters the battle, it lowers the evasion stat of all adjacent opponents by one stage. ",
+        "effect_desc": "A sickly sweet scent spreads across the field the first time the Pok\u00e9mon enters a battle, lowering the evasiveness of opposing Pok\u00e9mon.",
+        "flavor_text": "Lowers the evasion of opposing Pok\u00e9mon by 1 stage when first sent into battle"
+    },
+    "hospitality": {
+        "id": 301,
+        "name": "hospitality",
+        "short_desc": "When a Pok\u00e9mon with Hospitality enters a battle, it restores HP for an ally by 25%.",
+        "effect_desc": "When the Pok\u00e9mon enters a battle, it showers its ally with hospitality, restoring a small amount of the ally's HP.",
+        "flavor_text": "When the Pok\u00e9mon enters a battle, it showers its ally with hospitality, restoring a small amount of the ally's HP"
+    },
+    "toxic-chain": {
+        "id": 302,
+        "name": "toxic-chain",
+        "short_desc": "May cause bad poisoning when the Pok\u00e9mon hits an opponent with a move.",
+        "effect_desc": "The power of the Pok\u00e9mon's toxic chain may badly poison any target the Pok\u00e9mon hits with a move.",
+        "flavor_text": "The power of the Pok\u00e9mon's toxic chain may badly poison any target the Pok\u00e9mon hits with a move"
+    },
+    "embody-aspect": {
+        "id": 303,
+        "name": "embody-aspect",
+        "short_desc": "Embody Aspect boosts a particular stat, depending on the form of a Terastallized Ogerpon",
+        "effect_desc": "Embody Aspect boosts a particular stat, depending on the form of a Terastallized Ogerpon",
+        "flavor_text": "The Pok\u00e9mon's heart fills with memories, causing the Mask to shine and one of the Pok\u00e9mon's stats to be boosted."
+    },
+    "tera-shift": {
+        "id": 304,
+        "name": "tera-shift",
+        "short_desc": "When Terapagos enters the battle, it turns into its Terastal Form until the end of the battle. ",
+        "effect_desc": "When the Pok\u00e9mon enters a battle, it absorbs the energy around itself and transforms into its Terastal Form.",
+        "flavor_text": "When the Pok\u00e9mon enters a battle, it absorbs the energy around itself and transforms into its Terastal Form."
+    },
+    "tera-shell": {
+        "id": 305,
+        "name": "tera-shell",
+        "short_desc": "All damage-dealing moves that hit the Pok\u00e9mon when its HP is full will not be very effective.",
+        "effect_desc": "The Pok\u00e9mon\u2019s shell contains the powers of each type. All damage-dealing moves that hit the Pok\u00e9mon when its HP is full will not be very effective.",
+        "flavor_text": "The Pok\u00e9mon's shell contains the powers of each type. All damage-dealing moves that hit the Pok\u00e9mon when its HP is full will not be very effective."
+    },
+    "teraform-zero": {
+        "id": 306,
+        "name": "teraform-zero",
+        "short_desc": "As soon as Terapagos assumes its Stellar Form, it will immediately neutralize weather and terrain effects. ",
+        "effect_desc": "When Terapagos changes into its Stellar Form, it uses its hidden powers to eliminate all effects of weather and terrain, reducing them to zero.",
+        "flavor_text": "When Terapagos changes into its Stellar Form, it uses its hidden powers to eliminate all effects of weather and terrain, reducing them to zero."
+    },
+    "poison-puppeteer": {
+        "id": 307,
+        "name": "poison-puppeteer",
+        "short_desc": "Pok\u00e9mon poisoned by Pecharunt's moves will also become confused.",
+        "effect_desc": "When a Pok\u00e9mon is poisoned by any of Pecharunt's moves, it will also become confused.",
+        "flavor_text": "Pok\u00e9mon poisoned by Pecharunt's moves will also become confused."
+    }
+}

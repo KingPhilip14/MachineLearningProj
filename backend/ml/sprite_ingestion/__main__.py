@@ -1,6 +1,6 @@
 import asyncio
 
-from backend.machine_learning.sprite_ingestion.sprite_api import SpriteApi
+from backend.ml.sprite_ingestion.sprite_api import SpriteApi
 from utils import input_generation, create_dirs
 
 if __name__ == '__main__':

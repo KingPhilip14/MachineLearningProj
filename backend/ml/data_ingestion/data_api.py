@@ -3,7 +3,8 @@ import asyncio
 import aiohttp
 from tqdm import tqdm
 
-from backend.machine_learning.data_ingestion.base_api import BaseApi
+from backend.ml.data_ingestion.base_api import BaseApi
+from config import POKEMON_DATA_DIR
 from utils import pokemon_data_file_exists, save_json_file, roman_to_int, get_generation_num
 
 
@@ -278,20 +279,30 @@ class DataApi(BaseApi):
                     ability['name']:
                         {
                             'id': ability['id'],
+                            'name': ability['name'],
+                            'short_desc': [entry['short_effect'] for entry in ability['effect_entries']
+                                           if entry['language']['name'] == 'en'][0],
                             'effect_desc': [entry['effect'] for entry in ability['effect_entries']
+                                            if entry['language']['name'] == 'en'][0],
+                            'flavor_text': [entry['flavor_text'] for entry in ability['flavor_text_entries']
                                             if entry['language']['name'] == 'en'][0],
                         }
                 }
 
             except IndexError:
-                print(f'Cannot add ability "{ability["name"]}" because getting its English effect description failed\n'
-                      f'Adding empty string instead.')
+                print(
+                    f'Cannot add ability effect description or short description for ability "{ability["name"]}" because getting its English effect description failed\n'
+                    f'Adding empty strings for descriptions instead.instead.')
 
                 to_add = {
                     ability['name']:
                         {
                             'id': ability['id'],
+                            'name': ability['name'],
+                            'short_desc': '',
                             'effect_desc': '',
+                            'flavor_text': [entry['flavor_text'] for entry in ability['flavor_text_entries']
+                                            if entry['language']['name'] == 'en'][0],
                         }
                 }
 
@@ -389,4 +400,4 @@ class DataApi(BaseApi):
 
         output: dict[str, dict] = self.__combine_data(species_data, extra_info)
 
-        save_json_file(output, self.filename)
+        save_json_file(output, self.filename, POKEMON_DATA_DIR)
