@@ -12,7 +12,7 @@ from utils import save_json_file
 class AbilityApi(BaseApi):
     def __init__(self):
         super().__init__()
-        self.filename: str = 'ability'
+        self.filename: str = 'abilities'
 
     async def download_ability_data(self) -> None:
         """

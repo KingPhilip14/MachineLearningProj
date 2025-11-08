@@ -3,10 +3,13 @@ import os
 # get the project root directory
 ROOT_DIR: str = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR: str = os.path.join(ROOT_DIR, 'data')
+
 POKEMON_DATA_DIR: str = os.path.join(DATA_DIR, 'pokemon_data')
 EXTRA_DATA_DIR: str = os.path.join(DATA_DIR, 'extra_data')
-ABILITY_DATA_DIR: str = os.path.join(DATA_DIR, 'ability_data')
 SPRITES_DIR: str = os.path.join(DATA_DIR, 'sprites')
+ABILITY_DATA_DIR: str = os.path.join(DATA_DIR, 'ability_data')
+ABILITY_FILE_DIR: str = os.path.join(ABILITY_DATA_DIR, 'abilities.json')
+
 POKEMON_SPRITES_DIR: str = os.path.join(SPRITES_DIR, 'pokemon_sprites')
 ERR_SPRITES_DIR: str = os.path.join(SPRITES_DIR, 'errors')
 TYPE_SPRITES_DIR: str = os.path.join(SPRITES_DIR, 'types_sprites')
