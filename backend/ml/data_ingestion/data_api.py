@@ -183,7 +183,14 @@ class DataApi(BaseApi):
         form_meta_url: str = f'{self.base_url}pokemon-form/{form_name}'
         form_meta_data: dict[str, dict] = await self.fetch_json(session, form_meta_url)
 
-        version_group_url: str = form_meta_data['version_group']['url']
+        try:
+            version_group_url: str = form_meta_data['version_group']['url']
+        except Exception:
+            print(f'Something went wrong while trying to access data for form {form_name} from the form metadata in '
+                  f'{self.__class__.__name__}.__get_significant_forms. Returning None instead\n'
+                  f'Data: {form_meta_data}\n')
+
+            return None
 
         # find the form's generation through the endpoints
         version_data: dict[str, dict] = await self.fetch_json(session, version_group_url)
