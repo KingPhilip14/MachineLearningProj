@@ -1,17 +1,33 @@
-def create_tables(conn):
-    """
-    Creates the tables for the database.
-    """
-    cursor = conn.cursor()
+import os
+import psycopg2 as pg2
+from backend.database.db_utils import print_error_msg
 
-    # create the tables
-    cursor.execute(create_account_table())
-    cursor.execute(create_team_table())
-    cursor.execute(create_pokemon_table())
-    cursor.execute(create_pokemon_in_team_table())
-    cursor.execute(create_ability_table())
-    cursor.execute(create_pokemon_ability_table())
-    conn.commit()
+def create_all_tables(conn):
+    """
+    Creates all the tables for the database.
+    """
+    try:
+        cursor = conn.cursor()
+
+        # create the tables
+        cursor.execute(create_account_table())
+        cursor.execute(create_team_table())
+        cursor.execute(create_pokemon_table())
+        cursor.execute(create_movepool_table())
+        cursor.execute(create_move_table())
+        cursor.execute(create_movepool_collection_table())
+        cursor.execute(create_pokemon_in_team_table())
+        cursor.execute(create_ability_table())
+        cursor.execute(create_pokemon_ability_table())
+        cursor.execute(create_moveset_table())
+        conn.commit()
+
+        print('All tables were created successfully.')
+    except pg2.Error as e:
+        filename: str = os.path.basename(__file__)
+        print_error_msg(filename, create_all_tables.__name__, e)
+    finally:
+        conn.close()
 
 
 def create_account_table() -> str:
@@ -36,36 +52,6 @@ def create_team_table() -> str:
     );
     """
 
-def create_movepool_table() -> str:
-    return """
-    CREATE TABLE IF NOT EXISTS movepool(
-        movepool_id INTEGER PRIMARY KEY SERIAL,
-        FOREIGN KEY (pokemon_id) REFERENCES pokemon(pokemon_id),
-    );
-    """
-
-def create_move_table() -> str:
-    return """
-    CREATE TABLE IF NOT EXISTS move(
-        move_id INTEGER PRIMARY KEY,
-        move_name VARCHAR(30) NOT NULL,
-        damage_class VARCHAR(30) NOT NULL,
-        power INTEGER,
-        accuracy INTEGER NOT NULL,
-        pp INTEGER NOT NULL,
-        priority INTEGER NOT NULL,
-    );
-    """
-
-def create_movepool_move_table() -> str:
-    return """
-    CREATE TABLE IF NOT EXISTS movepool_move(
-        PRIMARY KEY(movepool_id, move_id),
-        FOREIGN KEY (movepool_id) REFERENCES movepool(movepool_id),
-        FOREIGN KEY (move_id) REFERENCES move(move_id),
-    ); 
-    """
-
 def create_pokemon_table() -> str:
     return """
     CREATE TABLE IF NOT EXISTS pokemon(
@@ -86,6 +72,36 @@ def create_pokemon_table() -> str:
         weaknesses JSONB,
         resistances JSONB,
     );
+    """
+
+def create_movepool_table() -> str:
+    return """
+    CREATE TABLE IF NOT EXISTS movepool(
+        PRIMARY KEY (movepool_id, pokemon_id),
+        FOREIGN KEY (pokemon_id) REFERENCES pokemon(pokemon_id),
+    );
+    """
+
+def create_move_table() -> str:
+    return """
+    CREATE TABLE IF NOT EXISTS move(
+        move_id INTEGER PRIMARY KEY,
+        move_name VARCHAR(30) NOT NULL,
+        damage_class VARCHAR(30) NOT NULL,
+        power INTEGER,
+        accuracy INTEGER NOT NULL,
+        pp INTEGER NOT NULL,
+        priority INTEGER NOT NULL,
+    );
+    """
+
+def create_movepool_collection_table() -> str:
+    return """
+    CREATE TABLE IF NOT EXISTS movepool_collection(
+        PRIMARY KEY(movepool_id, move_id),
+        FOREIGN KEY (movepool_id) REFERENCES movepool(movepool_id),
+        FOREIGN KEY (move_id) REFERENCES move(move_id),
+    ); 
     """
 
 def create_ability_table() -> str:
@@ -118,4 +134,11 @@ def create_pokemon_ability_table() -> str:
     );
     """
 
-
+def create_moveset_table() -> str:
+    return """
+    CREATE TABLE IF NOT EXISTS moveset_move(
+        moveset_id INTEGER PRIMARY KEY SERIAL,
+        FOREIGN KEY (pit_id) REFERENCES pokemon_in_team(pit_id),
+        FOREIGN KEY (move_id) REFERENCES move(move_id),
+    );
+    """
