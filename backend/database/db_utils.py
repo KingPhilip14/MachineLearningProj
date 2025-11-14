@@ -1,5 +1,6 @@
 import os
 import psycopg2 as pg2
+import sqlite3
 from dotenv import load_dotenv
 
 
@@ -18,14 +19,12 @@ def create_conn():
         'port': os.getenv('DB_PORT'),
     }
 
-    print(f'{db_params}')
     print('Database parameters loaded successfully.')
 
-    input('>')
+    # creates the database if it doesn't exist already
+    conn = sqlite3.connect('paige_server.db')
 
-    conn = pg2.connect(**db_params)
-
-    print('Database connection established.')
+    print('Database connection successful.')
 
     return conn
 

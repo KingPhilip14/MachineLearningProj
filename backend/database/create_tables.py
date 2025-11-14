@@ -33,30 +33,29 @@ def create_all_tables(conn):
 def create_account_table() -> str:
     return """
     CREATE TABLE IF NOT EXISTS account (
-        account_id INTEGER PRIMARY KEY SERIAL,
+        account_id SERIAL PRIMARY KEY,
         username VARCHAR(30) NOT NULL UNIQUE,
-        password VARCHAR(30) NOT NULL,
-    );
+        password VARCHAR(30) NOT NULL);
     """
 
 def create_team_table() -> str:
     return """
     CREATE TABLE IF NOT EXISTS team(
-        team_id INTEGER PRIMARY KEY SERIAL,
-        FOREIGN KEY (account_id) REFERENCES account(account_id) ON DELETE CASCADE,
+        team_id SERIAL PRIMARY KEY,
+        account_id INTEGER NOT NULL,
         team_name VARCHAR(30) NOT NULL,
         generation varchar(20) NOT NULL,
         time_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         last_time_used TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         overlapping_weaknesses JSONB NOT NULL,
-    );
+        FOREIGN KEY (account_id) REFERENCES account(account_id) ON DELETE CASCADE);
     """
 
 def create_pokemon_table() -> str:
     return """
     CREATE TABLE IF NOT EXISTS pokemon(
         pokemon_id INTEGER PRIMARY KEY,
-        FOREIGN KEY (movepool_id) REFERENCES movepool(movepool_id),
+        movepool_id INTEGER NOT NULL,
         pokemon_name VARCHAR(30) NOT NULL,
         pokemon_role VARCHAR(30) NOT NULL,
         type_1 VARCHAR(10) NOT NULL,
@@ -71,15 +70,16 @@ def create_pokemon_table() -> str:
         is_legend_or_mythical BOOLEAN NOT NULL,
         weaknesses JSONB,
         resistances JSONB,
-    );
+        FOREIGN KEY (movepool_id) REFERENCES movepool(movepool_id));
     """
 
 def create_movepool_table() -> str:
     return """
     CREATE TABLE IF NOT EXISTS movepool(
+        movepool_id INTEGER NOT NULL,
+        pokemon_id INTEGER NOT NULL,
         PRIMARY KEY (movepool_id, pokemon_id),
-        FOREIGN KEY (pokemon_id) REFERENCES pokemon(pokemon_id),
-    );
+        FOREIGN KEY (pokemon_id) REFERENCES pokemon(pokemon_id));
     """
 
 def create_move_table() -> str:
@@ -91,17 +91,17 @@ def create_move_table() -> str:
         power INTEGER,
         accuracy INTEGER NOT NULL,
         pp INTEGER NOT NULL,
-        priority INTEGER NOT NULL,
-    );
+        priority INTEGER NOT NULL);
     """
 
 def create_movepool_collection_table() -> str:
     return """
     CREATE TABLE IF NOT EXISTS movepool_collection(
+        movepool_id INTEGER NOT NULL,
+        move_id INTEGER NOT NULL,
         PRIMARY KEY(movepool_id, move_id),
         FOREIGN KEY (movepool_id) REFERENCES movepool(movepool_id),
-        FOREIGN KEY (move_id) REFERENCES move(move_id),
-    ); 
+        FOREIGN KEY (move_id) REFERENCES move(move_id)); 
     """
 
 def create_ability_table() -> str:
@@ -109,36 +109,40 @@ def create_ability_table() -> str:
     CREATE TABLE IF NOT EXISTS ability(
         ability_id INTEGER PRIMARY KEY,
         ability_name VARCHAR(30) NOT NULL UNIQUE,
-        effect_desc VARCHAR(150) NOT NULL,
-    )
+        effect_desc VARCHAR(150) NOT NULL);
     """
 
 def create_pokemon_in_team_table() -> str:
     return """
     CREATE TABLE IF NOT EXISTS pokemon_in_team(
-        pit_id INTEGER PRIMARY KEY SERIAL,
-        FOREIGN KEY (team_id) REFERENCES team(team_id) NOT NULL,
-        FOREIGN KEY (pokemon_id) REFERENCES user(pokemon_id) NOT NULL,
-        FOREIGN KEY (chosen_ability_id) REFERENCES ability(ability_id) NOT NULL,
-        FOREIGN KEY (moveset_id) REFERENCES moveset(moveset_id) NOT NULL,
+        pit_id SERIAL PRIMARY KEY,
+        team_id INTEGER NOT NULL,
+        pokemon_id INTEGER NOT NULL,
+        chosen_ability_id INTEGER NOT NULL,
+        moveset_id INTEGER NOT NULL,
         nickname VARCHAR(30) NOT NULL,
-    );
+        FOREIGN KEY (team_id) REFERENCES team(team_id),
+        FOREIGN KEY (pokemon_id) REFERENCES account(pokemon_id),
+        FOREIGN KEY (chosen_ability_id) REFERENCES ability(ability_id),
+        FOREIGN KEY (moveset_id) REFERENCES moveset(moveset_id));
     """
 
 def create_pokemon_ability_table() -> str:
     return """
     CREATE TABLE IF NOT EXISTS pokemon_abilities(
+        pokemon_id INTEGER NOT NULL,
+        ability_id INTEGER NOT NULL,
         PRIMARY KEY (pokemon_id, ability_id),
         FOREIGN KEY (pokemon_id) REFERENCES pokemon(pokemon_id),
-        FOREIGN KEY (ability_id) REFERENCES ability(ability_id)
-    );
+        FOREIGN KEY (ability_id) REFERENCES ability(ability_id));
     """
 
 def create_moveset_table() -> str:
     return """
     CREATE TABLE IF NOT EXISTS moveset_move(
-        moveset_id INTEGER PRIMARY KEY SERIAL,
+        moveset_id SERIAL PRIMARY KEY,
+        pit_id INTEGER NOT NULL,
+        move_id INTEGER NOT NULL,
         FOREIGN KEY (pit_id) REFERENCES pokemon_in_team(pit_id),
-        FOREIGN KEY (move_id) REFERENCES move(move_id),
-    );
+        FOREIGN KEY (move_id) REFERENCES move(move_id));
     """
