@@ -1,3 +1,7 @@
+.customLabel.MuiInputLabel-root {
+  color: var(--text);
+}
+
 .toggle-container {
     position: relative;
     margin: 15px;

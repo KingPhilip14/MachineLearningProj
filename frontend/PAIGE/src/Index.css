@@ -10,18 +10,18 @@
     --text-light: #FFFFFF; /*White*/
     --background-color: #FFFFFF; /*White*/
     --linear-gradient: linear-gradient(45deg, var(--primary), var(--secondary));
-    --toggle-bg: #f0eb9d;
-    --toggle-fg: #ffd000;
+    --toggle-bg: var(--secondary);
+    --toggle-fg: var(--primary);
 }
 
 [data-theme="dark"] {
-    --primary: #892A3A; /*Claret*/
-    --secondary: #BB3A4F; /*Redwood*/
+    --primary: #BB3A4F; /*Redwood*/
+    --secondary: #892A3A; /*Claret*/
     --tertiary: #010101; /*Silver*/
     --accent: #BBDBB4; /*Celadon*/
     --text: #FFFFFF; /*White*/
     --background-color: #403F3F; /*Onyx*/
     --linear-gradient: linear-gradient(45deg, var(--primary), var(--secondary));
-    --toggle-bg: #283452;
-    --toggle-fg: #00a6ff;
+    --toggle-bg: var(--primary);
+    --toggle-fg: var(--secondary);
 }

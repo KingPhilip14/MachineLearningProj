@@ -4,12 +4,11 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import mascot from "../../assets/floette-eternal.gif";
-// import { Toggle } from "../toggle/Toggle.tsx";
-// import { useState } from "react";
+import { Toggle } from "../toggle/Toggle.tsx";
+import { Box } from "@mui/material";
 
-export default function Header() {
-  // const [isDark, setIsDark] = useState(false);
-
+// @ts-ignore
+export default function Header({ isDark, setIsDark }) {
   return (
     <AppBar
       style={{
@@ -18,24 +17,31 @@ export default function Header() {
       sx={{ minHeight: "60px", position: "sticky" }}
     >
       <Toolbar>
-        <img
-          src={mascot}
-          className="mascot"
-          alt={"PAIGE Mascot"}
-          height="80px"
-          style={{ padding: "15px" }}
-        />
+        <Link to={"/about"}>
+          <img
+            src={mascot}
+            className="mascot"
+            alt={"PAIGE Mascot"}
+            height="80px"
+            style={{ padding: "15px" }}
+          />
+        </Link>
+
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <Link className={"header-link"} to={"/"}>
             PAIGE
           </Link>
         </Typography>
-        {/*<Toggle isChecked={isDark} handleChange={() => setIsDark(!isDark)} />*/}
+
         <Link className={"header-link"} to={"/about"}>
           <Button color="inherit">About</Button>
         </Link>
         <Button color="inherit">Saved Teams</Button>
         <Button color="inherit">Login</Button>
+
+        <Box sx={{ ml: 2 }}>
+          <Toggle isChecked={isDark} handleChange={() => setIsDark(!isDark)} />
+        </Box>
       </Toolbar>
     </AppBar>
   );

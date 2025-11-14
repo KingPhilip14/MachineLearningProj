@@ -1,23 +1,24 @@
 import "./Toggle.css";
-import { InputLabel } from "@mui/material";
+import { FormControlLabel, Switch } from "@mui/material";
+// import { styled } from "@mui/material/styles";
 
 interface Props {
   handleChange: () => void;
   isChecked: boolean;
 }
-
 export const Toggle = ({ handleChange, isChecked }: Props) => {
   return (
-    <div className="toggle-container">
-      <input
-        type={"checkbox"}
-        id={"check"}
-        className={"toggle"}
-        onChange={handleChange}
-        checked={isChecked}
-      />
-      <InputLabel htmlFor={"check"}>Dark Mode</InputLabel>
-    </div>
+    <FormControlLabel
+      control={
+        <Switch
+          defaultChecked
+          color="default"
+          checked={isChecked}
+          onChange={handleChange}
+        />
+      }
+      label="Dark Mode"
+    />
   );
 };
 
