@@ -33,7 +33,7 @@ def create_all_tables(conn):
 def create_account_table() -> str:
     return """
     CREATE TABLE IF NOT EXISTS account (
-        account_id SERIAL PRIMARY KEY,
+        account_id PRIMARY KEY AUTOINCREMENT,
         username VARCHAR(30) NOT NULL UNIQUE,
         password VARCHAR(30) NOT NULL);
     """
@@ -41,7 +41,7 @@ def create_account_table() -> str:
 def create_team_table() -> str:
     return """
     CREATE TABLE IF NOT EXISTS team(
-        team_id SERIAL PRIMARY KEY,
+        team_id PRIMARY KEY AUTOINCREMENT,
         account_id INTEGER NOT NULL,
         team_name VARCHAR(30) NOT NULL,
         generation varchar(20) NOT NULL,
@@ -115,7 +115,7 @@ def create_ability_table() -> str:
 def create_pokemon_in_team_table() -> str:
     return """
     CREATE TABLE IF NOT EXISTS pokemon_in_team(
-        pit_id SERIAL PRIMARY KEY,
+        pit_id PRIMARY KEY AUTOINCREMENT,
         team_id INTEGER NOT NULL,
         pokemon_id INTEGER NOT NULL,
         chosen_ability_id INTEGER NOT NULL,
@@ -140,9 +140,8 @@ def create_pokemon_ability_table() -> str:
 def create_moveset_table() -> str:
     return """
     CREATE TABLE IF NOT EXISTS moveset_move(
-        moveset_id SERIAL PRIMARY KEY,
-        pit_id INTEGER NOT NULL,
+        moveset_id PRIMARY KEY AUTOINCREMENT,
+        pit_id INTEGER NOT NULL REFERENCES pokemon_in_team(pit_id),
         move_id INTEGER NOT NULL,
-        FOREIGN KEY (pit_id) REFERENCES pokemon_in_team(pit_id),
         FOREIGN KEY (move_id) REFERENCES move(move_id));
     """
