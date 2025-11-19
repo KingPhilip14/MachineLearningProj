@@ -22,7 +22,7 @@ def create_conn():
     # print('Database parameters loaded successfully.')
 
     # creates the database if it doesn't exist already
-    conn = sqlite3.connect('paige_server.db')
+    conn: sqlite3.Connection = sqlite3.connect('paige_server.db')
 
     print('Database created successfully.')
 
