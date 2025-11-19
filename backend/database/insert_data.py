@@ -38,3 +38,5 @@ def insert_abilities(conn) -> None:
 
     print(f'Successfully inserted {success_inserts}/{len(data)} ({(success_inserts / len(data)) * 100}%) '
           f'abilities from {ABILITY_FILE_DIR} into the database.')
+
+

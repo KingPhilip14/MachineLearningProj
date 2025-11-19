@@ -1,6 +1,4 @@
-import os
 import sqlite3
-from dotenv import load_dotenv
 
 
 def create_conn():
@@ -8,17 +6,6 @@ def create_conn():
     Creates the database connection and returns it. The database parameters are read from the .env file.
     """
     print('Creating the database...')
-    # load_dotenv()
-
-    # db_params = {
-    #     'database': os.getenv('DB_NAME'),
-    #     'user': os.getenv('DB_USER'),
-    #     'password': os.getenv('DB_PASSWORD'),
-    #     'host': os.getenv('DB_HOST'),
-    #     'port': os.getenv('DB_PORT'),
-    # }
-    #
-    # print('Database parameters loaded successfully.')
 
     # creates the database if it doesn't exist already
     conn: sqlite3.Connection = sqlite3.connect('paige_server.db')

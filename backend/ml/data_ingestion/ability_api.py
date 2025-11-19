@@ -1,12 +1,9 @@
 import asyncio
-import os
-
 import aiohttp
 from tqdm import tqdm
-
-from backend.ml.data_ingestion.base_api import BaseApi
 from config import ABILITY_DATA_DIR
 from utils import save_json_file
+from backend.ml.data_ingestion.base_api import BaseApi
 
 
 class AbilityApi(BaseApi):
@@ -21,13 +18,16 @@ class AbilityApi(BaseApi):
         :return:
         """
         async with aiohttp.ClientSession() as session:
-            ability_url: str = f'{self.base_url}/ability?limit=1000000&offset=0'
-            url_collection: dict = await self.fetch_json(session, ability_url)
-            results: list[dict] = url_collection['results']
-            urls: list[str] = list()
+            urls: list[str] = await self.collect_data_urls('ability', session)
 
-            for result in tqdm(results):
-                urls.append(result['url'])
+            # async with aiohttp.ClientSession() as session:
+            #     ability_url: str = f'{self.base_url}/ability?limit=1000000&offset=0'
+            #     url_collection: dict = await self.fetch_json(session, ability_url)
+            #     results: list[dict] = url_collection['results']
+            #     urls: list[str] = list()
+            #
+            #     for result in tqdm(results):
+            #         urls.append(result['url'])
 
             collected_data: dict = await self.__get_ability_data(session, urls)
             save_json_file(collected_data, self.filename, ABILITY_DATA_DIR)
@@ -38,7 +38,6 @@ class AbilityApi(BaseApi):
         to_add: dict
 
         for ability in ability_data:
-
             if not ability['is_main_series']:
                 continue
 

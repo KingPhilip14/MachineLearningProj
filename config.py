@@ -9,6 +9,8 @@ EXTRA_DATA_DIR: str = os.path.join(DATA_DIR, 'extra_data')
 SPRITES_DIR: str = os.path.join(DATA_DIR, 'sprites')
 ABILITY_DATA_DIR: str = os.path.join(DATA_DIR, 'ability_data')
 ABILITY_FILE_DIR: str = os.path.join(ABILITY_DATA_DIR, 'abilities.json')
+MOVE_DATA_DIR: str = os.path.join(DATA_DIR, 'move_data')
+MOVE_FILE_DIR: str = os.path.join(MOVE_DATA_DIR, 'moves.json')
 
 POKEMON_SPRITES_DIR: str = os.path.join(SPRITES_DIR, 'pokemon_sprites')
 ERR_SPRITES_DIR: str = os.path.join(SPRITES_DIR, 'errors')

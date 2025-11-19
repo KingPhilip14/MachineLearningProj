@@ -1,5 +1,5 @@
 import os
-import psycopg2 as pg2
+import sqlite3
 from backend.database.db_utils import print_error_msg
 
 def create_all_tables(conn):
@@ -23,7 +23,7 @@ def create_all_tables(conn):
         conn.commit()
 
         print('All tables were created successfully.')
-    except pg2.Error as e:
+    except sqlite3.Error as e:
         filename: str = os.path.basename(__file__)
         print_error_msg(filename, create_all_tables.__name__, e)
 
