@@ -1,7 +1,5 @@
 import json
-import os
-import psycopg2
-
+import sqlite3
 from config import ABILITY_FILE_DIR
 
 
@@ -10,23 +8,21 @@ def insert_abilities(conn) -> None:
 
     # read in the JSON file
     with open(ABILITY_FILE_DIR, 'r') as f:
-        data = json.load(f)
+        data: dict = json.load(f)
         f.close()
-
-    ability_id: int
-    name: str
-    short_desc: str
-    effect_desc: str
-    flavor_text: str
 
     print(f'Inserting {len(data)} abilities from {ABILITY_FILE_DIR}...')
 
+    success_inserts: int = 0
+
     for ability in data:
-        ability_id = ability['id']
-        name = ability['name']
-        short_desc = ability['short_desc']
-        effect_desc = ability['effect_desc']
-        flavor_text = ability['flavor_text']
+        ability_data: dict = data[ability]
+
+        ability_id: int = ability_data['id']
+        name: str = ability_data['name']
+        short_desc: str = ability_data['short_desc']
+        effect_desc: str = ability_data['effect_desc']
+        flavor_text: str = ability_data['flavor_text']
 
         insert: str = """
         INSERT INTO ability VALUES (?, ?, ?, ?, ?);
@@ -36,9 +32,9 @@ def insert_abilities(conn) -> None:
             cursor = conn.cursor()
             cursor.execute(insert, (ability_id, name, short_desc, effect_desc, flavor_text))
             conn.commit()
-        except pg2.Error as e:
-            filename: str = os.path.basename(__file__)
-            print_error_msg(filename, create_all_tables.__name__, e)
-        finally:
-            conn.close()
+            success_inserts += 1
+        except sqlite3.Error as e:
+            print(e)
 
+    print(f'Successfully inserted {success_inserts}/{len(data)} ({(success_inserts / len(data)) * 100}%) '
+          f'abilities from {ABILITY_FILE_DIR} into the database.')

@@ -1,5 +1,4 @@
 import os
-import psycopg2 as pg2
 import sqlite3
 from dotenv import load_dotenv
 
@@ -29,13 +28,11 @@ def create_conn():
     return conn
 
 
-def print_error_msg(class_name: str, method_name: str, error: pg2.Error) -> None:
+def print_error_msg(class_name: str, method_name: str, error: sqlite3.Error) -> None:
     """
     Prints multiple statements to provide further details on may have gone wrong for a method. By using the given
     class name and method name, additional details will be given to know which method caused the issue.
     """
     print(f'An error occurred in {class_name}.{method_name}:')
-    print('Error message:', error)
-    print('Error details:', error.pgerror)
-    print('Error code:', error.pgcode)
-    print('Diagnostics:', getattr(error, 'diag', None))
+    print('Error code:', error.sqlite_errorcode)
+    print('Error name:', error.sqlite_errorname)

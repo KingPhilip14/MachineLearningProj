@@ -26,8 +26,6 @@ def create_all_tables(conn):
     except pg2.Error as e:
         filename: str = os.path.basename(__file__)
         print_error_msg(filename, create_all_tables.__name__, e)
-    finally:
-        conn.close()
 
 
 def create_account_table() -> str:
