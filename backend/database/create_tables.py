@@ -15,7 +15,7 @@ def create_all_tables(conn):
         cursor.execute(create_pokemon_table())
         cursor.execute(create_movepool_table())
         cursor.execute(create_move_table())
-        cursor.execute(create_movepool_collection_table())
+        # cursor.execute(create_movepool_collection_table())
         cursor.execute(create_pokemon_in_team_table())
         cursor.execute(create_ability_table())
         cursor.execute(create_moveset_table())
@@ -36,6 +36,7 @@ def create_account_table() -> str:
         password VARCHAR(30) NOT NULL);
     """
 
+
 def create_team_table() -> str:
     return """
     CREATE TABLE IF NOT EXISTS team(
@@ -48,11 +49,11 @@ def create_team_table() -> str:
         overlapping_weaknesses JSONB NOT NULL);
     """
 
+
 def create_pokemon_table() -> str:
     return """
     CREATE TABLE IF NOT EXISTS pokemon(
         pokemon_id INTEGER PRIMARY KEY,
-        movepool_id INTEGER NOT NULL REFERENCES movepool(movepool_id),
         pokemon_name VARCHAR(30) NOT NULL,
         pokemon_role VARCHAR(30) NOT NULL,
         type_1 VARCHAR(10) NOT NULL,
@@ -69,13 +70,6 @@ def create_pokemon_table() -> str:
         resistances JSONB);
     """
 
-def create_movepool_table() -> str:
-    return """
-    CREATE TABLE IF NOT EXISTS movepool(
-        movepool_id INTEGER NOT NULL,
-        pokemon_id INTEGER NOT NULL REFERENCES pokemon(pokemon_id),
-        PRIMARY KEY (movepool_id, pokemon_id));
-    """
 
 def create_move_table() -> str:
     return """
@@ -83,19 +77,22 @@ def create_move_table() -> str:
         move_id INTEGER PRIMARY KEY,
         move_name VARCHAR(30) NOT NULL,
         damage_class VARCHAR(30) NOT NULL,
+        move_type VARCHAR(10) NOT NULL,
         power INTEGER,
-        accuracy INTEGER NOT NULL,
-        pp INTEGER NOT NULL,
+        accuracy INTEGER,
+        pp INTEGER,
         priority INTEGER NOT NULL);
     """
 
-def create_movepool_collection_table() -> str:
+
+def create_movepool_table() -> str:
     return """
-    CREATE TABLE IF NOT EXISTS movepool_collection(
-        movepool_id INTEGER NOT NULL REFERENCES movepool(movepool_id),
+    CREATE TABLE IF NOT EXISTS movepool(
+        pokemon_id INTEGER NOT NULL REFERENCES pokemon(pokemon_id),
         move_id INTEGER NOT NULL REFERENCES move(move_id),
-        PRIMARY KEY(movepool_id, move_id)); 
+        PRIMARY KEY (pokemon_id, move_id));
     """
+
 
 def create_ability_table() -> str:
     return """
@@ -107,6 +104,7 @@ def create_ability_table() -> str:
         flavor_text VARCHAR(500) NOT NULL);
     """
 
+
 def create_moveset_table() -> str:
     return """
     CREATE TABLE IF NOT EXISTS moveset(
@@ -114,6 +112,7 @@ def create_moveset_table() -> str:
         pit_id INTEGER NOT NULL REFERENCES pokemon_in_team(pit_id),
         move_id INTEGER NOT NULL REFERENCES move(move_id));
     """
+
 
 def create_pokemon_in_team_table() -> str:
     return """
