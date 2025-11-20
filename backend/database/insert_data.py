@@ -1,10 +1,13 @@
 import json
-import sqlite3
+import psycopg2 as pg2
 from tqdm import tqdm
 from config import ABILITY_FILE_DIR, MOVE_FILE_DIR, NATIONAL_FILE_DIR
 
+prepared_var: str = 'statement'
+prepared_statement: str = f'PREPARE {prepared_var} AS'
 
-def insert_abilities(conn) -> None:
+
+def insert_abilities(conn, cursor) -> None:
     """
     Inserts the data from the ability.json file into the database.
     """
@@ -30,22 +33,21 @@ def insert_abilities(conn) -> None:
 
         insert: str = """
                       INSERT INTO ability
-                      VALUES (?, ?, ?, ?, ?); \
+                      VALUES (%s, %s, %s, %s, %s); \
                       """
 
         try:
-            cursor = conn.cursor()
             cursor.execute(insert, (ability_id, name, short_desc, effect_desc, flavor_text))
             conn.commit()
             success_inserts += 1
-        except sqlite3.Error as e:
+        except pg2.Error as e:
             print(e)
 
     print(f'Successfully inserted {success_inserts}/{len(data)} ({(success_inserts / len(data)) * 100}%) '
           f'abilities from {ABILITY_FILE_DIR} into the database.\n')
 
 
-def insert_moves(conn) -> None:
+def insert_moves(conn, cursor) -> None:
     """
     Inserts the data from the move.json file into the database.
     """
@@ -74,22 +76,21 @@ def insert_moves(conn) -> None:
 
         insert: str = """
                       INSERT INTO move
-                      VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+                      VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
                       """
 
         try:
-            cursor = conn.cursor()
             cursor.execute(insert, (move_id, move_name, damage_class, move_type, power, accuracy, pp, priority))
             conn.commit()
             success_inserts += 1
-        except sqlite3.Error as e:
+        except pg2.Error as e:
             print(e)
 
     print(f'Successfully inserted {success_inserts}/{len(data)} ({(success_inserts / len(data)) * 100}%) '
           f'moves from {MOVE_FILE_DIR} into the database.\n')
 
 
-def insert_pokemon(conn) -> None:
+def insert_pokemon(conn, cursor) -> None:
     data: dict
 
     # read in the JSON file
@@ -122,7 +123,7 @@ def insert_pokemon(conn) -> None:
 
         insert: str = """
                       INSERT INTO pokemon
-                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                      VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
                       """
 
         try:
@@ -130,14 +131,14 @@ def insert_pokemon(conn) -> None:
             cursor.execute(insert, (pokemon_id, pokemon_name, pokemon_role,
                                     type_1, type_2, bst, hp, attack, defense, sp_attack,
                                     sp_defense, speed, is_legend_or_mythical, weaknesses, resistances))
-        except sqlite3.Error as e:
+        except pg2.Error as e:
             print(e)
 
     print(f'Successfully inserted {success_inserts}/{len(data)} ({(success_inserts / len(data)) * 100}%) '
           f'Pokemon from {NATIONAL_FILE_DIR} into the database.\n')
 
 
-def insert_movepools(conn) -> None:
+def insert_movepools(conn, cursor) -> None:
     """
     Inserts the movepools from every Pokemon into the database by using the national_data.json file.
     """
@@ -171,13 +172,13 @@ def insert_movepools(conn) -> None:
     for pair in pkmn_move_pairs:
         insert: str = """
                       INSERT INTO movepool
-                      VALUES (?, ?);
+                      VALUES (%s, %s);
                       """
 
         try:
             cursor = conn.cursor()
             cursor.execute(insert, (pair[0], pair[1]))
-        except sqlite3.Error as e:
+        except pg2.Error as e:
             print(e)
 
     print('Successfully inserted movepools from every Pokemon in the database.\n')

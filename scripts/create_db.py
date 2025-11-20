@@ -4,8 +4,10 @@ from backend.database.insert_data import *
 
 if __name__ == '__main__':
     conn = create_conn()
-    create_all_tables(conn)
-    insert_abilities(conn)
-    insert_moves(conn)
-    insert_pokemon(conn)
-    insert_movepools(conn)
+    cursor = conn.cursor()
+
+    create_all_tables(conn, cursor)
+    insert_abilities(conn, cursor)
+    insert_moves(conn, cursor)
+    insert_pokemon(conn, cursor)
+    insert_movepools(conn, cursor)
