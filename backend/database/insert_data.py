@@ -158,7 +158,7 @@ def insert_movepools(conn) -> None:
         pokemon_id: int = data[pokemon]['id']
 
         # iterate over every move in the current Pokemon's movepool
-        for move_data in data[pokemon]['moveset']:
+        for move_data in data[pokemon]['movepool']:
             print(move_data)
             input('>')
 

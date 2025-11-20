@@ -3,7 +3,7 @@ import json
 import os
 
 from config import (EXTRA_DATA_DIR, POKEMON_DATA_DIR, ERR_SPRITES_DIR, POKEMON_SPRITES_DIR, TYPE_SPRITES_DIR,
-                    GEN_TO_POKEDEX_MAP, EXTRA_DATA_DIR, ABILITY_DATA_DIR)
+                    GEN_TO_POKEDEX_MAP, EXTRA_DATA_DIR, ABILITY_DATA_DIR, MOVE_DATA_DIR)
 
 
 def gen_roman_converter(filename: str) -> str:
@@ -107,9 +107,10 @@ def pokemon_data_file_exists(filename: str) -> bool:
 
     return os.path.exists(file_path)
 
+
 def create_dirs() -> None:
     dirs: list[str] = [EXTRA_DATA_DIR, POKEMON_DATA_DIR, ERR_SPRITES_DIR, POKEMON_SPRITES_DIR, TYPE_SPRITES_DIR,
-                       ABILITY_DATA_DIR]
+                       ABILITY_DATA_DIR, MOVE_DATA_DIR]
 
     print(f'Attempting to make data directories...')
     created: bool = False
