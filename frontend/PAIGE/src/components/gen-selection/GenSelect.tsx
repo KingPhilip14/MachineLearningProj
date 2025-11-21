@@ -1,9 +1,9 @@
-import "../App.css";
-import "./home/Home.css";
+import "../../App.css";
+// import "../home/Home.css";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 
-export default function GenerationSelect() {
+export default function GenSelect() {
   const gens = [
     "Gen 1",
     "Gen 2",
@@ -21,7 +21,7 @@ export default function GenerationSelect() {
     width: "248px",
     height: "128px",
     borderRadius: "30px",
-    color: "black",
+    color: "var(--text)",
     boxShadow: "3px 3px 8px",
   });
 

@@ -15,12 +15,12 @@
 }
 
 [data-theme="dark"] {
-    --primary: #BB3A4F; /*Redwood*/
-    --secondary: #892A3A; /*Claret*/
-    --tertiary: #010101; /*Silver*/
-    --accent: #BBDBB4; /*Celadon*/
+    --primary: #892a3a; /*Dark Amaranth*/
+    --secondary: #101010; /*Onyx*/
+    --tertiary: #2D2D2D; /*Graphite*/
+    --accent: #82B684; /*Muted Olive*/
     --text: #FFFFFF; /*White*/
-    --background-color: #403F3F; /*Onyx*/
+    --background-color: #403f3f; /*Gunmetal*/
     --linear-gradient: linear-gradient(45deg, var(--primary), var(--secondary));
     --toggle-bg: var(--primary);
     --toggle-fg: var(--secondary);

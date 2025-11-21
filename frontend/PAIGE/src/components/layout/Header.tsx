@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import mascot from "../../assets/floette-eternal.gif";
 import { Toggle } from "../toggle/Toggle.tsx";
-import { Box } from "@mui/material";
 
 // @ts-ignore
 export default function Header({ isDark, setIsDark }) {
@@ -33,15 +32,13 @@ export default function Header({ isDark, setIsDark }) {
           </Link>
         </Typography>
 
+        <Toggle isChecked={isDark} handleChange={() => setIsDark(!isDark)} />
+
         <Link className={"header-link"} to={"/about"}>
           <Button color="inherit">About</Button>
         </Link>
         <Button color="inherit">Saved Teams</Button>
         <Button color="inherit">Login</Button>
-
-        <Box sx={{ ml: 2 }}>
-          <Toggle isChecked={isDark} handleChange={() => setIsDark(!isDark)} />
-        </Box>
       </Toolbar>
     </AppBar>
   );

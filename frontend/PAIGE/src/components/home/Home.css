@@ -12,6 +12,11 @@
     animation: fade-in 1.5s;
 }
 
+.text {
+    padding: 75px;
+    text-align: center;
+}
+
 /*--------------------------*/
 
 .button{

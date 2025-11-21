@@ -1,7 +1,7 @@
 import "../../App.css";
 import "./Home.css";
 import Typography from "@mui/material/Typography";
-import GenerationSelect from "../GenerationSelect.tsx";
+import GenSelect from "../gen-selection/GenSelect.tsx";
 import { LinearGradient } from "react-text-gradients";
 
 export default function Home() {
@@ -21,13 +21,13 @@ export default function Home() {
             The Pokémon AI Generation Engine
           </Typography>
         </div>
-        <Typography style={{ padding: "75px", textAlign: "center" }}>
+        <Typography className="text">
           Select a generation below to get started!
         </Typography>
 
         <h3>
           <LinearGradient
-            gradient={["to left", "var(--light-primary), var(--dark-primary)"]}
+            gradient={["to left", "var(--secondary), var(--primary)"]}
             fallbackColor="var(--text)"
           >
             Generations
@@ -35,7 +35,7 @@ export default function Home() {
         </h3>
 
         <div className={"rectangle-wrapper"}>
-          <GenerationSelect />
+          <GenSelect />
         </div>
       </div>
     </>
