@@ -7,7 +7,7 @@ export default function Footer() {
     <Box component="footer" className={"footer"}>
       <Container maxWidth="lg">
         <Typography className={"footer-text"}>
-          Report bugs or leave feedback by creating an issue on <a />
+          Report bugs or leave feedback by creating an issue on{" "}
           <Link
             className={"footer-link"}
             target={"_blank"}

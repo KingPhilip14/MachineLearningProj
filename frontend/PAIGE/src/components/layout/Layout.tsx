@@ -29,13 +29,16 @@ const Layout = () => {
 
   return (
     <>
-      <div className={"app"}>
-        <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <div className="min-h-[100dvh] grid grid-rows-[auto_1fr_auto] app">
           <Header isDark={isDark} setIsDark={setIsDark} />
-          <Outlet />
+
+          <main>
+            <Outlet />
+          </main>
           <Footer />
-        </ThemeProvider>
-      </div>
+        </div>
+      </ThemeProvider>
     </>
   );
 };

@@ -1,5 +1,5 @@
 import "./Toggle.css";
-import { FormControlLabel, Switch } from "@mui/material";
+import { FormControlLabel, Switch, Typography } from "@mui/material";
 // import { styled } from "@mui/material/styles";
 
 interface Props {
@@ -17,7 +17,7 @@ export const Toggle = ({ handleChange, isChecked }: Props) => {
           onChange={handleChange}
         />
       }
-      label="Dark Mode"
+      label={<Typography sx={{ fontSize: "14px" }}>DARK MODE</Typography>}
     />
   );
 };

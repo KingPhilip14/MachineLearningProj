@@ -1,28 +1,12 @@
-.page-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-.header {
-    background-image: var(--linear-gradient);
-    min-height: 60px;
-    position: sticky;
-}
-
-.header-btn {
-    color: var(--text-light)
-}
-
 .footer {
     background-image: var(--linear-gradient);
     padding: 1vh;
-    margin-top: auto;
-    position: sticky;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
+    /*margin-top: auto;*/
+    /*position: relative;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
+    /*width: 100%;*/
 }
 
 .footer-text {

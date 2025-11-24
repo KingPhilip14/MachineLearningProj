@@ -13,7 +13,7 @@ export default function Header({ isDark, setIsDark }) {
       style={{
         background: "var(--linear-gradient)",
       }}
-      sx={{ minHeight: "60px", position: "sticky" }}
+      sx={{ position: "static" }}
     >
       <Toolbar>
         <Link to={"/about"}>
@@ -21,8 +21,8 @@ export default function Header({ isDark, setIsDark }) {
             src={mascot}
             className="mascot"
             alt={"PAIGE Mascot"}
-            height="80px"
-            style={{ padding: "15px" }}
+            // height="80px"
+            style={{ padding: "15px", position: "static" }}
           />
         </Link>
 
