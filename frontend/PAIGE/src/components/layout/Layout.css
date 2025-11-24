@@ -1,12 +1,13 @@
+.body {
+    margin: 0;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
 .footer {
     background-image: var(--linear-gradient);
     padding: 1vh;
-    /*margin-top: auto;*/
-    /*position: relative;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*bottom: 0;*/
-    /*width: 100%;*/
 }
 
 .footer-text {

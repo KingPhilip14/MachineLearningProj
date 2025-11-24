@@ -33,9 +33,10 @@ const Layout = () => {
         <div className="min-h-[100dvh] grid grid-rows-[auto_1fr_auto] app">
           <Header isDark={isDark} setIsDark={setIsDark} />
 
-          <main>
+          <main className="body">
             <Outlet />
           </main>
+
           <Footer />
         </div>
       </ThemeProvider>
