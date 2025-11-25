@@ -10,7 +10,7 @@ export default function Home() {
       <div className={"home-page-container"}>
         <div
           className={"rounded-rectangle"}
-          style={{ width: "864px", height: "140px" }}
+          style={{ width: "864px", height: "140px", justifyContent: "center" }}
         >
           <Typography
             variant="h5"

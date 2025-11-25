@@ -1,0 +1,12 @@
+.about-page-container {
+    display: flex;
+    justify-content: center; /* vertical centering */
+    /*align-items: center; !* horizontal centering *!*/
+    text-align: left;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#left-align {
+    justify-content: left;
+}
