@@ -6,9 +6,9 @@
     transition: background-color 250ms ease-in-out;
 }
 
-.rounded-rectangle {
+.text-card {
     max-width: 90%; /* for responsive scaling on different screens */
-    background: var(--tertiary);
+    background-color: var(--tertiary);
     padding: 5px;
     border-radius: 30px;
 

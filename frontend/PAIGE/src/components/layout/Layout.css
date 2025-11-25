@@ -2,12 +2,14 @@
     margin: 0;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    min-height: 100vh;
+    min-height: calc(100vh - var(--footer-min-height));
+    animation: fade-in 1.5s;
 }
 
 .footer {
     background-image: var(--linear-gradient);
     padding: 1vh;
+    min-height: var(--footer-min-height);
 }
 
 .footer-text {
@@ -22,4 +24,14 @@
 
 .footer-link {
     color: var(--text-light);
+}
+
+
+@keyframes spin {
+    from {
+        --angle: 0deg;
+    }
+    to {
+        --angle: 360deg;
+    }
 }

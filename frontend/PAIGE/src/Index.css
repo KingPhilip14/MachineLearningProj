@@ -12,6 +12,8 @@
     --linear-gradient: linear-gradient(45deg, var(--primary), var(--secondary));
     --toggle-bg: var(--secondary);
     --toggle-fg: var(--primary);
+
+    --footer-min-height: 5vh;
 }
 
 [data-theme="dark"] {
