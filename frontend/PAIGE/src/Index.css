@@ -6,7 +6,8 @@
     --secondary: #4191DC; /*United Nations Blue*/
     --tertiary: #E5E5E5; /*Platinum*/
     --accent: #4CAF50; /*Pigment green*/
-    --text: #000000; /*Onyx*/
+    --text: #000000; /*Black*/
+    --box-shadow: #000000; /*Black*/
     --text-light: #FFFFFF; /*White*/
     --background-color: #FFFFFF; /*White*/
     --linear-gradient: linear-gradient(45deg, var(--primary), var(--secondary));

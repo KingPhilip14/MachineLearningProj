@@ -22,7 +22,7 @@ export default function GenSelect() {
     height: "128px",
     borderRadius: "30px",
     color: "var(--text)",
-    boxShadow: "3px 3px 8px",
+    boxShadow: "3px 3px 8px var(--box-shadow)",
   });
 
   return (
@@ -35,7 +35,7 @@ export default function GenSelect() {
               margin: "45px",
               border: 1,
               borderStyle: "solid",
-              borderColor: "black",
+              borderColor: "var(--text)",
             }}
           >
             {gen}
