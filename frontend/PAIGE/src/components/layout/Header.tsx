@@ -3,7 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import mascot from "../../assets/floette-eternal.gif";
+import { mascot, mascot_shiny } from "../../assets";
 import { Toggle } from "../toggle/Toggle.tsx";
 
 // @ts-ignore
@@ -18,7 +18,7 @@ export default function Header({ isDark, setIsDark }) {
       <Toolbar>
         <Link to={"/about"}>
           <img
-            src={mascot}
+            src={isDark ? mascot_shiny : mascot}
             className="mascot"
             alt={"PAIGE Mascot"}
             // height="80px"
