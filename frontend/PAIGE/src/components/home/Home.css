@@ -1,15 +1,5 @@
-.home-page-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* vertical centering */
-    align-items: center; /* horizontal centering */
-    /*min-height: 100vh;*/
+.page-container.home {
     text-align: center;
-
-    box-sizing: border-box;
-    padding-top: 102px;
-
-    /*animation: fade-in 1.5s;*/
 }
 
 .text {

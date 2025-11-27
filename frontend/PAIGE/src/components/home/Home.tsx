@@ -2,18 +2,17 @@ import "../../App.css";
 import "./Home.css";
 import Typography from "@mui/material/Typography";
 import GenSelect from "../gen-selection/GenSelect.tsx";
-import { LinearGradient } from "react-text-gradients";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import LinearGradText from "../LinearGradText.tsx";
 
 export default function Home() {
   return (
     <>
-      <div className={"home-page-container"}>
+      <div className={"page-container home"}>
         <Card
           className={"text-card"}
           style={{
-            width: "864px",
             height: "140px",
             justifyContent: "center",
             borderRadius: "30px",
@@ -35,14 +34,7 @@ export default function Home() {
           Select a generation below to get started!
         </Typography>
 
-        <h3>
-          <LinearGradient
-            gradient={["to left", "var(--secondary), var(--primary)"]}
-            fallbackColor="var(--text)"
-          >
-            Generations
-          </LinearGradient>
-        </h3>
+        <LinearGradText text={"Generations"} />
 
         <div className={"rectangle-wrapper"}>
           <GenSelect />

@@ -1,11 +1,11 @@
 import "./Toggle.css";
 import { FormControlLabel, Switch, Typography } from "@mui/material";
-// import { styled } from "@mui/material/styles";
 
 interface Props {
   handleChange: () => void;
   isChecked: boolean;
 }
+
 export const Toggle = ({ handleChange, isChecked }: Props) => {
   return (
     <FormControlLabel

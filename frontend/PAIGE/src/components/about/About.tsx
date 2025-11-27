@@ -4,9 +4,10 @@ import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { LinearGradient } from "react-text-gradients";
+import LinearGradText from "../LinearGradText.tsx";
 
 export default function About() {
+  // custom theming for this page (follows Q&A format)
   const theme = createTheme({
     typography: {
       body1: {
@@ -29,17 +30,11 @@ export default function About() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <div className="about-page-container">
-          <h3>
-            <LinearGradient
-              gradient={["to left", "var(--secondary), var(--primary)"]}
-              fallbackColor="var(--text)"
-            >
-              About
-            </LinearGradient>
-          </h3>
+        <div className="page-container">
+          <LinearGradText text={"About"} />
 
           <Card
+            className={"text-card about"}
             style={{ width: "80%", margin: "50px", borderRadius: "30px" }}
             sx={{ background: "var(--tertiary)" }}
           >

@@ -6,8 +6,17 @@
     transition: background-color 250ms ease-in-out;
 }
 
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+}
+
 .text-card {
     max-width: 90%; /* for responsive scaling on different screens */
+    min-width: 70%;
     background-color: var(--tertiary);
     padding: 5px;
     border-radius: 30px;

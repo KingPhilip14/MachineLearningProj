@@ -1,7 +1,7 @@
 import "../../App.css";
-// import "../home/Home.css";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 
 export default function GenSelect() {
   const gens = [
@@ -29,17 +29,19 @@ export default function GenSelect() {
     <>
       <ul>
         {gens.map((gen) => (
-          <GenSelectBtn
-            sx={{
-              fontSize: "1rem",
-              margin: "45px",
-              border: 1,
-              borderStyle: "solid",
-              borderColor: "var(--text)",
-            }}
-          >
-            {gen}
-          </GenSelectBtn>
+          <Link to={"/team-config"} key={gen}>
+            <GenSelectBtn
+              sx={{
+                fontSize: "1rem",
+                margin: "45px",
+                border: 1,
+                borderStyle: "solid",
+                borderColor: "var(--text)",
+              }}
+            >
+              {gen}
+            </GenSelectBtn>
+          </Link>
         ))}
       </ul>
     </>
