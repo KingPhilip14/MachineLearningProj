@@ -4,6 +4,7 @@ import About from "./components/about/About.tsx";
 import PageNotFound from "./PageNotFound.tsx";
 import Layout from "./components/layout/Layout.tsx";
 import TeamConfig from "./components/team-config/TeamConfig.tsx";
+import GeneratedTeam from "./components/generated-team/GeneratedTeam.tsx";
 
 export const Routes = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ export const Routes = createBrowserRouter([
       {
         path: "/team-config",
         element: <TeamConfig />,
+      },
+      {
+        path: "/generated-team",
+        element: <GeneratedTeam />,
       },
       {
         path: "*",

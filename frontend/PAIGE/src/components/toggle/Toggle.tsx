@@ -10,12 +10,7 @@ export const Toggle = ({ handleChange, isChecked }: Props) => {
   return (
     <FormControlLabel
       control={
-        <Switch
-          defaultChecked
-          color="default"
-          checked={isChecked}
-          onChange={handleChange}
-        />
+        <Switch color="default" checked={isChecked} onChange={handleChange} />
       }
       label={<Typography sx={{ fontSize: "14px" }}>DARK MODE</Typography>}
     />

@@ -16,17 +16,41 @@ import { styled } from "@mui/material/styles";
 import React, { useState } from "react";
 
 export default function TeamConfig() {
-  const [usingLittleCup, setUsingLittleCup] = React.useState(false);
-  const [usingLegends, setUsingLegends] = React.useState(false);
-  const [teamComp, setTeamComp] = React.useState("balanced");
-  // const [littleCupLabel, setlittleCupLabel] = React.useState("no");
+  const [usingLittleCup, setUsingLittleCup] = useState("no");
+  const [disabledLegends, setDisabledLegends] = useState(false);
+  const [legendsValue, setLegendsValue] = useState("no");
 
-  const handleChange = (event: React.ChangeEvent) => {
-    setUsingLittleCup(event.target.value);
+  // const handleChange = (event: React.ChangeEvent) => {
+  //   console.log("Using Little Cup BEFORE change:", usingLittleCup);
+  //   console.log("Legends disabled BEFORE change:", disabledLegends);
+  //   console.log("Legends value BEFORE change:", legendsValue);
+  //
+  //   debugger;
+  //   setUsingLittleCup(event.target.value);
+  //   setDisabledLegends(usingLittleCup !== "yes");
+  //   usingLittleCup === "yes" ? setLegendsValue("no") : setLegendsValue("yes");
+  //
+  //   console.log("Using Little Cup after change:", usingLittleCup);
+  //   console.log("Legends disabled after change:", disabledLegends);
+  //   console.log("Legends value after change:", legendsValue);
+  // };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newLCValue = event.target.value;
+
+    setUsingLittleCup(newLCValue);
+
+    if (newLCValue === "yes") {
+      setDisabledLegends(true);
+      setLegendsValue("no");
+    } else {
+      setDisabledLegends(false);
+    }
   };
 
   const ConfigRadio = styled(Radio)({
     color: "var(--primary)",
+    transition: "color 150ms ease-in-out",
     "&.Mui-checked": {
       color: "var(--primary)",
     },
@@ -81,14 +105,16 @@ export default function TeamConfig() {
             <FormControl>
               <FormLabel
                 id="demo-form-control-label-placement"
-                style={{ color: "var(--text)" }}
+                style={{ color: "var(--text)", textAlign: "center" }}
               >
                 (Only baby Pokémon will be used)
               </FormLabel>
               <RadioGroup
                 row
-                name="position"
-                defaultValue="top"
+                name="LC"
+                value={usingLittleCup}
+                // defaultValue="no"
+                onChange={handleChange}
                 style={{ justifyContent: "center", alignItems: "center" }}
               >
                 <FormControlLabel
@@ -121,14 +147,19 @@ export default function TeamConfig() {
             <FormControl>
               <FormLabel
                 id="demo-form-control-label-placement"
-                style={{ color: "var(--text)" }}
+                style={{ color: "var(--text)", textAlign: "center" }}
               >
                 (Legendaries <em>may</em> be generated but are not guaranteed)
               </FormLabel>
+              <FormLabel style={{ color: "red", textAlign: "center" }}>
+                (<em>Cannot</em> be used with Little Cup enabled)
+              </FormLabel>
               <RadioGroup
                 row
-                name="position"
-                defaultValue="top"
+                name="legends"
+                value={legendsValue}
+                // defaultValue={"no"}
+                onChange={(e) => setLegendsValue(e.target.value)}
                 style={{ justifyContent: "center", alignItems: "center" }}
               >
                 <FormControlLabel
@@ -136,6 +167,7 @@ export default function TeamConfig() {
                   control={<ConfigRadio />}
                   label="Yes"
                   labelPlacement="bottom"
+                  disabled={disabledLegends}
                   style={{ padding: "15px 35px 5px 10px" }}
                 />
                 <FormControlLabel
@@ -143,6 +175,7 @@ export default function TeamConfig() {
                   control={<ConfigRadio />}
                   label="No"
                   labelPlacement="bottom"
+                  disabled={disabledLegends}
                   style={{ padding: "15px 35px 5px 10px" }}
                 />
               </RadioGroup>
@@ -161,14 +194,14 @@ export default function TeamConfig() {
             <FormControl>
               <FormLabel
                 id="demo-form-control-label-placement"
-                style={{ color: "var(--text)" }}
+                style={{ color: "var(--text)", textAlign: "center" }}
               >
                 (Affects the Pokémon considered for team generation)
               </FormLabel>
               <RadioGroup
                 row
-                name="position"
-                defaultValue="top"
+                name="team-composition"
+                // defaultValue="balanced"
                 style={{ justifyContent: "center", alignItems: "center" }}
               >
                 <FormControlLabel
@@ -196,6 +229,22 @@ export default function TeamConfig() {
             </FormControl>
           </CardActions>
         </ConfigCard>
+
+        {/* Generate button */}
+        <Link to={"/generated-team"}>
+          <Button
+            variant={"contained"}
+            size={"large"}
+            sx={{
+              backgroundColor: "var(--secondary)",
+              color: "var(--text)",
+              margin: "0px 0px 80px 0px",
+              minHeight: "50px",
+            }}
+          >
+            Generate Team
+          </Button>
+        </Link>
       </div>
     </>
   );
