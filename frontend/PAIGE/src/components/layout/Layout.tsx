@@ -2,11 +2,14 @@ import "../../App.css";
 import "./Layout.css";
 import Header from "./Header.tsx";
 import Footer from "./Footer.tsx";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material";
 
 const Layout = () => {
+  const location = useLocation();
+  const hideHeaderAndFooter =
+    location.pathname === "/login" || location.pathname === "/register";
   const [isDark, setIsDark] = useState(false);
 
   const theme = useMemo(
@@ -31,13 +34,13 @@ const Layout = () => {
     <>
       <ThemeProvider theme={theme}>
         <div className="min-h-[100dvh] grid grid-rows-[auto_1fr_auto] app">
+          {/*{!hideHeaderAndFooter && ()}*/}
           <Header isDark={isDark} setIsDark={setIsDark} />
-
           <main className="body">
             <Outlet />
           </main>
 
-          <Footer />
+          {!hideHeaderAndFooter && <Footer />}
         </div>
       </ThemeProvider>
     </>

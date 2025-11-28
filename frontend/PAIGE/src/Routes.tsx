@@ -5,10 +5,11 @@ import PageNotFound from "./PageNotFound.tsx";
 import Layout from "./components/layout/Layout.tsx";
 import TeamConfig from "./components/team-config/TeamConfig.tsx";
 import GeneratedTeam from "./components/generated-team/GeneratedTeam.tsx";
+import Login from "./components/account-access/Login.tsx";
+import Register from "./components/account-access/Register.tsx";
 
 export const Routes = createBrowserRouter([
   {
-    // path: "/",
     element: <Layout />,
     children: [
       {
@@ -18,6 +19,14 @@ export const Routes = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
       {
         path: "/team-config",

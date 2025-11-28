@@ -38,7 +38,9 @@ export default function Header({ isDark, setIsDark }) {
           <Button color="inherit">About</Button>
         </Link>
         <Button color="inherit">Saved Teams</Button>
-        <Button color="inherit">Login</Button>
+        <Link className={"header-link"} to={"/login"}>
+          <Button color="inherit">Login</Button>
+        </Link>
       </Toolbar>
     </AppBar>
   );

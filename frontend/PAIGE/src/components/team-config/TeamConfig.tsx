@@ -20,21 +20,6 @@ export default function TeamConfig() {
   const [disabledLegends, setDisabledLegends] = useState(false);
   const [legendsValue, setLegendsValue] = useState("no");
 
-  // const handleChange = (event: React.ChangeEvent) => {
-  //   console.log("Using Little Cup BEFORE change:", usingLittleCup);
-  //   console.log("Legends disabled BEFORE change:", disabledLegends);
-  //   console.log("Legends value BEFORE change:", legendsValue);
-  //
-  //   debugger;
-  //   setUsingLittleCup(event.target.value);
-  //   setDisabledLegends(usingLittleCup !== "yes");
-  //   usingLittleCup === "yes" ? setLegendsValue("no") : setLegendsValue("yes");
-  //
-  //   console.log("Using Little Cup after change:", usingLittleCup);
-  //   console.log("Legends disabled after change:", disabledLegends);
-  //   console.log("Legends value after change:", legendsValue);
-  // };
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newLCValue = event.target.value;
 
@@ -201,7 +186,7 @@ export default function TeamConfig() {
               <RadioGroup
                 row
                 name="team-composition"
-                // defaultValue="balanced"
+                defaultValue="balanced"
                 style={{ justifyContent: "center", alignItems: "center" }}
               >
                 <FormControlLabel
