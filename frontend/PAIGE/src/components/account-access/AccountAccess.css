@@ -7,3 +7,13 @@
     display: flex;
     flex-direction: column;
 }
+
+.dividing-line {
+    border-bottom: 1px solid lightgray /*var(--text)*/;
+    width: 100%;
+    margin: 50px auto 100px auto;
+}
+
+.link-style {
+    color: lightgray;
+}
