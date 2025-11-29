@@ -8,6 +8,10 @@
     flex-direction: column;
 }
 
+.input {
+    width: 100%;
+}
+
 .dividing-line {
     border-bottom: 1px solid lightgray /*var(--text)*/;
     width: 100%;

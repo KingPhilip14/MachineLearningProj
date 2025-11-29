@@ -35,30 +35,34 @@ export default function Login() {
               Log in to PAIGE to access your saved teams!
             </Typography>
 
-            <TextField
-              required
-              id="username"
-              label="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              style={{ margin: "30px 50px 30px 50px" }}
-              sx={{
-                fieldset: { borderColor: "var(--primary)" },
-              }}
-            />
-            <TextField
-              required
-              id="outlined-password-input"
-              label="Password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="current-password"
-              style={{ margin: "30px 50px 30px 50px" }}
-              sx={{
-                fieldset: { borderColor: "var(--primary)" },
-              }}
-            />
+            <div>
+              <TextField
+                required
+                id="username"
+                label="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                style={{ margin: "30px 50px 30px 50px" }}
+                sx={{
+                  fieldset: { borderColor: "var(--primary)" },
+                }}
+              />
+            </div>
+            <div>
+              <TextField
+                required
+                id="outlined-password-input"
+                label="Password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+                style={{ margin: "30px 50px 30px 50px" }}
+                sx={{
+                  fieldset: { borderColor: "var(--primary)" },
+                }}
+              />
+            </div>
             <div>
               <Button
                 variant={"outlined"}

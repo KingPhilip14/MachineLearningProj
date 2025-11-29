@@ -1,9 +1,113 @@
-import { Typography } from "@mui/material";
+import "./AccountAccess.css";
+import { TextField, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import { useState } from "react";
 
 export default function Register() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   return (
     <>
-      <Typography>This is the registration page</Typography>
+      <div className={"page-container"}>
+        <Card
+          className="account-card"
+          sx={{
+            background: "var(--rgba-gradient)",
+            minHeight: "80vh",
+          }}
+        >
+          <CardContent style={{ width: "80%vw", height: "80%vh" }}>
+            <Typography
+              variant={"h3"}
+              sx={{
+                textAlign: "center",
+                color: "var(--text)",
+                margin: "40px 20px 20px 20px",
+              }}
+            >
+              Register
+            </Typography>
+            <Typography variant="h6" style={{ margin: "40px 20px 40px 20px" }}>
+              Create an account to save teams and access them!
+            </Typography>
+
+            <div>
+              <TextField
+                required
+                id="username"
+                label="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                style={{ margin: "30px 50px 30px 50px" }}
+                sx={{
+                  fieldset: { borderColor: "var(--primary)" },
+                }}
+              />
+            </div>
+            <div>
+              <TextField
+                required
+                id="outlined-password-input"
+                label="Password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+                style={{ margin: "30px 50px 30px 50px" }}
+                sx={{
+                  fieldset: { borderColor: "var(--primary)" },
+                }}
+              />
+            </div>
+            <div>
+              <TextField
+                required
+                id="outlined-password-input"
+                label="Confirm Password"
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                autoComplete="confirm-password"
+                style={{ margin: "30px 50px 30px 50px" }}
+                sx={{
+                  fieldset: { borderColor: "var(--primary)" },
+                }}
+              />
+            </div>
+            <div>
+              <Button
+                variant={"outlined"}
+                size={"large"}
+                sx={{
+                  borderColor: "var(--primary)",
+                  color: "var(--text)",
+                  margin: "40px 30px 40px 30px",
+                  padding: "15px 30px 15px 30px",
+                }}
+              >
+                Register
+              </Button>
+            </div>
+
+            <div className={"dividing-line"}></div>
+
+            <div>
+              <Typography>
+                Already have an account? {""}
+                <Link className={"link-style"} to={"/login"}>
+                  Log in
+                </Link>{" "}
+                to your account instead!
+              </Typography>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </>
   );
 }
