@@ -1,6 +1,5 @@
 import Card from "@mui/material/Card";
 import LinearGradText from "../LinearGradText.tsx";
-import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import {
   CardActions,
@@ -14,6 +13,7 @@ import {
 import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import React, { useState } from "react";
+import { SelectedGenCard } from "../SelectedGenCard.tsx";
 
 export default function TeamConfig() {
   const [usingLittleCup, setUsingLittleCup] = useState("no");
@@ -53,27 +53,7 @@ export default function TeamConfig() {
   return (
     <>
       <div className={"page-container"}>
-        <ConfigCard className={"text-card"} style={{ flexDirection: "column" }}>
-          <CardContent>
-            <Typography
-              variant="h5"
-              style={{ textAlign: "center", margin: 0, lineHeight: 1.4 }}
-            >
-              Selected generation: [generation #]
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Link to={"/"}>
-              <Button
-                variant={"outlined"}
-                size={"large"}
-                sx={{ borderColor: "var(--text)", color: "var(--text)" }}
-              >
-                Back
-              </Button>
-            </Link>
-          </CardActions>
-        </ConfigCard>
+        <SelectedGenCard selectedGen={"Random gen"} backPage={"/"} />
 
         <Typography className="text">
           Configure your team preferences!

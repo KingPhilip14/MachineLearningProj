@@ -17,10 +17,12 @@
     "@mui/material": "^7.3.4",
     "@mui/styled-engine": "^7.3.3",
     "bootstrap": "^5.3.8",
+    "framer-motion": "^12.23.24",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.5",
     "react-text-gradients": "^1.0.2",
+    "react-transition-group": "^4.4.5",
     "styled-components": "^6.1.19",
     "use-local-storage": "^3.0.0"
   },
