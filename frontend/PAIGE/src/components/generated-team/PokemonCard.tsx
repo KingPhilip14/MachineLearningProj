@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import { Box, CardMedia, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import CardContent from "@mui/material/CardContent";
 
 export default function PokemonCard() {
@@ -101,58 +102,60 @@ export default function PokemonCard() {
 
   return (
     <>
-      <ul>
+      <Grid container spacing={2} justifyContent={"center"}>
         {Object.values(pkmnTeam).map((pkmn) => (
-          <PkmnCard
-            key={pkmn.name.toLowerCase()}
-            sx={{
-              fontSize: "1rem",
-              margin: "45px",
-              border: 1,
-              borderStyle: "solid",
-              borderColor: "var(--text)",
-            }}
-          >
-            <CardMedia
-              component="img"
+          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={pkmn.name.toLowerCase()}>
+            <PkmnCard
               sx={{
-                width: "128px",
-                height: "128px",
-                objectFit: "contain",
+                fontSize: "1rem",
+                margin: "45px",
                 border: 1,
-                borderRadius: "30px",
+                borderStyle: "solid",
                 borderColor: "var(--text)",
-                boxShadow: "1px 1px 5px var(--box-shadow)",
               }}
-              image={`/pokemon_sprites/${pkmn.name.toLowerCase()}-sprite.png`}
-              alt={pkmn.name + " sprite"}
-            />
-            <CardContent>
-              <Box>
-                <Typography component="div" variant="h5">
-                  {pkmn.name}
-                  {Types(pkmn.type_1, pkmn.type_2)}
-                </Typography>
-              </Box>
-
-              <Box
+            >
+              <CardMedia
+                component="img"
                 sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
+                  width: "128px",
+                  objectFit: "contain",
+                  border: 1,
+                  borderRadius: "30px",
+                  borderColor: "var(--text)",
+                  boxShadow: "1px 1px 5px var(--box-shadow)",
                 }}
-              >
-                <Typography>HP: {pkmn.hp}</Typography>
-                <Typography>Attack: {pkmn.attack}</Typography>
-                <Typography>Def: {pkmn.defense}</Typography>
-                <Typography>Sp. Atk: {pkmn["special-attack"]}</Typography>
-                <Typography>Sp. Def: {pkmn["special-defense"]}</Typography>
-                <Typography>Speed: {pkmn.speed}</Typography>
-              </Box>
-            </CardContent>
-          </PkmnCard>
+                image={`/pokemon_sprites/${pkmn.name.toLowerCase()}-sprite.png`}
+                alt={pkmn.name + " sprite"}
+              />
+              <CardContent>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Typography sx={{ marginRight: "10px" }} variant="h5">
+                    {pkmn.name}
+                  </Typography>
+                  {Types(pkmn.type_1, pkmn.type_2)}
+                </Box>
+
+                <Box
+                  sx={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    rowGap: "5px",
+                    columnGap: "15px",
+                  }}
+                >
+                  {/*The order allows for it appear in the way desired*/}
+                  <Typography>HP: {pkmn.hp}</Typography>
+                  <Typography>Sp. Atk: {pkmn["special-attack"]}</Typography>
+                  <Typography>Attack: {pkmn.attack}</Typography>
+                  <Typography>Sp. Def: {pkmn["special-defense"]}</Typography>
+                  <Typography>Def: {pkmn.defense}</Typography>
+                  <Typography>Speed: {pkmn.speed}</Typography>
+                </Box>
+              </CardContent>
+            </PkmnCard>
+          </Grid>
         ))}
-      </ul>
+      </Grid>
     </>
   );
 }
