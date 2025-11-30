@@ -14,6 +14,8 @@ export default function PokemonCard() {
       "special-defense": 75,
       speed: 80,
       abilities: ["ability #1", "ability #2"],
+      type_1: "psychic",
+      type_2: "",
     },
     Bulbasaur: {
       name: "Bulbasaur",
@@ -24,6 +26,8 @@ export default function PokemonCard() {
       "special-defense": 65,
       speed: 50,
       abilities: ["ability #1", "ability #2"],
+      type_1: "grass",
+      type_2: "poison",
     },
     Charizard: {
       name: "Charizard",
@@ -34,6 +38,8 @@ export default function PokemonCard() {
       "special-defense": 85,
       speed: 80,
       abilities: ["ability #1", "ability #2"],
+      type_1: "fire",
+      type_2: "flying",
     },
     Machop: {
       name: "Machop",
@@ -44,6 +50,8 @@ export default function PokemonCard() {
       "special-defense": 45,
       speed: 60,
       abilities: ["ability #1", "ability #2"],
+      type_1: "fighting",
+      type_2: "",
     },
     Spinda: {
       name: "Spinda",
@@ -54,6 +62,8 @@ export default function PokemonCard() {
       "special-defense": 60,
       speed: 60,
       abilities: ["ability #1", "ability #2"],
+      type_1: "normal",
+      type_2: "",
     },
     Gengar: {
       name: "Gengar",
@@ -64,6 +74,8 @@ export default function PokemonCard() {
       "special-defense": 90,
       speed: 110,
       abilities: ["ability #1", "ability #2"],
+      type_1: "ghost",
+      type_2: "poison",
     },
   };
 
@@ -73,6 +85,19 @@ export default function PokemonCard() {
     color: "var(--text)",
     boxShadow: "3px 3px 8px var(--box-shadow)",
   });
+
+  function Types(type_1: string, type_2: string) {
+    if (type_2 !== "") {
+      return (
+        <>
+          <img src={`/types_sprites/${type_1}.png`} alt={`${type_1}`} />
+          <img src={`/types_sprites/${type_2}.png`} alt={`${type_2}`} />
+        </>
+      );
+    }
+
+    return <img src={`/types_sprites/${type_1}.png`} alt={`${type_1}`} />;
+  }
 
   return (
     <>
@@ -90,14 +115,25 @@ export default function PokemonCard() {
           >
             <CardMedia
               component="img"
-              sx={{ width: "128px", height: "128px", objectFit: "contain" }}
+              sx={{
+                width: "128px",
+                height: "128px",
+                objectFit: "contain",
+                border: 1,
+                borderRadius: "30px",
+                borderColor: "var(--text)",
+                boxShadow: "1px 1px 5px var(--box-shadow)",
+              }}
               image={`/pokemon_sprites/${pkmn.name.toLowerCase()}-sprite.png`}
               alt={pkmn.name + " sprite"}
             />
             <CardContent>
-              <Typography component="div" variant="h5">
-                {pkmn.name}
-              </Typography>
+              <Box>
+                <Typography component="div" variant="h5">
+                  {pkmn.name}
+                  {Types(pkmn.type_1, pkmn.type_2)}
+                </Typography>
+              </Box>
 
               <Box
                 sx={{
@@ -106,13 +142,12 @@ export default function PokemonCard() {
                   justifyContent: "space-between",
                 }}
               >
-                <Typography component="div">
-                  HP: {pkmn.hp} Attack: {pkmn.attack} Def: {pkmn.defense}
-                </Typography>
-                <Typography component="div">
-                  Sp. Atk: {pkmn["special-attack"]} Sp. Def:
-                  {pkmn["special-defense"]} Speed: {pkmn.speed}
-                </Typography>
+                <Typography>HP: {pkmn.hp}</Typography>
+                <Typography>Attack: {pkmn.attack}</Typography>
+                <Typography>Def: {pkmn.defense}</Typography>
+                <Typography>Sp. Atk: {pkmn["special-attack"]}</Typography>
+                <Typography>Sp. Def: {pkmn["special-defense"]}</Typography>
+                <Typography>Speed: {pkmn.speed}</Typography>
               </Box>
             </CardContent>
           </PkmnCard>

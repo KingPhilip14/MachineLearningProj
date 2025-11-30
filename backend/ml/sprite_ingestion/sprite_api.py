@@ -51,7 +51,8 @@ class SpriteApi(BaseApi):
 
             async with aiohttp.ClientSession() as session:
                 # collect the data from the endpoint for each Pokémon
-                api_data: list[dict] = await asyncio.gather(*[self.fetch_json(session, url) for url in pokemon_data_urls])
+                api_data: list[dict] = await asyncio.gather(
+                    *[self.fetch_json(session, url) for url in pokemon_data_urls])
 
             # store all the sprite URLs in the list; this includes the regular and shiny front sprites
             for pokemon_data in api_data:
@@ -178,7 +179,7 @@ class SpriteApi(BaseApi):
             type_data: dict = requests.get(f'{self.base_url}/type/{count}').json()
 
             img_file_name: str = type_data['name'] + '.png'
-            sprite_url: str = type_data['sprites']['generation-viii']['sword-shield']['name_icon']
+            sprite_url: str = type_data['sprites']['generation-vi']['omega-ruby-alpha-sapphire']['name_icon']
 
             image = Image.open(requests.get(sprite_url, stream=True).raw).convert('RGBA')
             print(f'Downloading sprite for "{img_file_name}" type from {sprite_url}')
