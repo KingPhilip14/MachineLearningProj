@@ -9,16 +9,16 @@ def create_all_tables(conn, cursor):
     """
     try:
         # create the tables
-        cursor.execute(create_account_table(cursor))
-        cursor.execute(create_team_table(cursor))
-        cursor.execute(create_pokemon_table(cursor))
-        cursor.execute(create_movepool_table(cursor))
-        cursor.execute(create_move_table(cursor))
+        create_account_table(cursor)
+        create_team_table(cursor)
+        create_pokemon_table(cursor)
+        create_movepool_table(cursor)
+        create_move_table(cursor)
         # cursor.execute(create_movepool_collection_table())
-        cursor.execute(create_pokemon_in_team_table(cursor))
-        cursor.execute(create_ability_table(cursor))
-        cursor.execute(create_moveset_table(cursor))
-        cursor.execute(create_pokemon_ability_table(cursor))
+        create_pokemon_in_team_table(cursor)
+        create_ability_table(cursor)
+        create_moveset_table(cursor)
+        create_pokemon_ability_table(cursor)
         conn.commit()
 
         print('All tables were created successfully.')
@@ -164,7 +164,8 @@ def create_pokemon_in_team_table(cursor) -> None:
             pokemon_id INTEGER NOT NULL REFERENCES pokemon(pokemon_id),
             chosen_ability_id INTEGER NOT NULL REFERENCES ability(ability_id),
             moveset_id INTEGER NOT NULL REFERENCES moveset(move_id),
-            nickname VARCHAR(30) NOT NULL);
+            nickname VARCHAR(30) NOT NULL,
+            is_shiny BOOLEAN NOT NULL);
         """
 
         cursor.execute(insert)
@@ -179,6 +180,7 @@ def create_pokemon_ability_table(cursor) -> None:
         CREATE TABLE IF NOT EXISTS pokemon_abilities(
             pokemon_id INTEGER NOT NULL REFERENCES pokemon(pokemon_id),
             ability_id INTEGER NOT NULL REFERENCES ability(ability_id),
+            is_hidden BOOLEAN NOT NULL DEFAULT FALSE,
             PRIMARY KEY (pokemon_id, ability_id));
         """
 

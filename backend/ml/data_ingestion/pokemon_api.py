@@ -284,7 +284,9 @@ class PokemonApi(BaseApi):
         to_add: dict[str, dict]
 
         # collecting the desired data from each move from the data
-        for ability in ability_data:
+        for index, ability in enumerate(ability_data):
+            is_hidden: bool = abilities[index]['is_hidden']
+
             try:
                 to_add = {
                     ability['name']:
@@ -297,6 +299,7 @@ class PokemonApi(BaseApi):
                                             if entry['language']['name'] == 'en'][0],
                             'flavor_text': [entry['flavor_text'] for entry in ability['flavor_text_entries']
                                             if entry['language']['name'] == 'en'][0],
+                            'is_hidden': is_hidden,
                         }
                 }
 
@@ -314,6 +317,7 @@ class PokemonApi(BaseApi):
                             'effect_desc': '',
                             'flavor_text': [entry['flavor_text'] for entry in ability['flavor_text_entries']
                                             if entry['language']['name'] == 'en'][0],
+                            'is_hidden': is_hidden,
                         }
                 }
 

@@ -1,4 +1,4 @@
-from backend.database.db_utils import create_conn
+from backend.database.db_utils import create_conn, __create_database
 from backend.database.create_tables import create_all_tables
 from backend.database.insert_data import *
 

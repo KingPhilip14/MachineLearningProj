@@ -3,9 +3,6 @@ import psycopg2 as pg2
 from tqdm import tqdm
 from config import ABILITY_FILE_DIR, MOVE_FILE_DIR, NATIONAL_FILE_DIR
 
-prepared_var: str = 'statement'
-prepared_statement: str = f'PREPARE {prepared_var} AS'
-
 
 def insert_abilities(conn, cursor) -> None:
     """
@@ -127,10 +124,10 @@ def insert_pokemon(conn, cursor) -> None:
                       """
 
         try:
-            cursor = conn.cursor()
             cursor.execute(insert, (pokemon_id, pokemon_name, pokemon_role,
                                     type_1, type_2, bst, hp, attack, defense, sp_attack,
                                     sp_defense, speed, is_legend_or_mythical, weaknesses, resistances))
+            conn.commit()
         except pg2.Error as e:
             print(e)
 
@@ -169,16 +166,65 @@ def insert_movepools(conn, cursor) -> None:
 
             pkmn_move_pairs.append((pokemon_id, move_id))
 
-    for pair in pkmn_move_pairs:
+    success_inserts: int = 0
+
+    for pair in tqdm(pkmn_move_pairs):
         insert: str = """
                       INSERT INTO movepool
                       VALUES (%s, %s);
                       """
 
         try:
-            cursor = conn.cursor()
             cursor.execute(insert, (pair[0], pair[1]))
+            conn.commit()
+            success_inserts += 1
         except pg2.Error as e:
             print(e)
 
-    print('Successfully inserted movepools from every Pokemon in the database.\n')
+    print(f'Successfully inserted {success_inserts}/{len(pkmn_move_pairs)} ({(success_inserts / len(data)) * 100}%) '
+          f'Pokemon-move pairs for every Pokemon in the database.\n')
+
+
+def insert_pokemon_abilities(conn, cursor) -> None:
+    """
+    Inserts the abilities that correspond to every Pokemon into the database.
+    """
+    data: dict
+
+    # read in the JSON file
+    with open(NATIONAL_FILE_DIR, 'r') as f:
+        data: dict = json.load(f)
+        f.close()
+
+    print(f'Inserting the abilities that correspond to every Pokemon in the database...')
+
+    pkmn_ability_info: list[tuple[int, int, bool]] = list()
+
+    # iterate over every Pokemon
+    for pokemon in tqdm(data):
+        pokemon_id: int = data[pokemon]['id']
+
+        for ability in data[pokemon]['abilities']:
+            ability_id: int = ability['id']
+            is_hidden: bool = ability['is_hidden']
+
+            pkmn_ability_info.append((pokemon_id, ability_id, is_hidden))
+
+    success_inserts: int = 0
+
+    for info in tqdm(pkmn_ability_info):
+        insert: str = """
+                      INSERT INTO pokemon_abilities
+                      VALUES (%s, %s, %s);
+                      """
+
+        try:
+            cursor.execute(insert, (info[0], info[1]), info[2])
+            conn.commit()
+            success_inserts += 1
+        except pg2.Error as e:
+            print(e)
+
+    print(f'Successfully inserted {success_inserts}/{len(pkmn_ability_info)} ({(success_inserts / len(data)) * 100}%) '
+          f'Pokemon abilities pairs for every Pokemon in the database.\n')
+
