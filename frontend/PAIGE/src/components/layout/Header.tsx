@@ -41,6 +41,9 @@ export default function Header({ isDark, setIsDark }) {
         <Link className={"header-link"} to={"/login"}>
           <Button color="inherit">Login</Button>
         </Link>
+        <Link className={"header-link"} to={"/register"}>
+          <Button color="inherit">Register</Button>
+        </Link>
       </Toolbar>
     </AppBar>
   );

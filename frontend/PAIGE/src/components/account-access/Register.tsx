@@ -19,6 +19,7 @@ export default function Register() {
           sx={{
             background: "var(--rgba-gradient)",
             minHeight: "80vh",
+            marginBottom: "15vh",
           }}
         >
           <CardContent style={{ width: "80%vw", height: "80%vh" }}>
