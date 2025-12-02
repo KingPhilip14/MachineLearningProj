@@ -7,27 +7,22 @@ def create_all_tables(conn, cursor):
     """
     Creates all the tables for the database.
     """
-    try:
-        # create the tables
-        create_account_table(cursor)
-        create_team_table(cursor)
-        create_pokemon_table(cursor)
-        create_movepool_table(cursor)
-        create_move_table(cursor)
-        # cursor.execute(create_movepool_collection_table())
-        create_pokemon_in_team_table(cursor)
-        create_ability_table(cursor)
-        create_moveset_table(cursor)
-        create_pokemon_ability_table(cursor)
-        conn.commit()
+    # create the tables
+    create_account_table(conn, cursor)
+    create_team_table(conn, cursor)
+    create_pokemon_table(conn, cursor)
+    create_ability_table(conn, cursor)
+    create_pokemon_ability_table(conn, cursor)
+    create_move_table(conn, cursor)
+    create_movepool_table(conn, cursor)
+    # cursor.execute(create_movepool_collection_table())
+    create_moveset_table(conn, cursor)
+    create_pokemon_in_team_table(conn, cursor)
 
-        print('All tables were created successfully.')
-    except pg2.Error as e:
-        filename: str = os.path.basename(__file__)
-        print_error_msg(filename, create_all_tables.__name__, e)
+    print('All tables were created successfully.\n')
 
 
-def create_account_table(cursor) -> None:
+def create_account_table(conn, cursor) -> None:
     try:
         insert: str = """
         CREATE TABLE IF NOT EXISTS account (
@@ -37,12 +32,13 @@ def create_account_table(cursor) -> None:
         """
         
         cursor.execute(insert)
+        conn.commit()
     except pg2.Error as e:
         filename: str = os.path.basename(__file__)
         print_error_msg(filename, create_all_tables.__name__, e)
     
 
-def create_team_table(cursor) -> None:
+def create_team_table(conn, cursor) -> None:
     try:
         insert: str = """
         CREATE TABLE IF NOT EXISTS team(
@@ -56,18 +52,19 @@ def create_team_table(cursor) -> None:
         """
 
         cursor.execute(insert)
+        conn.commit()
     except pg2.Error as e:
         filename: str = os.path.basename(__file__)
         print_error_msg(filename, create_all_tables.__name__, e)
 
 
-def create_pokemon_table(cursor) -> None:
+def create_pokemon_table(conn, cursor) -> None:
     try:
         insert: str = """
         CREATE TABLE IF NOT EXISTS pokemon(
             pokemon_id INTEGER PRIMARY KEY,
-            pokemon_name VARCHAR(30) NOT NULL,
-            pokemon_role VARCHAR(30) NOT NULL,
+            pokemon_name VARCHAR(50) NOT NULL,
+            pokemon_role VARCHAR(50) NOT NULL,
             type_1 VARCHAR(10) NOT NULL,
             type_2 VARCHAR(10) NOT NULL,
             bst INTEGER NOT NULL,
@@ -83,17 +80,18 @@ def create_pokemon_table(cursor) -> None:
         """
 
         cursor.execute(insert)
+        conn.commit()
     except pg2.Error as e:
         filename: str = os.path.basename(__file__)
         print_error_msg(filename, create_all_tables.__name__, e)
 
 
-def create_move_table(cursor) -> None:
+def create_move_table(conn, cursor) -> None:
     try:
         insert: str = """
         CREATE TABLE IF NOT EXISTS move(
             move_id INTEGER PRIMARY KEY,
-            move_name VARCHAR(30) NOT NULL,
+            move_name VARCHAR(50) NOT NULL,
             damage_class VARCHAR(30) NOT NULL,
             move_type VARCHAR(10) NOT NULL,
             power INTEGER,
@@ -103,12 +101,13 @@ def create_move_table(cursor) -> None:
         """
 
         cursor.execute(insert)
+        conn.commit()
     except pg2.Error as e:
         filename: str = os.path.basename(__file__)
         print_error_msg(filename, create_all_tables.__name__, e)
 
 
-def create_movepool_table(cursor) -> None:
+def create_movepool_table(conn, cursor) -> None:
     try:
         insert: str = """
         CREATE TABLE IF NOT EXISTS movepool(
@@ -118,44 +117,46 @@ def create_movepool_table(cursor) -> None:
         """
 
         cursor.execute(insert)
+        conn.commit()
     except pg2.Error as e:
         filename: str = os.path.basename(__file__)
         print_error_msg(filename, create_all_tables.__name__, e)
 
 
-def create_ability_table(cursor) -> None:
+def create_ability_table(conn, cursor) -> None:
     try:
         insert: str = """
         CREATE TABLE IF NOT EXISTS ability(
             ability_id INTEGER PRIMARY KEY,
-            ability_name VARCHAR(30) NOT NULL UNIQUE,
-            effect_desc VARCHAR(500) NOT NULL,
-            short_desc VARCHAR(500) NOT NULL,
-            flavor_text VARCHAR(500) NOT NULL);
+            ability_name VARCHAR(50) NOT NULL UNIQUE,
+            effect_desc VARCHAR(3000) NOT NULL,
+            short_desc VARCHAR(3000) NOT NULL,
+            flavor_text VARCHAR(3000) NOT NULL);
         """
 
         cursor.execute(insert)
+        conn.commit()
     except pg2.Error as e:
         filename: str = os.path.basename(__file__)
         print_error_msg(filename, create_all_tables.__name__, e)
 
 
-def create_moveset_table(cursor) -> None:
+def create_moveset_table(conn, cursor) -> None:
     try:
         insert: str = """
         CREATE TABLE IF NOT EXISTS moveset(
             moveset_id SERIAL PRIMARY KEY,
-            pit_id INTEGER NOT NULL REFERENCES pokemon_in_team(pit_id),
             move_id INTEGER NOT NULL REFERENCES move(move_id));
         """
 
         cursor.execute(insert)
+        conn.commit()
     except pg2.Error as e:
         filename: str = os.path.basename(__file__)
         print_error_msg(filename, create_all_tables.__name__, e)
 
 
-def create_pokemon_in_team_table(cursor) -> None:
+def create_pokemon_in_team_table(conn, cursor) -> None:
     try:
         insert: str = """
         CREATE TABLE IF NOT EXISTS pokemon_in_team(
@@ -163,18 +164,19 @@ def create_pokemon_in_team_table(cursor) -> None:
             team_id INTEGER NOT NULL REFERENCES team(team_id) ON DELETE CASCADE,
             pokemon_id INTEGER NOT NULL REFERENCES pokemon(pokemon_id),
             chosen_ability_id INTEGER NOT NULL REFERENCES ability(ability_id),
-            moveset_id INTEGER NOT NULL REFERENCES moveset(move_id),
+            moveset_id INTEGER NOT NULL REFERENCES moveset(moveset_id),
             nickname VARCHAR(30) NOT NULL,
             is_shiny BOOLEAN NOT NULL);
         """
 
         cursor.execute(insert)
+        conn.commit()
     except pg2.Error as e:
         filename: str = os.path.basename(__file__)
         print_error_msg(filename, create_all_tables.__name__, e)
 
 
-def create_pokemon_ability_table(cursor) -> None:
+def create_pokemon_ability_table(conn, cursor) -> None:
     try:
         insert: str = """
         CREATE TABLE IF NOT EXISTS pokemon_abilities(
@@ -185,6 +187,7 @@ def create_pokemon_ability_table(cursor) -> None:
         """
 
         cursor.execute(insert)
+        conn.commit()
     except pg2.Error as e:
         filename: str = os.path.basename(__file__)
         print_error_msg(filename, create_all_tables.__name__, e)

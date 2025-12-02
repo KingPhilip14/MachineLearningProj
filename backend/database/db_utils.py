@@ -6,23 +6,23 @@ from dotenv import load_dotenv
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from psycopg2 import sql
 
+load_dotenv()
+db_params: dict = {
+    'host': os.getenv('DB_HOST'),
+    'dbname': os.getenv('DB_NAME'),
+    'user': os.getenv('DB_USER'),
+    'password': os.getenv('DB_PASSWORD'),
+    'port': os.getenv('DB_PORT'),
+}
+
 
 def create_conn():
     """
     Creates the database connection and returns it. The database parameters are read from the .env file.
     """
-    print('Creating the database...')
-    load_dotenv()
+    print('Creating the database connection...')
 
     try:
-        db_params: dict = {
-            'host': os.getenv('DB_HOST'),
-            'dbname': os.getenv('DB_NAME'),
-            'user': os.getenv('DB_USER'),
-            'password': os.getenv('DB_PASSWORD'),
-            'port': os.getenv('DB_PORT'),
-        }
-
         print('Database parameters loaded successfully.')
 
         conn = pg2.connect(**db_params)
@@ -31,22 +31,20 @@ def create_conn():
 
         print('Database connection established.\n')
 
-        __create_database(conn, db_params['dbname'])
-
-        print('Database created successfully.\n')
-
         return conn
     except pg2.Error as err:
         print(f"An error occurred while connecting to PostgreSQL: {err}\nExiting the program...")
         exit(1)
 
 
-def __create_database(conn, db_name: str):
+def create_database(conn):
+    db_name: str = db_params['dbname']
     cursor = conn.cursor()
-    create_query =  sql.SQL('CREATE DATABASE {}').format(sql.Identifier(db_name))
+    create_query = sql.SQL('CREATE DATABASE {}').format(sql.Identifier(db_name))
 
     try:
-        cursor.execute(create_query, (db_name, ))
+        cursor.execute(create_query, (db_name,))
+        print('Database created successfully.\n')
     except pg2.errors.DuplicateDatabase:
         print(f'Database "{db_name}" already exists. A new one will not be created.')
     except pg2.Error as err:

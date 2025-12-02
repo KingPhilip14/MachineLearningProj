@@ -3,6 +3,18 @@ import psycopg2 as pg2
 from tqdm import tqdm
 from config import ABILITY_FILE_DIR, MOVE_FILE_DIR, NATIONAL_FILE_DIR
 
+"""
+FROM STACKOVERFLOW TO INSERT DICT AS JSONB:
+
+`cur.execute("INSERT INTO product(store_id, url, price, charecteristics, color, dimensions) 
+VALUES (%s, %s, %s, %s, %s, %s)", (1,  'http://www.google.com', '$20', json.dumps(thedictionary), 'red', '8.5x11'))
+
+'That will solve your problem. However, you really should be storing keys and values in their own separate columns. 
+To retrieve the dictionary, do:'
+`cur.execute('select charecteristics from product where store_id = 1')`
+`dictionary = json.loads(cur.fetchone()[0])`
+"""
+
 
 def insert_abilities(conn, cursor) -> None:
     """
@@ -126,8 +138,10 @@ def insert_pokemon(conn, cursor) -> None:
         try:
             cursor.execute(insert, (pokemon_id, pokemon_name, pokemon_role,
                                     type_1, type_2, bst, hp, attack, defense, sp_attack,
-                                    sp_defense, speed, is_legend_or_mythical, weaknesses, resistances))
+                                    sp_defense, speed, is_legend_or_mythical, json.dumps(weaknesses),
+                                    json.dumps(resistances)))
             conn.commit()
+            success_inserts += 1
         except pg2.Error as e:
             print(e)
 
@@ -157,12 +171,9 @@ def insert_movepools(conn, cursor) -> None:
 
         # iterate over every move in the current Pokemon's movepool
         for move_data in data[pokemon]['movepool']:
-            print(move_data)
-            input('>')
-
-            key: str = move_data.keys()[0]
+            key: str = list(move_data.keys())[0]
             subdata: dict = move_data[key]
-            move_id: int = data[subdata]['id']
+            move_id: int = subdata['id']
 
             pkmn_move_pairs.append((pokemon_id, move_id))
 
@@ -181,8 +192,9 @@ def insert_movepools(conn, cursor) -> None:
         except pg2.Error as e:
             print(e)
 
-    print(f'Successfully inserted {success_inserts}/{len(pkmn_move_pairs)} ({(success_inserts / len(data)) * 100}%) '
-          f'Pokemon-move pairs for every Pokemon in the database.\n')
+    print(
+        f'Successfully inserted {success_inserts}/{len(pkmn_move_pairs)} ({(success_inserts / len(pkmn_move_pairs)) * 100}%) '
+        f'Pokemon-move pairs for every Pokemon in the database.\n')
 
 
 def insert_pokemon_abilities(conn, cursor) -> None:
@@ -205,8 +217,9 @@ def insert_pokemon_abilities(conn, cursor) -> None:
         pokemon_id: int = data[pokemon]['id']
 
         for ability in data[pokemon]['abilities']:
-            ability_id: int = ability['id']
-            is_hidden: bool = ability['is_hidden']
+            key: str = list(ability.keys())[0]
+            ability_id: int = ability[key]['id']
+            is_hidden: bool = ability[key]['is_hidden']
 
             pkmn_ability_info.append((pokemon_id, ability_id, is_hidden))
 
@@ -219,12 +232,12 @@ def insert_pokemon_abilities(conn, cursor) -> None:
                       """
 
         try:
-            cursor.execute(insert, (info[0], info[1]), info[2])
+            cursor.execute(insert, (info[0], info[1], info[2]))
             conn.commit()
             success_inserts += 1
         except pg2.Error as e:
             print(e)
 
-    print(f'Successfully inserted {success_inserts}/{len(pkmn_ability_info)} ({(success_inserts / len(data)) * 100}%) '
-          f'Pokemon abilities pairs for every Pokemon in the database.\n')
-
+    print(
+        f'Successfully inserted {success_inserts}/{len(pkmn_ability_info)} ({(success_inserts / len(pkmn_ability_info)) * 100}%) '
+        f'Pokemon abilities pairs for every Pokemon in the database.\n')
