@@ -47,10 +47,6 @@ class BaseApi:
                         print(
                             f'Attempting to fetch data from {url} again (attempts: {attempts}). Excluding trailing slash...')
                         return await self.__fetch(session, url[:-1], attempts)
-                    # elif attempts < 2 and (url[-1] != '/' and url[-1] != '\\'):
-                    #     print(
-                    #         f'Attempting to fetch data from {url} again (attempts: {attempts}). Adding trailing slash...')
-                    #     return await self.__fetch(session, url + '/', attempts)
 
                     print(f'Failed to fetch {url}: {e}')
                     return dict()
