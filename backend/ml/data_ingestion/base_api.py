@@ -44,11 +44,13 @@ class BaseApi:
                 except Exception as e:
                     # if on another attempt and the last url character is a slash, try again
                     if attempts < 2 and (url[-1] == '/' or url[-1] == '\\'):
-                        print(f'Attempting to fetch data from {url} again. Excluding trailing slash...')
+                        print(
+                            f'Attempting to fetch data from {url} again (attempts: {attempts}). Excluding trailing slash...')
                         return await self.__fetch(session, url[:-1], attempts)
-                    elif attempts < 2 and (url[-1] != '/' and url[-1] != '\\'):
-                        print(f'Attempting to fetch data from {url} again. Adding trailing slash...')
-                        return await self.__fetch(session, url + '/', attempts)
+                    # elif attempts < 2 and (url[-1] != '/' and url[-1] != '\\'):
+                    #     print(
+                    #         f'Attempting to fetch data from {url} again (attempts: {attempts}). Adding trailing slash...')
+                    #     return await self.__fetch(session, url + '/', attempts)
 
                     print(f'Failed to fetch {url}: {e}')
                     return dict()
