@@ -15,7 +15,6 @@ def create_all_tables(conn, cursor):
     create_pokemon_ability_table(conn, cursor)
     create_move_table(conn, cursor)
     create_movepool_table(conn, cursor)
-    # cursor.execute(create_movepool_collection_table())
     create_moveset_table(conn, cursor)
     create_pokemon_in_team_table(conn, cursor)
 
