@@ -3,7 +3,7 @@ from sqlalchemy import insert
 from backend.api.db import engine, SessionLocal
 from backend.api.schemas.create_account import CreateAccount
 from backend.api.models.account_table import account
-from passlib.hash import bcrypt
+from werkzeug.security import generate_password_hash
 
 app = FastAPI()
 
@@ -35,7 +35,7 @@ async def create_account(payload: CreateAccount):
 
     with engine.begin() as conn:
         row = conn.execute(stmt).fetchone()
-        
+
         if not row:
             raise HTTPException(status_code=400, detail="Account creation failed")
 
