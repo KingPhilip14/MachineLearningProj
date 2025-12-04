@@ -5,9 +5,9 @@ from backend.database.db_utils import print_error_msg
 
 def create_all_tables(conn, cursor):
     """
-    Creates all the tables for the database.
+    Creates all the models for the database.
     """
-    # create the tables
+    # create the models
     create_account_table(conn, cursor)
     create_team_table(conn, cursor)
     create_pokemon_table(conn, cursor)
@@ -18,7 +18,7 @@ def create_all_tables(conn, cursor):
     create_moveset_table(conn, cursor)
     create_pokemon_in_team_table(conn, cursor)
 
-    print('All tables were created successfully.\n')
+    print('All models were created successfully.\n')
 
 
 def create_account_table(conn, cursor) -> None:
