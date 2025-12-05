@@ -19,6 +19,7 @@ export default function Login() {
             background: "var(--rgba-gradient)",
             minHeight: "80vh",
             marginBottom: "15vh",
+            borderRadius: "30px",
           }}
         >
           <CardContent style={{ width: "80%vw", height: "80%vh" }}>

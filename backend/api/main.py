@@ -1,11 +1,20 @@
 from fastapi import FastAPI, HTTPException
 from sqlalchemy import insert
+from sqlalchemy.exc import IntegrityError
+from fastapi.middleware.cors import CORSMiddleware
 from backend.api.db import engine, SessionLocal
 from backend.api.schemas.create_account import CreateAccount
 from backend.api.models.account_table import account
 from werkzeug.security import generate_password_hash
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # for development only
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 # dependency to get DB session
@@ -23,7 +32,7 @@ async def root():
     return 'Hello world!'
 
 
-@app.post('/accounts')
+@app.post('/register')
 async def create_account(payload: CreateAccount):
     stmt = (
         insert(account)
@@ -33,13 +42,16 @@ async def create_account(payload: CreateAccount):
         )
     )
 
-    with engine.begin() as conn:
-        row = conn.execute(stmt).fetchone()
+    try:
+        with engine.begin() as conn:
+            row = conn.execute(stmt).fetchone()
+    except IntegrityError:
+        raise HTTPException(status_code=400, detail="Username already exists")
 
-        if not row:
-            raise HTTPException(status_code=400, detail="Account creation failed")
+    if not row:
+        raise HTTPException(status_code=400, detail="Username already exists")
 
-        return dict(row._mapping)
+    return dict(row._mapping)
 
 
 @app.get('/get_message')

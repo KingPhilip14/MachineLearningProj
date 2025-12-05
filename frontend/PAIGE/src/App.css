@@ -40,6 +40,11 @@
     margin: 14px;
 }
 
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
 @keyframes fade-in {
     from {
         opacity: 0;
