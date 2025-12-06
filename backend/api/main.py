@@ -1,5 +1,4 @@
 import os
-
 import bcrypt
 import uvicorn
 
@@ -10,9 +9,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from backend.api.db import engine, SessionLocal
 from backend.api.schemas.create_account import CreateAccount
 from backend.api.models.account_table import account
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-
+from backend.api.models.moveset_table import moveset
+from backend.api.models.pit_table import pit_table
+from backend.api.models.team_table import team
 from backend.api.schemas.get_account import GetAccount
+from backend.api.schemas.save_team import SaveTeam
 from backend.ml.learning.team_builder import TeamBuilder
 from config import POKEMON_DATA_DIR
 
@@ -24,8 +25,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
 
 
 # dependency to get DB session
@@ -99,16 +98,33 @@ async def generate_team(using_babies: bool, using_legends: bool, gen_file_name: 
     return team_json
 
 
-@app.get('/get_message')
+@app.post('/account/{account_id}/save-team/')
+async def save_team(account_id: int, payload: SaveTeam):
+    stmt = (
+        insert(team)
+        .values(account_id=account_id, team_name=payload.team_name, generation=payload.generation,
+                overlapping_weaknesses=payload.overlapping_weaknesses)
+        .returning(
+            team.c.account_id, team.c.team_name, team.c.generation, team.c.time_created,
+            team.c.last_time_used, team.c.overlapping_weaknesses
+        )
+    )
+
+    with engine.begin() as conn:
+        row = conn.execute(stmt).fetchone()
+
+    if not row:
+        raise HTTPException(status_code=400, detail="Something went wrong when saving the team")
+
+    return dict(row._mapping)
+
+
+@app.get('/get-message')
 async def read_root():
     return {'Message': 'Congrats! This is your API!'}
 
 
-@app.get('/get_message_param')
+@app.get('/get-message-param')
 def hello(name: str):
     # in URL, add "?name=<name_here>"
     return {'Message': f'Congrats, {name}! This is your API!'}
-
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)

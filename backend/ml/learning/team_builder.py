@@ -474,6 +474,11 @@ class TeamBuilder:
         team_json: dict = built_team_result[3]
 
         team_comments: str = self.get_team_synergy_desc(team_df, team_types)
+        all_weaknesses: Counter = self.get_team_weaknesses(team_types)
+
+        team_json.update({
+            'weaknesses': all_weaknesses,
+        })
 
         print(f'----- Generated Team -----\n\n' + '\n\n'.join(team_details))
         print(f'\nTeam Synergy Notes:\n{team_comments}')
@@ -490,6 +495,14 @@ class TeamBuilder:
         self.categorize()
 
         built_team_result: tuple[list[str], DataFrame, list[list[str]], dict] = self.build_team()
+        team_types: list[list[str]] = built_team_result[2]
+
+        all_weaknesses: Counter = self.get_team_weaknesses(team_types)
+
         team_json: dict = built_team_result[3]
+
+        team_json.update({
+            'weaknesses': all_weaknesses,
+        })
 
         return team_json

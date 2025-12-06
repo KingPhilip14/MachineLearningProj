@@ -39,14 +39,15 @@ def create_account_table(conn, cursor) -> None:
 
 def create_team_table(conn, cursor) -> None:
     try:
+
         insert: str = """
         CREATE TABLE IF NOT EXISTS team(
             team_id SERIAL PRIMARY KEY,
             account_id INTEGER NOT NULL REFERENCES account(account_id) ON DELETE CASCADE,
-            team_name VARCHAR(30) NOT NULL,
+            team_name VARCHAR(30) NOT NULL DEFAULT 'My team',
             generation varchar(20) NOT NULL,
-            time_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            last_time_used TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            time_created TIMESTAMP NOT NULL DEFAULT NOW(),
+            last_time_used TIMESTAMP NOT NULL DEFAULT NOW(),
             overlapping_weaknesses JSONB NOT NULL);
         """
 
@@ -162,10 +163,10 @@ def create_pokemon_in_team_table(conn, cursor) -> None:
             pit_id SERIAL PRIMARY KEY,
             team_id INTEGER NOT NULL REFERENCES team(team_id) ON DELETE CASCADE,
             pokemon_id INTEGER NOT NULL REFERENCES pokemon(pokemon_id),
-            chosen_ability_id INTEGER NOT NULL REFERENCES ability(ability_id),
+            chosen_ability_id INTEGER REFERENCES ability(ability_id),
             moveset_id INTEGER NOT NULL REFERENCES moveset(moveset_id),
-            nickname VARCHAR(30) NOT NULL,
-            is_shiny BOOLEAN NOT NULL);
+            nickname VARCHAR(30) NOT NULL DEFAULT '',
+            is_shiny BOOLEAN NOT NULL DEFAULT FALSE);
         """
 
         cursor.execute(insert)
