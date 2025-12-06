@@ -81,7 +81,9 @@ async def get_account(account_id: int):
     return dict(row._mapping)
 
 
-@app.post('/team')
+@app.post('/generate-team')
+async def generate_team():
+    ...
 
 
 @app.get('/get_message')

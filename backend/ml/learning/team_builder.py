@@ -247,7 +247,7 @@ class TeamBuilder:
 
         return weaknesses
 
-    def build_team(self) -> tuple[list[str], DataFrame, list[list[str]]]:
+    def build_team(self) -> tuple[list[str], DataFrame, list[list[str]], dict]:
         """
         Creates a team of Pokémon for the end user to use. The team is created based on the cluster roles and inputs
         from the user.
@@ -314,6 +314,9 @@ class TeamBuilder:
         # add the role the Pokémon will fulfill next to its name for the output
         team_with_details: list[str] = []
 
+        # create a dict that will be returned if export_json is true; used for API
+        json_export: dict = dict()
+
         # build a detailed string for each Pokémon in the generated team
         for name in team:
             role_row: DataFrame = self.df_encoded[self.df_encoded['name'] == name]
@@ -364,6 +367,23 @@ class TeamBuilder:
 
             team_with_details.append(details)
 
+            json_export.update({
+                name:
+                    {
+                        'name': name,
+                        'role': role,
+                        'role_description': get_role_description(role),
+                        'hp': stats['hp'],
+                        'attack': stats['attack'],
+                        'defense': stats['defense'],
+                        'special_attack': stats['special-defense'],
+                        'special_defense': stats['special-defense'],
+                        'speed': stats['speed'],
+                        'bst': stats['bst'],
+                        'abilities': ', '.join(ability_names)
+                    }
+            })
+
         # build a DataFrame to use later
         team_df: DataFrame = self.df_encoded[self.df_encoded['name'].isin(team)]
 
@@ -373,7 +393,7 @@ class TeamBuilder:
             for name in team
         ]
 
-        return team_with_details, team_df, team_types
+        return team_with_details, team_df, team_types, json_export
 
     def __convert_preferences(self) -> list[str]:
         """
@@ -430,7 +450,7 @@ class TeamBuilder:
 
         return '\n'.join(comments)
 
-    def generate_team(self) -> list[str]:
+    def generate_team(self) -> tuple[list[str], dict]:
         """
         Combines all methods used to build a team, then builds a string to print to the user for what their new team
         is.
@@ -440,15 +460,16 @@ class TeamBuilder:
         self.clustering()
         self.categorize()
 
-        built_team_result: tuple[list[str], DataFrame, list[list[str]]] = self.build_team()
+        built_team_result: tuple[list[str], DataFrame, list[list[str]], dict] = self.build_team()
 
         team_details: list[str] = built_team_result[0]
         team_df: DataFrame = built_team_result[1]
         team_types: list[list[str]] = built_team_result[2]
+        team_json: dict = built_team_result[3]
 
         team_comments: str = self.get_team_synergy_desc(team_df, team_types)
 
         print(f'----- Generated Team -----\n\n' + '\n\n'.join(team_details))
         print(f'\nTeam Synergy Notes:\n{team_comments}')
 
-        return team_details
+        return team_details, team_json
