@@ -16,10 +16,12 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 
 from utils import get_role_description, calculate_type_effectiveness
+from config import DEFAULT_TEAM_PREFS
 
 
 class TeamBuilder:
-    def __init__(self, use_babies: bool, use_legends: bool, file_to_use: str, preferences: dict[str, bool]):
+    def __init__(self, use_babies: bool, use_legends: bool, file_to_use: str,
+                 preferences: dict[str, bool] | None = None):
         self.using_babies: bool = use_babies
         self.using_legends: bool = use_legends
         self.file_to_use: str = file_to_use
@@ -32,11 +34,14 @@ class TeamBuilder:
         self.df: DataFrame = pd.DataFrame()
         self.df_encoded: DataFrame = pd.DataFrame()
 
-        self.preferences: dict[str, bool] = {
-            'more_offensive': preferences['more_offensive'],
-            'more_defensive': preferences['more_defensive'],
-            'more_balanced': preferences['more_balanced'],
-        }
+        if preferences is None:
+            self.preferences = DEFAULT_TEAM_PREFS
+        else:
+            self.preferences: dict[str, bool] = {
+                'more_offensive': preferences['more_offensive'],
+                'more_defensive': preferences['more_defensive'],
+                'more_balanced': preferences['more_balanced'],
+            }
 
         self.gimmick_found: bool = False
 
@@ -46,12 +51,13 @@ class TeamBuilder:
         # if using baby Pokémon, filter the data to those only and return that data
         if self.using_babies:
             # Some Pokémon are banned from the Little Cup format, so they will be excluded
-            banned_list: list[str] = ['Scyther', 'Sneasel', 'Yanma', 'Tangela', 'Swirlix', 'Gligar', 'Meditite',
-                                      'Murkrow', 'Misdreavus', 'Drifloon', 'Porygon', 'Cutiefly', 'Gothita']
+            banned_list: list[str] = ['scyther', 'sneasel', 'yanma', 'tangela', 'swirlix', 'gligar', 'meditite',
+                                      'murkrow', 'misdreavus', 'drifloon', 'porygon', 'cutiefly', 'gothita',
+                                      'girafarig']
 
             for name, info in self.data.items():
                 # Exclude banned Pokémon
-                if name in banned_list:
+                if name.lower() in banned_list:
                     continue
 
                 if info['evo_weight'] == 0.0:
@@ -473,3 +479,17 @@ class TeamBuilder:
         print(f'\nTeam Synergy Notes:\n{team_comments}')
 
         return team_details, team_json
+
+    def generate_team_json(self) -> dict:
+        """
+        Generates the team the same way `generate_team()` does, but only returns the team JSON. No prints are necessary.
+        """
+        self.create_df()
+        self.encode_and_normalize()
+        self.clustering()
+        self.categorize()
+
+        built_team_result: tuple[list[str], DataFrame, list[list[str]], dict] = self.build_team()
+        team_json: dict = built_team_result[3]
+
+        return team_json

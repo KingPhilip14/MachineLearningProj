@@ -187,8 +187,8 @@ def get_role_description(role: str) -> str:
         'Physical Wall': 'Eats physical hits without taking much of a scratch. Both HP and Defense are notably high.',
         'Special Wall': 'Absorbs special attacks, walling out special attackers. Both HP and Special Defense are '
                         'notably high.',
-        'Bulky Wall': 'Can take both physical and damage well. Both Defense and Special Defense are notably high, '
-                      'but HP may not be.',
+        'Bulky Wall': 'Can take both physical and special damage well. Both Defense and Special Defense are notably '
+                      'high, but HP may not be.',
         'Speedster': 'Focuses on speed, providing a variety of uses like maintaining momentum, revenge kills, or '
                      'occasional utility and setup.',
         'Utility/Support': 'Excels at using status moves, setup, or field control moves to aid the rest of the team.',

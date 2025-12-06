@@ -25,6 +25,13 @@ PAUSE_TIME: int = 10
 # the minimum BST for a Pokémon to be considered when creating a team
 BST_BARRIER: int = 350
 
+# used as the default dict for team generation preferences
+DEFAULT_TEAM_PREFS: dict[str, bool] = {
+    'more_offensive': False,
+    'more_defensive': False,
+    'more_balanced': True,
+}
+
 # this is a dict that maps a string representation of a generation to the int(s) used for the API for Pokédex calls
 GEN_TO_POKEDEX_MAP: dict[str, list[int]] = {
     'national': [1],

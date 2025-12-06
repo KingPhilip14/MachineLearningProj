@@ -1,3 +1,5 @@
+import os
+
 import bcrypt
 import uvicorn
 
@@ -11,6 +13,8 @@ from backend.api.models.account_table import account
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
 from backend.api.schemas.get_account import GetAccount
+from backend.ml.learning.team_builder import TeamBuilder
+from config import POKEMON_DATA_DIR
 
 app = FastAPI()
 app.add_middleware(
@@ -82,8 +86,17 @@ async def get_account(account_id: int):
 
 
 @app.post('/generate-team')
-async def generate_team():
-    ...
+async def generate_team(using_babies: bool, using_legends: bool, gen_file_name: str,
+                        preferences: dict[str, bool] | None = None):
+    file_path: str = os.path.join(POKEMON_DATA_DIR, f'{gen_file_name.lower()}_data.json')
+    tb: TeamBuilder = TeamBuilder(using_babies, using_legends, file_path, preferences)
+    team_json: dict = tb.generate_team_json()
+
+    if not team_json:
+        raise HTTPException(status_code=400,
+                            detail="A team could not be generated. Malformed inputs may have been provided.")
+
+    return team_json
 
 
 @app.get('/get_message')
@@ -95,6 +108,7 @@ async def read_root():
 def hello(name: str):
     # in URL, add "?name=<name_here>"
     return {'Message': f'Congrats, {name}! This is your API!'}
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
