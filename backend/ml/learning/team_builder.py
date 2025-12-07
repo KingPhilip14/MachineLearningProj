@@ -56,8 +56,8 @@ class TeamBuilder:
                                       'girafarig']
 
             for name, info in self.data.items():
-                # Exclude banned Pokémon
-                if name.lower() in banned_list:
+                # Exclude banned Pokémon or Pokémon that are too strong
+                if name.lower() in banned_list or info['bst'] > 360:
                     continue
 
                 if info['evo_weight'] == 0.0:
@@ -330,6 +330,8 @@ class TeamBuilder:
 
             info = self.data.get(name)
 
+            # p_id: int = info['id']
+
             # get the type(s) of the Pokémon
             type_1: str = info.get('type_1', '')
             type_2: str = info.get('type_2', '')
@@ -376,6 +378,7 @@ class TeamBuilder:
             json_export.update({
                 name:
                     {
+                        # 'pokemon_id': p_id,
                         'name': name,
                         'role': role,
                         'role_description': get_role_description(role),

@@ -8,9 +8,14 @@ from sqlalchemy.exc import IntegrityError
 from fastapi.middleware.cors import CORSMiddleware
 from backend.api.db import engine, SessionLocal
 from backend.api.schemas.create_account import CreateAccount
+from backend.api.models.ability_table import ability
 from backend.api.models.account_table import account
+from backend.api.models.move_table import move
+from backend.api.models.movepool_table import movepool
 from backend.api.models.moveset_table import moveset
-from backend.api.models.pit_table import pit_table
+from backend.api.models.pokemon_in_team_table import pokemon_in_team_table
+from backend.api.models.pokemon_ability_table import pokemon_ability
+from backend.api.models.pokemon_table import pokemon
 from backend.api.models.team_table import team
 from backend.api.schemas.delete_team import DeleteTeam
 from backend.api.schemas.get_account import GetAccount
@@ -101,33 +106,76 @@ async def generate_team(using_babies: bool, using_legends: bool, gen_file_name: 
 
 
 @app.post('/account/{account_id}/save-team')
-async def save_team(account_id: int, payload: SaveTeam):
-    stmt = (
+async def save_team(account_id: int, team_json: dict, payload: SaveTeam):
+    team_stmt = (
         insert(team)
         .values(account_id=account_id, team_name=payload.team_name, generation=payload.generation,
                 overlapping_weaknesses=payload.overlapping_weaknesses)
         .returning(
-            team.c.account_id, team.c.team_name, team.c.generation, team.c.time_created,
+            team.c.team_id, team.c.account_id, team.c.team_name, team.c.generation, team.c.time_created,
             team.c.last_time_used, team.c.overlapping_weaknesses
         )
     )
 
     with engine.begin() as conn:
-        row = conn.execute(stmt).fetchone()
+        team_row = conn.execute(team_stmt).fetchone()
 
-    if not row:
-        raise HTTPException(status_code=400, detail="Something went wrong when saving the team")
+        if not team_row:
+            raise HTTPException(status_code=400, detail="Something went wrong when saving the team")
 
-    return dict(row._mapping)
+        # get the team ID
+        team_id: int = team_row._mapping['team_id']
+
+        # insert Pokemon in PokemonInTeam by using the team_id
+        for pkmn_name, pkmn_info in team_json.items():
+            if pkmn_name == 'weaknesses':
+                continue
+
+            # find the pokemon ID from the Pokemon table
+            pkmn_id_stmt = select(pokemon.c.pokemon_id).where(pokemon.c.pokemon_name == pkmn_name)
+            pkmn_id = conn.execute(pkmn_id_stmt).scalar_one_or_none()
+
+            if pkmn_id is None:
+                raise HTTPException(
+                    status_code=400,
+                    detail=f'Pokémon "{pkmn_name}" was not found.'
+                )
+
+            # will modify later to support the full list
+            abilities: str = pkmn_info['abilities']
+            chosen_ability: str = abilities.split(',')[0].lower()
+            chosen_ability = chosen_ability.replace(' ', '-')
+
+            # find ability from ability table
+            ability_stmt = select(ability.c.ability_id).where(ability.c.ability_name == chosen_ability)
+            ability_id = conn.execute(ability_stmt).scalar_one_or_none()
+
+            if ability_id is None:
+                raise HTTPException(
+                    status_code=400,
+                    detail=f'The {chosen_ability} ability was not found.'
+                )
+
+            pkmn_stmt = (
+                insert(pokemon_in_team_table)
+                .values(
+                    team_id=team_id,
+                    pokemon_id=pkmn_id,
+                    chosen_ability_id=ability_id,
+                    nickname=pkmn_name,
+                )
+            )
+
+            conn.execute(pkmn_stmt)
+
+    return dict(team_row._mapping)
 
 
 @app.get('/account/{account_id}/saved-teams')
 async def get_teams(account_id: int):
-    ...
-    # stmt = (
-    #     select(team)
-    #
-    # )
+    stmt = (
+        select(team)
+    )
 
 
 @app.put('/account/{account_id}/team/{team_id}')

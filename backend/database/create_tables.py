@@ -146,7 +146,12 @@ def create_moveset_table(conn, cursor) -> None:
         insert: str = """
         CREATE TABLE IF NOT EXISTS moveset(
             moveset_id SERIAL PRIMARY KEY,
-            move_id INTEGER NOT NULL REFERENCES move(move_id));
+            pit_id INTEGER NOT NULL REFERENCES pokemon_in_team(pit_id),
+            move_id INTEGER NOT NULL REFERENCES move(move_id),
+            slot_number INTEGER NOT NULL,
+            UNIQUE (pit_id, slot_number),
+            UNIQUE (pit_id, move_id),
+            );
         """
 
         cursor.execute(insert)
@@ -164,7 +169,6 @@ def create_pokemon_in_team_table(conn, cursor) -> None:
             team_id INTEGER NOT NULL REFERENCES team(team_id) ON DELETE CASCADE,
             pokemon_id INTEGER NOT NULL REFERENCES pokemon(pokemon_id),
             chosen_ability_id INTEGER REFERENCES ability(ability_id),
-            moveset_id INTEGER NOT NULL REFERENCES moveset(moveset_id),
             nickname VARCHAR(30) NOT NULL DEFAULT '',
             is_shiny BOOLEAN NOT NULL DEFAULT FALSE);
         """

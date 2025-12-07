@@ -24,5 +24,5 @@ if __name__ == '__main__':
         'more_balanced': True
     }
 
-    team_data = generate_team_json(False, False, path, prefs)
+    team_data = generate_team_json(True, False, path, prefs)
     print(f'\n\nTeam json:\n{team_data}')
