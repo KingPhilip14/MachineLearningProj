@@ -1,9 +1,9 @@
 import os
 import bcrypt
-import uvicorn
 
+from typing import cast
 from fastapi import FastAPI, HTTPException
-from sqlalchemy import select, insert
+from sqlalchemy import select, insert, update, delete
 from sqlalchemy.exc import IntegrityError
 from fastapi.middleware.cors import CORSMiddleware
 from backend.api.db import engine, SessionLocal
@@ -12,6 +12,7 @@ from backend.api.models.account_table import account
 from backend.api.models.moveset_table import moveset
 from backend.api.models.pit_table import pit_table
 from backend.api.models.team_table import team
+from backend.api.schemas.delete_team import DeleteTeam
 from backend.api.schemas.get_account import GetAccount
 from backend.api.schemas.save_team import SaveTeam
 from backend.ml.learning.team_builder import TeamBuilder
@@ -115,6 +116,29 @@ async def save_team(account_id: int, payload: SaveTeam):
 
     if not row:
         raise HTTPException(status_code=400, detail="Something went wrong when saving the team")
+
+    return dict(row._mapping)
+
+
+@app.delete('/account/{account_id}/delete-team/{team_id}', response_model=DeleteTeam)
+async def delete_team(account_id: int, team_id: int):
+    stmt = (
+        delete(team)
+        .where(
+            team.c.team_id == team_id and team.c.account_id == account_id
+        )
+        .returning(
+            team.c.team_id, team.c.account_id, team.c.team_name, team.c.generation, team.c.time_created,
+            team.c.last_time_used, team.c.overlapping_weaknesses
+        )
+    )
+
+    with engine.begin() as conn:
+        row = conn.execute(stmt).fetchone()
+
+    if not row:
+        raise HTTPException(status_code=400,
+                            detail=f'Could not find team with ID {team_id} for account with ID {account_id}')
 
     return dict(row._mapping)
 
