@@ -22,6 +22,7 @@ from backend.api.schemas.delete_team import DeleteTeam
 from backend.api.schemas.get_account import GetAccount
 from backend.api.schemas.save_team import SaveTeam
 from backend.api.schemas.update_team_name import UpdateTeamName
+from backend.api.schemas.team_prefs import TeamPrefs
 from backend.ml.learning.team_builder import TeamBuilder
 from backend.api.utils import nest_team_data
 from config import POKEMON_DATA_DIR
@@ -98,7 +99,7 @@ async def get_account(account_id: int):
 
 @app.post('/generate-team')
 async def generate_team(using_babies: bool, using_legends: bool, gen_file_name: str,
-                        preferences: dict[str, bool] | None = None):
+                        preferences: dict[str, bool] | None = TeamPrefs()):
     file_path: str = os.path.join(POKEMON_DATA_DIR, f'{gen_file_name.lower()}_data.json')
     tb: TeamBuilder = TeamBuilder(using_babies, using_legends, file_path, preferences)
     team_json: dict = tb.generate_team_json()
