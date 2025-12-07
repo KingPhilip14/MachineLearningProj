@@ -4,7 +4,7 @@ from sqlalchemy.sql import func
 
 metadata = MetaData()
 
-pokemon_in_team_table = Table(
+pokemon_in_team = Table(
     'pokemon_in_team',
     metadata,
     Column('pit_id', Integer, primary_key=True),

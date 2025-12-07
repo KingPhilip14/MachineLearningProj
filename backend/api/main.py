@@ -1,19 +1,20 @@
 import os
 import bcrypt
 
-from typing import cast
+from typing import List
 from fastapi import FastAPI, HTTPException
 from sqlalchemy import select, insert, update, delete
 from sqlalchemy.exc import IntegrityError
 from fastapi.middleware.cors import CORSMiddleware
 from backend.api.db import engine, SessionLocal
+from backend.api.schemas.account_teams_response import AccountTeamsResponse
 from backend.api.schemas.create_account import CreateAccount
 from backend.api.models.ability_table import ability
 from backend.api.models.account_table import account
 from backend.api.models.move_table import move
 from backend.api.models.movepool_table import movepool
 from backend.api.models.moveset_table import moveset
-from backend.api.models.pokemon_in_team_table import pokemon_in_team_table
+from backend.api.models.pokemon_in_team_table import pokemon_in_team
 from backend.api.models.pokemon_ability_table import pokemon_ability
 from backend.api.models.pokemon_table import pokemon
 from backend.api.models.team_table import team
@@ -22,6 +23,7 @@ from backend.api.schemas.get_account import GetAccount
 from backend.api.schemas.save_team import SaveTeam
 from backend.api.schemas.update_team_name import UpdateTeamName
 from backend.ml.learning.team_builder import TeamBuilder
+from backend.api.utils import nest_team_data
 from config import POKEMON_DATA_DIR
 
 app = FastAPI()
@@ -42,6 +44,9 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+pit = pokemon_in_team.alias("pit")
 
 
 @app.get('/')
@@ -157,7 +162,7 @@ async def save_team(account_id: int, team_json: dict, payload: SaveTeam):
                 )
 
             pkmn_stmt = (
-                insert(pokemon_in_team_table)
+                insert(pit)
                 .values(
                     team_id=team_id,
                     pokemon_id=pkmn_id,
@@ -171,11 +176,41 @@ async def save_team(account_id: int, team_json: dict, payload: SaveTeam):
     return dict(team_row._mapping)
 
 
-@app.get('/account/{account_id}/saved-teams')
+@app.get('/account/{account_id}/saved-teams', response_model=List[AccountTeamsResponse])
 async def get_teams(account_id: int):
     stmt = (
-        select(team)
+        select(
+            account.c.account_id,
+            account.c.username,
+
+            team.c.team_id,
+            team.c.team_name,
+
+            pit.c.pit_id,
+
+            pokemon.c.pokemon_id,
+            pokemon.c.pokemon_name,
+            pit.c.chosen_ability_id,
+            pit.c.nickname
+        )
+        .select_from(
+            account
+            .join(team, team.c.account_id == account.c.account_id)
+            .join(pit, pit.c.team_id == team.c.team_id)
+            .join(pokemon, pit.c.pokemon_id == pokemon.c.pokemon_id)
+        )
+        .where(account.c.account_id == account_id)
+        .order_by(team.c.team_id)
     )
+
+    with engine.connect() as conn:
+        rows = conn.execute(stmt).fetchall()
+
+    # return an empty list if no rows were returned; the given account has no teams
+    if len(rows) == 0:
+        return []
+
+    return nest_team_data(rows)
 
 
 @app.put('/account/{account_id}/team/{team_id}')
