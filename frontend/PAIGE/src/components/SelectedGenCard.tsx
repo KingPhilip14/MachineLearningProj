@@ -33,7 +33,7 @@ export const SelectedGenCard = ({ selectedGen, backPage }: Props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Link to={backPage}>
+        <Link to={backPage} state={{ selectedGen: selectedGen }}>
           <Button
             variant={"outlined"}
             size={"large"}

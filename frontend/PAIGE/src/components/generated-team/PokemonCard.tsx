@@ -127,15 +127,6 @@ export default function PokemonCard() {
             <Grid size={{ xs: 6 }} key={pkmn.name.toLowerCase()}>
               <PkmnCard
                 sx={{
-                  // display: "flex",
-                  // margin: "45px",
-                  // border: 1,
-                  // borderStyle: "solid",
-                  // borderColor: "var(--text)",
-                  // minWidth: "50%",
-                  // maxWidth: "80%",
-                  // minHeight: "75%",
-
                   display: "flex",
                   border: 1,
                   borderStyle: "solid",

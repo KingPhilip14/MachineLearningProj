@@ -5,6 +5,7 @@ import Footer from "./Footer.tsx";
 import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material";
+import ScrollToTop from "../ScrollToTop.tsx";
 
 const Layout = () => {
   const [isDark, setIsDark] = useState(false);
@@ -33,6 +34,7 @@ const Layout = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
+        <ScrollToTop />
         <div className="min-h-[100dvh] grid grid-rows-[auto_1fr_auto] app">
           <Header isDark={isDark} setIsDark={setIsDark} />
 

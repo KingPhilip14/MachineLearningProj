@@ -10,12 +10,15 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import React, { useState } from "react";
 import { SelectedGenCard } from "../SelectedGenCard.tsx";
 
 export default function TeamConfig() {
+  const location = useLocation();
+  const { selectedGen } = location.state || {};
+
   const [usingLittleCup, setUsingLittleCup] = useState("no");
   const [disabledLegends, setDisabledLegends] = useState(false);
   const [legendsValue, setLegendsValue] = useState("no");
@@ -53,7 +56,7 @@ export default function TeamConfig() {
   return (
     <>
       <div className={"page-container"}>
-        <SelectedGenCard selectedGen={"Random gen"} backPage={"/"} />
+        <SelectedGenCard selectedGen={selectedGen} backPage={"/"} />
 
         <Typography className="text">
           Configure your team preferences!
@@ -196,7 +199,7 @@ export default function TeamConfig() {
         </ConfigCard>
 
         {/* Generate button */}
-        <Link to={"/generated-team"}>
+        <Link to={"/generated-team"} state={{ selectedGen: selectedGen }}>
           <Button
             variant={"contained"}
             size={"large"}

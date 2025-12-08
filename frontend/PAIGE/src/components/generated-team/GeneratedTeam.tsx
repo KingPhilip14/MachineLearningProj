@@ -2,12 +2,16 @@ import PokemonCard from "./PokemonCard.tsx";
 import { SelectedGenCard } from "../SelectedGenCard.tsx";
 import LinearGradText from "../LinearGradText.tsx";
 import Button from "@mui/material/Button";
+import { useLocation } from "react-router-dom";
 
 export default function GeneratedTeam() {
+  const location = useLocation();
+  const { selectedGen } = location.state || {};
+
   return (
     <>
       <div className={"page-container"}>
-        <SelectedGenCard selectedGen={"Random gen"} backPage={"/team-config"} />
+        <SelectedGenCard selectedGen={selectedGen} backPage={"/team-config"} />
         <LinearGradText text={"Generated Team"} />
 
         <PokemonCard />

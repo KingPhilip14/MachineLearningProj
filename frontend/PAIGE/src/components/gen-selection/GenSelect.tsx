@@ -29,7 +29,7 @@ export default function GenSelect() {
     <>
       <ul>
         {gens.map((gen) => (
-          <Link to={"/team-config"} key={gen}>
+          <Link to={"/team-config"} state={{ selectedGen: gen }} key={gen}>
             <GenSelectBtn
               sx={{
                 fontSize: "1rem",
