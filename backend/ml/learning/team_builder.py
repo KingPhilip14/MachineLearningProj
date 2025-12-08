@@ -253,6 +253,10 @@ class TeamBuilder:
 
         return weaknesses
 
+    def get_overlapping_weaknesses(self, weaknesses: Counter) -> list[str]:
+        weak_types: list[str] = [f'{type_}' for type_, count in weaknesses.items() if count >= 2]
+        return weak_types
+
     def build_team(self) -> tuple[list[str], DataFrame, list[list[str]], dict]:
         """
         Creates a team of Pokémon for the end user to use. The team is created based on the cluster roles and inputs
@@ -380,8 +384,11 @@ class TeamBuilder:
                     {
                         # 'pokemon_id': p_id,
                         'name': name,
+                        'nickname': name[0].upper() + name[1:],
                         'role': role,
                         'role_description': get_role_description(role),
+                        'type_1': type_1,
+                        'type_2': type_2,
                         'hp': stats['hp'],
                         'attack': stats['attack'],
                         'defense': stats['defense'],
@@ -432,7 +439,7 @@ class TeamBuilder:
         all_weaknesses: Counter = self.get_team_weaknesses(team_types)
 
         # find if the team has many overlapping weaknesses that would be concerning
-        weak_types: list[str] = [f'{type_}' for type_, count in all_weaknesses.items() if count >= 2]
+        weak_types: list[str] = self.get_overlapping_weaknesses(all_weaknesses)
 
         if weak_types:
             formatted_types: str = ', '.join(type_[0].upper() + type_[1:] for type_ in weak_types[:-1]) + ', and ' + \
@@ -488,7 +495,7 @@ class TeamBuilder:
 
         return team_details, team_json
 
-    def generate_team_json(self) -> dict:
+    def generate_team_json(self) -> tuple[dict, dict]:
         """
         Generates the team the same way `generate_team()` does, but only returns the team JSON. No prints are necessary.
         """
@@ -501,11 +508,11 @@ class TeamBuilder:
         team_types: list[list[str]] = built_team_result[2]
 
         all_weaknesses: Counter = self.get_team_weaknesses(team_types)
+        overlapping_weaknesses: list[str] = self.get_overlapping_weaknesses(all_weaknesses)
+        overlapping_weaknesses_dict: dict[str, list[str]] = {
+            'overlapping_weaknesses': overlapping_weaknesses,
+        }
 
         team_json: dict = built_team_result[3]
 
-        team_json.update({
-            'weaknesses': all_weaknesses,
-        })
-
-        return team_json
+        return team_json, overlapping_weaknesses_dict

@@ -7,91 +7,109 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import EditableTypography from "../EditableTypography.tsx";
 
-export default function PokemonCard() {
+export default function PokemonCards() {
   const pkmnTeam = {
-    Abra: {
-      name: "Abra",
-      role: "Special Attacker",
-      hp: 30,
-      attack: 10,
-      defense: 10,
-      special_attack: 100,
-      special_defense: 75,
-      speed: 80,
-      abilities: ["ability #1", "ability #2"],
-      bst: 289,
-      type_1: "psychic",
-      type_2: "",
-    },
-    Bulbasaur: {
-      name: "Bulbasaur",
-      role: "Baby or sum",
-      hp: 55,
-      attack: 65,
-      defense: 50,
+    solrock: {
+      name: "solrock",
+      nickname: "Solrock",
+      role: "Bulky",
+      role_description:
+        "Provides a general form of tankiness without having high defenses thanks to its high HP.",
+      type_1: "rock",
+      type_2: "psychic",
+      hp: 90,
+      attack: 95,
+      defense: 85,
       special_attack: 65,
       special_defense: 65,
-      speed: 50,
-      abilities: ["ability #1", "ability #2"],
-      bst: 365,
-      type_1: "grass",
-      type_2: "poison",
+      speed: 70,
+      bst: 460,
+      abilities: ["Levitate"],
     },
-    Charizard: {
-      name: "Charizard",
-      role: "Special Attacker",
-      hp: 80,
-      attack: 90,
-      defense: 80,
-      special_attack: 102,
-      special_defense: 85,
-      bst: 525,
-      speed: 80,
-      abilities: ["ability #1", "ability #2"],
-      type_1: "fire",
-      type_2: "flying",
-    },
-    Machop: {
-      name: "Machop",
-      role: "Physical Attacker",
-      hp: 65,
-      attack: 80,
-      defense: 64,
-      special_attack: 30,
-      special_defense: 45,
-      bst: 325,
-      speed: 60,
-      abilities: ["ability #1", "ability #2"],
-      type_1: "fighting",
-      type_2: "",
-    },
-    Spinda: {
-      name: "Spinda",
-      role: "Versatile",
-      hp: 60,
-      attack: 60,
+    excadrill: {
+      name: "excadrill",
+      nickname: "Excadrill",
+      role: "Physical Sweeper",
+      role_description:
+        "A fast, hard-hitting attacker that uses their astounding physical damage.",
+      type_1: "ground",
+      type_2: "steel",
+      hp: 110,
+      attack: 135,
       defense: 60,
-      special_attack: 60,
-      special_defense: 60,
-      speed: 60,
-      bst: 360,
-      abilities: ["ability #1", "ability #2"],
+      special_attack: 65,
+      special_defense: 65,
+      speed: 88,
+      bst: 508,
+      abilities: ["Sand Rush", "Sand Force", "Mold Breaker"],
+    },
+    jynx: {
+      name: "jynx",
+      nickname: "Jynx",
+      role: "Special Sweeper",
+      role_description:
+        "An attacker excelling in special damage and speed to overwhelm the opponent.",
+      type_1: "ice",
+      type_2: "psychic",
+      hp: 65,
+      attack: 50,
+      defense: 35,
+      special_attack: 95,
+      special_defense: 95,
+      speed: 95,
+      bst: 455,
+      abilities: ["Oblivious", "Forewarn", "Dry Skin"],
+    },
+    seaking: {
+      name: "seaking",
+      nickname: "Seaking",
+      role: "Versatile",
+      role_description:
+        "A flexible role that provides relatively balanced stats and can have unpredictable usage.",
+      type_1: "water",
+      type_2: "",
+      hp: 80,
+      attack: 92,
+      defense: 65,
+      special_attack: 80,
+      special_defense: 80,
+      speed: 68,
+      bst: 450,
+      abilities: ["Swift Swim", "Water Veil", "Lightning Rod"],
+    },
+    mantine: {
+      name: "mantine",
+      nickname: "Mantine",
+      role: "Special Wall",
+      role_description:
+        "Absorbs special attacks, walling out special attackers. Both HP and Special Defense are notably high.",
+      type_1: "water",
+      type_2: "flying",
+      hp: 85,
+      attack: 40,
+      defense: 70,
+      special_attack: 140,
+      special_defense: 140,
+      speed: 70,
+      bst: 485,
+      abilities: ["Swift Swim", "Water Absorb", "Water Veil"],
+    },
+    miltank: {
+      name: "miltank",
+      nickname: "Miltank",
+      role: "Physical Wall",
+      role_description:
+        "Eats physical hits without taking much of a scratch. Both HP and Defense are notably high.",
       type_1: "normal",
       type_2: "",
-    },
-    Gengar: {
-      name: "Gengar",
-      role: "Special Sweeper",
-      hp: 60,
-      attack: 60,
-      defense: 50,
-      special_attack: 130,
-      special_defense: 90,
-      speed: 110,
-      bst: 510,
-      abilities: ["ability #1", "ability #2"],
-      type_1: "ghost",
-      type_2: "poison",
+      hp: 95,
+      attack: 80,
+      defense: 105,
+      special_attack: 70,
+      special_defense: 70,
+      speed: 100,
+      bst: 490,
+      abilities: ["Thick Fat", "Scrappy", "Sap Sipper"],
     },
   };
 
@@ -151,7 +169,7 @@ export default function PokemonCard() {
                   <CardContent sx={{ flex: "1 0 auto" }}>
                     <Box sx={{ display: "flex", alignItems: "center" }}>
                       <EditableTypography
-                        givenText={pkmn.name}
+                        givenText={pkmn.nickname}
                         component="div"
                         variant="h5"
                         sx={{ marginRight: "5px" }}
@@ -163,14 +181,14 @@ export default function PokemonCard() {
                       component="div"
                       sx={{ color: "text.secondary" }}
                     >
-                      {pkmn.role}
+                      Role: {pkmn.role}
                     </Typography>
                     <Typography
                       variant="subtitle1"
                       component="div"
                       sx={{ color: "text.secondary" }}
                     >
-                      BST: 500
+                      BST: {pkmn.bst}
                     </Typography>
                   </CardContent>
                   <Box

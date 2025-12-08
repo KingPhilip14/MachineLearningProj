@@ -98,21 +98,25 @@ async def generate_team(using_babies: bool, using_legends: bool, gen_file_name: 
                         preferences: dict[str, bool] | None = TeamPrefs()):
     file_path: str = os.path.join(POKEMON_DATA_DIR, f'{gen_file_name.lower()}_data.json')
     tb: TeamBuilder = TeamBuilder(using_babies, using_legends, file_path, preferences)
-    team_json: dict = tb.generate_team_json()
+    generated_team_result: tuple[dict, dict] = tb.generate_team_json()
+
+    team_json: dict = generated_team_result[0]
+    weaknesses: dict = generated_team_result[1]
 
     if not team_json:
         raise HTTPException(status_code=400,
                             detail="A team could not be generated. Malformed inputs may have been provided.")
 
-    return team_json
+    return team_json, weaknesses
 
 
 @app.post('/account/{account_id}/save-team')
-async def save_team(account_id: int, team_json: dict, payload: SaveTeam):
+async def save_team(account_id: int, team_name: str, team_json: dict,
+                    generation: str, overlapping_weaknesses: dict):
     team_stmt = (
         insert(team)
-        .values(account_id=account_id, team_name=payload.team_name, generation=payload.generation,
-                overlapping_weaknesses=payload.overlapping_weaknesses)
+        .values(account_id=account_id, team_name=team_name, generation=generation,
+                overlapping_weaknesses=overlapping_weaknesses)
         .returning(
             team.c.team_id, team.c.account_id, team.c.team_name, team.c.generation, team.c.time_created,
             team.c.last_time_used, team.c.overlapping_weaknesses

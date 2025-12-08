@@ -32,7 +32,7 @@ export default function Register() {
   //   setMessage("");
   // }, [username, password]);
 
-  async function registerUser(event) {
+  async function registerUser(event: { preventDefault: () => void }) {
     // prevent a full page reload
     event.preventDefault();
 

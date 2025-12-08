@@ -1,4 +1,4 @@
-import PokemonCard from "./PokemonCard.tsx";
+import PokemonCards from "./PokemonCards.tsx";
 import { SelectedGenCard } from "../SelectedGenCard.tsx";
 import LinearGradText from "../LinearGradText.tsx";
 import Button from "@mui/material/Button";
@@ -14,7 +14,7 @@ export default function GeneratedTeam() {
         <SelectedGenCard selectedGen={selectedGen} backPage={"/team-config"} />
         <LinearGradText text={"Generated Team"} />
 
-        <PokemonCard />
+        <PokemonCards />
 
         <Button
           variant={"contained"}
