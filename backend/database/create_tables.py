@@ -15,8 +15,8 @@ def create_all_tables(conn, cursor):
     create_pokemon_ability_table(conn, cursor)
     create_move_table(conn, cursor)
     create_movepool_table(conn, cursor)
-    create_moveset_table(conn, cursor)
     create_pokemon_in_team_table(conn, cursor)
+    create_moveset_table(conn, cursor)
 
     print('All models were created successfully.\n')
 
@@ -150,8 +150,7 @@ def create_moveset_table(conn, cursor) -> None:
             move_id INTEGER NOT NULL REFERENCES move(move_id),
             slot_number INTEGER NOT NULL,
             UNIQUE (pit_id, slot_number),
-            UNIQUE (pit_id, move_id),
-            );
+            UNIQUE (pit_id, move_id));
         """
 
         cursor.execute(insert)
@@ -169,7 +168,7 @@ def create_pokemon_in_team_table(conn, cursor) -> None:
             team_id INTEGER NOT NULL REFERENCES team(team_id) ON DELETE CASCADE,
             pokemon_id INTEGER NOT NULL REFERENCES pokemon(pokemon_id),
             chosen_ability_id INTEGER REFERENCES ability(ability_id),
-            nickname VARCHAR(30) NOT NULL DEFAULT '',
+            nickname VARCHAR(15) NOT NULL DEFAULT '',
             is_shiny BOOLEAN NOT NULL DEFAULT FALSE);
         """
 

@@ -389,7 +389,7 @@ class TeamBuilder:
                         'special_defense': stats['special-defense'],
                         'speed': stats['speed'],
                         'bst': stats['bst'],
-                        'abilities': ', '.join(ability_names)
+                        'abilities': ability_names
                     }
             })
 

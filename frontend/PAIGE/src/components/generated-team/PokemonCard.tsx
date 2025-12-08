@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import EditableTypography from "../EditableTypography.tsx";
 
 export default function PokemonCard() {
   const pkmnTeam = {
@@ -149,13 +150,12 @@ export default function PokemonCard() {
                 <Box sx={{ display: "flex", flexDirection: "column" }}>
                   <CardContent sx={{ flex: "1 0 auto" }}>
                     <Box sx={{ display: "flex", alignItems: "center" }}>
-                      <Typography
+                      <EditableTypography
+                        givenText={pkmn.name}
                         component="div"
                         variant="h5"
                         sx={{ marginRight: "5px" }}
-                      >
-                        {pkmn.name}
-                      </Typography>
+                      />
                       {Types(pkmn.type_1, pkmn.type_2)}
                     </Box>
                     <Typography

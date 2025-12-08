@@ -46,10 +46,6 @@ def get_db():
     finally:
         db.close()
 
-
-pit = pokemon_in_team.alias("pit")
-
-
 @app.get('/')
 async def root():
     return 'Hello world!'
@@ -149,7 +145,7 @@ async def save_team(account_id: int, team_json: dict, payload: SaveTeam):
 
             # will modify later to support the full list
             abilities: str = pkmn_info['abilities']
-            chosen_ability: str = abilities.split(',')[0].lower()
+            chosen_ability: str = abilities[0].lower()
             chosen_ability = chosen_ability.replace(' ', '-')
 
             # find ability from ability table
@@ -167,7 +163,7 @@ async def save_team(account_id: int, team_json: dict, payload: SaveTeam):
             new_nickname = new_nickname[0].upper() + new_nickname[1:]
 
             pkmn_stmt = (
-                insert(pit)
+                insert(pokemon_in_team)
                 .values(
                     team_id=team_id,
                     pokemon_id=pkmn_id,
@@ -191,18 +187,18 @@ async def get_teams(account_id: int):
             team.c.team_id,
             team.c.team_name,
 
-            pit.c.pit_id,
+            pokemon_in_team.c.pit_id,
 
             pokemon.c.pokemon_id,
             pokemon.c.pokemon_name,
-            pit.c.chosen_ability_id,
-            pit.c.nickname
+            pokemon_in_team.c.chosen_ability_id,
+            pokemon_in_team.c.nickname
         )
         .select_from(
             account
             .join(team, team.c.account_id == account.c.account_id)
-            .join(pit, pit.c.team_id == team.c.team_id)
-            .join(pokemon, pit.c.pokemon_id == pokemon.c.pokemon_id)
+            .join(pokemon_in_team, pokemon_in_team.c.team_id == team.c.team_id)
+            .join(pokemon, pokemon_in_team.c.pokemon_id == pokemon.c.pokemon_id)
         )
         .where(account.c.account_id == account_id)
         .order_by(team.c.team_id)

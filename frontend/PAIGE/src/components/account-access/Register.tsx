@@ -32,7 +32,10 @@ export default function Register() {
   //   setMessage("");
   // }, [username, password]);
 
-  async function registerUser() {
+  async function registerUser(event) {
+    // prevent a full page reload
+    event.preventDefault();
+
     try {
       const response = await fetch("http://127.0.0.1:8000/register", {
         method: "POST",
@@ -50,9 +53,9 @@ export default function Register() {
       }
 
       // take the user to the last page they were on after successful registration
-      navigate("/");
-    } catch (e) {
-      console.error(e);
+      navigate("/", { replace: true });
+    } catch (error) {
+      console.error(error);
     }
   }
 
