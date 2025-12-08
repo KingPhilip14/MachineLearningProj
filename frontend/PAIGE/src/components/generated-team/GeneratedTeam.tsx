@@ -18,7 +18,7 @@ export default function GeneratedTeam() {
           sx={{
             backgroundColor: "var(--secondary)",
             color: "var(--text)",
-            margin: "0px 0px 80px 0px",
+            margin: "80px 0px 80px 0px",
             minHeight: "50px",
           }}
         >

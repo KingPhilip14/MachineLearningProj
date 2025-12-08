@@ -162,13 +162,17 @@ async def save_team(account_id: int, team_json: dict, payload: SaveTeam):
                     detail=f'The {chosen_ability} ability was not found.'
                 )
 
+            # make a new nickname by only getting the first part of the name and capitalizing the first letter
+            new_nickname: str = pkmn_name.split('-')[0]
+            new_nickname = new_nickname[0].upper() + new_nickname[1:]
+
             pkmn_stmt = (
                 insert(pit)
                 .values(
                     team_id=team_id,
                     pokemon_id=pkmn_id,
                     chosen_ability_id=ability_id,
-                    nickname=pkmn_name,
+                    nickname=new_nickname,
                 )
             )
 

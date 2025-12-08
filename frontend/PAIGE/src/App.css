@@ -45,6 +45,10 @@
     left: -9999px;
 }
 
+.sprite {
+    image-rendering: pixelated;
+}
+
 @keyframes fade-in {
     from {
         opacity: 0;

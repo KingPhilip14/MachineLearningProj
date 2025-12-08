@@ -21,6 +21,7 @@ export const SelectedGenCard = ({ selectedGen, backPage }: Props) => {
         alignItems: "center",
         borderRadius: "30px",
         background: "var(--tertiary)",
+        marginBottom: "50px",
       }}
     >
       <CardContent>
