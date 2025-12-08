@@ -1,6 +1,6 @@
 import "./AccountAccess.css";
 import { FormControl, TextField, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
@@ -11,9 +11,13 @@ import { useState } from "react";
 // const LOGIN_URL = "/auth";
 
 export default function Register() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || "/";
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
 
   // const { setAuth } = useContext(AuthContext);
@@ -28,62 +32,29 @@ export default function Register() {
   //   setMessage("");
   // }, [username, password]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  async function registerUser() {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
 
-    // try {
-    //   const response = await axios.post(
-    //     LOGIN_URL,
-    //     JSON.stringify({ username, password }),
-    //     {
-    //       headers: { "Content-Type": "application/json" },
-    //       withCredentials: true,
-    //     },
-    //   );
-    //   console.log(JSON.stringify(response?.data));
-    //   setAuth(username, password);
-    // }
-    // catch (error) {
-    //   if(!error?.response) {
-    //     setMessage("No server response");
-    //   }
-    //   else if (error?.response?.status === 400) {
-    //     setMessage("Missing username or password");
-    //     }
-    //   else if (error?.response?.status === 401) {
-    //     setMessage("Unauthorized");
-    //     }
-    //   else {
-    //     setMessage("Login failed");
-    //     }
-    //   }
-    // }
+      if (!response.ok) {
+        throw new Error("Failed to register a new account");
+      }
 
-    setMessage("Success!");
-
-    // try {
-    //   const response = await fetch("http://localhost:8000/register", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       username: username,
-    //       password: password,
-    //     }),
-    //   });
-    //
-    //   if (response.ok) {
-    //     const data = await response.json();
-    //     setMessage(`Account registered successfully! ID: ${data.account_id}`);
-    //   } else {
-    //     const error = await response.json();
-    //     setMessage(`Error: ${error.detail``}`);
-    //   }
-    // } catch (error) {
-    //   setMessage("An error occurred while registering a new account.");
-    // }
-  };
+      // take the user to the last page they were on after successful registration
+      navigate("/");
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   return (
     <>
@@ -100,7 +71,7 @@ export default function Register() {
           <CardContent
             component={"form"}
             style={{ width: "80%vw", height: "80%vh" }}
-            onSubmit={handleSubmit}
+            onSubmit={registerUser}
           >
             <Typography
               variant={"h3"}
@@ -122,6 +93,7 @@ export default function Register() {
               <div>
                 <TextField
                   required
+                  component={"div"}
                   id="username"
                   label="Username"
                   value={username}
@@ -135,6 +107,7 @@ export default function Register() {
               <div>
                 <TextField
                   required
+                  component={"div"}
                   id="outlined-password-input"
                   label="Password"
                   type="password"
@@ -146,20 +119,20 @@ export default function Register() {
                   }}
                 />
               </div>
-              <div>
-                <TextField
-                  required
-                  id="outlined-password-input"
-                  label="Confirm Password"
-                  type="password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  style={{ margin: "30px 50px 30px 50px" }}
-                  sx={{
-                    fieldset: { borderColor: "var(--primary)" },
-                  }}
-                />
-              </div>
+              {/*<div>*/}
+              {/*  <TextField*/}
+              {/*    required*/}
+              {/*    id="outlined-password-input"*/}
+              {/*    label="Confirm Password"*/}
+              {/*    type="password"*/}
+              {/*    value={confirmPassword}*/}
+              {/*    onChange={(e) => setConfirmPassword(e.target.value)}*/}
+              {/*    style={{ margin: "30px 50px 30px 50px" }}*/}
+              {/*    sx={{*/}
+              {/*      fieldset: { borderColor: "var(--primary)" },*/}
+              {/*    }}*/}
+              {/*  />*/}
+              {/*</div>*/}
               <div>
                 <Button
                   type="submit"

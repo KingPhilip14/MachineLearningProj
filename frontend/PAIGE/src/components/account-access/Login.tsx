@@ -1,12 +1,14 @@
 import "./AccountAccess.css";
 import { TextField, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 
 export default function Login() {
+  const location = useLocation();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -85,7 +87,11 @@ export default function Login() {
             <div>
               <Typography>
                 Don't have an account? {""}{" "}
-                <Link className={"link-style"} to={"/register"}>
+                <Link
+                  className={"link-style"}
+                  to={"/register"}
+                  state={{ from: location.pathname }}
+                >
                   Register
                 </Link>{" "}
                 an account instead!
