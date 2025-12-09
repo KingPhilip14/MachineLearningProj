@@ -108,6 +108,15 @@ export const PokemonCards = ({
                       sx={{ color: "text.secondary" }}
                     >
                       <em>
+                        <b>BST</b>: {pkmn.bst}
+                      </em>
+                    </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      component="div"
+                      sx={{ color: "text.secondary" }}
+                    >
+                      <em>
                         <b>Role</b>: {pkmn.role}
                       </em>
                     </Typography>
@@ -118,15 +127,6 @@ export const PokemonCards = ({
                     >
                       <em>
                         <b>Chosen Ability</b>: {pkmn.chosen_ability}
-                      </em>
-                    </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      component="div"
-                      sx={{ color: "text.secondary" }}
-                    >
-                      <em>
-                        <b>BST</b>: {pkmn.bst}
                       </em>
                     </Typography>
                     <AbilityMenu

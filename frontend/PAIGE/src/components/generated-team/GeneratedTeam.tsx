@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { CircularProgress } from "@mui/material";
+import ExportButton from "./ExportButton.tsx";
+import CopyButton from "./CopyButton.tsx";
 
 export default function GeneratedTeam() {
   interface PkmnTeam {
@@ -40,19 +42,18 @@ export default function GeneratedTeam() {
   const { selectedGen, usingLittleCup, usingLegends, composition } =
     location.state || {};
 
-  useEffect(() => {
-    console.log("PokemonCards mounted");
-    async function fetchTeam() {
-      const data = await getGeneratedTeam();
-      if (!data || !Array.isArray(data) || data.length === 0) return;
+  async function fetchTeam() {
+    const data = await getGeneratedTeam();
+    if (!data || !Array.isArray(data) || data.length === 0) return;
 
-      setPkmnTeam(data[0]);
+    setPkmnTeam(data[0]);
 
-      if (data[1]?.overlapping_weaknesses) {
-        setOverlappingWeaknesses(data[1].overlapping_weaknesses);
-      }
+    if (data[1]?.overlapping_weaknesses) {
+      setOverlappingWeaknesses(data[1].overlapping_weaknesses);
     }
+  }
 
+  useEffect(() => {
     fetchTeam();
   }, []);
 
@@ -106,6 +107,20 @@ export default function GeneratedTeam() {
           />
           <LinearGradText text={"Generated Team"} />
 
+          <Button
+            variant={"contained"}
+            size={"large"}
+            onClick={fetchTeam}
+            sx={{
+              backgroundColor: "var(--secondary)",
+              color: "var(--text)",
+              margin: "50px 0px 40px 0px",
+              minHeight: "50px",
+            }}
+          >
+            Regenerate
+          </Button>
+
           <PokemonCards
             pkmnTeam={pkmnTeam}
             updateAbility={(name, ability) =>
@@ -147,14 +162,28 @@ export default function GeneratedTeam() {
             variant={"contained"}
             size={"large"}
             sx={{
-              backgroundColor: "var(--secondary)",
+              backgroundColor: "var(--accent)",
               color: "var(--text)",
-              margin: "80px 0px 80px 0px",
+              margin: "80px 0px 0px 0px",
               minHeight: "50px",
             }}
           >
             Save Team
           </Button>
+
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            gap={8}
+          >
+            <ExportButton
+              displayText={"Export to File"}
+              teamName={"Team Name"}
+              pkmnTeam={pkmnTeam}
+            />
+            <CopyButton displayText={"Copy Team"} pkmnTeam={pkmnTeam} />
+          </Box>
         </div>
       )}
     </>
