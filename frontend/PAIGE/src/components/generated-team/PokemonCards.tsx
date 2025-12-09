@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import EditableTypography from "../EditableTypography.tsx";
 import AbilityMenu from "../AbilityMenu.tsx";
 import { useEffect, useState } from "react";
+import { CircularProgress } from "@mui/material";
 
 interface Props {
   selectedGen: string;
@@ -49,11 +50,13 @@ export const PokemonCards = ({
   }
 
   const [pkmnTeam, setPkmnTeam] = useState<PkmnTeam>({});
+  const [isLoading, setIsLoading] = useState(false);
   const [overlappingWeaknesses, setOverlappingWeaknesses] = useState<string[]>(
     [],
   );
 
   useEffect(() => {
+    console.log("PokemonCards mounted");
     async function fetchTeam() {
       const data = await getGeneratedTeam();
       if (!data || !Array.isArray(data) || data.length === 0) return;
@@ -90,6 +93,7 @@ export const PokemonCards = ({
       ? selectedGen.replace(" ", "_").toLowerCase()
       : "national";
 
+    setIsLoading(true);
     try {
       const response = await fetch("http://127.0.0.1:8000/generate-team", {
         method: "POST",
@@ -109,13 +113,14 @@ export const PokemonCards = ({
       }
 
       const data = await response.json();
-      console.log(data);
 
       return data || {};
     } catch (error) {
       console.error(error);
 
       return {};
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -134,146 +139,157 @@ export const PokemonCards = ({
 
   return (
     <>
-      <Box display="flex" justifyContent="center" width="100%">
-        <Grid
-          container
-          spacing={2}
-          justifyContent="center"
-          sx={{ maxWidth: "70rem", marginTop: "3rem" }}
-        >
-          {Object.values(pkmnTeam || {}).map((pkmn) => (
-            <Grid
-              size={{ xs: 6 }}
-              key={pkmn.name?.toLowerCase() || Math.random()}
-            >
-              <PkmnCard
-                sx={{
-                  display: "flex",
-                  border: 1,
-                  borderStyle: "solid",
-                  borderColor: "var(--text)",
-                  width: "100%",
-                  height: "100%",
-                  p: 2,
-                }}
-              >
-                <CardMedia
-                  className="sprite"
-                  component="img"
-                  sx={{
-                    width: 151,
-                    objectFit: "contain",
-                  }}
-                  image={`/pokemon_sprites/${pkmn.name.toLowerCase()}-sprite.png`}
-                  alt={pkmn.name + " sprite"}
-                />
-                <Box sx={{ display: "flex", flexDirection: "column" }}>
-                  <CardContent sx={{ flex: "1 0 auto" }}>
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
-                      <EditableTypography
-                        givenText={pkmn.nickname}
-                        component="div"
-                        variant="h5"
-                        sx={{ marginRight: "5px" }}
-                      />
-                      {Types(pkmn.type_1, pkmn.type_2)}
-                    </Box>
-                    <Typography
-                      variant="subtitle1"
-                      component="div"
-                      sx={{ color: "text.secondary" }}
-                    >
-                      <em>
-                        <b>Role</b>: {pkmn.role}
-                      </em>
-                    </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      component="div"
-                      sx={{ color: "text.secondary" }}
-                    >
-                      <em>
-                        <b>Chosen Ability</b>: {pkmn.chosen_ability}
-                      </em>
-                    </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      component="div"
-                      sx={{ color: "text.secondary" }}
-                    >
-                      <em>
-                        <b>BST</b>: {pkmn.bst}
-                      </em>
-                    </Typography>
-                    <AbilityMenu
-                      menuText={"Change Ability"}
-                      pkmnName={pkmn.name}
-                      abilities={pkmn.abilities}
-                      onSelect={(ability) => updateAbility(pkmn.name, ability)}
-                    />
-                  </CardContent>
-                  <Box
-                    sx={{
-                      display: "grid",
-                      gridTemplateColumns: "1fr 1fr 1fr",
-                      rowGap: "5px",
-                      columnGap: "20px",
-                      alignItems: "center",
-                      pl: 1,
-                      pb: 1,
-                      margin: "5px",
-                    }}
-                  >
-                    {/*The order allows for it appear in the way desired*/}
-                    <Typography>
-                      <b>HP</b>: {pkmn.hp}
-                    </Typography>
-                    <Typography>
-                      <b>Attack</b>: {pkmn.attack}
-                    </Typography>
-                    <Typography>
-                      <b>Def</b>: {pkmn.defense}
-                    </Typography>
-                    <Typography>
-                      <b>Sp. Atk</b>: {pkmn.special_attack}
-                    </Typography>
-                    <Typography>
-                      <b>Sp. Def</b>: {pkmn.special_defense}
-                    </Typography>
-                    <Typography>
-                      <b>Speed</b>: {pkmn.speed}
-                    </Typography>
-                  </Box>
-                </Box>
-              </PkmnCard>
-            </Grid>
-          ))}
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            sx={{ mt: 5 }}
+      {isLoading ? (
+        <div style={{ display: "flex", alignItems: "center", height: "50vh" }}>
+          <CircularProgress size="10rem" sx={{ color: "var(--primary)" }} />
+        </div>
+      ) : (
+        <Box display="flex" justifyContent="center" width="100%">
+          <Grid
+            container
+            spacing={2}
+            justifyContent="center"
+            sx={{ maxWidth: "70rem", marginTop: "3rem" }}
           >
-            <Typography sx={{ mb: 2, textAlign: "center" }}>
-              This team has the following overlapping weaknesses. Be mindful!
-            </Typography>
-            <Box
-              display="flex"
-              flexDirection="row"
-              justifyContent="center"
-              gap={3}
-            >
-              {overlappingWeaknesses.map((weakness) => (
-                <img
-                  key={weakness}
-                  src={`/types_sprites/${weakness}.png`}
-                  alt={weakness}
-                />
-              ))}
-            </Box>
-          </Box>
-        </Grid>
-      </Box>
+            {Object.values(pkmnTeam || {}).map((pkmn) => (
+              <Grid
+                size={{ xs: 6 }}
+                key={pkmn.name?.toLowerCase() || Math.random()}
+              >
+                <PkmnCard
+                  sx={{
+                    display: "flex",
+                    border: 1,
+                    borderStyle: "solid",
+                    borderColor: "var(--text)",
+                    width: "100%",
+                    height: "100%",
+                    p: 2,
+                  }}
+                >
+                  <CardMedia
+                    className="sprite"
+                    component="img"
+                    sx={{
+                      width: 151,
+                      objectFit: "contain",
+                    }}
+                    image={`/pokemon_sprites/${pkmn.name.toLowerCase()}-sprite.png`}
+                    alt={pkmn.name + " sprite"}
+                  />
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <CardContent sx={{ flex: "1 0 auto" }}>
+                      <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <EditableTypography
+                          givenText={pkmn.nickname}
+                          component="div"
+                          variant="h5"
+                          sx={{ marginRight: "5px" }}
+                        />
+                        {Types(pkmn.type_1, pkmn.type_2)}
+                      </Box>
+                      <Typography
+                        variant="subtitle1"
+                        component="div"
+                        sx={{ color: "text.secondary" }}
+                      >
+                        <em>
+                          <b>Role</b>: {pkmn.role}
+                        </em>
+                      </Typography>
+                      <Typography
+                        variant="subtitle1"
+                        component="div"
+                        sx={{ color: "text.secondary" }}
+                      >
+                        <em>
+                          <b>Chosen Ability</b>: {pkmn.chosen_ability}
+                        </em>
+                      </Typography>
+                      <Typography
+                        variant="subtitle1"
+                        component="div"
+                        sx={{ color: "text.secondary" }}
+                      >
+                        <em>
+                          <b>BST</b>: {pkmn.bst}
+                        </em>
+                      </Typography>
+                      <AbilityMenu
+                        menuText={"Change Ability"}
+                        pkmnName={pkmn.name}
+                        abilities={pkmn.abilities}
+                        onSelect={(ability) =>
+                          updateAbility(pkmn.name, ability)
+                        }
+                      />
+                    </CardContent>
+                    <Box
+                      sx={{
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr 1fr",
+                        rowGap: "5px",
+                        columnGap: "20px",
+                        alignItems: "center",
+                        pl: 1,
+                        pb: 1,
+                        margin: "5px",
+                      }}
+                    >
+                      {/*The order allows for it appear in the way desired*/}
+                      <Typography>
+                        <b>HP</b>: {pkmn.hp}
+                      </Typography>
+                      <Typography>
+                        <b>Attack</b>: {pkmn.attack}
+                      </Typography>
+                      <Typography>
+                        <b>Def</b>: {pkmn.defense}
+                      </Typography>
+                      <Typography>
+                        <b>Sp. Atk</b>: {pkmn.special_attack}
+                      </Typography>
+                      <Typography>
+                        <b>Sp. Def</b>: {pkmn.special_defense}
+                      </Typography>
+                      <Typography>
+                        <b>Speed</b>: {pkmn.speed}
+                      </Typography>
+                    </Box>
+                  </Box>
+                </PkmnCard>
+              </Grid>
+            ))}
+            {!isLoading && (
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                sx={{ mt: 5 }}
+              >
+                <Typography sx={{ mb: 2, textAlign: "center" }}>
+                  This team has the following overlapping weaknesses. Be
+                  mindful!
+                </Typography>
+                <Box
+                  display="flex"
+                  flexDirection="row"
+                  justifyContent="center"
+                  gap={3}
+                >
+                  {overlappingWeaknesses.map((weakness) => (
+                    <img
+                      key={weakness}
+                      src={`/types_sprites/${weakness}.png`}
+                      alt={weakness}
+                    />
+                  ))}
+                </Box>
+              </Box>
+            )}
+          </Grid>
+        </Box>
+      )}
     </>
   );
 };

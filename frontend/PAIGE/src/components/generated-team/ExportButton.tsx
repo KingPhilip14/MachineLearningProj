@@ -2,11 +2,12 @@ import Button from "@mui/material/Button";
 
 interface Props {
   content: string;
+  teamName: string;
 }
 
-const ExportButton = ({ content }: Props) => {
+const ExportButton = ({ content, teamName = "My Team" }: Props) => {
   const handleDownload = () => {
-    const fileName = "my-file.txt";
+    const fileName = `${teamName}.txt`;
     const blob = new Blob([content], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
 

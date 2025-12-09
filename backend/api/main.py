@@ -99,10 +99,6 @@ async def get_account(account_id: int):
 async def generate_team(payload: TeamRequest):
     file_path = os.path.join(POKEMON_DATA_DIR, f'{payload.gen_file_name.lower()}_data.json')
 
-    print(f'Using babies: {payload.using_little_cup}')
-    print(f'Using legends: {payload.using_legends}')
-    print(f'Composition: {payload.composition}')
-
     tb = TeamBuilder(
         payload.using_little_cup,
         payload.using_legends,
