@@ -21,7 +21,7 @@ export const SelectedGenCard = ({ selectedGen, backPage }: Props) => {
         alignItems: "center",
         borderRadius: "30px",
         background: "var(--tertiary)",
-        marginBottom: "50px",
+        marginBottom: "50px"
       }}
     >
       <CardContent>
@@ -29,7 +29,7 @@ export const SelectedGenCard = ({ selectedGen, backPage }: Props) => {
           variant="h5"
           style={{ textAlign: "center", margin: 0, lineHeight: 1.4 }}
         >
-          Selected generation: {selectedGen}
+          Selected generation: <b>{selectedGen}</b>
         </Typography>
       </CardContent>
       <CardActions>

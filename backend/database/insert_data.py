@@ -227,7 +227,7 @@ def insert_pokemon_abilities(conn, cursor) -> None:
 
     for info in tqdm(pkmn_ability_info):
         insert: str = """
-                      INSERT INTO pokemon_abilities
+                      INSERT INTO pokemon_ability
                       VALUES (%s, %s, %s);
                       """
 

@@ -182,7 +182,7 @@ def create_pokemon_in_team_table(conn, cursor) -> None:
 def create_pokemon_ability_table(conn, cursor) -> None:
     try:
         insert: str = """
-        CREATE TABLE IF NOT EXISTS pokemon_abilities(
+        CREATE TABLE IF NOT EXISTS pokemon_ability(
             pokemon_id INTEGER NOT NULL REFERENCES pokemon(pokemon_id),
             ability_id INTEGER NOT NULL REFERENCES ability(ability_id),
             is_hidden BOOLEAN NOT NULL DEFAULT FALSE,

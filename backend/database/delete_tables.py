@@ -13,7 +13,7 @@ def delete_tables(conn, cursor):
     __delete_table(conn, cursor, 'moveset')
     __delete_table(conn, cursor, 'pokemon_in_team')
     __delete_table(conn, cursor, 'ability')
-    __delete_table(conn, cursor, 'pokemon_abilities')
+    __delete_table(conn, cursor, 'pokemon_ability')
 
 
 def __delete_table(conn, cursor, table_name: str) -> None:

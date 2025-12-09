@@ -6,112 +6,144 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import EditableTypography from "../EditableTypography.tsx";
+import AbilityMenu from "../AbilityMenu.tsx";
+import { useState } from "react";
 
 export default function PokemonCards() {
-  const pkmnTeam = {
-    solrock: {
-      name: "solrock",
-      nickname: "Solrock",
+  const initialTeamData = {
+    sandaconda: {
+      name: "sandaconda",
+      nickname: "Sandaconda",
+      role: "Physical Wall",
+      role_description:
+        "Eats physical hits without taking much of a scratch. Both HP and Defense are notably high.",
+      type_1: "ground",
+      type_2: "",
+      hp: 72,
+      attack: 107,
+      defense: 125,
+      special_attack: 70,
+      special_defense: 70,
+      speed: 71,
+      bst: 510,
+      chosen_ability: "Sand Spit",
+      abilities: ["Sand Spit", "Shed Skin", "Sand Veil"],
+    },
+    garganacl: {
+      name: "garganacl",
+      nickname: "Garganacl",
       role: "Bulky",
       role_description:
         "Provides a general form of tankiness without having high defenses thanks to its high HP.",
       type_1: "rock",
-      type_2: "psychic",
-      hp: 90,
-      attack: 95,
-      defense: 85,
-      special_attack: 65,
-      special_defense: 65,
-      speed: 70,
-      bst: 460,
-      abilities: ["Levitate"],
-    },
-    excadrill: {
-      name: "excadrill",
-      nickname: "Excadrill",
-      role: "Physical Sweeper",
-      role_description:
-        "A fast, hard-hitting attacker that uses their astounding physical damage.",
-      type_1: "ground",
-      type_2: "steel",
-      hp: 110,
-      attack: 135,
-      defense: 60,
-      special_attack: 65,
-      special_defense: 65,
-      speed: 88,
-      bst: 508,
-      abilities: ["Sand Rush", "Sand Force", "Mold Breaker"],
-    },
-    jynx: {
-      name: "jynx",
-      nickname: "Jynx",
-      role: "Special Sweeper",
-      role_description:
-        "An attacker excelling in special damage and speed to overwhelm the opponent.",
-      type_1: "ice",
-      type_2: "psychic",
-      hp: 65,
-      attack: 50,
-      defense: 35,
-      special_attack: 95,
-      special_defense: 95,
-      speed: 95,
-      bst: 455,
-      abilities: ["Oblivious", "Forewarn", "Dry Skin"],
-    },
-    seaking: {
-      name: "seaking",
-      nickname: "Seaking",
-      role: "Versatile",
-      role_description:
-        "A flexible role that provides relatively balanced stats and can have unpredictable usage.",
-      type_1: "water",
       type_2: "",
-      hp: 80,
-      attack: 92,
-      defense: 65,
-      special_attack: 80,
-      special_defense: 80,
-      speed: 68,
-      bst: 450,
-      abilities: ["Swift Swim", "Water Veil", "Lightning Rod"],
+      hp: 100,
+      attack: 100,
+      defense: 130,
+      special_attack: 90,
+      special_defense: 90,
+      speed: 35,
+      bst: 500,
+      chosen_ability: "Purifying Salt",
+      abilities: ["Purifying Salt", "Sturdy", "Clear Body"],
     },
-    mantine: {
-      name: "mantine",
-      nickname: "Mantine",
+    cryogonal: {
+      name: "cryogonal",
+      nickname: "Cryogonal",
       role: "Special Wall",
       role_description:
         "Absorbs special attacks, walling out special attackers. Both HP and Special Defense are notably high.",
-      type_1: "water",
-      type_2: "flying",
-      hp: 85,
-      attack: 40,
-      defense: 70,
-      special_attack: 140,
-      special_defense: 140,
-      speed: 70,
-      bst: 485,
-      abilities: ["Swift Swim", "Water Absorb", "Water Veil"],
-    },
-    miltank: {
-      name: "miltank",
-      nickname: "Miltank",
-      role: "Physical Wall",
-      role_description:
-        "Eats physical hits without taking much of a scratch. Both HP and Defense are notably high.",
-      type_1: "normal",
+      type_1: "ice",
       type_2: "",
-      hp: 95,
-      attack: 80,
-      defense: 105,
-      special_attack: 70,
-      special_defense: 70,
-      speed: 100,
-      bst: 490,
-      abilities: ["Thick Fat", "Scrappy", "Sap Sipper"],
+      hp: 80,
+      attack: 50,
+      defense: 50,
+      special_attack: 135,
+      special_defense: 135,
+      speed: 105,
+      bst: 515,
+      chosen_ability: "Levitate",
+      abilities: ["Levitate"],
+    },
+    floette: {
+      name: "floette",
+      nickname: "Floette",
+      role: "Eviolite User",
+      role_description:
+        "While not fully evolved, an Eviolite will make this PokÃ©mon as bulky as another Wall archetype, providing unique usage.",
+      type_1: "fairy",
+      type_2: "",
+      hp: 54,
+      attack: 45,
+      defense: 47,
+      special_attack: 98,
+      special_defense: 98,
+      speed: 52,
+      bst: 371,
+      chosen_ability: "Flower Veil",
+      abilities: ["Flower Veil", "Symbiosis"],
+    },
+    "gallade-mega": {
+      name: "gallade-mega",
+      nickname: "Gallade-mega",
+      role: "Physical Sweeper",
+      role_description:
+        "A fast, hard-hitting attacker that uses their astounding physical damage.",
+      type_1: "psychic",
+      type_2: "fighting",
+      hp: 68,
+      attack: 165,
+      defense: 95,
+      special_attack: 115,
+      special_defense: 115,
+      speed: 110,
+      bst: 618,
+      chosen_ability: "Inner Focus",
+      abilities: ["Inner Focus"],
+    },
+    dusknoir: {
+      name: "dusknoir",
+      nickname: "Dusknoir",
+      role: "Bulky Wall",
+      role_description:
+        "Can take both physical and special damage well. Both Defense and Special Defense are notably high, but HP may not be.",
+      type_1: "ghost",
+      type_2: "",
+      hp: 45,
+      attack: 100,
+      defense: 135,
+      special_attack: 135,
+      special_defense: 135,
+      speed: 45,
+      bst: 525,
+      chosen_ability: "Pressure",
+      abilities: ["Pressure", "Frisk"],
     },
   };
+
+  interface PkmnEntry {
+    name: string;
+    nickname: string;
+    role: string;
+    role_description: string;
+    type_1: string;
+    type_2: string;
+    hp: number;
+    attack: number;
+    defense: number;
+    special_attack: number;
+    special_defense: number;
+    speed: number;
+    bst: number;
+    chosen_ability: string;
+    abilities: string[];
+  }
+
+  interface PkmnTeam {
+    [pokemonName: string]: PkmnEntry;
+  }
+
+  const [pkmnTeam, setPkmnTeam] = useState<PkmnTeam>(initialTeamData);
 
   const PkmnCard = styled(Card)({
     display: "flex",
@@ -119,6 +151,16 @@ export default function PokemonCards() {
     color: "var(--text)",
     boxShadow: "3px 3px 8px var(--box-shadow)",
   });
+
+  const updateAbility = (name: string, ability: string) => {
+    setPkmnTeam((prev) => ({
+      ...prev,
+      [name]: {
+        ...prev[name],
+        chosen_ability: ability,
+      },
+    }));
+  };
 
   function Types(type_1: string, type_2: string) {
     if (type_2 !== "") {
@@ -181,15 +223,34 @@ export default function PokemonCards() {
                       component="div"
                       sx={{ color: "text.secondary" }}
                     >
-                      Role: {pkmn.role}
+                      <em>
+                        <b>Role</b>: {pkmn.role}
+                      </em>
                     </Typography>
                     <Typography
                       variant="subtitle1"
                       component="div"
                       sx={{ color: "text.secondary" }}
                     >
-                      BST: {pkmn.bst}
+                      <em>
+                        <b>Chosen Ability</b>: {pkmn.chosen_ability}
+                      </em>
                     </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      component="div"
+                      sx={{ color: "text.secondary" }}
+                    >
+                      <em>
+                        <b>BST</b>: {pkmn.bst}
+                      </em>
+                    </Typography>
+                    <AbilityMenu
+                      menuText={"Change Ability"}
+                      pkmnName={pkmn.name}
+                      abilities={pkmn.abilities}
+                      onSelect={(ability) => updateAbility(pkmn.name, ability)}
+                    />
                   </CardContent>
                   <Box
                     sx={{

@@ -46,6 +46,7 @@ def get_db():
     finally:
         db.close()
 
+
 @app.get('/')
 async def root():
     return 'Hello world!'
@@ -108,6 +109,73 @@ async def generate_team(using_babies: bool, using_legends: bool, gen_file_name: 
                             detail="A team could not be generated. Malformed inputs may have been provided.")
 
     return team_json, weaknesses
+
+
+@app.get('/pokemon-ability/by-id/{pokemon_id}/{ability_id}')
+async def get_pokemon_ability(pokemon_id: int, ability_id: int):
+    stmt = (
+        select(
+            pokemon.c.pokemon_id,
+            pokemon.c.pokemon_name,
+
+            ability.c.ability_id,
+            ability.c.ability_name,
+
+            pokemon_ability.c.is_hidden,
+        )
+        .select_from(
+            pokemon
+            .join(pokemon_ability, pokemon_ability.c.pokemon_id == pokemon.c.pokemon_id)
+            .join(ability, pokemon_ability.c.ability_id == ability.c.ability_id)
+        )
+        .where(
+            (pokemon_ability.c.pokemon_id == pokemon_id) & (pokemon_ability.c.ability_id == ability_id)
+        )
+    )
+
+    with engine.connect() as conn:
+        row = conn.execute(stmt).fetchone()
+
+    if not row:
+        raise HTTPException(status_code=400,
+                            detail=f'Could not find ability with ID {ability_id} for Pokemon with ID {pokemon_id}')
+
+    return dict(row._mapping)
+
+
+@app.get('/pokemon-ability/by-name/{pokemon_name}/{ability_name}')
+async def get_pokemon_ability(pokemon_name: str, ability_name: str):
+    pokemon_name = pokemon_name.lower()
+    ability_name = ability_name.lower()
+
+    stmt = (
+        select(
+            pokemon.c.pokemon_id,
+            pokemon.c.pokemon_name,
+
+            ability.c.ability_id,
+            ability.c.ability_name,
+
+            pokemon_ability.c.is_hidden,
+        )
+        .select_from(
+            pokemon
+            .join(pokemon_ability, pokemon_ability.c.pokemon_id == pokemon.c.pokemon_id)
+            .join(ability, pokemon_ability.c.ability_id == ability.c.ability_id)
+        )
+        .where(
+            (pokemon.c.pokemon_name == pokemon_name) & (ability.c.ability_name == ability_name)
+        )
+    )
+
+    with engine.connect() as conn:
+        row = conn.execute(stmt).fetchone()
+
+    if not row:
+        raise HTTPException(status_code=400,
+                            detail=f'Could not find {ability_name} ability for {pokemon_name}')
+
+    return dict(row._mapping)
 
 
 @app.post('/account/{account_id}/save-team')
