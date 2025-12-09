@@ -114,7 +114,6 @@ export default function AbilityMenu({
     setAnchorEl(event.currentTarget);
 
     // fetches the information of the ability the first time the menu opens
-    debugger;
     if (Object.keys(abilityInfo).length === 0) {
       abilities.forEach(async (ability) => {
         const normalizedAbility = normalizeAbilityName(ability);
@@ -134,7 +133,6 @@ export default function AbilityMenu({
     setAnchorEl(null);
   };
 
-  debugger;
   return (
     <div>
       <Button

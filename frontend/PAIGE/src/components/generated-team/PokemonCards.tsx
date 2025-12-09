@@ -97,8 +97,8 @@ export const PokemonCards = ({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          using_little_cup: usingLittleCup === "yes",
-          using_legends: usingLegends === "yes",
+          using_little_cup: usingLittleCup,
+          using_legends: usingLegends,
           gen_file_name: genFileName,
           composition: composition,
         }),

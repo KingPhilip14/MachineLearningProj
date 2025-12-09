@@ -101,7 +101,6 @@ async def generate_team(payload: TeamRequest):
 
     print(f'Using babies: {payload.using_little_cup}')
     print(f'Using legends: {payload.using_legends}')
-    print(f'File path: {file_path}')
     print(f'Composition: {payload.composition}')
 
     tb = TeamBuilder(
@@ -112,8 +111,6 @@ async def generate_team(payload: TeamRequest):
     )
 
     team_json, weaknesses = tb.generate_team_json()
-
-    # print(f'Team json: {team_json}')
 
     if not team_json:
         raise HTTPException(

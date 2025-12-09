@@ -24,8 +24,6 @@ export default function TeamConfig() {
   const [usingLegends, setUsingLegends] = useState("no");
   const [composition, setComposition] = useState("balanced");
 
-  // type CompositionType = "offensive" | "balanced" | "defensive";
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newLCValue = event.target.value;
 
@@ -59,24 +57,6 @@ export default function TeamConfig() {
     borderRadius: "30px",
     background: "var(--tertiary)",
   });
-
-  // const compositionMap = {
-  //   offensive: {
-  //     more_offensive: true,
-  //     more_defensive: false,
-  //     more_balanced: false,
-  //   },
-  //   balanced: {
-  //     more_offensive: false,
-  //     more_defensive: false,
-  //     more_balanced: true,
-  //   },
-  //   defensive: {
-  //     more_offensive: false,
-  //     more_defensive: true,
-  //     more_balanced: false,
-  //   },
-  // };
 
   return (
     <>
@@ -240,7 +220,7 @@ export default function TeamConfig() {
             sx={{
               backgroundColor: "var(--secondary)",
               color: "var(--text)",
-              margin: "0px 0px 80px 0px",
+              marginBottom: "80px",
               minHeight: "50px",
             }}
           >
