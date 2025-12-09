@@ -21,6 +21,7 @@ from backend.api.models.team_table import team
 from backend.api.schemas.delete_team import DeleteTeam
 from backend.api.schemas.get_account import GetAccount
 from backend.api.schemas.save_team import SaveTeam
+from backend.api.schemas.team_request import TeamRequest
 from backend.api.schemas.update_team_name import UpdateTeamName
 from backend.api.schemas.team_prefs import TeamPrefs
 from backend.ml.learning.team_builder import TeamBuilder
@@ -95,22 +96,35 @@ async def get_account(account_id: int):
 
 
 @app.post('/generate-team')
-async def generate_team(using_babies: bool, using_legends: bool, gen_file_name: str,
-                        preferences: dict[str, bool] | None = TeamPrefs()):
-    file_path: str = os.path.join(POKEMON_DATA_DIR, f'{gen_file_name.lower()}_data.json')
-    tb: TeamBuilder = TeamBuilder(using_babies, using_legends, file_path, preferences)
-    generated_team_result: tuple[dict, dict] = tb.generate_team_json()
+async def generate_team(payload: TeamRequest):
+    file_path = os.path.join(POKEMON_DATA_DIR, f'{payload.gen_file_name.lower()}_data.json')
 
-    team_json: dict = generated_team_result[0]
-    weaknesses: dict = generated_team_result[1]
+    print(f'Using babies: {payload.using_little_cup}')
+    print(f'Using legends: {payload.using_legends}')
+    print(f'File path: {file_path}')
+    print(f'Composition: {payload.composition}')
+
+    tb = TeamBuilder(
+        payload.using_little_cup,
+        payload.using_legends,
+        file_path,
+        payload.composition
+    )
+
+    team_json, weaknesses = tb.generate_team_json()
+
+    # print(f'Team json: {team_json}')
 
     if not team_json:
-        raise HTTPException(status_code=400,
-                            detail="A team could not be generated. Malformed inputs may have been provided.")
+        raise HTTPException(
+            status_code=400,
+            detail='A team could not be generated. Malformed inputs may have been provided.'
+        )
 
     return team_json, weaknesses
 
 
+@app.post('/')
 @app.get('/pokemon-ability/by-id/{pokemon_id}/{ability_id}')
 async def get_pokemon_ability(pokemon_id: int, ability_id: int):
     stmt = (

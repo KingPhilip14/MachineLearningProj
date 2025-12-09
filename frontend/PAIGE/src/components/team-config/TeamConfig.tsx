@@ -21,7 +21,10 @@ export default function TeamConfig() {
 
   const [usingLittleCup, setUsingLittleCup] = useState("no");
   const [disabledLegends, setDisabledLegends] = useState(false);
-  const [legendsValue, setLegendsValue] = useState("no");
+  const [usingLegends, setUsingLegends] = useState("no");
+  const [composition, setComposition] = useState("balanced");
+
+  // type CompositionType = "offensive" | "balanced" | "defensive";
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newLCValue = event.target.value;
@@ -30,10 +33,14 @@ export default function TeamConfig() {
 
     if (newLCValue === "yes") {
       setDisabledLegends(true);
-      setLegendsValue("no");
+      setUsingLegends("no");
     } else {
       setDisabledLegends(false);
     }
+  };
+
+  const handleCompositionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setComposition(e.target.value);
   };
 
   const ConfigRadio = styled(Radio)({
@@ -52,6 +59,24 @@ export default function TeamConfig() {
     borderRadius: "30px",
     background: "var(--tertiary)",
   });
+
+  // const compositionMap = {
+  //   offensive: {
+  //     more_offensive: true,
+  //     more_defensive: false,
+  //     more_balanced: false,
+  //   },
+  //   balanced: {
+  //     more_offensive: false,
+  //     more_defensive: false,
+  //     more_balanced: true,
+  //   },
+  //   defensive: {
+  //     more_offensive: false,
+  //     more_defensive: true,
+  //     more_balanced: false,
+  //   },
+  // };
 
   return (
     <>
@@ -125,9 +150,9 @@ export default function TeamConfig() {
               <RadioGroup
                 row
                 name="legends"
-                value={legendsValue}
+                value={usingLegends}
                 // defaultValue={"no"}
-                onChange={(e) => setLegendsValue(e.target.value)}
+                onChange={(e) => setUsingLegends(e.target.value)}
                 style={{ justifyContent: "center", alignItems: "center" }}
               >
                 <FormControlLabel
@@ -169,7 +194,8 @@ export default function TeamConfig() {
               <RadioGroup
                 row
                 name="team-composition"
-                defaultValue="balanced"
+                value={composition}
+                onChange={handleCompositionChange}
                 style={{ justifyContent: "center", alignItems: "center" }}
               >
                 <FormControlLabel
@@ -199,7 +225,15 @@ export default function TeamConfig() {
         </ConfigCard>
 
         {/* Generate button */}
-        <Link to={"/generated-team"} state={{ selectedGen: selectedGen }}>
+        <Link
+          to={"/generated-team"}
+          state={{
+            selectedGen: selectedGen,
+            usingLittleCup: usingLittleCup === "yes",
+            usingLegends: usingLegends === "yes",
+            composition: composition,
+          }}
+        >
           <Button
             variant={"contained"}
             size={"large"}

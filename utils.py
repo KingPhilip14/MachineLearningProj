@@ -133,43 +133,34 @@ def ask_if_using_legends() -> bool:
     return user_input.lower() in ['y', 'yes']
 
 
-def ask_if_only_using_babies() -> bool:
+def asking_if_using_little_cup() -> bool:
     user_input: str = input('Would you like to generate a team for the Little Cup format '
                             '(only unevolved Pokémon are used; legendaries will not be used)\n(y/n) > ')
 
     return user_input.lower() in ['y', 'yes']
 
 
-def ask_for_team_preferences() -> dict[str, bool]:
+def ask_for_team_composition() -> str:
     """
-    Asks the user for how they want their team composition. They can choose between a more offensive, defensive, or
-    balanced composition.
+    Asks the user for how they want their team composition. They can choose between offensive, defensive, or
+    balanced.
 
     When asking the user, each question will be asked until they say yes to one of the compositions. If they say no
     to all three, the default composition will be the balanced composition.
     """
-    preferences: dict[str, bool] = {
-        'more_offensive': False,
-        'more_defensive': False,
-        'more_balanced': False
-    }
 
     user_input: str = input('\nWould you like a more offensive team composition?\n(y/n) > ')
 
     if user_input.lower() in ['y', 'yes']:
-        preferences['more_offensive'] = True
-        return preferences
+        return 'offensive'
 
-    user_input = input('\nWould you like a more defense team composition instead?\n(y/n) > ')
+    user_input = input('\nWould you like a more defensive team composition instead?\n(y/n) > ')
 
     if user_input.lower() in ['y', 'yes']:
-        preferences['more_defensive'] = True
-        return preferences
+        return 'defensive'
 
     print('\nThe balanced composition will be used by default.')
-    preferences['more_balanced'] = True
-
-    return preferences
+    return 'balanced'
 
 
 def get_role_description(role: str) -> str:

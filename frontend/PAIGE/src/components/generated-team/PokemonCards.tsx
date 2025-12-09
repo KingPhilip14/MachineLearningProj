@@ -7,120 +7,25 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import EditableTypography from "../EditableTypography.tsx";
 import AbilityMenu from "../AbilityMenu.tsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function PokemonCards() {
-  const initialTeamData = {
-    sandaconda: {
-      name: "sandaconda",
-      nickname: "Sandaconda",
-      role: "Physical Wall",
-      role_description:
-        "Eats physical hits without taking much of a scratch. Both HP and Defense are notably high.",
-      type_1: "ground",
-      type_2: "",
-      hp: 72,
-      attack: 107,
-      defense: 125,
-      special_attack: 70,
-      special_defense: 70,
-      speed: 71,
-      bst: 510,
-      chosen_ability: "Sand Spit",
-      abilities: ["Sand Spit", "Shed Skin", "Sand Veil"],
-    },
-    garganacl: {
-      name: "garganacl",
-      nickname: "Garganacl",
-      role: "Bulky",
-      role_description:
-        "Provides a general form of tankiness without having high defenses thanks to its high HP.",
-      type_1: "rock",
-      type_2: "",
-      hp: 100,
-      attack: 100,
-      defense: 130,
-      special_attack: 90,
-      special_defense: 90,
-      speed: 35,
-      bst: 500,
-      chosen_ability: "Purifying Salt",
-      abilities: ["Purifying Salt", "Sturdy", "Clear Body"],
-    },
-    cryogonal: {
-      name: "cryogonal",
-      nickname: "Cryogonal",
-      role: "Special Wall",
-      role_description:
-        "Absorbs special attacks, walling out special attackers. Both HP and Special Defense are notably high.",
-      type_1: "ice",
-      type_2: "",
-      hp: 80,
-      attack: 50,
-      defense: 50,
-      special_attack: 135,
-      special_defense: 135,
-      speed: 105,
-      bst: 515,
-      chosen_ability: "Levitate",
-      abilities: ["Levitate"],
-    },
-    floette: {
-      name: "floette",
-      nickname: "Floette",
-      role: "Eviolite User",
-      role_description:
-        "While not fully evolved, an Eviolite will make this PokÃ©mon as bulky as another Wall archetype, providing unique usage.",
-      type_1: "fairy",
-      type_2: "",
-      hp: 54,
-      attack: 45,
-      defense: 47,
-      special_attack: 98,
-      special_defense: 98,
-      speed: 52,
-      bst: 371,
-      chosen_ability: "Flower Veil",
-      abilities: ["Flower Veil", "Symbiosis"],
-    },
-    "gallade-mega": {
-      name: "gallade-mega",
-      nickname: "Gallade-mega",
-      role: "Physical Sweeper",
-      role_description:
-        "A fast, hard-hitting attacker that uses their astounding physical damage.",
-      type_1: "psychic",
-      type_2: "fighting",
-      hp: 68,
-      attack: 165,
-      defense: 95,
-      special_attack: 115,
-      special_defense: 115,
-      speed: 110,
-      bst: 618,
-      chosen_ability: "Inner Focus",
-      abilities: ["Inner Focus"],
-    },
-    dusknoir: {
-      name: "dusknoir",
-      nickname: "Dusknoir",
-      role: "Bulky Wall",
-      role_description:
-        "Can take both physical and special damage well. Both Defense and Special Defense are notably high, but HP may not be.",
-      type_1: "ghost",
-      type_2: "",
-      hp: 45,
-      attack: 100,
-      defense: 135,
-      special_attack: 135,
-      special_defense: 135,
-      speed: 45,
-      bst: 525,
-      chosen_ability: "Pressure",
-      abilities: ["Pressure", "Frisk"],
-    },
+interface Props {
+  selectedGen: string;
+  usingLittleCup: string;
+  usingLegends: string;
+  composition: {
+    more_offensive: boolean;
+    more_defensive: boolean;
+    more_balanced: boolean;
   };
+}
 
+export const PokemonCards = ({
+  selectedGen,
+  usingLittleCup,
+  usingLegends,
+  composition,
+}: Props) => {
   interface PkmnEntry {
     name: string;
     nickname: string;
@@ -143,7 +48,25 @@ export default function PokemonCards() {
     [pokemonName: string]: PkmnEntry;
   }
 
-  const [pkmnTeam, setPkmnTeam] = useState<PkmnTeam>(initialTeamData);
+  const [pkmnTeam, setPkmnTeam] = useState<PkmnTeam>({});
+  const [overlappingWeaknesses, setOverlappingWeaknesses] = useState<string[]>(
+    [],
+  );
+
+  useEffect(() => {
+    async function fetchTeam() {
+      const data = await getGeneratedTeam();
+      if (!data || !Array.isArray(data) || data.length === 0) return;
+
+      setPkmnTeam(data[0]);
+
+      if (data[1]?.overlapping_weaknesses) {
+        setOverlappingWeaknesses(data[1].overlapping_weaknesses);
+      }
+    }
+
+    fetchTeam();
+  }, []);
 
   const PkmnCard = styled(Card)({
     display: "flex",
@@ -161,6 +84,40 @@ export default function PokemonCards() {
       },
     }));
   };
+
+  async function getGeneratedTeam() {
+    const genFileName = selectedGen
+      ? selectedGen.replace(" ", "_").toLowerCase()
+      : "national";
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/generate-team", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          using_little_cup: usingLittleCup === "yes",
+          using_legends: usingLegends === "yes",
+          gen_file_name: genFileName,
+          composition: composition,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("A new team was not able to be generated.");
+      }
+
+      const data = await response.json();
+      console.log(data);
+
+      return data || {};
+    } catch (error) {
+      console.error(error);
+
+      return {};
+    }
+  }
 
   function Types(type_1: string, type_2: string) {
     if (type_2 !== "") {
@@ -184,8 +141,11 @@ export default function PokemonCards() {
           justifyContent="center"
           sx={{ maxWidth: "70rem", marginTop: "3rem" }}
         >
-          {Object.values(pkmnTeam).map((pkmn) => (
-            <Grid size={{ xs: 6 }} key={pkmn.name.toLowerCase()}>
+          {Object.values(pkmnTeam || {}).map((pkmn) => (
+            <Grid
+              size={{ xs: 6 }}
+              key={pkmn.name?.toLowerCase() || Math.random()}
+            >
               <PkmnCard
                 sx={{
                   display: "flex",
@@ -292,4 +252,4 @@ export default function PokemonCards() {
       </Box>
     </>
   );
-}
+};

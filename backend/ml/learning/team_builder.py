@@ -16,15 +16,14 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 
 from utils import get_role_description, calculate_type_effectiveness
-from config import DEFAULT_TEAM_PREFS
 
 
 class TeamBuilder:
-    def __init__(self, use_babies: bool, use_legends: bool, file_to_use: str,
-                 preferences: dict[str, bool] | None = None):
-        self.using_babies: bool = use_babies
-        self.using_legends: bool = use_legends
+    def __init__(self, using_little_cup: bool, using_legends: bool, file_to_use: str, composition: str = 'balanced'):
+        self.using_little_cup: bool = using_little_cup
+        self.using_legends: bool = using_legends
         self.file_to_use: str = file_to_use
+        self.composition: str = composition
         self.data = dict()
 
         with open(file_to_use, 'r') as file:
@@ -34,22 +33,13 @@ class TeamBuilder:
         self.df: DataFrame = pd.DataFrame()
         self.df_encoded: DataFrame = pd.DataFrame()
 
-        if preferences is None:
-            self.preferences = DEFAULT_TEAM_PREFS
-        else:
-            self.preferences: dict[str, bool] = {
-                'more_offensive': preferences['more_offensive'],
-                'more_defensive': preferences['more_defensive'],
-                'more_balanced': preferences['more_balanced'],
-            }
-
         self.gimmick_found: bool = False
 
     def filter_data(self) -> None:
         temp: dict = dict()
 
         # if using baby Pokémon, filter the data to those only and return that data
-        if self.using_babies:
+        if self.using_little_cup:
             # Some Pokémon are banned from the Little Cup format, so they will be excluded
             banned_list: list[str] = ['scyther', 'sneasel', 'yanma', 'tangela', 'swirlix', 'gligar', 'meditite',
                                       'murkrow', 'misdreavus', 'drifloon', 'porygon', 'cutiefly', 'gothita',
@@ -164,6 +154,7 @@ class TeamBuilder:
         special_attack = row['special-attack']
         special_defense = row['special-defense']
         speed = row['speed']
+        bst = row['bst']
 
         # determine thresholds to use for labeling
         evo_weight: float = row.get('evo_weight', 1.0)
@@ -267,9 +258,9 @@ class TeamBuilder:
         team_types: list[list[str]] = []
 
         grouped = self.df_encoded.groupby('cluster_name')
-        preferred_roles: list[str] = self.__convert_preferences()
+        preferred_roles: list[str] = self.__convert_composition()
 
-        # shuffle the preferences to not have the same result of clusters frequently
+        # shuffle the compositions to not have the same result of clusters frequently
         random.shuffle(preferred_roles)
 
         # used to potentially select one gimmick form for the team
@@ -412,15 +403,15 @@ class TeamBuilder:
 
         return team_with_details, team_df, team_types, json_export
 
-    def __convert_preferences(self) -> list[str]:
+    def __convert_composition(self) -> list[str]:
         """
-        Uses the dict of preferences to determine the returned list of strings. The returned list will indicate how many
-        Pokémon of a particular role are added to the final team composition.
+        Uses the string representing the team composition to determine the returned list of strings.
+        The returned list will indicate how many Pokémon of a particular role are added to the final team composition.
         """
-        if self.preferences['more_offensive']:
+        if self.composition == 'offensive':
             return ['Physical Sweeper', 'Special Sweeper', 'Physical Sweeper', 'Special Sweeper', 'Utility/Support',
                     'Mixed Attacker', 'Physical Attacker', 'Special Attacker', 'Speedster', 'Bulky', 'Bulky Wall']
-        elif self.preferences['more_defensive']:
+        elif self.composition == 'defensive':
             return ['Physical Wall', 'Special Wall', 'Physical Wall', 'Special Wall', 'Bulky', 'Bulky Wall',
                     'Physical Attacker', 'Special Attacker', 'Versatile', 'Utility/Support', 'Eviolite User']
         else:

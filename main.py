@@ -1,7 +1,7 @@
 import os
 
 import utils
-from utils import input_generation, ask_if_using_legends, ask_if_only_using_babies, ask_for_team_preferences
+from utils import input_generation, ask_if_using_legends, asking_if_using_little_cup, ask_for_team_composition
 from backend.ml.learning.team_builder import TeamBuilder
 
 if __name__ == '__main__':
@@ -14,18 +14,18 @@ if __name__ == '__main__':
 
     utils.clear_screen()
 
-    using_babies: bool = ask_if_only_using_babies()
+    using_little_cup: bool = asking_if_using_little_cup()
     using_legends: bool = False
 
-    if not using_babies:
+    if not using_little_cup:
         using_legends = ask_if_using_legends()
 
-    preferences: dict[str, bool] = ask_for_team_preferences()
+    composition: str = ask_for_team_composition()
 
     data_path: str = os.path.join(os.getcwd(), 'data', 'pokemon_data')
     file_path: str = os.path.join(data_path, filename + '.json')
 
-    tb: TeamBuilder = TeamBuilder(using_babies, using_legends, file_path, preferences)
+    tb: TeamBuilder = TeamBuilder(using_little_cup, using_legends, file_path, composition)
 
     input('\nPress "Enter" to continue > ')
     utils.clear_screen()
