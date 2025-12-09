@@ -146,6 +146,7 @@ export default function AbilityMenu({
         disableElevation
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
+        sx={{ backgroundColor: "var(--secondary)", color: "var(--text)" }}
       >
         {menuText}
       </Button>

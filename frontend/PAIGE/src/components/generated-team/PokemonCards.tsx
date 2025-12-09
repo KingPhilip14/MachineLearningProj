@@ -248,6 +248,30 @@ export const PokemonCards = ({
               </PkmnCard>
             </Grid>
           ))}
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            sx={{ mt: 5 }}
+          >
+            <Typography sx={{ mb: 2, textAlign: "center" }}>
+              This team has the following overlapping weaknesses. Be mindful!
+            </Typography>
+            <Box
+              display="flex"
+              flexDirection="row"
+              justifyContent="center"
+              gap={3}
+            >
+              {overlappingWeaknesses.map((weakness) => (
+                <img
+                  key={weakness}
+                  src={`/types_sprites/${weakness}.png`}
+                  alt={weakness}
+                />
+              ))}
+            </Box>
+          </Box>
         </Grid>
       </Box>
     </>

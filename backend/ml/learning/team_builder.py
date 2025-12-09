@@ -383,7 +383,7 @@ class TeamBuilder:
                         'hp': stats['hp'],
                         'attack': stats['attack'],
                         'defense': stats['defense'],
-                        'special_attack': stats['special-defense'],
+                        'special_attack': stats['special-attack'],
                         'special_defense': stats['special-defense'],
                         'speed': stats['speed'],
                         'bst': stats['bst'],
