@@ -42,6 +42,10 @@
     left: -9999px;
 }
 
+.errormsg {
+    color: red;
+}
+
 .hide {
     display: none;
 }

@@ -5,9 +5,13 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { mascot, mascot_shiny } from "../../assets";
 import { Toggle } from "../toggle/Toggle.tsx";
+import { useAuth } from "../../context/AuthContext.tsx";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Tooltip, IconButton } from "@mui/material";
 
 // @ts-ignore
 export default function Header({ isDark, setIsDark }) {
+  const { auth } = useAuth();
   const location = useLocation();
 
   return (
@@ -39,17 +43,43 @@ export default function Header({ isDark, setIsDark }) {
         <Link className={"header-link"} to={"/about"}>
           <Button color="inherit">About</Button>
         </Link>
-        <Button color="inherit">Saved Teams</Button>
-        <Link className={"header-link"} to={"/login"}>
-          <Button color="inherit">Login</Button>
-        </Link>
-        <Link
-          className={"header-link"}
-          to={"/register"}
-          state={{ from: location.pathname }}
-        >
-          <Button color="inherit">Register</Button>
-        </Link>
+
+        {auth.user ? (
+          <>
+            <Link className={"header-link"} to={"/saved-teams"}>
+              <Button color="inherit">Saved Teams</Button>
+            </Link>
+            <Tooltip title={auth.user.username}>
+              <IconButton color="inherit">
+                <AccountCircleIcon fontSize="large" />
+              </IconButton>
+            </Tooltip>
+          </>
+        ) : (
+          <>
+            <Link className={"header-link"} to={"/login"}>
+              <Button color="inherit">Login</Button>
+            </Link>
+            <Link
+              className={"header-link"}
+              to={"/register"}
+              state={{ from: location.pathname }}
+            >
+              <Button color="inherit">Register</Button>
+            </Link>
+          </>
+        )}
+
+        {/*<Link className={"header-link"} to={"/login"}>*/}
+        {/*  <Button color="inherit">Login</Button>*/}
+        {/*</Link>*/}
+        {/*<Link*/}
+        {/*  className={"header-link"}*/}
+        {/*  to={"/register"}*/}
+        {/*  state={{ from: location.pathname }}*/}
+        {/*>*/}
+        {/*  <Button color="inherit">Register</Button>*/}
+        {/*</Link>*/}
       </Toolbar>
     </AppBar>
   );

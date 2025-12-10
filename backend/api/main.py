@@ -1,7 +1,10 @@
 import os
 import bcrypt
+import jwt
+from datetime import datetime, timedelta, UTC
 
 from typing import List
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from sqlalchemy import select, insert, update, delete
 from sqlalchemy.exc import IntegrityError
@@ -20,6 +23,7 @@ from backend.api.models.pokemon_table import pokemon
 from backend.api.models.team_table import team
 from backend.api.schemas.delete_team import DeleteTeam
 from backend.api.schemas.get_account import GetAccount
+from backend.api.schemas.log_in import LogIn
 from backend.api.schemas.save_team import SaveTeam
 from backend.api.schemas.team_request import TeamRequest
 from backend.api.schemas.update_team_name import UpdateTeamName
@@ -28,10 +32,14 @@ from backend.ml.learning.team_builder import TeamBuilder
 from backend.api.utils import nest_team_data
 from config import POKEMON_DATA_DIR
 
+origins = [
+    "http://localhost:5173",  # your frontend origin
+]
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # for development only
+    allow_origins=origins,  # for development only
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -48,16 +56,21 @@ def get_db():
         db.close()
 
 
+load_dotenv()
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = "HS256"
+
+
 @app.get('/')
 async def root():
     return 'Hello world!'
 
 
 @app.post('/register')
-def create_account(payload: CreateAccount):
+async def create_account(payload: CreateAccount):
     password: bytes = bytes(payload.password, 'utf-8')
     salt = bcrypt.gensalt()
-    hashed_password = bcrypt.hashpw(password, salt)
+    hashed_password = bcrypt.hashpw(password, salt).decode("utf-8")
 
     stmt = (
         insert(account)
@@ -77,6 +90,43 @@ def create_account(payload: CreateAccount):
         raise HTTPException(status_code=400, detail="Username already exists")
 
     return dict(row._mapping)
+
+
+@app.post('/login')
+async def login(payload: LogIn):
+    stmt = select(account).where(account.c.username == payload.username)
+
+    try:
+        with engine.connect() as conn:
+            user = conn.execute(stmt).fetchone()
+
+        if not user:
+            raise HTTPException(status_code=401, detail="Invalid username or password")
+
+        # verify the password matches the account
+        if not bcrypt.checkpw(
+                payload.password.encode('utf-8'),
+                user.password.encode('utf-8')
+        ):
+            raise HTTPException(status_code=401, detail="The password is incorrect")
+
+        token_data = {
+            'account_id': user.account_id,
+            'username': user.username,
+            'exp': datetime.now(UTC) + timedelta(hours=1)
+        }
+
+        token = jwt.encode(token_data, SECRET_KEY, algorithm=ALGORITHM)
+    except IntegrityError:
+        raise HTTPException(status_code=404, detail="Account not found")
+
+    return {
+        "accessToken": token,
+        "user": {
+            "account_id": user.account_id,
+            "username": user.username
+        }
+    }
 
 
 @app.get('/account/{account_id}', response_model=GetAccount)

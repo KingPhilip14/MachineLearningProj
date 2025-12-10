@@ -7,6 +7,7 @@ import TeamConfig from "./components/team-config/TeamConfig.tsx";
 import GeneratedTeam from "./components/generated-team/GeneratedTeam.tsx";
 import Login from "./components/account-access/Login.tsx";
 import Register from "./components/account-access/Register.tsx";
+import SavedTeams from "./components/saved-teams/SavedTeams.tsx";
 
 export const Routes = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export const Routes = createBrowserRouter([
       {
         path: "/generated-team",
         element: <GeneratedTeam />,
+      },
+      {
+        path: "/saved-teams",
+        element: <SavedTeams />,
       },
       {
         path: "*",

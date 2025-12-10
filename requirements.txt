@@ -17,3 +17,4 @@ sqlalchemy~=2.0.44
 passlib~=1.7.4
 bcrypt~=5.0.0
 sqlalchemy-stubs~=0.4
+PyJWT~=2.10.1

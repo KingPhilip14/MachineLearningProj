@@ -61,7 +61,6 @@ const Register = () => {
       return;
     }
 
-    debugger;
     try {
       const response = await fetch("http://127.0.0.1:8000/register", {
         method: "POST",
@@ -106,7 +105,7 @@ const Register = () => {
         >
           <CardContent
             component={"form"}
-            style={{ width: "80%vw", height: "80%vh" }}
+            sx={{ width: "80%vw", height: "80%vh" }}
             onSubmit={registerUser}
           >
             <Typography
@@ -122,15 +121,14 @@ const Register = () => {
             <Typography variant="h6" style={{ margin: "40px 20px 40px 20px" }}>
               Create an account to save teams and access them!
             </Typography>
-            <section>
-              <Typography
-                ref={errRef}
-                className={errorMsg ? "errormsg" : "offscreen"}
-                sx={{ color: "red" }}
-              >
-                {errorMsg}
-              </Typography>
-            </section>
+
+            {/* Error message */}
+            <Typography
+              ref={errRef}
+              className={errorMsg ? "errormsg" : "offscreen"}
+            >
+              {errorMsg}
+            </Typography>
 
             <FormControl>
               {/* Username field */}

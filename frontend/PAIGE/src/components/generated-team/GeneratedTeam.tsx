@@ -96,9 +96,15 @@ export default function GeneratedTeam() {
   return (
     <>
       {isLoading ? (
-        <div style={{ display: "flex", alignItems: "center", height: "50vh" }}>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="100vh"
+          width="100vw"
+        >
           <CircularProgress size="10rem" sx={{ color: "var(--primary)" }} />
-        </div>
+        </Box>
       ) : (
         <div className={"page-container"}>
           <SelectedGenCard
