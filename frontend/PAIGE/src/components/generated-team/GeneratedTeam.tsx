@@ -6,13 +6,18 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, TextField } from "@mui/material";
 import ExportButton from "./ExportButton.tsx";
 import CopyButton from "./CopyButton.tsx";
 import { useAuth } from "../../context/AuthContext.tsx";
 
+function formatWeaknesses(weaknesses: string[]): Record<string, any> {
+  return { weaknesses: Object.fromEntries(weaknesses.map((w) => [w, 1])) };
+}
+
 export default function GeneratedTeam() {
   const { auth } = useAuth();
+  const [teamName, setTeamName] = useState("My Team");
 
   interface PkmnTeam {
     [pokemonName: string]: PkmnEntry;
@@ -39,11 +44,13 @@ export default function GeneratedTeam() {
   const location = useLocation();
   const [pkmnTeam, setPkmnTeam] = useState<PkmnTeam>({});
   const [isLoading, setIsLoading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [overlappingWeaknesses, setOverlappingWeaknesses] = useState<string[]>(
     [],
   );
   const { selectedGen, usingLittleCup, usingLegends, composition } =
     location.state || {};
+  const [errorMsg, setErrorMsg] = useState("");
 
   async function fetchTeam() {
     const data = await getGeneratedTeam();
@@ -85,7 +92,7 @@ export default function GeneratedTeam() {
       }
 
       const data = await response.json();
-
+      setErrorMsg("");
       return data || {};
     } catch (error) {
       console.error(error);
@@ -93,6 +100,44 @@ export default function GeneratedTeam() {
       return {};
     } finally {
       setIsLoading(false);
+    }
+  }
+
+  async function saveTeam() {
+    const accountId = auth.user?.account_id;
+
+    setIsSaving(true);
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/account/${accountId}/save-team`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            team_name: teamName,
+            team_json: pkmnTeam,
+            generation: selectedGen || "national",
+            overlapping_weaknesses: formatWeaknesses(overlappingWeaknesses),
+          }),
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to save team: ${response.status}`);
+      }
+
+      const savedTeam = await response.json();
+      console.log("Saved team:", savedTeam);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setErrorMsg("No server response");
+      } else {
+        setErrorMsg("Could not save the team");
+      }
+    } finally {
+      setIsSaving(false);
     }
   }
 
@@ -129,6 +174,22 @@ export default function GeneratedTeam() {
           >
             Regenerate
           </Button>
+
+          <TextField
+            required
+            id="team name"
+            type="text"
+            label="Team Name"
+            value={teamName}
+            onChange={(e) => setTeamName(e.target.value)}
+            autoComplete="off"
+            sx={{
+              width: "25%",
+              margin: "30px 50px 30px 50px",
+              fieldset: { borderColor: "var(--primary)" },
+              flexShrink: 0,
+            }}
+          />
 
           <PokemonCards
             pkmnTeam={pkmnTeam}
@@ -169,11 +230,17 @@ export default function GeneratedTeam() {
             </Box>
           )}
 
+          <Typography className={errorMsg ? "errormsg" : "offscreen"}>
+            {errorMsg}
+          </Typography>
+
           {auth.user ? (
             <>
               <Button
-                variant={"contained"}
-                size={"large"}
+                variant="contained"
+                size="large"
+                onClick={saveTeam}
+                disabled={isSaving}
                 sx={{
                   backgroundColor: "var(--accent)",
                   color: "var(--text)",
@@ -181,8 +248,9 @@ export default function GeneratedTeam() {
                   minHeight: "50px",
                 }}
               >
-                Save Team
+                {isSaving ? "Saving..." : "Save Team"}
               </Button>
+
               <Box
                 display="flex"
                 flexDirection="row"

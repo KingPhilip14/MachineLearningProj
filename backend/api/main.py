@@ -24,7 +24,7 @@ from backend.api.models.team_table import team
 from backend.api.schemas.delete_team import DeleteTeam
 from backend.api.schemas.get_account import GetAccount
 from backend.api.schemas.log_in import LogIn
-from backend.api.schemas.save_team import SaveTeam
+from backend.api.schemas.save_team_request import SaveTeamRequest
 from backend.api.schemas.team_request import TeamRequest
 from backend.api.schemas.update_team_name import UpdateTeamName
 from backend.api.schemas.team_prefs import TeamPrefs
@@ -236,12 +236,11 @@ async def get_pokemon_ability(pokemon_name: str, ability_name: str):
 
 
 @app.post('/account/{account_id}/save-team')
-async def save_team(account_id: int, team_name: str, team_json: dict,
-                    generation: str, overlapping_weaknesses: dict):
+async def save_team(account_id: int, payload: SaveTeamRequest):
     team_stmt = (
         insert(team)
-        .values(account_id=account_id, team_name=team_name, generation=generation,
-                overlapping_weaknesses=overlapping_weaknesses)
+        .values(account_id=account_id, team_name=payload.team_name, generation=payload.generation,
+                overlapping_weaknesses=payload.overlapping_weaknesses)
         .returning(
             team.c.team_id, team.c.account_id, team.c.team_name, team.c.generation, team.c.time_created,
             team.c.last_time_used, team.c.overlapping_weaknesses
@@ -258,7 +257,7 @@ async def save_team(account_id: int, team_name: str, team_json: dict,
         team_id: int = team_row._mapping['team_id']
 
         # insert Pokemon in PokemonInTeam by using the team_id
-        for pkmn_name, pkmn_info in team_json.items():
+        for pkmn_name, pkmn_info in payload.team_json.items():
             if pkmn_name == 'weaknesses':
                 continue
 

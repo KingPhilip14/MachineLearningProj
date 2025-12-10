@@ -1,14 +1,19 @@
-// import { Navigate } from "react-router-dom";
-// import { useContext } from "react";
-// import AuthContext from "../../context/AuthContext.tsx";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext.tsx";
 import { Typography } from "@mui/material";
 
-export default function SavedTeams() {
-  // const { auth } = useContext(AuthContext);
+interface TeamProps {
+  account_id: number;
+  team_name: string;
+  generation: string;
+}
 
-  // if (!auth) {
-  //   return <Navigate to="/login" />;
-  // }
+export default function SavedTeams() {
+  const { auth } = useAuth();
+
+  if (!auth) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <>
