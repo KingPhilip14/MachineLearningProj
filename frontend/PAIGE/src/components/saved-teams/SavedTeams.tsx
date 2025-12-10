@@ -12,7 +12,7 @@ interface PokemonInTeam {
   nickname: string;
 }
 
-interface Team {
+export interface Team {
   team_id: number;
   team_name: string;
   pokemon: PokemonInTeam[];
@@ -89,7 +89,19 @@ export default function SavedTeams() {
       <Typography variant="h4" mb={3}>
         {savedTeams.username}'s Saved Teams
       </Typography>
-      <TeamCards teams={savedTeams.teams} />
+      <TeamCards
+        teams={savedTeams.teams}
+        accountId={savedTeams.account_id}
+        onDeleteTeam={(deletedTeamId: number) => {
+          setSavedTeams((prev) => {
+            if (!prev) return prev;
+            return {
+              ...prev,
+              teams: prev.teams.filter((t) => t.team_id !== deletedTeamId),
+            };
+          });
+        }}
+      />
     </Box>
   );
 }
