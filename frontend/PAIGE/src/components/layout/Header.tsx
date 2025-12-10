@@ -27,7 +27,6 @@ export default function Header({ isDark, setIsDark }) {
             src={isDark ? mascot_shiny : mascot}
             className="mascot"
             alt={"PAIGE Mascot"}
-            // height="80px"
             style={{ padding: "15px", position: "static" }}
           />
         </Link>
@@ -69,17 +68,6 @@ export default function Header({ isDark, setIsDark }) {
             </Link>
           </>
         )}
-
-        {/*<Link className={"header-link"} to={"/login"}>*/}
-        {/*  <Button color="inherit">Login</Button>*/}
-        {/*</Link>*/}
-        {/*<Link*/}
-        {/*  className={"header-link"}*/}
-        {/*  to={"/register"}*/}
-        {/*  state={{ from: location.pathname }}*/}
-        {/*>*/}
-        {/*  <Button color="inherit">Register</Button>*/}
-        {/*</Link>*/}
       </Toolbar>
     </AppBar>
   );

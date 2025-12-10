@@ -9,8 +9,11 @@ import Typography from "@mui/material/Typography";
 import { CircularProgress } from "@mui/material";
 import ExportButton from "./ExportButton.tsx";
 import CopyButton from "./CopyButton.tsx";
+import { useAuth } from "../../context/AuthContext.tsx";
 
 export default function GeneratedTeam() {
+  const { auth } = useAuth();
+
   interface PkmnTeam {
     [pokemonName: string]: PkmnEntry;
   }
@@ -144,7 +147,9 @@ export default function GeneratedTeam() {
               alignItems="center"
               sx={{ mt: 5 }}
             >
-              <Typography sx={{ mb: 2, textAlign: "center" }}>
+              <Typography
+                sx={{ marginTop: 6, marginBottom: 2, textAlign: "center" }}
+              >
                 This team has the following overlapping weaknesses. Be mindful!
               </Typography>
               <Box
@@ -164,32 +169,51 @@ export default function GeneratedTeam() {
             </Box>
           )}
 
-          <Button
-            variant={"contained"}
-            size={"large"}
-            sx={{
-              backgroundColor: "var(--accent)",
-              color: "var(--text)",
-              margin: "80px 0px 0px 0px",
-              minHeight: "50px",
-            }}
-          >
-            Save Team
-          </Button>
-
-          <Box
-            display="flex"
-            flexDirection="row"
-            justifyContent="center"
-            gap={8}
-          >
-            <ExportButton
-              displayText={"Export to File"}
-              teamName={"Team Name"}
-              pkmnTeam={pkmnTeam}
-            />
-            <CopyButton displayText={"Copy Team"} pkmnTeam={pkmnTeam} />
-          </Box>
+          {auth.user ? (
+            <>
+              <Button
+                variant={"contained"}
+                size={"large"}
+                sx={{
+                  backgroundColor: "var(--accent)",
+                  color: "var(--text)",
+                  margin: "80px 0px 0px 0px",
+                  minHeight: "50px",
+                }}
+              >
+                Save Team
+              </Button>
+              <Box
+                display="flex"
+                flexDirection="row"
+                justifyContent="center"
+                gap={8}
+              >
+                <ExportButton
+                  displayText={"Export to File"}
+                  teamName={"Team Name"}
+                  pkmnTeam={pkmnTeam}
+                />
+                <CopyButton displayText={"Copy Team"} pkmnTeam={pkmnTeam} />
+              </Box>
+            </>
+          ) : (
+            <>
+              <Box
+                display="flex"
+                flexDirection="row"
+                justifyContent="center"
+                gap={8}
+              >
+                <ExportButton
+                  displayText={"Export to File"}
+                  teamName={"Team Name"}
+                  pkmnTeam={pkmnTeam}
+                />
+                <CopyButton displayText={"Copy Team"} pkmnTeam={pkmnTeam} />
+              </Box>
+            </>
+          )}
         </div>
       )}
     </>
