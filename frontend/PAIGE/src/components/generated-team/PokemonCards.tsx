@@ -9,8 +9,8 @@ import EditableTypography from "../EditableTypography.tsx";
 import AbilityMenu from "../AbilityMenu.tsx";
 
 interface PokemonCardsProps {
-  pkmnTeam: PkmnTeam; // the fetched team
-  updateAbility: (name: string, ability: string) => void; // callback
+  pkmnTeam: PkmnTeam;
+  updateAbility: (name: string, ability: string) => void;
 }
 
 interface PkmnEntry {
