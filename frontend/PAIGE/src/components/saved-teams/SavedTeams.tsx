@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Box, CircularProgress, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext.tsx";
 import { TeamCards } from "./TeamCards.tsx";
 
@@ -64,8 +65,21 @@ export default function SavedTeams() {
 
   if (!savedTeams || savedTeams.teams.length === 0) {
     return (
-      <Box display="flex" justifyContent="center" mt={5}>
-        <Typography>No saved teams found.</Typography>
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        height="100vh"
+        textAlign="center"
+        px={2}
+      >
+        <Typography variant="h4">
+          No saved teams found.{" "}
+          <Link className="link-style" to="/">
+            Generate some!
+          </Link>
+        </Typography>
       </Box>
     );
   }

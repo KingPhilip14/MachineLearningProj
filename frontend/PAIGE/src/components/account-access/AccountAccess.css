@@ -20,7 +20,7 @@
 }
 
 .link-style {
-    color: lightgray;
+    color: var(--secondary);
 }
 
 .instructions {
