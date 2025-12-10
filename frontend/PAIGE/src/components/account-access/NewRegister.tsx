@@ -22,7 +22,7 @@ const NewRegister = () => {
   const errRef = useRef<HTMLInputElement>(null);
 
   const [username, setUsername] = useState("");
-  const [validName, setValidName] = useState(false);
+  const [validUsername, setValidUsername] = useState(false);
   const [usernameFocus, setUsernameFocus] = useState(false);
 
   const [password, setPassword] = useState("");
@@ -42,7 +42,7 @@ const NewRegister = () => {
 
   useEffect(() => {
     const result = USER_REGEX.test(username);
-    setValidName(result);
+    setValidUsername(result);
   }, [username]);
 
   useEffect(() => {
@@ -115,7 +115,7 @@ const NewRegister = () => {
                   label="Username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  aria-invalid={validName ? "false" : "true"}
+                  aria-invalid={validUsername ? "false" : "true"}
                   aria-describedby="uidnote"
                   onFocus={() => setUsernameFocus(true)}
                   onBlur={() => setUsernameFocus(false)}
@@ -129,18 +129,18 @@ const NewRegister = () => {
                 <Box>
                   <FontAwesomeIcon
                     icon={faCheck}
-                    className={validName ? "valid" : "hide"}
+                    className={validUsername ? "valid" : "hide"}
                   />
                   <FontAwesomeIcon
                     icon={faTimes}
-                    className={validName || !username ? "hide" : "invalid"}
+                    className={validUsername || !username ? "hide" : "invalid"}
                   />
                 </Box>
               </Box>
               <Typography
                 id={"uidnote"}
                 variant={"subtitle2"}
-                sx={{ color: "text.secondary", marginBottom: "60px" }}
+                sx={{ color: "text.secondary", marginBottom: "30px" }}
               >
                 Usernames must be between 4-30 characters and start with a
                 letter.
@@ -188,13 +188,87 @@ const NewRegister = () => {
               <Typography
                 id={"uidnote"}
                 variant={"subtitle2"}
-                sx={{ color: "text.secondary", marginBottom: "60px" }}
+                sx={{ color: "text.secondary", marginBottom: "30px" }}
               >
                 Passwords must be between 4-30 characters.
               </Typography>
 
               {/* Confirm password field */}
+              <Box
+                display={"flex"}
+                flexDirection={"row"}
+                alignItems={"center"}
+                sx={{ width: "400px" }}
+              >
+                <TextField
+                  required
+                  component={"div"}
+                  ref={userRef}
+                  autoComplete="off"
+                  type="password"
+                  id="confirm-password-input"
+                  label="Confirm Password"
+                  value={matchPassword}
+                  onChange={(e) => setMatchPassword(e.target.value)}
+                  aria-invalid={validPassword ? "false" : "true"}
+                  aria-describedby="confirmnote"
+                  onFocus={() => setMatchFocus(true)}
+                  onBlur={() => setMatchFocus(false)}
+                  sx={{
+                    margin: "30px 50px 30px 50px",
+                    fieldset: { borderColor: "var(--primary)" },
+                    width: "75%",
+                    flexShrink: 0,
+                  }}
+                />
+                <Box>
+                  <FontAwesomeIcon
+                    icon={faCheck}
+                    className={validMatch && matchPassword ? "valid" : "hide"}
+                  />
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    className={
+                      validMatch || !matchPassword ? "hide" : "invalid"
+                    }
+                  />
+                </Box>
+              </Box>
+              <Typography
+                id={"uidnote"}
+                variant={"subtitle2"}
+                sx={{ color: "text.secondary", marginBottom: "30px" }}
+              >
+                The passwords must match.
+              </Typography>
+
+              <Button
+                type="submit"
+                variant={"outlined"}
+                size={"large"}
+                disabled={!validUsername || !validPassword || !validMatch}
+                sx={{
+                  borderColor: "var(--primary)",
+                  color: "var(--text)",
+                  margin: "40px 30px 40px 30px",
+                  padding: "15px 30px 15px 30px",
+                }}
+              >
+                Register
+              </Button>
             </FormControl>
+
+            <div className={"dividing-line"}></div>
+
+            <div>
+              <Typography sx={{ marginBottom: "60px" }}>
+                Already have an account? {""}
+                <Link className={"link-style"} to={"/login"}>
+                  Log in
+                </Link>{" "}
+                to your account instead!
+              </Typography>
+            </div>
           </CardContent>
         </Card>
       </div>
