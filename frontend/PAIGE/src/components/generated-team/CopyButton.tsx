@@ -47,6 +47,7 @@ const CopyButton = ({ displayText, pkmnTeam }: Props) => {
     try {
       await navigator.clipboard.writeText(buildExport());
       setCopySuccessMsg("Copied!");
+      console.log(copySuccessMsg);
     } catch (err) {
       setCopySuccessMsg("Failed to copy!");
       console.error("Failed to copy text: ", err);
