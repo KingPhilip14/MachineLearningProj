@@ -1,41 +1,67 @@
 import "./AccountAccess.css";
-import { FormControl, TextField, Typography } from "@mui/material";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Box, FormControl, TextField, Typography } from "@mui/material";
+import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
-import { useState } from "react";
-// import { useState, useContext } from "react";
-// import AuthContext from "../../context/AuthProvider.tsx";
-// import axios from "./../../api/axios.tsx";
-// const LOGIN_URL = "/auth";
+import { useEffect, useRef, useState } from "react";
 
-export default function Register() {
+const USER_REGEX = /^[A-z][A-z0-9-_]{3,29}$/;
+const PASSWORD_REGEX = /^.{4,29}$/;
+
+const Register = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from || "/";
+
+  const userRef = useRef<HTMLInputElement>(null);
+  const errRef = useRef<HTMLInputElement>(null);
 
   const [username, setUsername] = useState("");
+  const [validUsername, setValidUsername] = useState(false);
+
   const [password, setPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [validPassword, setValidPassword] = useState(false);
 
-  // const { setAuth } = useContext(AuthContext);
-  // const userRef = useRef("");
-  // const errRef = useRef("");
+  const [matchPassword, setMatchPassword] = useState("");
+  const [validMatch, setValidMatch] = useState(false);
 
-  // useEffect(() => {
-  //   userRef.current.focus();
-  // }, []);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  // useEffect(() => {
-  //   setMessage("");
-  // }, [username, password]);
+  useEffect(() => {
+    userRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    const result = USER_REGEX.test(username);
+    setValidUsername(result);
+  }, [username]);
+
+  useEffect(() => {
+    const result = PASSWORD_REGEX.test(password);
+    setValidPassword(result);
+
+    const match = password === matchPassword;
+    setValidMatch(match);
+  }, [password, matchPassword]);
+
+  useEffect(() => {
+    setErrorMsg("");
+  }, [username, password, matchPassword]);
 
   async function registerUser(event: { preventDefault: () => void }) {
-    // prevent a full page reload
     event.preventDefault();
 
+    // used to help prevent attempts at maliciously enabling the button
+    const testUsername = USER_REGEX.test(username);
+    const testPassword = PASSWORD_REGEX.test(password);
+
+    if (!testUsername || !testPassword) {
+      setErrorMsg("Invalid entry");
+      return;
+    }
+
+    debugger;
     try {
       const response = await fetch("http://127.0.0.1:8000/register", {
         method: "POST",
@@ -48,14 +74,21 @@ export default function Register() {
         }),
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to register a new account");
+      if (response.ok) {
+        // take the user to the home page
+        navigate("/", { replace: true });
+        return;
       }
 
-      // take the user to the last page they were on after successful registration
-      navigate("/", { replace: true });
-    } catch (error) {
-      console.error(error);
+      setErrorMsg("Could not register account. Try a different username");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setErrorMsg("No server response");
+      } else {
+        setErrorMsg("Could not register account. Try a different username");
+      }
+
+      errRef.current?.focus();
     }
   }
 
@@ -89,74 +122,175 @@ export default function Register() {
             <Typography variant="h6" style={{ margin: "40px 20px 40px 20px" }}>
               Create an account to save teams and access them!
             </Typography>
-
-            <Typography>{message}</Typography>
+            <section>
+              <Typography
+                ref={errRef}
+                className={errorMsg ? "errormsg" : "offscreen"}
+                sx={{ color: "red" }}
+              >
+                {errorMsg}
+              </Typography>
+            </section>
 
             <FormControl>
-              <div>
+              {/* Username field */}
+              <Box
+                display={"flex"}
+                flexDirection={"row"}
+                alignItems={"center"}
+                sx={{ width: "400px" }}
+              >
                 <TextField
                   required
                   component={"div"}
+                  ref={userRef}
+                  autoComplete="off"
+                  type="text"
                   id="username"
                   label="Username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  style={{ margin: "30px 50px 30px 50px" }}
+                  aria-invalid={validUsername ? "false" : "true"}
+                  aria-describedby="uidnote"
                   sx={{
+                    margin: "30px 50px 30px 50px",
                     fieldset: { borderColor: "var(--primary)" },
+                    width: "75%",
+                    flexShrink: 0,
                   }}
                 />
-              </div>
-              <div>
+                <Box>
+                  <FontAwesomeIcon
+                    icon={faCheck}
+                    className={validUsername ? "valid" : "hide"}
+                  />
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    className={validUsername || !username ? "hide" : "invalid"}
+                  />
+                </Box>
+              </Box>
+              <Typography
+                id={"uidnote"}
+                variant={"subtitle2"}
+                sx={{ color: "text.secondary", marginBottom: "30px" }}
+              >
+                Usernames must be between 4-30 characters and start with a
+                letter.
+              </Typography>
+
+              {/* Password field */}
+              <Box
+                display={"flex"}
+                flexDirection={"row"}
+                alignItems={"center"}
+                sx={{ width: "400px" }}
+              >
                 <TextField
                   required
                   component={"div"}
+                  ref={userRef}
+                  autoComplete="off"
+                  type="password"
                   id="outlined-password-input"
                   label="Password"
-                  type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  style={{ margin: "30px 50px 30px 50px" }}
+                  aria-invalid={validPassword ? "false" : "true"}
+                  aria-describedby="pwdnote"
                   sx={{
+                    margin: "30px 50px 30px 50px",
                     fieldset: { borderColor: "var(--primary)" },
+                    width: "75%",
+                    flexShrink: 0,
                   }}
                 />
-              </div>
-              {/*<div>*/}
-              {/*  <TextField*/}
-              {/*    required*/}
-              {/*    id="outlined-password-input"*/}
-              {/*    label="Confirm Password"*/}
-              {/*    type="password"*/}
-              {/*    value={confirmPassword}*/}
-              {/*    onChange={(e) => setConfirmPassword(e.target.value)}*/}
-              {/*    style={{ margin: "30px 50px 30px 50px" }}*/}
-              {/*    sx={{*/}
-              {/*      fieldset: { borderColor: "var(--primary)" },*/}
-              {/*    }}*/}
-              {/*  />*/}
-              {/*</div>*/}
-              <div>
-                <Button
-                  type="submit"
-                  variant={"outlined"}
-                  size={"large"}
+                <Box>
+                  <FontAwesomeIcon
+                    icon={faCheck}
+                    className={validPassword ? "valid" : "hide"}
+                  />
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    className={validPassword || !password ? "hide" : "invalid"}
+                  />
+                </Box>
+              </Box>
+              <Typography
+                id={"uidnote"}
+                variant={"subtitle2"}
+                sx={{ color: "text.secondary", marginBottom: "30px" }}
+              >
+                Passwords must be between 4-30 characters.
+              </Typography>
+
+              {/* Confirm password field */}
+              <Box
+                display={"flex"}
+                flexDirection={"row"}
+                alignItems={"center"}
+                sx={{ width: "400px" }}
+              >
+                <TextField
+                  required
+                  component={"div"}
+                  ref={userRef}
+                  autoComplete="off"
+                  type="password"
+                  id="confirm-password-input"
+                  label="Confirm Password"
+                  value={matchPassword}
+                  onChange={(e) => setMatchPassword(e.target.value)}
+                  aria-invalid={validPassword ? "false" : "true"}
+                  aria-describedby="confirmnote"
                   sx={{
-                    borderColor: "var(--primary)",
-                    color: "var(--text)",
-                    margin: "40px 30px 40px 30px",
-                    padding: "15px 30px 15px 30px",
+                    margin: "30px 50px 30px 50px",
+                    fieldset: { borderColor: "var(--primary)" },
+                    width: "75%",
+                    flexShrink: 0,
                   }}
-                >
-                  Register
-                </Button>
-              </div>
+                />
+                <Box>
+                  <FontAwesomeIcon
+                    icon={faCheck}
+                    className={validMatch && matchPassword ? "valid" : "hide"}
+                  />
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    className={
+                      validMatch || !matchPassword ? "hide" : "invalid"
+                    }
+                  />
+                </Box>
+              </Box>
+              <Typography
+                id={"uidnote"}
+                variant={"subtitle2"}
+                sx={{ color: "text.secondary", marginBottom: "30px" }}
+              >
+                The passwords must match.
+              </Typography>
+
+              <Button
+                type="submit"
+                variant={"outlined"}
+                size={"large"}
+                disabled={!validUsername || !validPassword || !validMatch}
+                sx={{
+                  borderColor: "var(--primary)",
+                  color: "var(--text)",
+                  margin: "40px 30px 40px 30px",
+                  padding: "15px 30px 15px 30px",
+                }}
+              >
+                Register
+              </Button>
             </FormControl>
 
             <div className={"dividing-line"}></div>
 
             <div>
-              <Typography>
+              <Typography sx={{ marginBottom: "60px" }}>
                 Already have an account? {""}
                 <Link className={"link-style"} to={"/login"}>
                   Log in
@@ -169,4 +303,6 @@ export default function Register() {
       </div>
     </>
   );
-}
+};
+
+export default Register;

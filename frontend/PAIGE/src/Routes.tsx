@@ -7,7 +7,6 @@ import TeamConfig from "./components/team-config/TeamConfig.tsx";
 import GeneratedTeam from "./components/generated-team/GeneratedTeam.tsx";
 import Login from "./components/account-access/Login.tsx";
 import Register from "./components/account-access/Register.tsx";
-import NewRegister from "./components/account-access/NewRegister.tsx";
 
 export const Routes = createBrowserRouter([
   {
@@ -27,8 +26,7 @@ export const Routes = createBrowserRouter([
       },
       {
         path: "/register",
-        // element: <Register />,
-        element: <NewRegister />,
+        element: <Register />,
       },
       {
         path: "/team-config",
