@@ -1,4 +1,5 @@
 import Button from "@mui/material/Button";
+import { capitalizeFirstLetter } from "./GeneratedTeamUtils.tsx";
 
 interface Props {
   displayText: string;
@@ -37,9 +38,9 @@ const ExportButton = ({
     return Object.values(pkmnTeam || {})
       .map(
         (pkmn) =>
-          `${pkmn.nickname} (${pkmn.name}) 
+          `${pkmn.nickname} (${capitalizeFirstLetter(pkmn.name)}) 
           Ability: ${pkmn.chosen_ability} 
-          Tera Type: ${pkmn.type_1}
+          Tera Type: ${capitalizeFirstLetter(pkmn.type_1)}
           `,
       )
       .join("\n");

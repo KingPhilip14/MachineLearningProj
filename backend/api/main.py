@@ -2,13 +2,13 @@ import os
 import bcrypt
 import jwt
 from datetime import datetime, timedelta, UTC
-
-from typing import List
+from typing import List, Type
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from sqlalchemy import select, insert, update, delete
 from sqlalchemy.exc import IntegrityError
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 from backend.api.db import engine, SessionLocal
 from backend.api.schemas.account_teams_response import AccountTeamsResponse
 from backend.api.schemas.create_account import CreateAccount
@@ -33,7 +33,8 @@ from backend.api.utils import nest_team_data
 from config import POKEMON_DATA_DIR
 
 origins = [
-    "http://localhost:5173",  # your frontend origin
+    "http://localhost:5173",
+    "http://localhost:5174",
 ]
 
 app = FastAPI()
